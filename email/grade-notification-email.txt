@@ -1,0 +1,5 @@
+Notificación de evaluación
+
+Se ha evaluado su partificación en $SERVICE_NAME. Ingrese al sitio de certificación para verificar.
+
+Ingresar al sitio de Certificación: https://training.issivs.com

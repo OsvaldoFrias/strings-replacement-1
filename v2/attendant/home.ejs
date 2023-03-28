@@ -1,0 +1,193 @@
+<style>
+  .widget-count {
+    background-color: #003F76;
+    border-radius: 1em;
+    color: #eee;
+    height: 140px;
+  }
+
+  .widget-count>h5 {
+    font-family: 'Montserrat-SemiBold';
+    margin: 0;
+    margin-top: 10px;
+  }
+
+  .widget-count label {
+    font-family: 'Montserrat-ExtraBold';
+    font-size: 4.5em;
+  }
+
+  .widget-count img {
+    height: 50px;
+    width: 50px;
+  }
+
+  .widget-two-columns {
+    background-color: #e3e8f8;
+    border-radius: 1em;
+  }
+</style>
+
+<br>
+<br>
+<aside>
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-4 text-center widget-count">
+      <h5>
+        <%= translation.HOME.BADGE_1_TITLE %>
+      </h5>
+      <div class="row">
+        <div class="col-2 d-flex">
+          <img class="align-self-center"
+            src="/public/img/v2/Reservas.png">
+        </div>
+        <div class="col-3"></div>
+        <div class="col-2">
+          <label id="appointments-count"></label>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-4 text-center widget-count">
+      <h5>
+        <a href="/grades">
+          <%= translation.HOME.BADGE_2_TITLE %>
+        </a>
+      </h5>
+      <div class="row">
+        <div class="col-2 d-flex">
+          <img class="align-self-center"
+            src="/public/img/v2/Certificacion.png">
+        </div>
+        <div class="col-3"></div>
+        <div class="col-2">
+          <label id="certificates-count"></label>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-4">
+      <h5 class="M-bold">
+        <%= translation.HOME.LIST_1_TITLE %>
+      </h5>
+    </div>
+  </div>
+  <div class="row M-sbold" id="appointments"></div>
+  <br>
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <a href="/calendar" class="btn btn-primary btn-calendario">
+      <%= translation.CALENDAR.TITLE %>
+    </a>
+  </div>
+</aside>
+
+<script>
+  function setup() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v2/profile/appointments', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseAppointments(res))
+      .then(res => fillAppointmentsTemplate(res))
+      .then(res => fetch('/api/v2/profile/certificates', {
+        headers: myHeaders,
+        credentials: "same-origin"
+      }))
+      .then(res => res.json())
+      .then(res => parseCertificates(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseCertificates(certificates) {
+    // console.log(certificates);
+    const certificatesCount = document.getElementById("certificates-count");
+    certificatesCount.innerText = certificates.length;
+  }
+
+  function fillAppointmentsTemplate(htmlData) {
+    const appointments = document.getElementById("appointments");
+    const appointmentsCount = document.getElementById("appointments-count");
+
+    appointmentsCount.innerText = htmlData.length;
+    if (htmlData && htmlData.length > 0) {
+      appointments.innerHTML = htmlData.join('\n');
+    } else {
+      appointments.innerHTML = `<div class="col-lg-1"></div>
+      <div class="col-lg-9">
+        <p>
+          <%= translation.HOME.LIST_1_EMPTY %>
+        </p>
+      </div>`
+    }
+  }
+
+  function parseAppointments(appointments) {
+    const appointmentsTemplate = appointments.map(appointment => {
+      const appointmentHash = appointment.hash;
+      const meetingUrl = appointment.available.meetingUrl;
+      const appointmentStartDatetime =
+        new Date(appointment.available.appointmentStartDatetime);
+      const appointmentFinishDatetime =
+        new Date(appointment.available.appointmentFinishDatetime);
+      const month = months[appointmentStartDatetime.getMonth()];
+      const weekDay = weekDays[appointmentStartDatetime.getDay()];
+      const startDatetime = parseDateToJson(appointmentStartDatetime);
+      const finishDatetime = parseDateToJson(appointmentFinishDatetime);
+
+      const serviceName = appointment.available.service.name;
+      const serviceType = appointment.available.service.type;
+      const serviceCategoryName =
+        appointment.available.service.serviceCategory.name;
+      const serviceCategoryDescription =
+        appointment.available.service.serviceCategory.description;
+      const sessionType = appointment.available.sessionType === "remote"
+        ? "<%= translation.AVAILABLE.TYPE_REMOTE %>"
+        : "<%= translation.AVAILABLE.TYPE_CLOSE %>";
+      const state = appointment.available.state;
+      const country = appointment.available.state.country;
+      const location = serviceType === 'exam'
+        ? ''
+        : appointment.available.sessionType === "remote"
+          ? country.name
+          : `${country.name} ${state.name}`;
+      const linkTitle = appointment.available.sessionType === "remote"
+        ? "<%= translation.AVAILABLE.LINK_REMOTE %>"
+        : "<%= translation.AVAILABLE.LINK_CLOSE %>";
+
+      const cardTemplate = `
+          <div class="col-lg-1"></div>
+          <div class="col-lg-9 widget-two-columns">
+            <div class="row align-items-center">
+              <div class="col-6">
+                ${startDatetime.stringDate} ${startDatetime.formatTime} -
+                <br/>${finishDatetime.stringDate} ${finishDatetime.formatTime}
+              </div>
+              <div class="col-6">
+                <a href="/appointment/${appointmentHash}">
+                  ${serviceName} - ${sessionType}
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-1"></div>
+          <div class="w-100 d-none d-md-block"></div>
+          <br>`;
+      return cardTemplate;
+    });
+
+    return appointmentsTemplate;
+
+  }
+</script>

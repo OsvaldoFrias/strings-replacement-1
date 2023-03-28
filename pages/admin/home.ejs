@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+
+  <!-- Data table -->
+  <link rel="stylesheet" type="text/css" href="/public/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+  <script type="text/javascript" charset="utf8" src="/public/js/jquery.dataTables.js">
+  </script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js">
+    </script>
+  <!--/ Data table -->
+  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs", { "location": "home" }) %>
+  <%- include("./header.admin.ejs") %>
+  <div class="container">
+    <section>
+      <div class="container py-4">
+        <div class="row d-flex align-items-center justify-content-center">
+          <div class="w-100">
+            <div class="col-md-12 text-right">
+              <a href="/available-appointment/add" class="btn btn-primary">Agendar nuevas sesiones</a>
+            </div>
+            <div id="loading"></div>
+            <h2>Próximas sesiones</h2>
+            <div id="appointments"></div>
+            <div id="availableAppointments">
+              <table id="availableAppointments-list" class="compact" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Sesión</th>
+                    <th>Fecha/Hora</th>
+                    <th>Enlace</th>
+                    <th>Instructor</th>
+                    <th>Reservaciones</th>
+                    <th>Cancelar</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div>
+          <%- include("../../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script type="text/javascript" charset="utf8" src="/public/js/custom.home.js"></script>
+<script>
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/profile/available-appointments', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseAvailableAppointments(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function fixAppointment(availableAppointmentId) {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`/api/v1/profile/fix-appointment/${availableAppointmentId}`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'post'
+    })
+      .then(res => {
+        if (res.status === 201) {
+          alert('Cita agendada.');
+        } else {
+          alert('Hubo un problema agendando la cita, favor de intentar más tarde.');
+        }
+        location.reload(true);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseAvailableAppointments(res) {
+    let availableAppointmentsTable = $('#availableAppointments-list').DataTable({
+      "responsive": true,
+      "ordering": false,
+      "pageLength": 20,
+      "sDom": 'lrtip',
+      "dom": '<"top"if>rt<"bottom"p><"clear">'
+    });
+    res.forEach(availableAppointment => {
+      const availableAppointmentId = availableAppointment.id;
+      const totalAppointments = availableAppointment.totalAppointments;
+      const meetingUrl = availableAppointment.meetingUrl;
+      const appointmentStartDatetime = new Date(availableAppointment.appointmentStartDatetime);
+      const appointmentFinishDatetime = new Date(availableAppointment.appointmentFinishDatetime);
+      const month = months[appointmentStartDatetime.getMonth()];
+      const weekDay = weekDays[appointmentStartDatetime.getDay()];
+      const startDatetime = parseDateToJson(appointmentStartDatetime);
+      const finishDatetime = parseDateToJson(appointmentFinishDatetime);
+
+      const intervalDate = `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.formatTime}`;
+
+      // let trainerMail = null;
+      // if (availableAppointment.trainer) {
+      //   trainerMail = availableAppointment.trainer.email;
+      // }
+
+      let trainersMail = `
+        <img id="trainerEdit-${availableAppointmentId}" style="cursor:pointer;" onclick="populateTrainerList('${availableAppointmentId}')" src="/public/img/add-btn.png" alt="Agregar instructor de sesión remota" width="25px"/>
+        <span style="font-style: italic;color: #999999;">Agregar instructor.</span>
+        <div id="availableAppointmentId-${availableAppointmentId}"></div>`;
+      if (availableAppointment.trainers && availableAppointment.trainers.length !== 0) {
+        let acc = '';
+        trainersMail += availableAppointment.trainers.reduce((previousValue, trainer) => {
+          return previousValue + `
+            <img id="trainerRemove-${availableAppointmentId}" style="cursor:pointer;" onclick="removeTrainer('${availableAppointmentId}','${trainer.id}')" src="/public/img/button-cancel.png" alt="Agregar instructor de sesión remota" width="25px"/>
+            <a href="mailto:${trainer.email}">${trainer.email}</a>
+            <div id="availableAppointmentId-${availableAppointmentId}-${trainer.id}"></div>`;
+        }, acc);
+        // console.log(trainersMail);
+      }
+
+      const serviceName = availableAppointment.service.name;
+      const serviceType = availableAppointment.service.type;
+      const serviceAttendantsNumber = availableAppointment.overrideAttendantsNumber || availableAppointment.service
+        .attendantsNumber;
+      const serviceCategoryName = availableAppointment.service.serviceCategory.name;
+      const serviceCategoryDescription = availableAppointment.service.serviceCategory.description;
+      const sessionType = availableAppointment.sessionType === "remote" ? "Remoto" : "Presencial";
+      const state = availableAppointment.state;
+      const country = availableAppointment.state.country;
+      const location = serviceType === 'exam' ? '' : availableAppointment.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
+      const linkTitle = availableAppointment.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
+
+      availableAppointmentsTable
+        .row
+        .add([
+          `<div><a href="/available-appointment/${availableAppointmentId}">${serviceName} - ${sessionType}${location ? " - " + location : ''}</a></div>`,
+          `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}`,
+          `<img style="cursor:pointer;" onclick="setMeetingUrl(${availableAppointmentId},'${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="Editar enlace de sesión remota" width="15px"/> ${(meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle}</a>` : '<span style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</span>')}`,
+          // `<img id="trainerEdit-${availableAppointmentId}" style="cursor:pointer;" onclick="populateTrainerList('${availableAppointmentId}')" src="/public/img/edit.png" alt="Editar instructor de sesión remota" width="15px"/> ${trainerMail ? `<a href="mailto:${trainerMail}">${trainerMail}</a>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido asignado un instructor.</span>'}<div id="availableAppointmentId-${availableAppointmentId}"></div>`,
+          trainersMail,
+          `${totalAppointments} de ${serviceAttendantsNumber}`,
+          `<img style="cursor:pointer;" onclick="cancelAvailableAppointment(${availableAppointmentId}, '${serviceCategoryName}', '${intervalDate}')" src="/public/img/cancel-book.png" alt="Cancelar" width="30px"/>`
+        ])
+        .draw()
+        .node();
+    });
+  }
+
+  function removeTrainer(availableAppointmentId, trainerId) {
+    // console.log(availableAppointmentId, trainerId);
+    displayLoading();
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`/api/v1/profile/available-appointments/${availableAppointmentId}/trainer`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'DELETE',
+      body: JSON.stringify({
+        trainerId
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        // console.log(res);
+        if (res.statusCode) {
+          if (res.statusCode !== 200) {
+            alert(res.message);
+          }
+        }
+        window.location = '/home';
+      })
+      .catch(err => {
+        console.error(err);
+      })
+      .finally(() => {
+        hideLoading();
+      });
+
+  }
+
+  function cancelAvailableAppointment(availableAppointmentId, serviceCategoryName, intervalDate) {
+    displayLoading();
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (!confirm(
+      `¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`
+    )) {
+      return;
+    }
+
+    fetch(`/api/v1/available-appointments/${availableAppointmentId}`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'delete'
+    })
+      .then(res => res.json())
+      .then(res => {
+        // console.log(res);
+        if (res.statusCode) {
+          if (res.statusCode !== 200) {
+            alert(res.message);
+          }
+        }
+        window.location = '/home';
+      })
+      .catch(err => {
+        console.error(err);
+      })
+      .finally(() => {
+        hideLoading();
+      });
+  }
+
+  function populateTrainerList(availableAppointmentId) {
+    const trainerEdit = document.getElementById(`trainerEdit-${availableAppointmentId}`);
+    trainerEdit.classList.add('d-none');
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/users/trainers', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => fillDiv(res, `availableAppointmentId-${availableAppointmentId}`))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function fillDiv(res, htmlDivId) {
+    const container = document.getElementById(htmlDivId);
+    const select = document.createElement('select');
+    res.forEach(trainer => {
+      const option = document.createElement('option');
+      option.value = trainer.id;
+      option.innerText = trainer.email;
+
+      select.appendChild(option);
+    });
+
+    if (res) {
+      if (res.length > 0) {
+        container.appendChild(select);
+
+        const cancelBtn = document.createElement('button');
+        cancelBtn.innerText = "Cancelar";
+        cancelBtn.onclick = (e) => {
+          const availableAppointmentId = htmlDivId.replace('availableAppointmentId-', '');
+          const trainerEdit = document.getElementById(`trainerEdit-${availableAppointmentId}`);
+          trainerEdit.classList.remove('d-none');
+          container.innerHTML = '';
+        };
+        cancelBtn.classList.add('btn', 'btn-danger');
+        container.appendChild(cancelBtn);
+
+        const button = document.createElement('button');
+        button.innerText = "Guardar";
+        button.onclick = (e) => {
+          const trainerId = select.options[select.selectedIndex].value;
+          const availableAppointmentId = container.id.replace('availableAppointmentId-', '');
+          container.innerHTML = '';
+          setAppointmentTrainer(trainerId, availableAppointmentId);
+        };
+        button.classList.add('btn', 'btn-success');
+        container.appendChild(button);
+      }
+    }
+  }
+
+  function setAppointmentTrainer(trainerId, availableAppointmentId) {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    fetch(`/api/v1/profile/available-appointments/${availableAppointmentId}`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'post',
+      body: JSON.stringify({
+        trainerId
+      })
+    })
+      .then(res => {
+        if (res.status === 200) {
+          alert('Instructor actualizado.');
+        } else {
+          alert('Hubo un problema actualizando al instructor de la sesión, favor de intentar más tarde.');
+        }
+        location.reload(true);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+      .finally(() => {
+        const trainerEdit = document.getElementById(`trainerEdit-${availableAppointmentId}`);
+        trainerEdit.classList.remove('d-none');
+      });
+  }
+
+  function setMeetingUrl(availableAppointmentId, serviceName, datetime) {
+    let meetingUrl = prompt(`Enlace para la sesión remota de ${serviceName} de ${datetime}`);
+    if (!meetingUrl) {
+      return;
+    }
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`/api/v1/profile/available-appointments/${availableAppointmentId}`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'post',
+      body: JSON.stringify({
+        meetingUrl
+      })
+    })
+      .then(res => {
+        if (res.status === 200) {
+          alert('Enlace actualizado.');
+        } else {
+          alert('Hubo un problema actualizando el enlace de la cita, favor de intentar más tarde.');
+        }
+        location.reload(true);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+</script>
+
+</html>

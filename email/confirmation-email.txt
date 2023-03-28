@@ -1,0 +1,7 @@
+Bienvenido al sitio de Certificación ISS
+
+Verifica tu correo electrónico.
+
+Para der utilizar el sitio de Certificación ISS, favor de verificar esta cuenta de correo usando el siguiente enlace: $URL_CONFIRMATION_EMAIL
+
+* Si no hizo el registro en el sitio, favor de ignorar el correo, la cuenta se ELIMINARÁ eventualmente.

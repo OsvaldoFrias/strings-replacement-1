@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <script src="/public/js/html2pdf.bundle.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+  <style>
+    #certificado {
+      position: relative;
+    }
+
+    #certificado button {
+      position: absolute;
+      top: 100%;
+      left: 0%;
+      transform: translate(50%, -100%);
+      -ms-transform: translate(50%, -100%);
+      /* opacity: 50%; */
+    }
+  </style>
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../partials/topnav.ejs") %>
+  <%- include("../partials/header.ejs") %>
+  <div class="container">
+    <section>
+      <div class="container py-4">
+        <div id="certificado" class="row d-flex align-items-center justify-content-center">
+          <div class="col-lg-12">
+            <img id="certificado-img" class="col-lg-12" src="data:image/png;base64,<%= certData %>" />
+            <button class="btn btn-info" onclick="printPdf()"><i class="fa fa-download"></i> PDF</button>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-center">
+            <div>
+              <p>Nombre del asistente:
+                <strong><%= `${grade.appointment.attendant.firstName} ${grade.appointment.attendant.lastName}` %></strong>
+              </p>
+              <p>Certificado: <strong><%= grade.appointment.available.service.serviceCategory.name %></strong></p>
+              <p>Estatus: <strong><%= grade.gradeType.name %></strong></p>
+              <p>Emitido en: <strong><%= issuedAt %></strong> </p>
+              <p>Fecha de expiración: <strong><%= expirationTime %></strong></p>
+            </div>
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script>
+  function getBasicInfo() {
+    // html2pdf().set({
+    //   margin: 1,
+    //   filename: 'myfile.pdf',
+    //   image: {
+    //     type: 'png',
+    //     quality: 0.98
+    //   },
+    //   // html2canvas: {
+    //   //   scale: 2
+    //   // },
+    //   jsPDF: {
+    //     unit: 'in',
+    //     format: 'letter',
+    //     orientation: 'landscape'
+    //   }
+    // }).from(document.getElementById('certificado')).save();
+  }
+  function printPdf() {
+    const certificado = document.getElementById('certificado-img');
+    var worker = html2pdf().set({
+      margin: [0.15, 0, 0, 0],
+      filename: 'certificate.pdf',
+      image: {
+        type: 'jpeg',
+        quality: 1.0
+      },
+      html2canvas: {
+        // scale: 4,
+        // width: 720,
+        // y: 0.05,
+        // x: 0.05,
+      },
+      jsPDF: {
+        unit: 'in',
+        format: 'letter',
+        orientation: 'landscape'
+      }
+    }).from(certificado).save();
+  }
+</script>
+
+</html>

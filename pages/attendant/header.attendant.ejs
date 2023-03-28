@@ -1,0 +1,76 @@
+<div class="header d-flex" style="height:auto;padding-top: 20px;padding-bottom: 20px;">
+  <% if (locals.username) { %>
+  <div class="">
+    <h4>
+      <%= `${username}` %>
+    </h4>
+    <% if (locals.role) { %>
+    <% if (role==='attendant' ) { %>
+    <!-- <button onclick="saveCoupon()" class="btn btn-primary" style="text-transform: uppercase;">Registrar
+            cupón</button> -->
+    <% } %>
+    <% } %>
+  </div>
+  <% } %>
+</div>
+
+<% if (locals.role) { %>
+<% if (role==='attendant' ) { %>
+<script>
+
+  function saveCoupon() {
+    const coupon = prompt('Ingresa el cupón válido para acceder a la información del curso o examen:');
+
+    if (coupon) {
+      if (confirm('Esta operación es IRREVERSIBLE. ¿Desea continuar?')) {
+        registerCoupon(coupon);
+      } else {
+        // console.log('no se guardó');
+      }
+    }
+  }
+
+  function registerCoupon(coupon) {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`/api/v1/profile/coupon`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'post',
+      body: JSON.stringify({
+        coupon
+      })
+    })
+      .then(async (res) => {
+        if (res.status === 201) {
+          alert('Cupón registrado con éxito. Favor de seleccionar una fecha para terminar su registro.');
+        } else if (res.status === 404) {
+          alert('El cupón ya fue utilizado o no existe en el registro, favor de contactar a su RSM.');
+        } else if (res.status === 400) {
+          const body = await res.json();
+          if (body) {
+            alert(body.message);
+          } else {
+            alert('Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.');
+          }
+        } else if (res.status === 408) {
+          const body = await res.json();
+          if (body && body.message === 'token expired') {
+            alert('El cupón ha expirado');
+          } else {
+            alert('Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.');
+          }
+        } else {
+          alert('Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.');
+        }
+        location.reload(true);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+
+  }
+</script>
+<% } %>
+<% } %>

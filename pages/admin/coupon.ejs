@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Data table -->
+  <link rel="stylesheet" type="text/css"
+    href="/public/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/jquery.dataTables.js">
+    </script>
+  <!--/ Data table -->
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs", { "location": "coupons" }) %>
+  <%- include("./header.admin.ejs") %>
+  <div>
+    <section>
+      <div>
+        <div class="d-flex align-items-center justify-content-center">
+          <div class="w-100">
+            <div class="col-md-12 text-right">
+              <a href="/coupon/add" class="btn btn-primary">Generar
+                cupones</a>
+            </div>
+            <h2>Cupones generados</h2>
+            <div class="col-md-12 text-right">
+              <a href="/api/v2/csv/coupons" class="btn btn-primary"><i
+                  class="fa fa-download"></i>
+                Descargar reporte</a>
+            </div>
+            <div id="availableAppointments">
+              <table id="availableAppointments-list">
+                <thead>
+                  <tr>
+                    <th>Núm. Factura</th>
+                    <th>Consecutivo</th>
+                    <th>Producto</th>
+                    <th>Usuario</th>
+                    <th>Cupón</th>
+                    <th>Empresa</th>
+                    <th>RSM</th>
+                    <th>Tipo</th>
+                    <th>Vencimiento</th>
+                    <th>Eliminar cupón</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div>
+          <%- include("../../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script>
+  const availableAppointments = document.getElementById('availableAppointments');
+
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/coupons', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseCoupons(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseCoupons(res) {
+    let availableAppointmentsTable = $('#availableAppointments-list').DataTable({
+      "ordering": false,
+      "pageLength": 20,
+      "sDom": 'lrtip',
+      "dom": '<"top"if>rt<"bottom"p><"clear">'
+    });
+    res.forEach(coupon => {
+      const couponId = coupon.id;
+      const poCode = coupon.poCode;
+      const sequence = coupon.sequence;
+      const couponCode = coupon.coupon;
+      const serviceName = coupon.service.name;
+      const type = coupon.type;
+      const rsmName = coupon.rsmName;
+      const businessName = coupon.businessName;
+      const expirationDate = coupon.expirationDate;
+
+      let attendantMail = null;
+      if (coupon.attendant) {
+        const email = coupon.attendant.user.email;
+        const id = coupon.attendant.id;
+        attendantMail = `<a href="/attendant/${id}">${email}</a>`;
+      }
+      let expirationString = null;
+      if (expirationDate) {
+        expirationString = parseDateToJson(new Date(expirationDate)).stringDate + ' ' + parseDateToJson(new Date(expirationDate)).formatTime;
+      }
+
+      availableAppointmentsTable
+        .row
+        .add([
+          `${poCode}`,
+          `${sequence}`,
+          `${serviceName}`,
+          `${attendantMail ? attendantMail : '<span style="font-style: italic;color: #999999;">El cupón aún no ha sido utilizado.</span>'}`,
+          `<img style="cursor:pointer;" onclick="prompt('Copiar al portapapeles: CTRL + C, Enter','${couponCode}')" src="/public/img/copy-icon.png" alt="Copiar" width="30px"/>${couponCode}`,
+          `${businessName}`,
+          `${rsmName}`,
+          `${type}`,
+          `${expirationString}`,
+          `<img style="cursor:pointer;" onclick="deleteCoupon(${couponId})" src="/public/img/cancel.png" alt="Cancelar" width="30px"/>`,
+        ])
+        .draw()
+        .node();
+    });
+  }
+
+  function deleteCoupon(couponId) {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`/api/v1/coupons/${couponId}`, {
+      headers: myHeaders,
+      method: 'DELETE',
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.statusCode) {
+          alert(res.message);
+        } else {
+          window.location.reload();
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+</script>
+
+</html>

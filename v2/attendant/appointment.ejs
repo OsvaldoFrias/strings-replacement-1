@@ -1,0 +1,194 @@
+<style>
+  .card-1 {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 15px;
+    transition: 0.3s;
+  }
+
+  .card-1 .calendar-ico {
+    margin-top: 5px;
+  }
+
+  .card-1 .calendar-ico div {
+    font-weight: bold;
+    font-weight: bold;
+    text-align: center;
+    width: 72px;
+  }
+
+  .card-1 .calendar-ico div:nth-child(1) {
+    background-color: #004277;
+    border-radius: 10px 10px 0 0;
+    color: #e5e5e5;
+  }
+
+  .card-1 .calendar-ico div:nth-child(2) {
+    background-color: #e5e5e5;
+    font-size: larger;
+  }
+
+  .card-1 .calendar-ico div:nth-child(3) {
+    background-color: #e5e5e5;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .card-1 .cell-1 div:nth-child(1) {
+    font-size: x-large;
+  }
+
+  .card-1 .cell-1 div:nth-child(2) {
+    font-size: large;
+  }
+
+  .card-1 .cell-2 {
+    margin: 5px;
+  }
+</style>
+
+<br>
+<br>
+<aside>
+  <div class="row">
+    <div class="col-lg-12" id="appointment"></div>
+  </div>
+</aside>
+
+<script>
+  const appointmentContainer = document.getElementById('appointment');
+
+  function setup() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/appointments/<%= hash %>', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseAppointment(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseAppointment(appointment) {
+    if (appointment.isCancelled) {
+      window.location.replace('/home');
+      // history.back();
+    }
+    const meetingUrl = appointment.available.meetingUrl;
+    const appointmentStartDatetime = new Date(appointment.available.appointmentStartDatetime);
+    const appointmentFinishDatetime = new Date(appointment.available.appointmentFinishDatetime);
+    const month = months[appointmentStartDatetime.getMonth()];
+    const weekDay = weekDays[appointmentStartDatetime.getDay()];
+    const startDatetime = parseDateToJson(appointmentStartDatetime);
+    const finishDatetime = parseDateToJson(appointmentFinishDatetime);
+
+    const intervalDate =
+      `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.formatTime}`;
+
+    const serviceName = appointment.available.service.name;
+    const serviceType = appointment.available.service.type;
+    const serviceCategoryName = appointment.available.service.serviceCategory.name;
+    const serviceCategoryDescription = appointment.available.service.serviceCategory.description;
+    const serviceInfoTemplate = appointment.available.service.serviceCategory.infoTemplate;
+    const sessionType = appointment.available.sessionType === "remote"
+      ? "<%= translation.AVAILABLE.TYPE_REMOTE %>"
+      : "<%= translation.AVAILABLE.TYPE_CLOSE %>";
+    const state = appointment.available.state;
+    const country = appointment.available.state.country;
+    const location = serviceType === 'exam'
+      ? ''
+      : appointment.available.sessionType === "remote"
+        ? country.name
+        : `${country.name} ${state.name}`;
+    const linkTitle = appointment.available.sessionType === "remote"
+      ? "<%= translation.AVAILABLE.LINK_REMOTE %>"
+      : "<%= translation.AVAILABLE.LINK_CLOSE %>";
+    const directionType = appointment.available.sessionType === "remote"
+      ? "<%= translation.AVAILABLE.ADDITIONAL_INFO_REMOTE_TITLE %>"
+      : "<%= translation.AVAILABLE.ADDITIONAL_INFO_CLOSE_TITLE %>";
+    const direction = appointment.available.direction;
+
+    const cardTemplate = `<div class="card-1">
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="p-2">
+            <div class="calendar-ico">
+              <div>${month}</div>
+              <div>${appointmentStartDatetime.getDate()}</div>
+              <div>${weekDay}</div>
+            </div>
+          </div>
+          <div class="p-2">
+            <div class="cell-1">
+              <div>${serviceName}</div>
+              <div>${location}</div>
+              <table>
+                <tr>
+                  <td>Cita: </td>
+                  <td>
+                    ${startDatetime.stringDate} ${startDatetime.formatTime} -
+                    ${finishDatetime.stringDate} ${finishDatetime.formatTime}
+                  </td>
+                </tr>
+              </table>
+              <p>${directionType}:</p>
+              <p>${direction ? direction.replace(/\n/gi, '<br>') : '-'}</p>
+            </div>
+          </div>
+          <div class="ml-auto p-2">
+            <div class="cell-2">
+              ${meetingUrl
+        ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>`
+        : `<p style="font-style: italic;color: #999999;">
+            <%= translation.AVAILABLE.LINK_NOT_AVAILABLE %>
+          </p>`}
+              <div>
+                <button class="btn btn-danger" 
+                  onclick="cancelAppointment('<%= hash %>', '${serviceCategoryName}', '${intervalDate}')">
+                  <%= translation.APPOINTMENT.CANCEL_BUTTON %>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 offset-md-1" style="text-align:justify;">${serviceInfoTemplate}</div>
+      </div>`;
+
+    appointmentContainer.innerHTML = cardTemplate;
+  }
+
+  function cancelAppointment(hash, serviceCategoryName, intervalDate) {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    // if (!confirm(`¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`)) {
+    if (!confirm('<%= translation.APPOINTMENT.CANCEL_PROMPT %>'
+      .replace("$0", serviceCategoryName)
+      .replace("$1", intervalDate))) {
+      return;
+    }
+
+    fetch('/api/v1/appointments/<%= hash %>', {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'delete'
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.statusCode) {
+          if (res.statusCode === 400) {
+            alert(res.message);
+          }
+        }
+        // window.location = '/home';
+        window.location.replace('/home');
+        // history.back();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+</script>

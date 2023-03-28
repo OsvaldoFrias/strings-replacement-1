@@ -1,0 +1,112 @@
+{
+  "SITE_TITLE": "Training Center",
+  "LOGINV2": {
+    "TITLE": "Inicia Sesión",
+    "FORM": {
+      "EMAIL": "Correo electrónico",
+      "PASSWORD": "Contraseña",
+      "NEW_ACCOUNT": "Crear una cuenta",
+      "FORGOT_PASSWORD": "Olvidé mi contraseña",
+      "LOGIN": "Ingresar"
+    }
+  },
+  "CALENDAR": {
+    "TITLE": "Calendario de cursos",
+    "AVAILABLE_TEMPLATE": "Disponible $0 de $1",
+    "LOCALE": "es",
+    "LOADING_ERROR": "Hubo un error al cargar el calendario"
+  },
+  "HEADER": {
+    "PROFILE": "Mi Perfil",
+    "LOGOUT": "Salir"
+  },
+  "MENU": {
+    "MENU_1": "Capacitaciones",
+    "MENU_2": "Mis Certificados",
+    "MENU_3": "Preguntas frecuentes",
+    "MENU_4": "Inicio",
+    "MENU_5": "Estatus",
+    "MENU_6": "Exámenes",
+    "MENU_7": "Cursos",
+    "MENU_8": "Cupones",
+    "MENU_9": "Usuarios",
+    "MENU_10": "Servicios",
+    "MENU_11": "Catálogos",
+    "MENU_12": "Países",
+    "MENU_13": "Usuarios del sistema",
+    "MENU_14": "Preguntas frecuentes"
+  },
+  "HOME": {
+    "BADGE_1_TITLE": "Mis reservaciones",
+    "BADGE_2_TITLE": "Mis certificados",
+    "LIST_1_TITLE": "PRÓXIMAS FECHAS",
+    "LIST_1_EMPTY": "Aún no se han hecho reservaciones."
+  },
+  "APPOINTMENT": {
+    "CANCEL_BUTTON": "Cancelar Curso",
+    "CANCEL_PROMPT": "¿Desea cancelar la sesión de $0 para el $1?",
+    "FIX_APPOINTMENT_PROMPT": "¿Desea reservar para $0 para $1?",
+    "FIXED": "Cita agendada."
+  },
+  "AVAILABLE": {
+    "APPOINTMENT_LABEL": "Horario",
+    "TYPE_REMOTE": "Remoto",
+    "TYPE_CLOSE": "Presencial",
+    "LINK_REMOTE": "Entrar a la conferencia",
+    "LINK_CLOSE": "Dirección",
+    "ADDITIONAL_INFO_REMOTE_TITLE": "Instrucciones adicionales",
+    "ADDITIONAL_INFO_CLOSE_TITLE": "Indicaciones adicionales",
+    "FIX_APPOINTMENT": "Registrarse",
+    "LINK_NOT_AVAILABLE": "Aún no está disponible el enlace para unirse.",
+    "FIXING_ERROR": "Hubo un problema agendando la cita, favor de intentar más tarde.",
+    "UNKNOWN_ERROR": "Error desconocido.",
+    "ENTER_COUPON": "Ingresa el cupón válido para acceder a la información del curso o examen:",
+    "IRREVERSIBLE_COUPON": "Esta operación es IRREVERSIBLE. ¿Desea continuar?",
+    "SAVED_COUPON": "Cupón registrado con éxito.",
+    "TAKEN_COUPON": "El cupón ya fue utilizado o no existe en el registro, favor de contactar a su RSM.",
+    "COUPON_ERROR": "Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.",
+    "EXPIRED_COUPON": "El cupón ha expirado."
+  },
+  "CERTIFICATES": {
+    "THEAD_1": "Sesión",
+    "THEAD_2": "Fecha",
+    "THEAD_3": "Nombre",
+    "THEAD_4": "Email",
+    "THEAD_5": "Empresa",
+    "THEAD_6": "Resultado",
+    "THEAD_7": "URL Certificado",
+    "THEAD_8": "Evaluación",
+    "PENDING_REVIEW": "Aún no ha sido evaluado.",
+    "NO_CERTIFICATE": "No hay certificado.",
+    "CERTIFICATE_TITLE": "Certificado",
+    "NO_REVIEW": "No hay evaluación.",
+    "REVIEW_TITLE": "Evaluación"
+  },
+  "PROFILE": {
+    "NAME_TITLE": "Nombre(s)",
+    "LAST_NAME_TITLE": "Apellido(s)",
+    "BUSINESS_TITLE": "Empresa",
+    "LICENSE_TITLE": "Licencia",
+    "EMAIL_TITLE": "Correo electrónico",
+    "COUNTRY_TITLE": "País",
+    "HRU_TITLE": "Hardware Report Utility (HRU)",
+    "COUPONS_TABLE_TITLE": "Cupones",
+    "THEAD_1": "Producto",
+    "THEAD_2": "Cupón",
+    "THEAD_3": "Empresa",
+    "UPDATE_BUTTON": "Actualizar",
+    "COPY_COUPON": "Copiar al portapapeles: CTRL + C, Enter",
+    "NO_LICENSE": "No hay licencia.",
+    "EMAIL_EMPTY_ERROR": "Se requiere el correo electrónico del usuario.",
+    "COUNTRY_EMPTY_ERROR": "Debe seleccionar un país de origen.",
+    "UPDATED_PROFILE": "Perfil actualizado.",
+    "PROFILE_UPDATE_ERROR": "Hubo un problema actualizando el perfil del usuario, favor de intentar más tarde."
+  },
+  "GRADE": {
+    "LABEL_1": "Nombre del asistente",
+    "LABEL_2": "Certificado",
+    "LABEL_3": "Estatus",
+    "LABEL_4": "Emitido en",
+    "LABEL_5": "Fecha de expiración"
+  }
+}

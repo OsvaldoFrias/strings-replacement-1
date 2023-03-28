@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs", { "location": "coupons" }) %>
+  <%- include("./header.admin.ejs") %>
+  <div class="container">
+    <section>
+      <div class="container py-4">
+        <div class="row d-flex align-items-center justify-content-center">
+          <div class="w-100">
+            <div>
+              <h2>Generar cupones a partir de PO</h2>
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="poCode">Núm. factura (PO):</label>
+                    <input type="text" class="form-control" id="poCode" name="poCode" placeholder="ABC-123-DFG-0">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="sequence">Cantidad de cupones:</label>
+                    <input type="number" class="form-control" id="sequence" name="sequence">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="businessName">Empresa:</label>
+                    <input type="text" class="form-control" id="businessName" name="businessName">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="rsmName">RSM:</label>
+                    <input type="text" class="form-control" id="rsmName" name="rsmName">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6 text-center" style="margin: auto;">
+                    <label class="form-check-label" for="type">
+                      Cupón vendido
+                    </label>&nbsp;&nbsp;&nbsp;
+                    <input class="form-check-input" type="checkbox" value="" id="type" checked>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="serviceId">Tipo de producto:</label>
+                    <select id="serviceId" name="serviceId" class="form-control">
+                      <option value="" selected>Choose...</option>
+                    </select>
+                  </div>
+                </div>
+                <div id="error" class="alert alert-danger alert-dismissible d-none">
+                  <div id="error-message"></div>
+                </div>
+                <div class="col-md-12 text-right">
+                  <button type="button" class="btn btn-primary" onclick="saveCoupon()">Generar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div>
+          <%- include("../../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script>
+  const appointmentContainer = document.getElementById('appointment');
+  let services = [];
+
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/services/', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseServices(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function getSelectValue(select) {
+    return select.options[select.selectedIndex].value;
+  }
+
+  function displayErrors(errors) {
+    const error = document.getElementById('error');
+    const errorMessage = document.getElementById('error-message');
+
+    if (errors.length === 0) {
+      error.classList.add('d-none');
+      errorMessage.innerText = '';
+      return;
+    }
+
+    error.classList.remove('d-none');
+    errorMessage.innerText = errors.join('\n');
+  }
+
+  function saveCoupon() {
+    const poCode = document.getElementById("poCode").value;
+    const sequence = document.getElementById("sequence").value;
+    const serviceId = getSelectValue(document.getElementById("serviceId"));
+    const type = document.getElementById('type').checked ? 'sold' : 'free';
+    const businessName = document.getElementById('businessName').value;
+    const rsmName = document.getElementById('rsmName').value;
+
+    const errors = [];
+
+    if (!serviceId) {
+      errors.push('Seleccione un tipo de producto.');
+    }
+    if (!sequence) {
+      errors.push('Indique un consecutivo.');
+    }
+    if (type === 'sold') {
+      if (!poCode) {
+        errors.push('Ingrese un número de factura.');
+      }
+    }
+    if (!businessName) {
+      errors.push('Indique la empresa que compró el cupón.');
+    }
+    if (!rsmName) {
+      errors.push('Indique el nombre del RSM asociado.');
+    }
+
+    if (errors.length > 0) {
+      displayErrors(errors);
+      return;
+    }
+
+    let data = {
+      poCode,
+      type,
+      businessName,
+      rsmName,
+    };
+
+    data = serviceId ? {
+      ...data,
+      serviceId: Number.parseInt(serviceId)
+    } : data;
+    data = sequence ? {
+      ...data,
+      sequence: Number.parseInt(sequence)
+    } : data;
+
+    fetch("/api/v1/coupons", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify(data)
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        // console.log(res);
+        if (res.statusCode === 400) {
+          displayErrors([res.message]);
+        } else {
+          window.location.href = "/coupon";
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  function parseServices(services) {
+    const select = document.getElementById('serviceId');
+    services.forEach(service => {
+      // console.log(service);
+      const option = document.createElement('option');
+      option.value = service.id;
+      option.innerText = service.name;
+
+      select.appendChild(option);
+    });
+
+    if (services) {
+      if (services.length > 0) {
+        // const attendantsNumber = document.getElementById('overrideAttendantsNumber');
+        select.onchange = (e) => {
+          const serviceId = select.options[select.selectedIndex].value;
+          const service = services[select.selectedIndex - 1];
+          // console.log(serviceId);
+          // console.log(service);
+
+          if (service) {
+            // attendantsNumber.removeAttribute('disabled');
+            // attendantsNumber.value = service.attendantsNumber;
+            // console.log(service.attendantsNumber);
+            const serviceId = service.id;
+            const serviceCategoryId = service.serviceCategory.id;
+
+            const myHeaders = new Headers();
+            myHeaders.append('Content-Type', 'application/json');
+          } else {
+            // attendantsNumber.value = '';
+            // attendantsNumber.setAttribute('disabled', true);
+          }
+        };
+      }
+    }
+  }
+</script>
+
+</html>

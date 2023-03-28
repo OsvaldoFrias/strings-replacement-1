@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+    <style>
+      @font-face {
+        font-family: 'Gotham';
+        src: url(/public/fonts/GOTHAM-MEDIUM.TTF);
+      }
+
+      body {
+        background: #e4e9f9;
+        color: #2a3a6f;
+        font-family: 'Gotham';
+      }
+
+      .login-page {
+        padding: 5% 0 0;
+      }
+
+      .left-col {
+        display: inline-block;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      }
+
+      .left-col>img {
+        height: 550px;
+      }
+
+      .right-col {
+        display: inline-block;
+        height: 550px;
+        width: 458px;
+        padding: 10px 40px 10px 40px;
+        vertical-align: top;
+        background-color: #fff;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      }
+
+      .right-col h1,
+      .right-col h4 {
+        text-align: center;
+      }
+
+      .right-col h4 {
+        font-size: 20px;
+      }
+
+      form input {
+        margin-top: 10%;
+        border-left-color: #2a3a6f !important;
+        border-left-width: 5px !important;
+        border-radius: 0px !important;
+      }
+
+      form button {
+        background: #2a3a6f !important;
+        cursor: pointer;
+      }
+
+      form button:hover,
+      form button:active,
+      form button:focus {
+        background: #2a354f !important;
+      }
+
+      form a {
+        font-size: 1.2rem !important;
+      }
+
+      .btn {
+        border-radius: 25px;
+      }
+    </style>
+</head>
+
+<body>
+  <div class="container login-page">
+    <div class="row d-flex justify-content-center">
+      <div class="d-none d-lg-inline-block left-col">
+        <img src="/public/img/login.png">
+      </div>
+      <div class="right-col">
+        <br>
+        <h1>BIENVENIDO</h1>
+        <h4>ISS Appointments Portal</h4>
+        <form>
+          <div class="form-outline">
+            <input onkeydown="clickPress(event)" type="email" name="email" id="email"
+              class="form-control form-control-lg" placeholder="Correo electrónico" required />
+          </div>
+          <div class="form-outline">
+            <input onkeydown="clickPress(event)" type="password" name="password" id="password"
+              class="form-control form-control-lg" placeholder="Contraseña" required />
+            <div class="col-md-12 text-right mb-4" style="padding: 0;">
+              <a href="/recovery" class="btn btn-link">Olvidé mi contraseña</a>
+            </div>
+          </div>
+          <div id="error" class="alert alert-danger alert-dismissible d-none">
+            <div id="error-message"></div>
+          </div>
+          <button type="button" onclick="signIn()" class="btn btn-primary btn-lg btn-block">INGRESAR</button>
+          <a href="/signup" class="btn btn-secondary btn-lg btn-block">REGISTRARSE</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  function clickPress(e) {
+    // console.log(e);
+    if (e.key === "Enter") {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      if (email && password) {
+        signIn();
+      }
+    }
+  }
+
+  function signIn() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    fetch("/api/v1/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify({
+        email,
+        password
+      })
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.statusCode) {
+          // console.log(res);
+          displayErrors([res.message]);
+        } else {
+          window.location.href = "/home";
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  function displayErrors(errors) {
+    const error = document.getElementById('error');
+    const errorMessage = document.getElementById('error-message');
+
+    if (errors.length === 0) {
+      error.classList.add('d-none');
+      errorMessage.innerText = '';
+      return;
+    }
+
+    error.classList.remove('d-none');
+    errorMessage.innerText = errors.join('\n');
+  }
+
+</script>
+
+</html>

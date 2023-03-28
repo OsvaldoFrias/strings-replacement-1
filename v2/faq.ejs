@@ -1,0 +1,507 @@
+<!-- <link href="https://vjs.zencdn.net/7.19.2/video-js.css" rel="stylesheet" /> -->
+
+<h1>Preguntas frecuentes</h1>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="heading1">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left" type="button"
+          data-toggle="collapse" data-target="#collapse1"
+          aria-expanded="true" aria-controls="collapse1">
+          ¿Por qué el listado de próximas fechas está vacío?
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapse1" class="collapse" aria-labelledby="heading1"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        El listado de próximas fechas se llena con las próximas fechas
+        disponibles que cumplen con las siguientes características:
+        <br>
+        <br>
+        <ul>
+          <li>Fechas de máximo 1 día de anticipación.</li>
+          <li>Fechas con cupo disponible.</li>
+        </ul>
+        <!-- Adicionalmente, es necesario registrar el cupón
+        correspondiente para que el listado de fechas sea
+        liberado. -->
+
+        Si el listado de fechas aparece vacío significa que no existen
+        próximas fechas disponibles. Favor de seguir
+        al pendiente de la página para reservar su lugar.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="heading2">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed"
+          type="button" data-toggle="collapse"
+          data-target="#collapse2" aria-expanded="false"
+          aria-controls="collapse2">
+          ¿Cómo obtengo un cupón?
+        </button>
+      </h2>
+    </div>
+    <div id="collapse2" class="collapse" aria-labelledby="heading2"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        Los cupones se adquieren a través de una orden de compra. Por
+        cada unidad, se envía por correo el cupón para el curso, el
+        cupón para el examen se envía una vez tomado el curso.
+
+        Se recomienda registrar los cupones una vez que hayan sido
+        recibidos debido a que los cupones tienen vigencia.
+        <br>
+        <br>
+        <ul>
+          <li>1 año cupones vendidos</li>
+          <li>30 días los cupones regalados</li>
+        </ul>
+
+        Favor de contactar a su agente de ventas si es que su cupón ya
+        expiró.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="heading3">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed"
+          type="button" data-toggle="collapse"
+          data-target="#collapse3" aria-expanded="false"
+          aria-controls="collapse3">
+          ¿Por qué cada que entro tengo que cambiar mi contraseña?
+        </button>
+      </h2>
+    </div>
+    <div id="collapse3" class="collapse" aria-labelledby="heading3"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        Verifique que no esté usando una contraseña guardada para
+        algún otro sitio del dominio <strong>.issivs.com</strong>,
+        como por ejemplo el sitio de soporte. En cuyo caso, intente
+        escribir directamente la contraseña correspondiente a este
+        sitio.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="heading4">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed"
+          type="button" data-toggle="collapse"
+          data-target="#collapse4" aria-expanded="false"
+          aria-controls="collapse4">
+          ¿Qué puedo hacer si ya hice mi examen y aún no tengo mi
+          evaluación?
+        </button>
+      </h2>
+    </div>
+    <div id="collapse4" class="collapse" aria-labelledby="heading4"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        Las evaluaciones requieren tiempo dedicado para revisar cada
+        aspecto, razón por la cual, el resultado de la evaluación
+        puede demorar hasta 2 semanas.
+
+        Una vez asentada la calificación el sitio le notificará vía
+        correo electrónico que ha recibido una evaluación.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="heading5">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed"
+          type="button" data-toggle="collapse"
+          data-target="#collapse5" aria-expanded="false"
+          aria-controls="collapse5">
+          ¿Cómo instalo el software (SecurOS)?
+        </button>
+      </h2>
+    </div>
+    <div id="collapse5" class="collapse" aria-labelledby="heading5"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        <ol>
+          <li>
+            Descargar el software desde la página de información del
+            curso.
+          </li>
+          <li>Ejecutar el instalador con permisos de <strong>
+              Administrador</strong>.</li>
+          <li>Indicar el idioma de los pasos de instalación.</li>
+          <li>Aceptar los términos y condiciones de la licencia.</li>
+          <li>Seleccionar tipo de instalación típica.</li>
+          <li>Seleccionar tipo de servidor de configuración.</li>
+          <li>Saltar el paso de la licencia.</li>
+          <li>Seleccionar el idioma del software (para curso
+            presencial favor de elegir idioma <strong>
+              Español</strong>).</li>
+          <li>Marcar o dejar marcada la casilla de instalación del
+            Integrated Device Pack.</li>
+          <li>Quitar la marca de la casilla de iniciar servicio
+            después de que la instalación termine.</li>
+          <li>Iniciar la instalación.</li>
+        </ol>
+        Al concluir la instalación se debe extraer el Código de
+        Hardware del equipo (HRU) y enviarlo al correo de <a
+          href="mailto:soportemexico@issivs.com">soportemexico@issivs.com</a>
+        o
+        <% if (locals.role) { %>
+        <% if (role==='attendant' ) { %>
+        <a href="/my-profile">subirlo al perfil</a>
+        <% } %>
+        <% if (role !=='attendant' ) { %>
+        <span>subirlo al perfil</span>
+        <% } %>
+        <% } %>
+        o guardarlo en un archivo txt para compartirlo con el
+        instructor por el medio que sea indicado.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="heading6">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed"
+          type="button" data-toggle="collapse"
+          data-target="#collapse6" aria-expanded="false"
+          aria-controls="collapse6">
+          ¿Cómo obtengo el Código de Hardware (HRU) o cómo obtengo mi
+          licencia?
+        </button>
+      </h2>
+    </div>
+    <div id="collapse6" class="collapse" aria-labelledby="heading6"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        Para propósito de los cursos, las licencias a distribuir son
+        temporales y deberán ser solicitadas con el
+        código HRU que se puede obtener mediante el siguiente
+        procedimiento:
+        <ol>
+          <li>Abrir el inicio de tareas de Windows.</li>
+          <li>
+            En la sección de SecurOS buscar y ejecutar el programa
+            Hardware Report Utility.
+          </li>
+          <!-- <li>
+            Copiar el contenido de la ventana emergente en
+            <% if (locals.role) { %>
+            <% if (role==='attendant' ) { %>
+            <a href="/my-profile">el perfil</a>
+            <% } %>
+            <% if (role !=='attendant' ) { %>
+            <span>el perfil</span>
+            <% } %>
+            <% } %> de usuario del sitio de cursos y certificaciones.
+          </li> -->
+          <li>
+            Copiar el código y enviarlo al correo de <a
+              href="mailto:soportemexico@issivs.com">soportemexico@issivs.com</a>
+            o
+            <% if (locals.role) { %>
+            <% if (role==='attendant' ) { %>
+            <a href="/my-profile">subirlo al perfil</a>
+            <% } %>
+            <% if (role !=='attendant' ) { %>
+            <span>subirlo al perfil</span>
+            <% } %>
+            <% } %>
+            o guardarlo en un archivo txt para compartirlo con el
+            instructor por el medio que sea indicado.
+          </li>
+        </ol>
+
+        Una vez colocado el Código de Hardware (HRU), esperar al
+        trámite de la licencia. La licencia temporal se
+        entrega hasta que inicie el curso.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="heading7">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed"
+          type="button" data-toggle="collapse"
+          data-target="#collapse7" aria-expanded="false"
+          aria-controls="collapse7">
+          ¿Recibiré un certificado después de completar el curso de
+          capacitación presencial?
+        </button>
+      </h2>
+    </div>
+    <div id="collapse7" class="collapse" aria-labelledby="heading7"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        Se emite un certificado de cualquier nivel una vez que el
+        usuario haya tomado y aprobado el examen de certificación
+        correspondiente. Los usuarios pueden agendar estos exámenes a
+        través de este sitio web.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="heading8">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed"
+          type="button" data-toggle="collapse"
+          data-target="#collapse8" aria-expanded="false"
+          aria-controls="collapse8">
+          ¿Cómo puedo encontrar la ubicación exacta del curso de
+          capacitación presencial?
+        </button>
+      </h2>
+    </div>
+    <div id="collapse8" class="collapse" aria-labelledby="heading8"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        La sección de información del curso incluye detalles sobre la
+        ubicación del curso de capacitación. Se proporcionará tanta
+        información como sea necesaria para cada curso.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="heading9">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed"
+          type="button" data-toggle="collapse"
+          data-target="#collapse9" aria-expanded="false"
+          aria-controls="collapse9">
+          ¿Qué debo llevar al curso de capacitación presencial?
+        </button>
+      </h2>
+    </div>
+    <div id="collapse9" class="collapse" aria-labelledby="heading9"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        <p>
+          El usuario deberá llevar su propio equipo de cómputo para
+          poder realizar los ejercicios y ejemplos del curso. Se
+          requiere que el equipo cuente con las siguientes
+          especificaciones MÍNIMAS:
+        </p>
+        <table
+          style="border: 1px solid black;border-collapse: collapse;">
+          <tbody>
+            <tr>
+              <td style="border: 1px solid black;">
+                <p><b>Parameter</b></p>
+              </td>
+              <td style="border: 1px solid black;">
+                <p><b>Description</b></p>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid black;">
+                <p><b>Sistema Operativo</b></p>
+              </td>
+              <td style="border: 1px solid black;">
+                <p>Windows 8.1 —all editions; Windows Server 2012 R2
+                  —all editions; Windows 10 —Home, Pro, Enterprise,
+                  Education; Windows Server 2016 —Standard,
+                  Datacenter; Windows Server 2019 —Standard,
+                  Datacenter.</p>
+                <p><i>Warning! Only 64-bit versions of operation
+                    systems listed above are supported.</i></p>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid black;">
+                <p><b>CPU</b></p>
+              </td>
+              <td style="border: 1px solid black;">
+                <p>Intel Core i5+8400&nbsp;<span
+                    style="font-size: 1rem;">or above/</span>AMD
+                  FX-8800P<span style="font-size: 1rem;">&nbsp;or
+                    above.</span></p>
+                <p> <i>Warning! Hardware decompression of H.264/H.265
+                    stream is not supported by AMD CPUs.</i></p>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid black;">
+                <p><b>RAM</b></p>
+              </td>
+              <td style="border: 1px solid black;">
+                <p>8 GB or above</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid black;">
+                <p><b>HDD</b></p>
+              </td>
+              <td style="border: 1px solid black;">
+                <p>250 GB</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid black;">
+                <p><b>HDD free space for software installation</b></p>
+              </td>
+              <td style="border: 1px solid black;">
+                <p>Not less than 5 GB</p>
+                <p> <i>Note. Additional intelligent modules require
+                    additional disk space.</i></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <p>
+          <u>
+            <font color="#000000"
+              style="background-color: rgb(255, 255, 0);">
+              El equipo debe contar con una cuenta de usuario local de
+              Windows y no estar en un dominio.
+            </font>
+          </u>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="heading10">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed"
+          type="button" data-toggle="collapse"
+          data-target="#collapse10" aria-expanded="false"
+          aria-controls="collapse10">
+          ¿Puedo cambiar la fecha de mi reserva para el curso de
+          capacitación presencial o examen en línea?
+        </button>
+      </h2>
+    </div>
+    <div id="collapse10" class="collapse" aria-labelledby="heading10"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        Sí, es posible, en la página principal al hacer clic en el
+        título del curso o examen, en la sección de información se
+        mostrará un botón para cancelar la sesión. Es importante
+        destacar que el sistema solo permite cancelaciones de
+        reservaciones hasta <strong>24 horas antes</strong> de la cita
+        programada. Una vez que se ha cancelado una cita, se puede
+        reprogramar en cualquier momento que el usuario lo necesite o
+        requiera de acuerdo a la disponibilidad de fechas.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="heading11">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed"
+          type="button" data-toggle="collapse"
+          data-target="#collapse11" aria-expanded="false"
+          aria-controls="collapse11">
+          ¿Cuántos intentos tengo para aprobar el examen de
+          certificación en línea?
+        </button>
+      </h2>
+    </div>
+    <div id="collapse11" class="collapse" aria-labelledby="heading11"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        Los exámenes en línea ofrecen hasta un <strong>máximo de 2
+          intentos</strong> para aprobar el examen. Si el usuario no
+        aprueba el examen en su último intento, deberá volver a tomar
+        el curso de capacitación correspondiente al nivel para poder
+        volver a realizar el examen.
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<!-- <h2>Galería</h2>
+    <video id="my-video" class="video-js" controls preload="auto" height="480" poster="/public/img/logo_213x68v2.png"
+      data-setup="{}">
+      <source src="/public/video/1.Generacion Licencia-v2.mp4" type="video/mp4" />
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a
+        web browser that
+        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+      </p>
+    </video> -->
+
+<!-- <script src="https://vjs.zencdn.net/7.19.2/video.min.js"></script> -->
+<!-- <script>
+    // Get the Component base class from Video.js
+    var Component = videojs.getComponent('Component');
+
+    // The videojs.extend function is used to assist with inheritance. In
+    // an ES6 environment, `class TitleBar extends Component` would work
+    // identically.
+    var TitleBar = videojs.extend(Component, {
+
+      // The constructor of a component receives two arguments: the
+      // player it will be associated with and an object of options.
+      constructor: function (player, options) {
+
+        // It is important to invoke the superclass before anything else, 
+        // to get all the features of components out of the box!
+        Component.apply(this, arguments);
+
+        // If a `text` option was passed in, update the text content of 
+        // the component.
+        if (options.text) {
+          this.updateTextContent(options.text);
+        }
+      },
+
+      // The `createEl` function of a component creates its DOM element.
+      createEl: function () {
+        return videojs.createEl('div', {
+
+          // Prefixing classes of elements within a player with "vjs-" 
+          // is a convention used in Video.js.
+          className: 'vjs-title-bar'
+        });
+      },
+
+      // This function could be called at any time to update the text 
+      // contents of the component.
+      updateTextContent: function (text) {
+
+        // If no text was provided, default to "Title Unknown"
+        if (typeof text !== 'string') {
+          text = 'Title Unknown';
+        }
+
+        // Use Video.js utility DOM methods to manipulate the content
+        // of the component's element.
+        videojs.emptyEl(this.el());
+        videojs.appendContent(this.el(), text);
+      }
+    });
+
+    // Register the component with Video.js, so it can be used in players.
+    videojs.registerComponent('TitleBar', TitleBar);
+
+    // Create a player.
+    var player = videojs('my-video');
+
+    // Add the TitleBar as a child of the player and provide it some text 
+    // in its options.
+    player.addChild('TitleBar', { text: 'Obtener HRU y subirlo al perfil' });
+
+  </script> -->
+<br>
+<center>
+  <h2>¿Tu pregunta no está en el listado de arriba?</h2>
+  <p>Si tu pregunta no se puede resolver con esta información, favor
+    de contactar a su RSM local o envía un correo a <a
+      href="mailto:soportemexico@issivs.com">soportemexico@issivs.com</a>.
+  </p>
+</center>
+<br>
+<br>
+<br>
+
+<script>
+  function setup() { }
+</script>

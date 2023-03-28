@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+  <!-- Data table -->
+  <link rel="stylesheet" type="text/css" href="/public/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="/public/js/jquery.dataTables.js">
+  </script>
+  <!--/ Data table -->
+  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs", { "location": "attendants" }) %>
+  <%- include("./header.admin.ejs") %>
+  <div class="container">
+    <section>
+      <div class="container py-4">
+        <div class="row d-flex align-items-center justify-content-center">
+          <div class="w-100">
+            <h2>Perfil de usuario</h2>
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="email">Correo electrónico:</label>
+                  <br>
+                  <label id="email">Email</label>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="country">País:</label>
+                  <br>
+                  <label id="country">País</label>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="firstName">Nombre(s):</label>
+                  <input type="text" class="form-control" id="firstName" name="firstName">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="lastName">Apellido(s):</label>
+                  <input type="text" class="form-control" id="lastName" name="lastName">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="businessName">Empresa:</label>
+                  <input type="text" class="form-control" id="businessName" name="businessName">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="rsmName">RSM asociado:</label>
+                  <select id="rsmName" name="rsmName" class="form-control">
+                    <option value="" selected>Choose...</option>
+                  </select>
+                </div>
+              </div>
+              <div id="error" class="alert alert-danger alert-dismissible d-none">
+                <div id="error-message"></div>
+              </div>
+              <div class="form-group col-md-12 text-right">
+                <button type="button" class="btn btn-primary" onclick="updateAttendant()">Actualizar</button>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <h3>Cupones</h3>
+                  <table id="coupons-list">
+                    <thead>
+                      <tr>
+                        <th>Producto</th>
+                        <th>Cupón</th>
+                        <th>Empresa</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <h3>Próximas asistencias</h3>
+                  <div id="appointments"></div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <h3>Historial</h3>
+                  <table id="grades-list"></table>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div>
+          <%- include("../../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script>
+  const appointmentContainer = document.getElementById('appointment');
+
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/system-user-data?roles=rsm', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseSystemUserData('rsmName', res, null))
+      .then(res => fetch('/api/v1/attendants/<%= attendantId %>', {
+        headers: myHeaders,
+        credentials: "same-origin"
+      }))
+      .then(res => res.json())
+      .then(res => parseAttendant(res))
+      .catch(err => {
+        console.error(err);
+      });
+
+    fetch('/api/v1/grades/attendant/<%= attendantId %>', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseGrades(res))
+      .catch(err => {
+        console.error(err);
+      });
+
+    fetch('/api/v1/appointments/attendant/<%= attendantId %>', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseAppointments(res))
+      .catch(err => {
+        console.error(err);
+      });
+
+    fetch('/api/v1/coupons/attendant/<%= attendantId %>', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseCoupons(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseSystemUserData(selectId, array, onchange = null, selectedId = 0) {
+    // console.log(array);
+    const select = document.getElementById(selectId);
+    array.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.user.id;
+      option.innerText = `${item.firstName} ${item.lastName}`;
+
+      if (item.user.id === selectedId) {
+        option.selected = true;
+      }
+      select.appendChild(option);
+    });
+
+    if (array) {
+      if (array.length > 0) {
+        if (onchange) {
+          select.onchange = (e) => {
+            onchange(select);
+          };
+        }
+      }
+    }
+  }
+
+  function parseCoupons(res) {
+    let availableAppointmentsTable = $('#coupons-list').DataTable({
+      "ordering": false,
+      "pageLength": 20,
+      "sDom": 'lrtip',
+      "dom": '<"top"i>rt<"bottom"p><"clear">'
+    });
+    res.forEach(coupon => {
+      const couponId = coupon.id;
+      const poCode = coupon.poCode;
+      const sequence = coupon.sequence;
+      const couponCode = coupon.coupon;
+      const serviceName = coupon.service.name;
+      const type = coupon.type;
+      const rsmName = coupon.rsmName;
+      const businessName = coupon.businessName;
+      const expirationDate = coupon.expirationDate;
+
+      let attendantMail = null;
+      if (coupon.attendant) {
+        attendantMail = coupon.attendant.user.email;
+      }
+      let expirationString = null;
+      if (expirationDate) {
+        expirationString = parseDateToJson(new Date(expirationDate)).stringDate + ' ' + parseDateToJson(new Date(expirationDate)).formatTime;
+      }
+
+      availableAppointmentsTable
+        .row
+        .add([
+          `${serviceName}`,
+          `<img style="cursor:pointer;" onclick="prompt('Copiar al portapapeles: CTRL + C, Enter','${couponCode}')" src="/public/img/copy-icon.png" alt="Copiar" width="30px"/>${couponCode}`,
+          `${businessName}`,
+        ])
+        .draw()
+        .node();
+    });
+  }
+
+  function parseAppointments(res) {
+    const appointmentsTemplate = res.map(appointment => {
+      const appointmentHash = appointment.hash;
+      const availableId = appointment.available.id;
+      const meetingUrl = appointment.available.meetingUrl;
+      const appointmentStartDatetime = new Date(appointment.available.appointmentStartDatetime);
+      const appointmentFinishDatetime = new Date(appointment.available.appointmentFinishDatetime);
+      const month = months[appointmentStartDatetime.getMonth()];
+      const weekDay = weekDays[appointmentStartDatetime.getDay()];
+      const startDatetime = parseDateToJson(appointmentStartDatetime);
+      const finishDatetime = parseDateToJson(appointmentFinishDatetime);
+
+      const serviceName = appointment.available.service.name;
+      const serviceCategoryName = appointment.available.service.serviceCategory.name;
+      const serviceCategoryDescription = appointment.available.service.serviceCategory.description;
+      const sessionType = appointment.available.sessionType === "remote" ? "Remoto" : "Presencial";
+      const state = appointment.available.state;
+      const country = appointment.available.state.country;
+      const location = appointment.available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
+      const linkTitle = appointment.available.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
+
+      const cardTemplate = `<div class="card-1">
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="p-2">
+          <div class="calendar-ico">
+            <div>${month}</div>
+            <div>${appointmentStartDatetime.getDate()}</div>
+            <div>${weekDay}</div>
+          </div>
+        </div>
+        <div class="p-2">
+          <div class="cell-1">
+            <div><a href="/available-appointment/${availableId}">${serviceName}</a></div>
+            <div>${sessionType} - ${location}</div>
+            <table>
+              <tr>
+                <td>Cita: </td>
+                <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="ml-auto p-2">
+          <div class="cell-2">
+            ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</p>'}
+          </div>
+        </div>
+      </div>
+    </div>`;
+      return cardTemplate;
+    });
+
+    if (appointmentsTemplate && appointmentsTemplate.length > 0) {
+      appointments.innerHTML = appointmentsTemplate.join('\n');
+    } else {
+      appointments.innerHTML = '<p>Aún no se han hecho reservaciones.</p>'
+    }
+
+  }
+
+  function parseGrades(grades, type) {
+    const gradesList = document.getElementById('grades-list');
+
+    gradesList.innerHTML = `<thead><tr><th>Sesión</th><th>Fecha</th><th>Nombre</th><th>Email</th><th>Empresa</th><th>Resultado</th></tr></thead>`;
+
+    let gradesTable = $('#grades-list').DataTable({
+      "ordering": false,
+      "pageLength": 20,
+      "sDom": 'lrtip',
+      "dom": '<"top"i>rt<"bottom"p><"clear">'
+    });
+
+    grades.forEach(appointment => {
+      const appointmentId = appointment.id;
+      const appointmentStartDatetime = new Date(appointment.available.appointmentStartDatetime);
+      const appointmentFinishDatetime = new Date(appointment.available.appointmentFinishDatetime);
+      const month = months[appointmentStartDatetime.getMonth()];
+      const weekDay = weekDays[appointmentStartDatetime.getDay()];
+      const startDatetime = parseDateToJson(appointmentStartDatetime);
+      const finishDatetime = parseDateToJson(appointmentFinishDatetime);
+
+      let trainerMail = null;
+      if (appointment.available.trainer) {
+        trainerMail = appointment.available.trainer.email;
+      }
+
+      const serviceName = appointment.available.service.name;
+      const serviceCategoryName = appointment.available.service.serviceCategory.name;
+      const serviceCategoryDescription = appointment.available.service.serviceCategory.description;
+
+      let grade = null;
+      let gradeId = null;
+      let certificateUrl = null;
+      let feedbackUrl = null;
+      if (appointment.grade) {
+        gradeId = appointment.grade.id;
+        certificateUrl = appointment.grade.certificateUrl;
+        feedbackUrl = appointment.grade.feedbackUrl;
+        if (appointment.grade.gradeType) {
+          grade = appointment.grade.gradeType.name;
+        }
+      }
+
+      const {
+        attendant: {
+          id,
+          firstName,
+          lastName,
+          businessName,
+          hash,
+          user: {
+            email
+          }
+        }
+      } = appointment;
+      const fullName = `${firstName} ${lastName}`;
+
+      const rowData = [
+        `${serviceName}`,
+        `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}`,
+        `${fullName}`,
+        `<a href="mailto:${email}">${email}</a>`,
+        `${businessName}`,
+        `${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido evaluado.</span>'}<div id="gradeType-${appointmentId}"></div>`,
+      ];
+
+      if (type === 'exam') {
+        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}">Certificado</a>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido generado el certificado.</span>'}<div id="meetingUrl-${appointmentId}"></div>`);
+        rowData.push(`${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}">Evaluación</a>` : '<span style="font-style: italic;color: #999999;">No hay evaluación.</span>')}`);
+      }
+
+      rowData.push(`${trainerMail}`);
+
+      gradesTable
+        .row
+        .add(rowData)
+        .draw()
+        .node();
+    });
+  }
+
+  function displayErrors(errors) {
+    const error = document.getElementById('error');
+    const errorMessage = document.getElementById('error-message');
+
+    if (errors.length === 0) {
+      error.classList.add('d-none');
+      errorMessage.innerText = '';
+      return;
+    }
+
+    error.classList.remove('d-none');
+    errorMessage.innerText = errors.join('\n');
+  }
+
+  function parseAttendant(attendant) {
+    const firstName = document.getElementById('firstName');
+    const lastName = document.getElementById('lastName');
+    const businessName = document.getElementById('businessName');
+    const email = document.getElementById('email');
+    const country = document.getElementById('country');
+    const rsmName = document.getElementById('rsmName');
+
+    firstName.value = attendant.firstName;
+    lastName.value = attendant.lastName;
+    businessName.value = attendant.businessName;
+    email.innerHTML = attendant.user.email;
+
+    if (attendant.user.countryId) {
+      country.innerHTML = attendant.user.country.name;
+    }
+
+    rsmName.value = attendant.rsmId;
+  }
+
+  function validateFormFields() {
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const businessName = document.getElementById('businessName').value;
+
+    const errors = [];
+
+    if (!firstName) {
+      errors.push("Se requiere el nombre del usuario.");
+    }
+    if (!lastName) {
+      errors.push("Se requiere el apellido del usuario.");
+    }
+    if (!businessName) {
+      errors.push("Se requiere el nombre de la empresa a la que pertenece el usuario.");
+    }
+
+    displayErrors(errors);
+    return errors.length == 0; // There are no errors
+  }
+
+  function updateAttendant(e) {
+    if (e) {
+      e.preventDefault();
+    }
+
+    if (!validateFormFields()) {
+      return;
+    }
+
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const businessName = document.getElementById('businessName').value;
+    const rsmId = document.getElementById('rsmName').value;
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/attendants/<%= attendantId %>', {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'PATCH',
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        businessName,
+        rsmId
+      })
+    })
+      .then(res => {
+        if (res.status === 200) {
+          alert('Usuario actualizado.');
+        } else {
+          alert('Hubo un problema actualizando los datos del usuario, favor de intentar más tarde.');
+        }
+        window.location.href = "/attendant";
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+</script>
+
+</html>

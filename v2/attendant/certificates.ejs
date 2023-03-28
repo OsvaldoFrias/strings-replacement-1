@@ -1,0 +1,154 @@
+<!-- Data table -->
+<link rel="stylesheet" type="text/css"
+  href="/public/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8"
+  src="/public/js/jquery.dataTables.js">
+  </script>
+<!--/ Data table -->
+
+<h2>Calificaciones</h2>
+<div>
+  <table id="appointments-list"></table>
+</div>
+
+<script>
+  function setup() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/profile/appointments/grades?type=<%= type %>', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseGrades(res, '<%= type %>'))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseGrades(appointments, type) {
+    const appointmentsList = document.getElementById('appointments-list');
+
+    if (type === 'exam') {
+      appointmentsList.innerHTML =
+        `<thead><tr>
+          <th><%= translation.CERTIFICATES.THEAD_1 %></th>
+          <th><%= translation.CERTIFICATES.THEAD_2 %></th>
+          <th><%= translation.CERTIFICATES.THEAD_3 %></th>
+          <th><%= translation.CERTIFICATES.THEAD_4 %></th>
+          <th><%= translation.CERTIFICATES.THEAD_5 %></th>
+          <th><%= translation.CERTIFICATES.THEAD_6 %></th>
+          <th><%= translation.CERTIFICATES.THEAD_7 %></th>
+          <th><%= translation.CERTIFICATES.THEAD_8 %></th>
+        </tr></thead>`;
+    } else if (type === 'course') {
+      appointmentsList.innerHTML =
+        `<thead><tr>
+          <th><%= translation.CERTIFICATES.THEAD_1 %></th>
+          <th><%= translation.CERTIFICATES.THEAD_2 %></th>
+          <th><%= translation.CERTIFICATES.THEAD_3 %></th>
+          <th><%= translation.CERTIFICATES.THEAD_4 %></th>
+          <th><%= translation.CERTIFICATES.THEAD_5 %></th>
+          <th><%= translation.CERTIFICATES.THEAD_6 %></th>
+        </tr></thead>`;
+    }
+
+    let appointmentsTable = $('#appointments-list').DataTable({
+      "ordering": false,
+      "pageLength": 20,
+      "sDom": 'lrtip',
+      "dom": '<"top"if>rt<"bottom"p><"clear">'
+    });
+
+    appointments.forEach(appointment => {
+      const appointmentId = appointment.id;
+      // const appointmentHash = appointment.hash;
+      const appointmentStartDatetime =
+        new Date(appointment.available.appointmentStartDatetime);
+      const appointmentFinishDatetime =
+        new Date(appointment.available.appointmentFinishDatetime);
+      const month = months[appointmentStartDatetime.getMonth()];
+      const weekDay = weekDays[appointmentStartDatetime.getDay()];
+      const startDatetime = parseDateToJson(appointmentStartDatetime);
+      const finishDatetime = parseDateToJson(appointmentFinishDatetime);
+
+      let trainerMail = null;
+      if (appointment.available.trainer) {
+        trainerMail = appointment.available.trainer.email;
+      }
+
+      const serviceName = appointment.available.service.name;
+      const serviceCategoryName = appointment.available.service.serviceCategory.name;
+      const serviceCategoryDescription =
+        appointment.available.service.serviceCategory.description;
+
+      let grade = null;
+      let gradeId = null;
+      let certificateUrl = null;
+      let feedbackUrl = null;
+      if (appointment.grade) {
+        gradeId = appointment.grade.id;
+        certificateUrl = appointment.grade.certificateUrl;
+        feedbackUrl = appointment.grade.feedbackUrl;
+        if (appointment.grade.gradeType) {
+          grade = appointment.grade.gradeType.name;
+        }
+      }
+
+      const {
+        attendant: {
+          id,
+          firstName,
+          lastName,
+          businessName,
+          hash,
+          user: {
+            email
+          }
+        }
+      } = appointment;
+      const fullName = `${firstName} ${lastName}`;
+
+      const rowData = [
+        `${serviceName}`,
+        `${startDatetime.stringDate} ${startDatetime.formatTime} - 
+          ${finishDatetime.stringDate} ${finishDatetime.formatTime}`,
+        `${fullName}`,
+        `<a href="mailto:${email}">${email}</a>`,
+        `${businessName}`,
+        `${grade
+          ? `<strong>${grade}</strong>`
+          : '<span style="font-style: italic;color: #999999;">' +
+          '<%= translation.CERTIFICATES.PENDING_REVIEW %>' +
+          '</span>'}<div id="gradeType-${appointmentId}"></div>`,
+      ];
+
+      if (type === 'exam') {
+        rowData.push(`${certificateUrl
+          ? `<a target="_blank" href="/grade/${certificateUrl}">
+            <%= translation.CERTIFICATES.CERTIFICATE_TITLE %>
+            </a>`
+          : '<span style="font-style: italic;color: #999999;">' +
+          '<%= translation.CERTIFICATES.NO_CERTIFICATE %>' +
+          '</span>'}<div id="meetingUrl-${appointmentId}"></div>`);
+        rowData.push(`${(feedbackUrl
+          ? `<a target="_blank" href="${feedbackUrl}">
+            <%= translation.CERTIFICATES.REVIEW_TITLE %>
+            </a>`
+          : '<span style="font-style: italic;color: #999999;">' +
+          '<%= translation.CERTIFICATES.NO_REVIEW %>' +
+          '</span>')}`);
+      }
+
+      rowData.push(`${trainerMail}`);
+
+      appointmentsTable
+        .row
+        .add(rowData)
+        .draw()
+        .node();
+    });
+  }
+
+</script>

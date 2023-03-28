@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+
+  <!-- Data table -->
+  <link rel="stylesheet" type="text/css" href="/public/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="/public/js/jquery.dataTables.js">
+  </script>
+  <!--/ Data table -->
+  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs") %>
+  <%- include("./header.attendant.ejs") %>
+  <div class="container">
+    <section>
+      <div class="container py-4">
+        <div class="row d-flex align-items-center justify-content-center">
+          <div class="w-100">
+            <h2>Perfil de usuario</h2>
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="firstName">Nombre(s):</label>
+                  <br>
+                  <label id="firstName">Nombre(s)</label>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="lastName">Apellido(s):</label>
+                  <br>
+                  <label id="lastName">Apellido(s)</label>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="businessName">Empresa:</label>
+                  <br>
+                  <label id="businessName">Empresa</label>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="licenseKey">Licencia:</label>
+                  <br>
+                  <label id="licenseKey">Licencia</label>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="email">Correo electrónico:</label>
+                  <input type="text" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="countryId">País:</label>
+                  <select id="countryId" name="countryId" class="form-control">
+                    <option value="" selected>Choose...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="hru">Hardware Report Utility (HRU):</label>
+                  <textarea type="text" class="form-control" id="hru" name="hru" rows="10"></textarea>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <h3>Cupones</h3>
+                  <table id="coupons-list">
+                    <thead>
+                      <tr>
+                        <th>Producto</th>
+                        <th>Cupón</th>
+                        <th>Empresa</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+              <div id="error" class="alert alert-danger alert-dismissible d-none">
+                <div id="error-message"></div>
+              </div>
+              <div class="form-group col-md-12 text-right">
+                <button type="button" class="btn btn-primary" onclick="updateAttendant()">Actualizar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div>
+          <%- include("../../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script>
+  const appointmentContainer = document.getElementById('appointment');
+
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+
+    fetch('/api/v1/countries', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseSelect('countryId', res, 'id', 'name', null))
+      .then(() => {
+        fetch('/api/v1/attendants/<%= attendantId %>', {
+          headers: myHeaders,
+          credentials: "same-origin"
+        })
+          .then(res => res.json())
+          .then(res => parseAttendant(res))
+          .catch(err => {
+            console.error(err);
+          });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+
+    fetch('/api/v1/profile/coupons', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseCoupons(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseCoupons(res) {
+    let availableAppointmentsTable = $('#coupons-list').DataTable({
+      "ordering": false,
+      "pageLength": 20,
+      "sDom": 'lrtip',
+      "dom": '<"top"i>rt<"bottom"p><"clear">'
+    });
+    res.forEach(coupon => {
+      const couponId = coupon.id;
+      const poCode = coupon.poCode;
+      const sequence = coupon.sequence;
+      const couponCode = coupon.coupon;
+      const serviceName = coupon.service.name;
+      const type = coupon.type;
+      const rsmName = coupon.rsmName;
+      const businessName = coupon.businessName;
+      const expirationDate = coupon.expirationDate;
+
+      let attendantMail = null;
+      if (coupon.attendant) {
+        attendantMail = coupon.attendant.user.email;
+      }
+      let expirationString = null;
+      if (expirationDate) {
+        expirationString = parseDateToJson(new Date(expirationDate)).stringDate + ' ' + parseDateToJson(new Date(expirationDate)).formatTime;
+      }
+
+      availableAppointmentsTable
+        .row
+        .add([
+          `${serviceName}`,
+          `<img style="cursor:pointer;" onclick="prompt('Copiar al portapapeles: CTRL + C, Enter','${couponCode}')" src="/public/img/copy-icon.png" alt="Copiar" width="30px"/>${couponCode}`,
+          `${businessName}`,
+        ])
+        .draw()
+        .node();
+    });
+  }
+
+  function parseSelect(selectId, array, value = 'id', text = 'name', onchange = null) {
+    const select = document.getElementById(selectId);
+    array.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item[value];
+      option.innerText = item[text];
+
+      select.appendChild(option);
+    });
+
+    if (array) {
+      if (array.length > 0) {
+        if (onchange) {
+          select.onchange = (e) => {
+            onchange(select);
+          };
+        }
+      }
+    }
+  }
+
+  function displayErrors(errors) {
+    const error = document.getElementById('error');
+    const errorMessage = document.getElementById('error-message');
+
+    if (errors.length === 0) {
+      error.classList.add('d-none');
+      errorMessage.innerText = '';
+      return;
+    }
+
+    error.classList.remove('d-none');
+    errorMessage.innerText = errors.join('\n');
+  }
+
+  function parseAttendant(attendant) {
+    // console.log(attendants);
+    const firstName = document.getElementById('firstName');
+    const lastName = document.getElementById('lastName');
+    const businessName = document.getElementById('businessName');
+    const email = document.getElementById('email');
+    const hru = document.getElementById('hru');
+    const licenseKey = document.getElementById('licenseKey');
+    const select = document.getElementById("countryId");
+    // const countryId = select.options[select.selectedIndex].value;
+
+    firstName.innerHTML = attendant.firstName;
+    lastName.innerHTML = attendant.lastName;
+    businessName.innerHTML = attendant.businessName;
+    const licenseKeyValue = attendant.licenseKey;
+    licenseKey.innerHTML = `${(licenseKeyValue ? `<a target="_blank" href="${licenseKeyValue}">Licencia</a>` : '<span style="font-style: italic;color: #999999;">No ha colocado una licencia.</span>')}`;
+    email.value = attendant.user.email;
+    hru.value = attendant.hru;
+
+    if (attendant.user.countryId) {
+      select.value = attendant.user.countryId;
+    }
+  }
+
+  function validateFormFields() {
+    const email = document.getElementById('email').value;
+    const select = document.getElementById("countryId");
+    const countryId = select.options[select.selectedIndex].value;
+
+    const errors = [];
+
+    if (!email) {
+      errors.push("Se requiere el correo electrónico del usuario.");
+    }
+    if (!countryId) {
+      errors.push("Debe seleccionar un país de origen.");
+    }
+
+    displayErrors(errors);
+    return errors.length == 0; // There are no errors
+  }
+
+  function updateAttendant(e) {
+    if (e) {
+      e.preventDefault();
+    }
+
+    if (!validateFormFields()) {
+      return;
+    }
+
+    const email = document.getElementById('email').value;
+    const select = document.getElementById("countryId");
+    const countryId = select.options[select.selectedIndex].value;
+
+    let data = {
+      email,
+      countryId,
+    };
+
+    const hru = document.getElementById('hru').value;
+    if (hru) {
+      data = {
+        ...data,
+        hru,
+      };
+    }
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/profile/myself', {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    })
+      .then(res => {
+        if (res.status === 200) {
+          alert('Perfil actualizado.');
+        } else {
+          alert('Hubo un problema actualizando el perfil del usuario, favor de intentar más tarde.');
+        }
+        window.location.href = "/my-profile";
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+</script>
+
+</html>

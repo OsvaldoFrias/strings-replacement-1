@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+  <!-- Data table -->
+  <link rel="stylesheet" type="text/css" href="/public/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="/public/js/jquery.dataTables.js">
+  </script>
+  <!--/ Data table -->
+  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs", { "location": "home" }) %>
+  <%- include("./header.attendant.ejs") %>
+  <div class="container">
+    <section>
+      <div class="container py-4">
+        <div class="row d-flex align-items-center justify-content-center">
+          <div class="w-100">
+            <div class="col-md-12 text-right">
+              <!-- <button onclick="saveCoupon()" class="btn btn-primary">Registrar cupón</button> -->
+            </div>
+            <div id="loading"></div>
+            <h2>Reservaciones</h2>
+            <div id="appointments">
+            </div>
+            <h2>Próximas fechas</h2>
+            <div id="availableAppointments">
+              <table id="availableAppointments-list">
+                <thead>
+                  <tr>
+                    <th>Fecha/Inicio</th>
+                    <th>Tema</th>
+                    <!-- <th>Cupos disponibles</th> -->
+                    <th>Registros</th>
+                    <th>Reservar</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div>
+          <%- include("../../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script type="text/javascript" charset="utf8" src="/public/js/custom.home.js"></script>
+<script>
+  const availableAppointments = document.getElementById('availableAppointments');
+  const appointments = document.getElementById('appointments');
+
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/profile/available-appointments', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseAvailableAppointments(res))
+      .catch(err => {
+        console.error(err);
+      });
+    fetch('/api/v1/profile/appointments', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseAppointments(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  async function saveCoupon() {
+    const coupon = prompt('Ingresa el cupón válido para acceder a la información del curso o examen:');
+
+    if (coupon) {
+      if (confirm('Esta operación es IRREVERSIBLE. ¿Desea continuar?')) {
+        // Register coupon
+        const myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
+
+        const res1 = await fetch(`/api/v1/profile/coupon`, {
+          headers: myHeaders,
+          credentials: "same-origin",
+          method: 'post',
+          body: JSON.stringify({
+            coupon
+          })
+        })
+        if (res1.status === 201) {
+          alert('Cupón registrado con éxito.');
+          return res1;
+        } else if (res1.status === 404) {
+          alert('El cupón ya fue utilizado o no existe en el registro, favor de contactar a su RSM.');
+        } else if (res1.status === 400) {
+          const body = await res1.json();
+          if (body) {
+            alert(body.message);
+          } else {
+            alert('Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.');
+          }
+        } else if (res1.status === 408) {
+          const body = await res1.json();
+          if (body && body.message === 'token expired') {
+            alert('El cupón ha expirado');
+          } else {
+            alert('Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.');
+          }
+        } else {
+          alert('Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.');
+        }
+
+      } // else {
+      // console.log('no se guardó');
+      return false;
+      // }
+    }
+  }
+
+  function parseAvailableAppointments(res) {
+    let availableAppointmentsTable = $('#availableAppointments-list').DataTable({
+      "ordering": false,
+      "sDom": 'lrtip',
+      "dom": '<"top"i>rt<"bottom"p><"clear">'
+    });
+    res.forEach(availableAppointment => {
+      const totalAppointments = availableAppointment.totalAppointments;
+      const serviceAttendantsNumber =
+        availableAppointment.overrideAttendantsNumber || availableAppointment.service.attendantsNumber;
+      let appointmentStartDatetime = new Date(availableAppointment.appointmentStartDatetime);
+      let appointmentFinishDatetime = new Date(availableAppointment.appointmentFinishDatetime);
+      let startDatetime = parseDateToJson(appointmentStartDatetime);
+      let finishDatetime = parseDateToJson(appointmentFinishDatetime);
+      let serviceName = availableAppointment.service.name;
+      let serviceType = availableAppointment.service.type;
+      let availableAppointmentId = availableAppointment.id;
+      let sessionType = availableAppointment.sessionType === "remote" ? "Remoto" : "Presencial";
+      let state = availableAppointment.state;
+      let country = availableAppointment.state.country;
+      let location =
+        serviceType === 'exam' ? '' : availableAppointment.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
+
+      availableAppointmentsTable
+        .row
+        .add([
+          `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}`,
+          `${serviceName}${location ? " - " + location : ''}`,
+          `${totalAppointments} de ${serviceAttendantsNumber}`,
+          `<img style="cursor:pointer;" onclick="fixAppointment(${availableAppointmentId},'${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/book.png" alt="Agendar" width="30px"/>`
+        ])
+        .draw()
+        .node();
+    });
+  }
+
+  async function fixAppointment(availableAppointmentId, serviceName, datetime) {
+    if (!confirm(`¿Desea reservar para ${serviceName} para ${datetime}?`)) {
+      return;
+    }
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    displayLoading();
+    try {
+      // Get active coupon
+      let res1 = await fetch(`/api/v1/profile/appointment-coupon/${availableAppointmentId}`, {
+        headers: myHeaders,
+        credentials: "same-origin"
+      });
+      // console.log(res1);
+      // console.log(await res1.json());
+
+      // Register coupon
+      if (res1.status === 404) {
+        let res2 = await saveCoupon();
+        // console.log(res2);
+      }
+
+      // Fix appointment
+      if (res1.status === 200 || res1.status === 404) {
+        let res3 = await fetch(`/api/v1/profile/fix-appointment/${availableAppointmentId}`, {
+          headers: myHeaders,
+          credentials: "same-origin",
+          method: 'post'
+        });
+
+        if (res3.status === 201) {
+          alert('Cita agendada.');
+        } else {
+          res3.json().then(obj => {
+            alert(obj.message);
+          });
+        }
+
+        location.reload(true);
+        hideLoading();
+      } else {
+        alert('Error desconocido.')
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  function parseAppointments(res) {
+    const appointmentsTemplate = res.map(appointment => {
+      const appointmentHash = appointment.hash;
+      const meetingUrl = appointment.available.meetingUrl;
+      const appointmentStartDatetime = new Date(appointment.available.appointmentStartDatetime);
+      const appointmentFinishDatetime = new Date(appointment.available.appointmentFinishDatetime);
+      const month = months[appointmentStartDatetime.getMonth()];
+      const weekDay = weekDays[appointmentStartDatetime.getDay()];
+      const startDatetime = parseDateToJson(appointmentStartDatetime);
+      const finishDatetime = parseDateToJson(appointmentFinishDatetime);
+
+      const serviceName = appointment.available.service.name;
+      const serviceType = appointment.available.service.type;
+      const serviceCategoryName = appointment.available.service.serviceCategory.name;
+      const serviceCategoryDescription = appointment.available.service.serviceCategory.description;
+      const sessionType = appointment.available.sessionType === "remote" ? "Remoto" : "Presencial";
+      const state = appointment.available.state;
+      const country = appointment.available.state.country;
+      const location = serviceType === 'exam' ? '' : appointment.available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
+      const linkTitle = appointment.available.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
+
+      const cardTemplate = `<div class="card-1">
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="p-2">
+            <div class="calendar-ico">
+              <div>${month}</div>
+              <div>${appointmentStartDatetime.getDate()}</div>
+              <div>${weekDay}</div>
+            </div>
+          </div>
+          <div class="p-2">
+            <div class="cell-1">
+              <div><a href="/appointment/${appointmentHash}">${serviceName}</a></div>
+              <div>${location}</div>
+              <table>
+                <tr>
+                  <td>Cita: </td>
+                  <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="ml-auto p-2">
+            <div class="cell-2">
+              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</p>'}
+            </div>
+          </div>
+        </div>
+      </div>`;
+      return cardTemplate;
+    });
+
+    if (appointmentsTemplate && appointmentsTemplate.length > 0) {
+      appointments.innerHTML = appointmentsTemplate.join('\n');
+    } else {
+      appointments.innerHTML = '<p>Aún no se han hecho reservaciones.</p>'
+    }
+
+  }
+</script>
+
+</html>

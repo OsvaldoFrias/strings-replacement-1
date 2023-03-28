@@ -1,0 +1,7 @@
+Reservación de $SERVICE_NAME
+
+Se ha completado la reservación de $SERVICE_NAME que se llevará a cabo del $START_DATETIME al $FINISH_DATETIME. Copia y pega el siguiente enlace en la barra de búsqueda del navegador para entrar a la conferencia o consultar la ubicación:
+
+$MEETING_URL
+
+Nota:  las reservaciones se pueden cancelar MÁXIMO 24 h ANTES.

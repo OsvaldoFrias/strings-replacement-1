@@ -1,0 +1,142 @@
+<!-- Calendario -->
+<link href='/public/js/fullcalendar/main.min.css' rel='stylesheet' />
+<script src='/public/js/fullcalendar/main.min.js'></script>
+<script src='/public/js/fullcalendar/locales-all.min.js'></script>
+<!--/ Calendario -->
+
+<aside class="calendar-container">
+  <section class="header-title-calendar">
+    <h2><%= translation.CALENDAR.TITLE %></h2>
+  </section>
+  <section>
+    <div id='calendar'></div>
+  </section>
+</aside>
+
+<script>
+  function clickPress(e) {
+    // console.log(e);
+    if (e.key === "Enter") {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      if (email && password) {
+        signIn();
+      }
+    }
+  }
+
+  function setup() {
+    fetch('/api/v2/available-appointments/full-calendar')
+      .then(res => res.json())
+      .then(res => parseAvailableAppointments(res))
+      .then(res => generateCalendar(res))
+      .catch(err => {
+        alert('<%= translation.CALENDAR.LOADING_ERROR %>');
+      })
+  }
+
+  function generateCalendar(calendarData) {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      headerToolbar: {
+        left: 'prev,next today',
+        center: '',
+        right: 'title'
+      },
+      eventDisplay: 'block',
+      eventContent: function (arg) {
+        var event = arg.event;
+        var customHtml = '';
+        // console.log(event);
+        // console.log(event.extendedProps);
+        // console.log(event.extendedProps.status);
+        let status = event.extendedProps.status;
+        customHtml +=
+          "<div class='calendar-event top-half-event" + (status ? '-' + status : '') + "'>🕛"
+          + event.start.getHours()
+          + "&nbsp;h&nbsp;&nbsp;<strong>" + event.title + "</strong></div>";
+        customHtml +=
+          "<div class='calendar-event bottom-half-event" + (status ? '-' + status : '') + "'>" +
+          event.extendedProps.description + "</div>";
+
+        return { html: customHtml }
+      },
+      locale: '<%= translation.CALENDAR.LOCALE %>',
+      // editable: true,
+      selectable: true,
+      hiddenDays: [6, 0],
+      dayMaxEvents: true,
+      events: calendarData
+    });
+
+    calendar.render();
+  }
+
+  function parseAvailableAppointments(availableAppointments) {
+    const calendarData = availableAppointments.map(availableAppointment => {
+      const { id, service, state,
+        overrideAttendantsNumber,
+        totalAppointments,
+        appointmentStartDatetime,
+        appointmentFinishDatetime } = availableAppointment;
+
+      let title = `${service.name} - ${state.name}`;
+      if (service.type === 'exam') {
+        title = `${service.name}`;
+      }
+
+      let extendedProps = { id };
+
+      if (overrideAttendantsNumber - totalAppointments <= 0) {
+        extendedProps.status = 'disabled';
+      }
+
+      return {
+        title,
+        start: parseDateToCalendar(new Date(appointmentStartDatetime)),
+        end: parseDateToCalendar(new Date(appointmentFinishDatetime)),
+        description:
+          // `Disponible ${overrideAttendantsNumber - totalAppointments} de ${overrideAttendantsNumber}`,
+          '<%= translation.CALENDAR.AVAILABLE_TEMPLATE %>'
+            .replace("$0", overrideAttendantsNumber - totalAppointments)
+            .replace("$1", overrideAttendantsNumber),
+        url: `/available-appointment/${id}`,
+        extendedProps: { ...extendedProps },
+      };
+    });
+    // console.log(availableAppointments);
+    // console.log(calendarData);
+    return calendarData;
+  }
+
+  function signIn() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    fetch("/api/v1/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify({
+        email,
+        password
+      })
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.statusCode) {
+          // console.log(res);
+          displayErrors([res.message]);
+        } else {
+          window.location.href = "/home";
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+</script>
+
+</html>

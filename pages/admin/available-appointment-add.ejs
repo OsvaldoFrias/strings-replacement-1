@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+  <!-- Include Moment.js CDN -->
+  <link
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    rel="stylesheet">
+  <!-- Date Range Picker -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+  <link rel="stylesheet" type="text/css"
+    href="/public/css/datetimepicker.css">
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/datetimepicker.js"></script>
+
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs", { "location": "home" }) %>
+  <%- include("./header.admin.ejs") %>
+  <div class="container">
+    <section>
+      <div class="container py-4">
+        <div
+          class="row d-flex align-items-center justify-content-center">
+          <div class="w-100">
+            <div>
+              <h2>Agendar próxima sesión</h2>
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label class="form-label"
+                      for="appointmentStartDatetime">Fecha y hora
+                      inicial:</label>
+                    <div class="input-group date"
+                      id="fechaInicialGroup">
+                      <input type="datetime-local"
+                        class="form-control"
+                        id="appointmentStartDatetime"
+                        name="appointmentStartDatetime"
+                        value="<%= new Date().toISOString().slice(0,-10)+'00' %>">
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label"
+                      for="appointmentFinishDatetime">Fecha y hora
+                      final:</label>
+                    <div class="input-group date"
+                      id="fechaFinalGroup">
+                      <input type="datetime-local"
+                        class="form-control"
+                        id="appointmentFinishDatetime"
+                        name="appointmentFinishDatetime"
+                        value="<%= new Date().toISOString().slice(0,-10)+'00' %>">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="serviceId">Tipo de sesión:</label>
+                    <select id="serviceId" name="serviceId"
+                      class="form-control">
+                      <option value="" selected>Choose...</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label
+                      for="overrideAttendantsNumber">Cupo:</label>
+                    <input type="number" class="form-control"
+                      id="overrideAttendantsNumber"
+                      name="overrideAttendantsNumber" disabled>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6 text-center"
+                    style="margin: auto;">
+                    <input class="form-check-input" type="checkbox"
+                      id="sessionType" checked>
+                    <label class="form-check-label" for="sessionType">
+                      Sesión remota
+                    </label>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="meetingUrl">Enlace de sesión:</label>
+                    <input type="text" class="form-control"
+                      id="meetingUrl" name="meetingUrl"
+                      placeholder="https://teams.microsoft.com/dl/launcher/launcher.html">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="countryId">País:</label>
+                    <select id="countryId" name="countryId"
+                      class="form-control">
+                      <option value="" selected>Choose...</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="stateId">Ciudad:</label>
+                    <select id="stateId" name="stateId"
+                      class="form-control">
+                      <option value="" selected>Choose...</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="trainerId">Instructor:</label>
+                    <select id="trainerId" name="trainerId"
+                      class="form-control">
+                      <option value="" selected>Choose...</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="direction">Instrucciones de la
+                      dirección de este curso:</label>
+                    <textarea type="text" class="form-control"
+                      id="direction" name="direction" rows="10"
+                      placeholder="No es obligatoria, si se actualiza más adelante, se notifica a cada asistente registrado..."></textarea>
+                  </div>
+                </div>
+                <div id="error"
+                  class="alert alert-danger alert-dismissible d-none">
+                  <div id="error-message"></div>
+                </div>
+                <div class="col-md-12 text-right">
+                  <button type="button" class="btn btn-primary"
+                    onclick="saveAppointment()">Agendar</button>
+                </div>
+                <div id="loading"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div>
+          <%- include("../../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script type="text/javascript" charset="utf8"
+  src="/public/js/custom.home.js"></script>
+<script>
+  const appointmentContainer = document.getElementById('appointment');
+  let services = [];
+
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/services', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseServices(res))
+      .catch(err => {
+        console.error(err);
+      });
+
+    fetch('/api/v1/users/trainers', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseTrainers(res))
+      .catch(err => {
+        console.error(err);
+      });
+
+    fetch('/api/v1/countries', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseSelect('countryId', res, 'id', 'name', (select) => {
+        const countryId = select.options[select.selectedIndex].value;
+        // console.log(countryId);
+        clearSelect('stateId');
+        fetch(`/api/v1/countries/${countryId}`, {
+          headers: myHeaders,
+          credentials: "same-origin"
+        })
+          .then(res => res.json())
+          .then(res => parseSelect('stateId', res.states, 'id', 'name'))
+          .catch(err => {
+            console.error(err);
+          });
+      }))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function getTimeZone() {
+    var offset = new Date().getTimezoneOffset(), o = Math.abs(offset);
+    return (offset < 0 ? "+" : "-") + ("00" + Math.floor(o / 60)).slice(-2) + ":" + ("00" + (o % 60)).slice(-2);
+  }
+
+  function getSelectValue(select) {
+    return select.options[select.selectedIndex].value;
+  }
+
+  function displayErrors(errors) {
+    const error = document.getElementById('error');
+    const errorMessage = document.getElementById('error-message');
+
+    if (errors.length === 0) {
+      error.classList.add('d-none');
+      errorMessage.innerText = '';
+      return;
+    }
+
+    error.classList.remove('d-none');
+    errorMessage.innerText = errors.join('\n');
+  }
+
+  function saveAppointment() {
+    displayLoading();
+    const appointmentStartDatetime = document.getElementById("appointmentStartDatetime").value;
+    const appointmentFinishDatetime = document.getElementById("appointmentFinishDatetime").value;
+    const meetingUrl = document.getElementById("meetingUrl").value;
+    const overrideAttendantsNumber = document.getElementById("overrideAttendantsNumber").value;
+    const trainerId = getSelectValue(document.getElementById("trainerId"));
+    const serviceId = getSelectValue(document.getElementById("serviceId"));
+    const stateId = getSelectValue(document.getElementById("stateId"));
+    const sessionType = document.getElementById('sessionType').checked ? 'remote' : 'close';
+    const direction = document.getElementById('direction').value;
+
+    const errors = [];
+
+    if (!serviceId) {
+      errors.push('Selecciona un tipo de sesión.');
+    }
+    if (!appointmentStartDatetime) {
+      errors.push('Selecciona una fecha de inicio.');
+    }
+    if (!appointmentFinishDatetime) {
+      errors.push('Selecciona una fecha de final.');
+    }
+    if (!trainerId) {
+      errors.push('Selecciona a un instructor.');
+    }
+    if (!stateId) {
+      errors.push('Selecciona un país y una región.');
+    }
+
+    if (errors.length > 0) {
+      displayErrors(errors);
+      hideLoading();
+      return;
+    }
+
+    let data = {
+      appointmentStartDatetime: appointmentStartDatetime + getTimeZone(),
+      appointmentFinishDatetime: appointmentFinishDatetime + getTimeZone(),
+      sessionType
+    };
+
+    data = serviceId ? {
+      ...data,
+      serviceId: Number.parseInt(serviceId)
+    } : data;
+    data = meetingUrl ? {
+      ...data,
+      meetingUrl
+    } : data;
+    data = overrideAttendantsNumber ? {
+      ...data,
+      overrideAttendantsNumber: Number.parseInt(overrideAttendantsNumber)
+    } : data;
+    data = trainerId ? {
+      ...data,
+      trainerId: Number.parseInt(trainerId)
+    } : data;
+    data = stateId ? {
+      ...data,
+      stateId: Number.parseInt(stateId)
+    } : data;
+    data = direction ? {
+      ...data,
+      direction: direction
+    } : data;
+    console.log(data);
+
+    fetch("/api/v1/profile/available-appointment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify(data)
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        // console.log(res);
+        if (res.statusCode === 400) {
+          displayErrors([res.message]);
+        } else {
+          // window.location.href = "/home";
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        hideLoading();
+      });
+  }
+
+  function parseTrainers(trainers) {
+    const select = document.getElementById('trainerId');
+    trainers.forEach(trainer => {
+      const option = document.createElement('option');
+      // console.log(trainer);
+      option.value = trainer.id;
+      option.innerText = trainer.email;
+
+      select.appendChild(option);
+    });
+
+  }
+
+  function clearSelect(selectId) {
+    const select = document.getElementById(selectId);
+    select.innerHTML = '';
+
+    const option = document.createElement('option');
+    option.value = '';
+    option.innerText = 'Choose...';
+    option.selected = true;
+
+    select.appendChild(option);
+  }
+
+  function parseSelect(selectId, array, value = 'id', text = 'name', onchange = null) {
+    const select = document.getElementById(selectId);
+    array.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item[value];
+      option.innerText = item[text];
+
+      select.appendChild(option);
+    });
+
+    if (array) {
+      if (array.length > 0) {
+        if (onchange) {
+          select.onchange = (e) => {
+            onchange(select);
+          };
+        }
+      }
+    }
+
+  }
+
+  function parseServices(services) {
+    const select = document.getElementById('serviceId');
+    services.forEach(service => {
+      // console.log(service);
+      const option = document.createElement('option');
+      option.value = service.id;
+      option.innerText = service.name;
+
+      select.appendChild(option);
+    });
+
+    if (services) {
+      if (services.length > 0) {
+        const attendantsNumber = document.getElementById('overrideAttendantsNumber');
+        select.onchange = (e) => {
+          const serviceId = select.options[select.selectedIndex].value;
+          const service = services[select.selectedIndex - 1];
+          // console.log(serviceId);
+          // console.log(service);
+
+          if (service) {
+            attendantsNumber.removeAttribute('disabled');
+            attendantsNumber.value = service.attendantsNumber;
+            // console.log(service.attendantsNumber);
+            const serviceId = service.id;
+            const serviceCategoryId = service.serviceCategory.id;
+
+            const myHeaders = new Headers();
+            myHeaders.append('Content-Type', 'application/json');
+          } else {
+            attendantsNumber.value = '';
+            attendantsNumber.setAttribute('disabled', true);
+          }
+        };
+      }
+    }
+  }
+</script>
+
+</html>

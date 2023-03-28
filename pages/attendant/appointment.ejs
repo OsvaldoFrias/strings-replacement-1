@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs", { "location": "home" }) %>
+  <%- include("./header.attendant.ejs") %>
+  <div class="container">
+    <section>
+      <div class="container py-4">
+        <div class="row d-flex align-items-center justify-content-center">
+          <div class="w-100">
+            <div id="appointment"></div>
+          </div>
+        </div>
+        <div>
+          <%- include("../../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script>
+  const appointmentContainer = document.getElementById('appointment');
+
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/appointments/<%= hash %>', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseAppointment(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseAppointment(appointment) {
+    if (appointment.isCancelled) {
+      window.location.replace('/home');
+      // history.back();
+    }
+    const meetingUrl = appointment.available.meetingUrl;
+    const appointmentStartDatetime = new Date(appointment.available.appointmentStartDatetime);
+    const appointmentFinishDatetime = new Date(appointment.available.appointmentFinishDatetime);
+    const month = months[appointmentStartDatetime.getMonth()];
+    const weekDay = weekDays[appointmentStartDatetime.getDay()];
+    const startDatetime = parseDateToJson(appointmentStartDatetime);
+    const finishDatetime = parseDateToJson(appointmentFinishDatetime);
+
+    const intervalDate = `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.formatTime}`;
+
+    const serviceName = appointment.available.service.name;
+    const serviceType = appointment.available.service.type;
+    const serviceCategoryName = appointment.available.service.serviceCategory.name;
+    const serviceCategoryDescription = appointment.available.service.serviceCategory.description;
+    const serviceInfoTemplate = appointment.available.service.serviceCategory.infoTemplate;
+    const sessionType = appointment.available.sessionType === "remote" ? "Remoto" : "Presencial";
+    const state = appointment.available.state;
+    const country = appointment.available.state.country;
+    const location = serviceType === 'exam' ? '' : appointment.available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
+    const linkTitle = appointment.available.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
+    const directionType = appointment.available.sessionType === "remote" ? "Indicaciones" : "Dirección";
+    const direction = appointment.available.direction;
+
+    const cardTemplate = `<div class="card-1">
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="p-2">
+            <div class="calendar-ico">
+              <div>${month}</div>
+              <div>${appointmentStartDatetime.getDate()}</div>
+              <div>${weekDay}</div>
+            </div>
+          </div>
+          <div class="p-2">
+            <div class="cell-1">
+              <div>${serviceName}</div>
+              <div>${location}</div>
+              <table>
+                <tr>
+                  <td>Cita: </td>
+                  <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
+                </tr>
+              </table>
+              <p>${directionType}:</p>
+              <p>${direction ? direction.replace(/\n/gi, '<br>') : '-'}</p>
+            </div>
+          </div>
+          <div class="ml-auto p-2">
+            <div class="cell-2">
+              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</p>'}
+              <div><button class="btn btn-danger" onclick="cancelAppointment('<%= hash %>', '${serviceCategoryName}', '${intervalDate}')">Cancelar Curso</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 offset-md-1" style="text-align:justify;">${serviceInfoTemplate}</div>
+      </div>`;
+
+    appointmentContainer.innerHTML = cardTemplate;
+  }
+
+  function cancelAppointment(hash, serviceCategoryName, intervalDate) {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (!confirm(`¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`)) {
+      return;
+    }
+
+    fetch('/api/v1/appointments/<%= hash %>', {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'delete'
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.statusCode) {
+          if (res.statusCode === 400) {
+            alert(res.message);
+          }
+        }
+        // window.location = '/home';
+        window.location.replace('/home');
+        // history.back();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+</script>
+
+</html>

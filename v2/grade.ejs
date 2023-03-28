@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Training Center">
+  <meta name="keywords" content="ISSIVS, ISS, SecurOS, Training">
+  <link rel="icon" type="image/x-icon" href="/public/img/favicon.png">
+  <title>Training Center</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <!--/ Bootstrap -->
+
+  <script src="/public/js/html2pdf.bundle.min.js"></script>
+
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.home.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" href="/public/css/v2/home.css">
+
+  <style>
+    h1,
+    h2 {
+      font-family: "Montserrat-Bold";
+    }
+
+    .btn {
+      font-family: "Montserrat-Bold" !important;
+    }
+
+    .btn-primary {
+      background-color: #133469;
+    }
+
+    .header-title-calendar {
+      background-color: #003F76;
+      color: #eee;
+      padding: 0.5em;
+    }
+
+    .header-title-calendar>h2 {
+      font-family: "Montserrat-Medium" !important;
+    }
+
+    .header-username-placeholder {
+      background-color: #E3E7F6;
+      color: #333;
+    }
+
+    .header-username-placeholder>h2 {
+      font-family: "Montserrat-Medium" !important;
+    }
+
+    /* <calendar> */
+    .fc-h-event {
+      border: 0px;
+    }
+
+    .fc-header-toolbar {
+      background-color: #003F76;
+      border-top-left-radius: 0.5em;
+      border-top-right-radius: 0.5em;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      color: #eee;
+      padding: 0.5em;
+    }
+
+    .fc-toolbar-title {
+      font-family: "Montserrat-Medium" !important;
+    }
+
+    .fc-button {
+      background-color: #eee !important;
+      color: #333 !important;
+    }
+
+    .top-half-event {
+      background-color: #4A9CD2;
+      display: block;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    .bottom-half-event {
+      background-color: #133469;
+      display: block;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    .top-half-event-disabled {
+      background-color: #C4C4C4;
+      display: block;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    .bottom-half-event-disabled {
+      background-color: #6B6B6B;
+      display: block;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    #calendar {
+      padding: 2em;
+    }
+
+    /* </calendar> */
+
+    .training-menu {
+      list-style: none;
+    }
+
+    .training-menu img {
+      height: 70px;
+    }
+
+    .training-menu>li {
+      /* width: 150px; */
+      padding: 1em;
+    }
+
+    #certificado {
+      position: relative;
+    }
+
+    #certificado button {
+      position: absolute;
+      top: 100%;
+      left: 0%;
+      transform: translate(50%, -100%);
+      -ms-transform: translate(50%, -100%);
+    }
+  </style>
+</head>
+
+<body onload="setup()">
+  <%- include('./header'); %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="container py-4">
+        <div id="certificado"
+          class="row d-flex align-items-center justify-content-center">
+          <div class="col-lg-12">
+            <img id="certificado-img" class="col-lg-12"
+              src="data:image/png;base64,<%= certData %>" />
+            <button class="btn btn-info" onclick="printPdf()"><i
+                class="fa fa-download"></i> PDF</button>
+          </div>
+          <div class="col-lg-5 d-flex justify-content-center">
+            <div>
+              <p>
+                <%= translation.GRADE.LABEL_1 %>:
+                <strong><%= `${grade.appointment.attendant.firstName} ${grade.appointment.attendant.lastName}` %></strong>
+              </p>
+              <p>
+                <%= translation.GRADE.LABEL_2 %>:
+                <strong><%= grade.appointment.available.service.serviceCategory.name %></strong>
+              </p>
+              <p>
+                <%= translation.GRADE.LABEL_3 %>:
+                <strong><%= grade.gradeType.name %></strong>
+              </p>
+              <p>
+                <%= translation.GRADE.LABEL_4 %>:
+                <strong><%= issuedAt %></strong>
+              </p>
+              <p>
+                <%= translation.GRADE.LABEL_5 %>:
+                <strong><%= expirationTime %></strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  function setup() {
+  }
+
+  function printPdf() {
+    const certificado = document.getElementById('certificado-img');
+    var worker = html2pdf().set({
+      margin: [0.15, 0, 0, 0],
+      filename: 'certificate.pdf',
+      image: {
+        type: 'jpeg',
+        quality: 1.0
+      },
+      html2canvas: {
+        // scale: 4,
+        // width: 720,
+        // y: 0.05,
+        // x: 0.05,
+      },
+      jsPDF: {
+        unit: 'in',
+        format: 'letter',
+        orientation: 'landscape'
+      }
+    }).from(certificado).save();
+  }
+</script>

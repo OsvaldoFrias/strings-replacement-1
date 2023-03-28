@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+  <!-- Data table -->
+  <link rel="stylesheet" type="text/css" href="/public/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="/public/js/jquery.dataTables.js">
+  </script>
+  <!--/ Data table -->
+  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs", { "location": "status" }) %>
+  <%- include("./header.trainer.ejs") %>
+  <div>
+    <div class="d-flex align-items-center justify-content-center">
+      <div class="w-100">
+        <h2>Calificaciones</h2>
+        <div id="appointments">
+        </div>
+        <div id="appointments">
+          <table id="appointments-list"></table>
+        </div>
+        <div id="loading"></div>
+      </div>
+    </div>
+    <div>
+      <%- include("../../partials/footer.ejs") %>
+    </div>
+  </div>
+</body>
+<script type="text/javascript" charset="utf8" src="/public/js/custom.home.js"></script>
+<script>
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/profile/appointments/grades?type=<%= type %>', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseGrades(res, '<%= type %>'))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseGrades(appointments, type) {
+    const appointmentsList = document.getElementById('appointments-list');
+
+    if (type === 'exam') {
+      appointmentsList.innerHTML = `<thead><tr><th>Sesión</th><th>Fecha</th><th>Nombre</th><th>Email</th><th>Empresa</th><th>Resultado</th><th>URL Certificado</th><th>Evaluación</th><th>Instructor</th></tr></thead>`;
+    } else if (type === 'course') {
+      appointmentsList.innerHTML = `<thead><tr><th>Sesión</th><th>Fecha</th><th>Nombre</th><th>Email</th><th>Empresa</th><th>Asistencia</th><th>Instructor</th></tr></thead>`;
+    }
+
+    let appointmentsTable = $('#appointments-list').DataTable({
+      "ordering": false,
+      "pageLength": 20,
+      "sDom": 'lrtip',
+      "dom": '<"top"if>rt<"bottom"p><"clear">'
+    });
+
+    appointments.forEach(appointment => {
+      const appointmentId = appointment.id;
+      const appointmentStartDatetime = new Date(appointment.available.appointmentStartDatetime);
+      const appointmentFinishDatetime = new Date(appointment.available.appointmentFinishDatetime);
+      const month = months[appointmentStartDatetime.getMonth()];
+      const weekDay = weekDays[appointmentStartDatetime.getDay()];
+      const startDatetime = parseDateToJson(appointmentStartDatetime);
+      const finishDatetime = parseDateToJson(appointmentFinishDatetime);
+
+      // let trainerMail = null;
+      // if (appointment.available.trainer) {
+      //   trainerMail = appointment.available.trainer.email;
+      // }
+      let trainersMail = '';
+      if (appointment.available.trainers && appointment.available.trainers.length !== 0) {
+        let acc = '';
+        trainersMail += appointment.available.trainers.reduce((previousValue, trainer) => {
+          return previousValue + `
+            <a href="mailto:${trainer.email}">${trainer.email}</a>`;
+        }, acc);
+        // console.log(trainersMail);
+      }
+
+      const serviceName = appointment.available.service.name;
+      const serviceType = appointment.available.service.type;
+      const serviceCategoryName = appointment.available.service.serviceCategory.name;
+      const serviceCategoryDescription = appointment.available.service.serviceCategory.description;
+
+      let grade = null;
+      let gradeId = null;
+      let certificateUrl = null;
+      let feedbackUrl = null;
+      if (appointment.grade) {
+        gradeId = appointment.grade.id;
+        certificateUrl = appointment.grade.certificateUrl;
+        feedbackUrl = appointment.grade.feedbackUrl;
+        if (appointment.grade.gradeType) {
+          grade = appointment.grade.gradeType.name;
+        }
+      }
+
+      const {
+        attendant: {
+          id,
+          firstName,
+          lastName,
+          businessName,
+          hash,
+          user: {
+            email
+          }
+        }
+      } = appointment;
+      const fullName = `${firstName} ${lastName}`;
+
+      const rowData = [
+        `${serviceName}`,
+        `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}`,
+        `${fullName}`,
+        `<a href="mailto:${email}">${email}</a>`,
+        `${businessName}`,
+        `<img id="gradeEdit-${appointmentId}" style="cursor:pointer;" onclick="populateGradeList('${appointmentId}', '${serviceType}')" src="/public/img/edit.png" alt="Editar calificación" width="15px"/> ${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido evaluado.</span>'}<div id="gradeType-${appointmentId}"></div>`,
+      ];
+
+      if (type === 'exam') {
+        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}">Certificado</a>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido generado el certificado.</span>'}<div id="meetingUrl-${appointmentId}"></div>`);
+        rowData.push(`<img style="cursor:pointer;" onclick="setFeedbackUrl(${gradeId}, '${fullName}','${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="Editar enlace de la evaluación" width="15px"/> ${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}">Evaluación</a>` : '<span style="font-style: italic;color: #999999;">No hay evaluación.</span>')}`);
+      }
+
+      rowData.push(`${trainersMail}`);
+
+      appointmentsTable
+        .row
+        .add(rowData)
+        .draw()
+        .node();
+    });
+  }
+
+  function setFeedbackUrl(gradeId, fullAttendantName, serviceName, datetime) {
+    let feedbackUrl = prompt(`Enlace para evaluación de ${fullAttendantName} de ${serviceName} de ${datetime}`);
+    if (!feedbackUrl) {
+      return;
+    }
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`/api/v1/grades/${gradeId}`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'PATCH',
+      body: JSON.stringify({
+        feedbackUrl
+      })
+    })
+      .then(res => {
+        if (res.status === 200) {
+          alert('Enlace actualizado.');
+        } else {
+          alert('Hubo un problema actualizando el enlace del feedback de la evaluación, favor de intentar más tarde.');
+        }
+        location.reload(true);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function populateGradeList(appointmentId, serviceType) {
+    const gradeEdit = document.getElementById(`gradeEdit-${appointmentId}`);
+    gradeEdit.classList.add('d-none');
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/grade-types/for/' + serviceType, {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => fillGradeDiv(res, 'gradeType-' + appointmentId))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function fillGradeDiv(grades, divId) {
+    const container = document.getElementById(divId);
+    const select = document.createElement('select');
+    grades.forEach(grade => {
+      const option = document.createElement('option');
+      option.value = grade.id;
+      option.innerText = grade.name;
+
+      select.appendChild(option);
+    });
+
+    if (grades) {
+      if (grades.length > 0) {
+        container.appendChild(select);
+
+        const cancelBtn = document.createElement('button');
+        cancelBtn.innerText = "Cancelar";
+        cancelBtn.onclick = (e) => {
+          const appointmentId = divId.replace('gradeType-', '');
+          const gradeEdit = document.getElementById(`gradeEdit-${appointmentId}`);
+          gradeEdit.classList.remove('d-none');
+          container.innerHTML = '';
+        };
+        cancelBtn.classList.add('btn', 'btn-danger');
+        container.appendChild(cancelBtn);
+
+        const button = document.createElement('button');
+        button.innerText = "Guardar";
+        button.onclick = (e) => {
+          displayLoading();
+          const gradeTypeId = select.options[select.selectedIndex].value;
+          const gradeTypeText = select.options[select.selectedIndex].text;
+          const appointmentId = divId.replace('gradeType-', '');
+          container.innerHTML = '';
+          if (confirm(`El asistente se evaulará como: ${gradeTypeText.toUpperCase()}.\n¿Desea continuar?`)) {
+            setAppointmentGrade(gradeTypeId, appointmentId);
+          } else {
+            const gradeEdit = document.getElementById(`gradeEdit-${appointmentId}`);
+            gradeEdit.classList.remove('d-none');
+          }
+        };
+        button.classList.add('btn', 'btn-success');
+        container.appendChild(button);
+      }
+    }
+  }
+
+  function setAppointmentGrade(gradeTypeId, appointmentId) {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    fetch(`/api/v1/profile/appointments/grade`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'post',
+      body: JSON.stringify({
+        appointmentId,
+        gradeTypeId,
+      })
+    })
+      .then(res => {
+        if (res.status === 201) {
+          alert('Evaluación actualizada.');
+          // container.innerHTML = '';
+        } else {
+          alert('Hubo un problema estableciendo la evaluación del usuario, favor de intentar más tarde.');
+        }
+        location.reload(true);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+      .finally(() => {
+        hideLoading();
+        const gradeEdit = document.getElementById(`gradeEdit-${appointmentId}`);
+        gradeEdit.classList.remove('d-none');
+      });
+  }
+
+</script>
+
+</html>

@@ -1,0 +1,53 @@
+<header class="container-fluid">
+  <section class="row">
+    <section class="row col-lg-3 justify-content-center">
+      <a href="/">
+        <img class="img-fluid" style="height:52px;"
+          src="/public/img/Logo Final ISS_R_logo dark BG - cut.png"
+          alt="Logo">
+      </a>
+    </section>
+    <section class="col-lg-6">
+      <h1>
+        <%= translation.SITE_TITLE %>
+      </h1>
+    </section>
+    <% if (locals.role) { %>
+    <% if (role==='attendant' ) { %>
+    <section
+      class="row col-lg-3 justify-content-end align-items-center">
+      <% if (locals.role) { %>
+      <% if (role==='attendant' ) { %>
+      <a href="/my-profile" class="M-bold text-lg-right"
+        style="color: #eee; text-decoration: none;">
+        <%= translation.HEADER.PROFILE %>&nbsp;&nbsp;&nbsp;&nbsp;
+      </a>
+      <% } %>
+      <% } %>
+      <div class="dropdown">
+        <a class="dropdown-toggle" href="#"
+          id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <img style="height:36px;" src="/public/img/profile.png" />
+        </a>
+        <div class="dropdown-menu dropdown-menu-right"
+          aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/logout">
+            <%= translation.HEADER.LOGOUT %>
+          </a>
+        </div>
+      </div>
+    </section>
+    <% } %>
+    <% } %>
+  </section>
+  <section class="row header-username-placeholder">
+    <br>
+    <% if (locals.username) { %>
+    <h2><%= `${username}` %></h2>
+    <% } else { %>
+    <label></label>
+    <br>
+    <% } %>
+  </section>
+</header>

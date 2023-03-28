@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+</head>
+
+<body onload="getBasicInfo()">
+  <div class="container">
+    <section class="vh-100">
+      <div class="container py-0 h-100">
+        <div class="h-10">
+          <%- include("../partials/header.ejs") %>
+        </div>
+        <div class="row d-flex align-items-center justify-content-center h-80">
+          <div class="col-md-7 col-lg-5 col-xl-5">
+            <h1>Registro</h1>
+            <form>
+              <div class="form-row">
+                <label><em style="color: firebrick;">* Los datos de Nombre(s) y Apellido(s) aparecerán sin modificación
+                    en el certificado</em></label>
+                <div class="form-group col-md-6">
+                  <label for="firstName">Nombre(s):</label>
+                  <input type="text" class="form-control form-control-lg" name="firstName" id="firstName"
+                    placeholder="Nombre(s)" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="lastName">Apellido(s):</label>
+                  <input type="text" class="form-control form-control-lg" name="lastName" id="lastName"
+                    placeholder="Apellido(s)" required>
+                </div>
+              </div>
+              <div class="form-outline mb-4">
+                <label class="form-label" for="businessName">Empresa: <em style="color: firebrick;">* Este dato
+                    aparecerá sin modificación en el certificado</em></label>
+                <input type="text" class="form-control form-control-lg" name="businessName" id="businessName"
+                  placeholder="Empresa" required />
+              </div>
+              <div class="form-outline mb-4">
+                <label class="form-label" for="email">Correo electrónico:</label>
+                <input type="email" name="email" id="email" class="form-control form-control-lg"
+                  placeholder="Correo electrónico:" required />
+              </div>
+              <div class="form-outline mb-4">
+                <label for="countryId">País:</label>
+                <select id="countryId" name="countryId" class="form-control">
+                  <option value="" selected>Choose...</option>
+                </select>
+              </div>
+              <!-- <div class="form-outline mb-4">
+                <label class="form-label" for="password">Contraseña:</label>
+                <input type="password" name="password" id="password" class="form-control form-control-lg"
+                  placeholder="Contraseña:" required />
+              </div>
+              <div class="form-outline mb-4">
+                <label class="form-label" for="repeatPassword">Repetir contraseña:</label>
+                <input type="password" name="repeatPassword" id="repeatPassword" class="form-control form-control-lg"
+                  placeholder="Repetir contraseña" required />
+              </div> -->
+              <div id="captchaContainer" class="form-outline mb-4 text-center">
+                <div class="col-md-6 offset-xl-3"
+                  style="background-color: #10a5e0;border-radius: 5px; border: 2px solid #333;">
+                  <div id="captcha"></div>
+                  <input class="form-control" id="captchaUser" placeholder="Ingresar captcha" type="search" required>
+                  <div class="row">
+                    <input type="button" id="checkCaptcha" class="btn btn-success col-md-6" value="Validar">
+                    <input type="button" id="updateCaptcha" class="btn btn-primary col-md-6" value="Cambiar">
+                  </div>
+                </div>
+              </div>
+              <div id="error" class="alert alert-danger alert-dismissible d-none">
+                <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+                <div id="error-message"></div>
+              </div>
+            </form>
+            <script>
+              const updateCaptcha = document.getElementById('updateCaptcha');
+              updateCaptcha.onclick = getBasicInfo;
+
+              function getBasicInfo() {
+                const myHeaders = new Headers();
+                myHeaders.append('Content-Type', 'application/json');
+
+                fetch('/captcha', {
+                  headers: myHeaders,
+                  credentials: "same-origin"
+                })
+                  .then(res => res.json())
+                  .then(res => parseCaptcha(res))
+                  .catch(err => {
+                    console.error(err);
+                  });
+
+                fetch('/api/v1/countries', {
+                  headers: myHeaders,
+                  credentials: "same-origin"
+                })
+                  .then(res => res.json())
+                  .then(res => parseSelect('countryId', res, 'id', 'name', null))
+                  .catch(err => {
+                    console.error(err);
+                  });
+              }
+
+              function parseSelect(selectId, array, value = 'id', text = 'name', onchange = null) {
+                const select = document.getElementById(selectId);
+                array.forEach(item => {
+                  const option = document.createElement('option');
+                  option.value = item[value];
+                  option.innerText = item[text];
+
+                  select.appendChild(option);
+                });
+
+                if (array) {
+                  if (array.length > 0) {
+                    if (onchange) {
+                      select.onchange = (e) => {
+                        onchange(select);
+                      };
+                    }
+                  }
+                }
+              }
+
+              function parseCaptcha(data) {
+                // console.log(data);
+                const captchaContainer = document.getElementById('captchaContainer');
+                const captcha = document.getElementById('captcha');
+                const captchaUser = document.getElementById('captchaUser');
+                const checkCaptcha = document.getElementById('checkCaptcha');
+                const form = document.querySelector('form');
+
+                captcha.innerHTML = data.data;
+                checkCaptcha.onclick = (e) => {
+                  if (captchaUser.value === data.text) {
+                    captchaContainer.classList.add('d-none');
+                    const button = document.createElement('button');
+                    button.classList.value = "btn btn-primary btn-lg btn-block";
+                    button.onclick = signUp;
+                    button.innerText = "Registro";
+
+                    form.appendChild(button);
+                  }
+                };
+              }
+
+              function validateFormFields() {
+                const firstName = document.getElementById("firstName").value;
+                const lastName = document.getElementById("lastName").value;
+                const businessName = document.getElementById("businessName").value;
+                const email = document.getElementById("email").value;
+                // const password = document.getElementById("password").value;
+                // const repeatPassword = document.getElementById("repeatPassword").value;
+                const select = document.getElementById("countryId");
+                const countryId = select.options[select.selectedIndex].value;
+                // const password = document.getElementById("password").value;
+                // const repeatPassword = document.getElementById("repeatPassword").value;
+                const errors = [];
+
+                if (!firstName) {
+                  errors.push("El nombre es requerido.");
+                }
+                if (!lastName) {
+                  errors.push("El apellido es requerido.");
+                }
+                if (!businessName) {
+                  errors.push("El nombre de la empresa de origen es requerido.");
+                }
+                if (!countryId) {
+                  errors.push("Debe seleccionar un país de origen.");
+                }
+                if (!email) {
+                  errors.push("El correo electrónico es requerido.");
+                }
+                // if (!password) {
+                //   errors.push("La contraseña es requerida.");
+                // } else {
+                //   // @.-_+!#$%&
+                //   // Aa9@.-_+!#$%&
+                //   const passw = /^[(A-Za-z0-9)+(\@\.\-\_\+\!\#\$\%\&)+]{8,}$/;
+                //   if (!password.match(passw)) {
+                //     errors.push(
+                //       "La contraseña debe tener: al menos letras y números, al menos un caracter especial (@.-_+!#$%&) y ser de al menos 8 caracteres."
+                //     );
+                //   }
+                //   if (password !== repeatPassword) {
+                //     errors.push("La contraseña no coincide.");
+                //     document.getElementById("repeatPassword").focus();
+                //   }
+                // }
+
+                displayErrors(errors);
+                return errors.length == 0; // There are no errors
+              }
+
+              function signUp(e) {
+                // console.log(e);
+                if (e) {
+                  e.preventDefault();
+                }
+
+                if (!validateFormFields()) {
+                  return;
+                }
+
+                const firstName = document.getElementById("firstName").value;
+                const lastName = document.getElementById("lastName").value;
+                const businessName = document.getElementById("businessName").value;
+                const email = document.getElementById("email").value;
+                // const password = document.getElementById("password").value;
+                const select = document.getElementById("countryId");
+                const countryId = select.options[select.selectedIndex].value;
+
+                fetch("/api/v1/attendants/", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json;charset=utf-8"
+                  },
+                  body: JSON.stringify({
+                    firstName,
+                    lastName,
+                    businessName,
+                    user: {
+                      email,
+                      // password,
+                      countryId
+                    }
+                  })
+                })
+                  .then((res) => res.json())
+                  .then((res) => {
+                    // console.log(res);
+                    if (res.statusCode && res.statusCode !== 201) {
+                      displayErrors([res.message]);
+                    } else {
+                      // alert('Registro realizado con éxito.');
+                      // fetch("/api/v1/auth/login", {
+                      //   method: "POST",
+                      //   headers: {
+                      //     "Content-Type": "application/json;charset=utf-8"
+                      //   },
+                      //   body: JSON.stringify({
+                      //     email,
+                      //     password
+                      //   })
+                      // })
+                      fetch("/api/v1/auth/verify-email", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json;charset=utf-8"
+                        },
+                        body: JSON.stringify({
+                          email
+                        })
+                      })
+                        // })
+                        .then((res) => res.json())
+                        .then((res) => {
+                          if (res.statusCode) {
+                            displayErrors([res.message]);
+                          } else {
+                            alert('Registro realizado con éxito, favor de revisar el correo proporcionado.');
+                            window.location.href = "/";
+                          }
+                        })
+                        .catch((err) => {
+                          console.error(err);
+                        });
+                      // fetch("/api/v1/auth/login", {
+                      //     method: "POST",
+                      //     headers: {
+                      //       "Content-Type": "application/json;charset=utf-8"
+                      //     },
+                      //     body: JSON.stringify({
+                      //       email,
+                      //       password
+                      //     })
+                      //   })
+                      //   .then((res) => res.json())
+                      //   .then((res) => {
+                      //     // console.log(res);
+                      //     if (res.statusCode) {
+                      //       displayErrors([res.message]);
+                      //     } else {
+                      //       window.location.href = "/home";
+                      //     }
+                      //   })
+                      //   .catch((err) => {
+                      //     console.error(err);
+                      //   });
+                    }
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                  });
+              }
+
+              function displayErrors(errors) {
+                const error = document.getElementById('error');
+                const errorMessage = document.getElementById('error-message');
+
+                if (errors.length === 0) {
+                  error.classList.add('d-none');
+                  errorMessage.innerText = '';
+                  return;
+                }
+
+                error.classList.remove('d-none');
+                errorMessage.innerText = errors.join('\n');
+              }
+            </script>
+          </div>
+        </div>
+        <div class="h-10">
+          <%- include("../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+
+</html>

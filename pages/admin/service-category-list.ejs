@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+  <!-- Data table -->
+  <link rel="stylesheet" type="text/css" href="/public/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="/public/js/jquery.dataTables.js">
+  </script>
+  <!--/ Data table -->
+  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs", { "location": "services" }) %>
+  <%- include("./header.admin.ejs") %>
+  <div class="container">
+    <section>
+      <div class="container py-4">
+        <div class="row d-flex align-items-center justify-content-center">
+          <div class="w-100">
+            <div>
+              <table id="appointments-list">
+                <thead>
+                  <th>Nombre</th>
+                  <th>Nivel</th>
+                </thead>
+              </table>
+            </div>
+            <div id="appointment"></div>
+          </div>
+        </div>
+        <div>
+          <%- include("../../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script>
+  const appointmentContainer = document.getElementById('appointment');
+
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/service-categories', {
+        headers: myHeaders,
+        credentials: "same-origin"
+      })
+      .then(res => res.json())
+      .then(res => parseServiceCategories(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseServiceCategories(serviceCategories) {
+    // console.log(serviceCategories);
+
+    let serviceCategoryTable = $('#appointments-list').DataTable({
+      "ordering": false,
+      "sDom": 'lrtip',
+      "dom": '<"top"i>rt<"bottom"p><"clear">'
+    });
+
+    serviceCategories.forEach(serviceCategory => {
+      const {
+        id, name, level
+      } = serviceCategory;
+
+      serviceCategoryTable
+        .row
+        .add([
+          `<div><a href="/service-category/${id}">${name}</a></div>`,
+          level,
+        ])
+        .draw()
+        .node();
+    });
+  }
+
+  function setLicenseKeyUrl(attendantId, fullAttendantName) {
+    let licenseKey = prompt(`Enlace para licencia de ${fullAttendantName}`);
+    if (!licenseKey) {
+      return;
+    }
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`/api/v1/attendants/${attendantId}`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'PATCH',
+      body: JSON.stringify({
+        licenseKey
+      })
+    })
+      .then(res => {
+        if (res.status === 200) {
+          alert('Enlace actualizado.');
+        } else {
+          alert('Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde.');
+        }
+        location.reload(true);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function cancelAvailableAppointment(availableAppointmentId, serviceCategoryName, intervalDate) {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (!confirm(
+        `¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`
+      )) {
+      return;
+    }
+
+    fetch(`/api/v1/available-appointments/${availableAppointmentId}`, {
+        headers: myHeaders,
+        credentials: "same-origin",
+        method: 'delete'
+      })
+      .then(res => res.json())
+      .then(res => {
+        // console.log(res);
+        if (res.statusCode) {
+          if (res.statusCode !== 200) {
+            alert(res.message);
+          }
+        }
+        window.location = '/home';
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function cancelAppointment(hash, serviceCategoryName, intervalDate) {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (!confirm(
+        `¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`
+      )) {
+      return;
+    }
+
+    fetch(`/api/v1/appointments/${hash}`, {
+        headers: myHeaders,
+        credentials: "same-origin",
+        method: 'delete'
+      })
+      .then(res => res.json())
+      .then(res => {
+        // console.log(res);
+        if (res.statusCode) {
+          if (res.statusCode !== 200) {
+            alert(res.message);
+          }
+        }
+        window.location = '/home';
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+</script>
+
+</html>

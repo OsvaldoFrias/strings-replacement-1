@@ -1,0 +1,317 @@
+<style>
+  .card-1 {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 15px;
+    transition: 0.3s;
+  }
+
+  .card-1 .calendar-ico {
+    margin-top: 5px;
+  }
+
+  .card-1 .calendar-ico div {
+    font-weight: bold;
+    font-weight: bold;
+    text-align: center;
+    width: 72px;
+  }
+
+  .card-1 .calendar-ico div:nth-child(1) {
+    background-color: #004277;
+    border-radius: 10px 10px 0 0;
+    color: #e5e5e5;
+  }
+
+  .card-1 .calendar-ico div:nth-child(2) {
+    background-color: #e5e5e5;
+    font-size: larger;
+  }
+
+  .card-1 .calendar-ico div:nth-child(3) {
+    background-color: #e5e5e5;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .card-1 .cell-1 div:nth-child(1) {
+    font-size: x-large;
+  }
+
+  .card-1 .cell-1 div:nth-child(2) {
+    font-size: large;
+  }
+
+  .card-1 .cell-2 {
+    margin: 5px;
+  }
+</style>
+
+<br>
+<br>
+<aside>
+  <div class="row">
+    <div id="loading"></div>
+    <div class="col-lg-12" id="available-appointment"></div>
+  </div>
+</aside>
+
+<script>
+  const availableAppointmentContainer =
+    document.getElementById('available-appointment');
+
+  function setup() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/available-appointments/<%= availableId %>', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseAvailable(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseAvailable(available) {
+    if (available.isCancelled) {
+      window.location.replace('/home');
+      // history.back();
+    }
+    const meetingUrl = available.meetingUrl;
+    const appointmentStartDatetime = new Date(available.appointmentStartDatetime);
+    const appointmentFinishDatetime = new Date(available.appointmentFinishDatetime);
+    const month = months[appointmentStartDatetime.getMonth()];
+    const weekDay = weekDays[appointmentStartDatetime.getDay()];
+    const startDatetime = parseDateToJson(appointmentStartDatetime);
+    const finishDatetime = parseDateToJson(appointmentFinishDatetime);
+
+    const intervalDate = `${startDatetime.stringDate} ${startDatetime.formatTime}`
+      + ` - ${finishDatetime.formatTime}`;
+
+    const serviceName = available.service.name;
+    const serviceType = available.service.type;
+    const serviceIsOpen = available.service.isOpen;
+    const serviceCategoryName = available.service.serviceCategory.name;
+    const serviceCategoryDescription = available.service.serviceCategory.description;
+    const serviceInfoTemplate = available.service.serviceCategory.infoTemplate;
+    const sessionType = available.sessionType === "remote"
+      ? "<%= translation.AVAILABLE.TYPE_REMOTE %>"
+      : "<%= translation.AVAILABLE.TYPE_CLOSE %>";
+    const state = available.state;
+    const country = available.state.country;
+    const location = serviceType === 'exam'
+      ? ''
+      : available.sessionType === "remote"
+        ? country.name
+        : `${country.name} ${state.name}`;
+    const linkTitle = available.sessionType === "remote"
+      ? "<%= translation.AVAILABLE.LINK_REMOTE %>"
+      : "<%= translation.AVAILABLE.LINK_CLOSE %>";
+    const directionType = available.sessionType === "remote"
+      ? "<%= translation.AVAILABLE.ADDITIONAL_INFO_REMOTE_TITLE %>"
+      : "<%= translation.AVAILABLE.ADDITIONAL_INFO_CLOSE_TITLE %>";
+    const direction = available.direction;
+
+    const cardTemplate = `<div class="card-1">
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="p-2">
+            <div class="calendar-ico">
+              <div>${month}</div>
+              <div>${appointmentStartDatetime.getDate()}</div>
+              <div>${weekDay}</div>
+            </div>
+          </div>
+          <div class="p-2">
+            <div class="cell-1">
+              <div>${serviceName}</div>
+              <div>${location}</div>
+              <table>
+                <tr>
+                  <td><%= translation.AVAILABLE.APPOINTMENT_LABEL %>:</td>
+                  <td>${startDatetime.stringDate} ${startDatetime.formatTime} -
+                    ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
+                </tr>
+              </table>
+              <p>${directionType}:</p>
+              <p>${direction ? direction.replace(/\n/gi, '<br>') : '-'}</p>
+            </div>
+          </div>
+          <div class="ml-auto p-2">
+            <div class="cell-2">
+              <div><button class="btn btn-primary" onclick="${serviceIsOpen
+        ? 'fixOpenTraining'
+        : 'fixAppointment'}('<%= availableId %>', '${serviceCategoryName}', '${intervalDate}')">
+                <%= translation.AVAILABLE.FIX_APPOINTMENT %>
+              </button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 offset-md-1" style="text-align:justify;">${serviceInfoTemplate}</div>
+      </div>`;
+
+    availableAppointmentContainer.innerHTML = cardTemplate;
+  }
+
+  function cancelAppointment(hash, serviceCategoryName, intervalDate) {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    if (!confirm('<%= translation.APPOINTMENT.CANCEL_PROMPT %>'
+      .replace("$0", serviceCategoryName)
+      .replace("$1", intervalDate))) {
+      return;
+    }
+
+    fetch('/api/v1/appointments/<%= availableId %>', {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'delete'
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.statusCode) {
+          if (res.statusCode === 400) {
+            alert(res.message);
+          }
+        }
+        // window.location = '/home';
+        window.location.replace('/home');
+        // history.back();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function fixOpenTraining(availableAppointmentId, serviceName, datetime) {
+    if (!confirm('<%= translation.APPOINTMENT.FIX_APPOINTMENT_PROMPT %>'
+      .replace("$0", serviceName)
+      .replace("$1", datetime))) {
+      return;
+    }
+    displayLoading();
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`/api/v1/profile/fix-open-training/${availableAppointmentId}`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'post'
+    })
+      .then(res => {
+        if (res.status === 201) {
+          alert('<%= translation.APPOINTMENT.FIXED %>');
+        } else {
+          alert('<%= translation.AVAILABLE.FIXING_ERROR %>');
+        }
+        // location.reload(true);
+        location.href = '/home';
+      })
+      .catch(err => {
+        console.error(err);
+      })
+      .finally(() => {
+        hideLoading();
+      });
+  }
+
+  async function fixAppointment(availableAppointmentId, serviceName, datetime) {
+    if (!confirm('<%= translation.APPOINTMENT.FIX_APPOINTMENT_PROMPT %>'
+      .replace("$0", serviceName)
+      .replace("$1", datetime))) {
+      return;
+    }
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    displayLoading();
+    try {
+      // Get active coupon
+      let res1 = await
+        fetch(`/api/v1/profile/appointment-coupon/${availableAppointmentId}`, {
+          headers: myHeaders,
+          credentials: "same-origin"
+        });
+
+      // Register coupon
+      if (res1.status === 404) {
+        let res2 = await saveCoupon();
+      }
+
+      // Fix appointment
+      if (res1.status === 200 || res1.status === 404) {
+        let res3 = await
+          fetch(`/api/v1/profile/fix-appointment/${availableAppointmentId}`, {
+            headers: myHeaders,
+            credentials: "same-origin",
+            method: 'post'
+          });
+
+        if (res3.status === 201) {
+          alert('<%= translation.APPOINTMENT.FIXED %>');
+        } else {
+          res3.json().then(obj => {
+            alert(obj.message);
+          });
+        }
+
+        // location.reload(true);
+        location.href = '/home';
+        hideLoading();
+      } else {
+        alert('<%= translation.AVAILABLE.UNKNOWN_ERROR %>')
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function saveCoupon() {
+    const coupon =
+      prompt('<%= translation.AVAILABLE.ENTER_COUPON %>');
+
+    if (coupon) {
+      if (confirm('<%= translation.AVAILABLE.IRREVERSIBLE_COUPON %>')) {
+        // Register coupon
+        const myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
+
+        const res1 = await fetch(`/api/v1/profile/coupon`, {
+          headers: myHeaders,
+          credentials: "same-origin",
+          method: 'post',
+          body: JSON.stringify({
+            coupon
+          })
+        })
+        if (res1.status === 201) {
+          alert('<%= translation.AVAILABLE.SAVED_COUPON %>');
+          return res1;
+        } else if (res1.status === 404) {
+          alert('<%= translation.AVAILABLE.TAKEN_COUPON %>');
+        } else if (res1.status === 400) {
+          const body = await res1.json();
+          if (body) {
+            alert(body.message);
+          } else {
+            alert('<%= translation.AVAILABLE.COUPON_ERROR %>');
+          }
+        } else if (res1.status === 408) {
+          const body = await res1.json();
+          if (body && body.message === 'token expired') {
+            alert('<%= translation.AVAILABLE.EXPIRED_COUPON %>');
+          } else {
+            alert('<%= translation.AVAILABLE.COUPON_ERROR %>');
+          }
+        } else {
+          alert('<%= translation.AVAILABLE.COUPON_ERROR %>');
+        }
+
+      }
+      return false;
+    }
+  }
+</script>

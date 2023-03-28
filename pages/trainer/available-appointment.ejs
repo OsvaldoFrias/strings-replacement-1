@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+  <!-- Data table -->
+  <link rel="stylesheet" type="text/css" href="/public/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="/public/js/jquery.dataTables.js">
+  </script>
+  <!--/ Data table -->
+  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs", { "location": "home" }) %>
+  <%- include("./header.trainer.ejs") %>
+  <div class="container">
+    <section>
+      <div class="container py-4">
+        <div class="row d-flex align-items-center justify-content-center">
+          <div class="w-100">
+            <div>
+              <table id="appointments-list">
+                <thead>
+                  <th>Asistente</th>
+                  <th>Correo</th>
+                  <th>Empresa</th>
+                  <th>HRU</th>
+                  <th>Licencia</th>
+                </thead>
+              </table>
+            </div>
+            <div id="appointment"></div>
+          </div>
+        </div>
+        <div>
+          <%- include("../../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script>
+  const appointmentContainer = document.getElementById('appointment');
+
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/available-appointments/<%= id %>', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      // .then(res => console.log(res))
+      .then(res => parseAvailableAppointment(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseAvailableAppointment(available) {
+    // console.log(available);
+
+    let appointmentsTable = $('#appointments-list').DataTable({
+      "ordering": false,
+      "sDom": 'lrtip',
+      "dom": '<"top"if>rt<"bottom"p><"clear">'
+    });
+
+    const availableAppointmentId = available.id;
+    const meetingUrl = available.meetingUrl;
+    const appointmentStartDatetime = new Date(available.appointmentStartDatetime);
+    const appointmentFinishDatetime = new Date(available.appointmentFinishDatetime);
+    const month = months[appointmentStartDatetime.getMonth()];
+    const weekDay = weekDays[appointmentStartDatetime.getDay()];
+    const startDatetime = parseDateToJson(appointmentStartDatetime);
+    const finishDatetime = parseDateToJson(appointmentFinishDatetime);
+    const totalAppointments = available.totalAppointments;
+
+    const intervalDate = `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.formatTime}`;
+
+    // let trainerMail = null;
+    // if (available.trainer) {
+    //   trainerMail = available.trainer.email;
+    // }
+
+    let trainersMail = '';
+    if (available.trainers && available.trainers.length !== 0) {
+      let acc = '';
+      trainersMail += available.trainers.reduce((previousValue, trainer) => {
+        return previousValue + `<a href="mailto:${trainer.email}">${trainer.email}</a><br/>`;
+      }, acc);
+      // console.log(trainersMail);
+    }
+
+    // const serviceDescription = available.service.serviceCategory.description;
+    const serviceName = available.service.name;
+    const serviceType = available.service.type;
+    const serviceCategoryName = available.service.serviceCategory.name;
+    const serviceCategoryDescription = available.service.serviceCategory.description;
+    const serviceInfoTemplate = available.service.serviceCategory.infoTemplate;
+    const serviceAttendantsNumber = available.overrideAttendantsNumber || available.service.attendantsNumber;
+    const sessionType = available.sessionType === "remote" ? "Remoto" : "Presencial";
+    const state = available.state;
+    const country = available.state.country;
+    const location = serviceType === 'exam' ? '' : available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
+    const linkTitle = available.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
+    const directionType = available.sessionType === "remote" ? "Indicaciones" : "Dirección";
+    const direction = available.direction;
+
+    const cardTemplate = `<div class="card-1">
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="p-2">
+            <div class="calendar-ico">
+              <div>${month}</div>
+              <div>${appointmentStartDatetime.getDate()}</div>
+              <div>${weekDay}</div>
+            </div>
+          </div>
+          <div class="p-2">
+            <div class="cell-1">
+              <div>${serviceName}</div>
+              <div>${sessionType}${location ? " - " + location : ''}</div>
+              <table>
+                <tr>
+                  <td>Cita: </td>
+                  <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
+                </tr>
+              </table>
+              <!--${meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle} ${sessionType}${location ? " - " + location : ''}</a>` : '<p style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</p>'} -->
+              <p>${directionType}:</p>
+              <p>${direction ? direction.replace(/\n/gi, '<br>') : '-'}</p>
+            </div>
+          </div>
+          <div class="ml-auto p-2">
+            <div class="cell-2">
+              <div>${totalAppointments} de ${serviceAttendantsNumber} asistentes</div>
+              ${trainersMail}
+              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</p>'}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 offset-md-1" style="text-align:justify;">${serviceInfoTemplate}</div>
+      </div>`;
+
+    appointmentContainer.innerHTML = cardTemplate;
+
+
+    available.appointments.forEach(appointment => {
+      const {
+        hash,
+        attendant: {
+          id,
+          firstName,
+          lastName,
+          businessName,
+          hru,
+          licenseKey,
+          user: {
+            email
+          }
+        }
+      } = appointment;
+      const fullName = `${firstName} ${lastName}`;
+
+      appointmentsTable
+        .row
+        .add([
+          `<a href="/attendant/${id}">${fullName}</a>`,
+          // `${fullName}`,
+          `<a href="mailto:${email}">${email}</a>`,
+          `${businessName}`,
+          hru,
+          `<img style="cursor:pointer;" onclick="setLicenseKeyUrl(${id}, '${fullName}')" src="/public/img/edit.png" alt="Editar enlace de la licencia" width="15px"/> ${(licenseKey ? `<a target="_blank" href="${licenseKey}">Licencia</a>` : '<span style="font-style: italic;color: #999999;">No ha colocado una licencia.</span>')}`,
+        ])
+        .draw()
+        .node();
+    });
+  }
+
+  function setLicenseKeyUrl(attendantId, fullAttendantName) {
+    let licenseKey = prompt(`Enlace para licencia de ${fullAttendantName}`);
+    if (!licenseKey) {
+      return;
+    }
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`/api/v1/attendants/${attendantId}`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'PATCH',
+      body: JSON.stringify({
+        licenseKey
+      })
+    })
+      .then(res => {
+        if (res.status === 200) {
+          alert('Enlace actualizado.');
+        } else {
+          alert('Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde.');
+        }
+        location.reload(true);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+</script>
+
+</html>

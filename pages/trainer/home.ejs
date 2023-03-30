@@ -27,14 +27,14 @@
         <div class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div id="loading"></div>
-            <h2>Próximas sesiones</h2>
+            <h2><%= translation.TRAINER_HOME.UPCOMING_SESSIONS %></h2>
             <div id="appointments">
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="trainerId">Instructor:</label>
+                    <label for="trainerId"><%= translation.TRAINER_HOME.TRAINER %></label>
                     <select id="trainerId" name="trainerId" class="form-control">
-                      <option value="" selected>Choose...</option>
+                      <option value="" selected><%= translation.TRAINER_HOME.OPTION %></option>
                     </select>
                   </div>
                   <div class="col-md-6 align-bottom">
@@ -51,11 +51,11 @@
               <table id="availableAppointments-list" class="compact" style="width:100%">
                 <thead>
                   <tr>
-                    <th>Sesión</th>
-                    <th>Fecha/Hora</th>
-                    <th>Enlace</th>
-                    <th>Instructor</th>
-                    <th>Reservaciones</th>
+                    <th><%= translation.TRAINER_HOME.SESSION %></th>
+                    <th><%= translation.TRAINER_HOME.DATE_HOUR %></th>
+                    <th><%= translation.TRAINER_HOME.LINK %></th>
+                    <th><%= translation.TRAINER_HOME.TRAINER_1 %></th>
+                    <th><%= translation.TRAINER_HOME.RESERVATIONS %></th>
                   </tr>
                 </thead>
               </table>

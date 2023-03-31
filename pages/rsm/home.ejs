@@ -27,18 +27,18 @@
         <div class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div id="loading"></div>
-            <h2>Próximas sesiones</h2>
+            <h2><%= translation.RSM_HOME.UPCOMING_SESSIONS %></h2>
             <div id="appointments">
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="trainerId">Instructor:</label>
+                    <label for="trainerId"><%= translation.RSM_HOME.TRAINER %></label>
                     <select id="trainerId" name="trainerId" class="form-control">
-                      <option value="" selected>Choose...</option>
+                      <option value="" selected><%= translation.RSM_HOME.OPTION %></option>
                     </select>
                   </div>
                   <div class="col-md-6 align-bottom">
-                    <button type="button" class="btn btn-primary" onclick="filterAppointmentList()">Filtrar</button>
+                    <button type="button" class="btn btn-primary" onclick="filterAppointmentList()"><%= translation.RSM_HOME.FILTER %></button>
                   </div>
                 </div>
                 <div id="error" class="alert alert-danger alert-dismissible d-none">
@@ -51,11 +51,11 @@
               <table id="availableAppointments-list" class="compact" style="width:100%">
                 <thead>
                   <tr>
-                    <th>Sesión</th>
-                    <th>Fecha/Hora</th>
-                    <th>Enlace</th>
-                    <th>Instructor</th>
-                    <th>Reservaciones</th>
+                    <th><%= translation.RSM_HOME.SESSION %></th>
+                    <th><%= translation.RSM_HOME.DATE_HOUR %></th>
+                    <th><%= translation.RSM_HOME.LINK %></th>
+                    <th><%= translation.RSM_HOME.TRAINER_1 %></th>
+                    <th><%= translation.RSM_HOME.RESERVATIONS %></th>
                   </tr>
                 </thead>
               </table>

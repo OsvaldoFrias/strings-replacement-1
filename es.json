@@ -132,11 +132,12 @@
     "BUSINESS_NAME": "Empresa:",
     "RSM_NAME": "RSM asociado:",
     "OPTION": "Choose...",
+    "UPDATE": "Actualizar",
     "COUPONS": "Cupones",
     "PRODUCT": "Producto",
     "COUPON": "Cupón",
     "COMPANY": "Empresa",
-    "NEXT_ASSISTS": "Próximas asistencias",
+    "NEXT_ASSISTANCES": "Próximas asistencias",
     "BROWSING_HISTORY": "Historial"
   },
   "TRAINER_AVAILABLE_APPOINTMEN":{
@@ -151,7 +152,7 @@
     "INVOICE_NUMBER": "Núm. Factura",
     "CONSECUTIVE": "Consecutivo",
     "PRODUCT": "Producto",
-    "USER": "usuario",
+    "USER": "Usuario",
     "COUPON": "Cupón",
     "COMPANY": "Empresa",
     "RSM": "RSM",
@@ -164,6 +165,64 @@
     "UPCOMING_SESSIONS": "Próximas sesiones",
     "TRAINER": "Instructor:",
     "OPTION": "Choose...",
+    "FILTER": "Filtrar",
+    "SESSION": "Sesión",
+    "DATE_HOUR": "Fecha/Hora",
+    "LINK": "Enlace",
+    "TRAINER_1": "Instructor",
+    "RESERVATIONS": "Reservaciones"
+  },
+  "RSM_ATTENDANT_LIST":{
+    "USER_LIST": "Lista de usuarios",
+    "ASSISTANT": "Asistente",
+    "MAIL": "Correo",
+    "COMPANY": "Empresa",
+    "HRU": "HRU",
+    "COUNTRY": "País"
+  },
+  "RSM_ATTENDANT_PROFILE":{
+    "USER_PROFILE": "Perfil de usuario",
+    "EMAIL_PROFILE_1": "Correo electrónico:",
+    "EMAIL_PROFILE_2": "Email",
+    "COUNTRY_PROFILE_1": "País:",
+    "COUNTRY_PROFILE_2": "País",
+    "FIRST_NAME": "Nombres(s):",
+    "lAST_NAME": "Apellido(s):",
+    "BUSINESS_NAME": "Empresa:",
+    "RSM_NAME": "RSM asociado:",
+    "OPTION": "Choose...",
+    "UPDATE": "Actualizar",
+    "NEXT_ASSISTANCES": "Próximas asistencias",
+    "BROWSING_HISTORY": "Historial"
+  },
+  "RSM_AVAILABLE_APPOINTMEN":{
+    "ASSISTANT": "Asistente",
+    "MAIL": "Correo",
+    "COMPANY": "Empresa",
+    "HRU": "HRU",
+    "LICENSE": "Licencia"
+  },
+  "RSM_COUPON":{
+    "GENERATED_COUPONS": "Cupones generados",
+    "DOWNLOAD_REPORT":  "Descargar reporte",
+    "INVOICE_NUMBER": "Núm. Factura",
+    "CONSECUTIVE": "Consecutivo",
+    "PRODUCT": "Producto",
+    "USER": "Usuario",
+    "COUPON": "Cupón",
+    "COMPANY": "Empresa",
+    "RSM": "RSM",
+    "TYPE": "Tipo"
+  },
+  "RSM_GRADE_LIST":{
+    "RATINGS": "Calificaciones",
+    "DOWNLOAD_REPORT": "Descargar reporte"
+  },
+  "RSM_HOME":{
+    "UPCOMING_SESSIONS": "Próximas sesiones",
+    "TRAINER": "Instructor:",
+    "OPTION": "Choose...",
+    "FILTER": "Filtrar",
     "SESSION": "Sesión",
     "DATE_HOUR": "Fecha/Hora",
     "LINK": "Enlace",

@@ -21,59 +21,59 @@
       <div class="container py-4">
         <div class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
-            <h2>Perfil de usuario</h2>
+            <h2><%= translation.ATTENDANT_ATTENDANT_PROFILE.USER_PROFILE %></h2>
             <form>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="firstName">Nombre(s):</label>
+                  <label for="firstName"><%= translation.ATTENDANT_ATTENDANT_PROFILE.FIRST_NAME_1 %></label>
                   <br>
-                  <label id="firstName">Nombre(s)</label>
+                  <label id="firstName"><%= translation.ATTENDANT_ATTENDANT_PROFILE.FIRST_NAME_2 %></label>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="lastName">Apellido(s):</label>
+                  <label for="lastName"><%= translation.ATTENDANT_ATTENDANT_PROFILE.LAST_NAME_1 %></label>
                   <br>
-                  <label id="lastName">Apellido(s)</label>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="businessName">Empresa:</label>
-                  <br>
-                  <label id="businessName">Empresa</label>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="licenseKey">Licencia:</label>
-                  <br>
-                  <label id="licenseKey">Licencia</label>
+                  <label id="lastName"><%= translation.ATTENDANT_ATTENDANT_PROFILE.LAST_NAME_2 %></label>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="email">Correo electrónico:</label>
+                  <label for="businessName"><%= translation.ATTENDANT_ATTENDANT_PROFILE.BUSINESS_NAME_1 %></label>
+                  <br>
+                  <label id="businessName"><%= translation.ATTENDANT_ATTENDANT_PROFILE.BUSINESS_NAME_2 %></label>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="licenseKey"><%= translation.ATTENDANT_ATTENDANT_PROFILE.LICENSE_1 %></label>
+                  <br>
+                  <label id="licenseKey"><%= translation.ATTENDANT_ATTENDANT_PROFILE.LICENSE_2 %></label>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="email"><%= translation.ATTENDANT_ATTENDANT_PROFILE.EMAIL %></label>
                   <input type="text" class="form-control" id="email" name="email">
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="countryId">País:</label>
+                  <label for="countryId"><%= translation.ATTENDANT_ATTENDANT_PROFILE.COUNTRY %></label>
                   <select id="countryId" name="countryId" class="form-control">
-                    <option value="" selected>Choose...</option>
+                    <option value="" selected><%= translation.ATTENDANT_ATTENDANT_PROFILE.OPTION %></option>
                   </select>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <label for="hru">Hardware Report Utility (HRU):</label>
+                  <label for="hru"><%= translation.ATTENDANT_ATTENDANT_PROFILE.HRU %></label>
                   <textarea type="text" class="form-control" id="hru" name="hru" rows="10"></textarea>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <h3>Cupones</h3>
+                  <h3><%= translation.ATTENDANT_ATTENDANT_PROFILE.COUPONS %></h3>
                   <table id="coupons-list">
                     <thead>
                       <tr>
-                        <th>Producto</th>
-                        <th>Cupón</th>
-                        <th>Empresa</th>
+                        <th><%= translation.ATTENDANT_ATTENDANT_PROFILE.PRODUCT %></th>
+                        <th><%= translation.ATTENDANT_ATTENDANT_PROFILE.COUPON %></th>
+                        <th><%= translation.ATTENDANT_ATTENDANT_PROFILE.COMPANY %></th>
                       </tr>
                     </thead>
                   </table>
@@ -83,7 +83,7 @@
                 <div id="error-message"></div>
               </div>
               <div class="form-group col-md-12 text-right">
-                <button type="button" class="btn btn-primary" onclick="updateAttendant()">Actualizar</button>
+                <button type="button" class="btn btn-primary" onclick="updateAttendant()"><%= translation.ATTENDANT_ATTENDANT_PROFILE.UPDATE %></button>
               </div>
             </form>
           </div>

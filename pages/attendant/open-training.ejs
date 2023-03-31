@@ -24,17 +24,17 @@
               <!-- <button onclick="saveCoupon()" class="btn btn-primary">Registrar cupón</button> -->
             </div>
             <div id="loading"></div>
-            <h2>Reservaciones</h2>
+            <h2><%= translation.ATTENDANT_OPEN_TRAINING.RESERVATIONS %></h2>
             <div id="appointments">
             </div>
-            <h2>Próximas fechas</h2>
+            <h2><%= translation.ATTENDANT_OPEN_TRAINING.NEXT_DATES %></h2>
             <div id="availableAppointments">
               <table id="availableAppointments-list">
                 <thead>
                   <tr>
-                    <th>Fecha/Inicio</th>
-                    <th>Tema</th>
-                    <th>Reservar</th>
+                    <th>F<%= translation.ATTENDANT_OPEN_TRAINING.START_DATE %></th>
+                    <th><%= translation.ATTENDANT_OPEN_TRAINING.TOPIC %></th>
+                    <th><%= translation.ATTENDANT_OPEN_TRAINING.RESERVE %></th>
                   </tr>
                 </thead>
               </table>

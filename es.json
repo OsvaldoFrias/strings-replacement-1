@@ -228,5 +228,44 @@
     "LINK": "Enlace",
     "TRAINER_1": "Instructor",
     "RESERVATIONS": "Reservaciones"
+  },
+  "ATTENDANT_ATTENDANT_PROFILE":{
+    "USER_PROFILE": "Perfil de usuario",
+    "FIRST_NAME_1": "Nombres(s):",
+    "FIRST_NAME_2": "Nombres(s)",
+    "lAST_NAME_1": "Apellido(s):",
+    "lAST_NAME_2": "Apellido(s)",
+    "BUSINESS_NAME_1": "Empresa:",
+    "BUSINESS_NAME_2": "Empresa",
+    "LICENSE_1": "Licencia:",
+    "LICENSE_2": "Licencia",
+    "EMAIL": "Correo electrónico:",
+    "COUNTRY": "País:",
+    "OPTION": "Choose...",
+    "HRU": "Hardware Report Utility (HRU):",
+    "COUPONS": "Cupones",
+    "PRODUCT": "Producto",
+    "COUPON": "Cupón",
+    "COMPANY": "Empresa",
+    "UPDATE": "Actualizar"
+  },
+  "ATTENDANT_GRADE_LIST":{
+    "RATINGS": "Calificaciones"
+  },
+  "ATTENDANT_HOME":{
+    "RESERVATIONS": "Reservaciones",
+    "NEXT_DATES": "Próximas fechas",
+    "START_DATE": "Fecha/Inicio",
+    "TOPIC": "Tema",
+    "REGISTERS": "Registros",
+    "RESERVE": "Reservar"
+  },
+  "ATTENDANT_OPEN_TRAINING":{
+    "RESERVATIONS": "Reservaciones",
+    "NEXT_DATES": "Próximas fechas",
+    "START_DATE": "Fecha/Inicio",
+    "TOPIC": "Tema",
+    "REGISTERS": "Registros",
+    "RESERVE": "Reservar"
   }
 }

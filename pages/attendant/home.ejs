@@ -24,19 +24,19 @@
               <!-- <button onclick="saveCoupon()" class="btn btn-primary">Registrar cupón</button> -->
             </div>
             <div id="loading"></div>
-            <h2>Reservaciones</h2>
+            <h2><%= translation.ATTENDANT_HOME.RESERVATIONS %></h2>
             <div id="appointments">
             </div>
-            <h2>Próximas fechas</h2>
+            <h2><%= translation.ATTENDANT_HOME.NEXT_DATES %></h2>
             <div id="availableAppointments">
               <table id="availableAppointments-list">
                 <thead>
                   <tr>
-                    <th>Fecha/Inicio</th>
-                    <th>Tema</th>
+                    <th><%= translation.ATTENDANT_HOME.START_DATE %></th>
+                    <th><%= translation.ATTENDANT_HOME.TOPIC %></th>
                     <!-- <th>Cupos disponibles</th> -->
-                    <th>Registros</th>
-                    <th>Reservar</th>
+                    <th><%= translation.ATTENDANT_HOME.REGISTERS %></th>
+                    <th><%= translation.ATTENDANT_HOME.RESERVE %></th>
                   </tr>
                 </thead>
               </table>

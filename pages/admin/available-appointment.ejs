@@ -23,12 +23,12 @@
             <div>
               <table id="appointments-list">
                 <thead>
-                  <th>Asistente</th>
-                  <th>Correo</th>
-                  <th>Empresa</th>
-                  <th>HRU</th>
-                  <th>Licencia</th>
-                  <th>Cancelar</th>
+                  <th><%= translation.ADMIN_AVAILABLE_APPOINTMEN.ASSISTANT %></th>
+                  <th><%= translation.ADMIN_AVAILABLE_APPOINTMEN.MAIL %></th>
+                  <th><%= translation.ADMIN_AVAILABLE_APPOINTMEN.COMPANY %></th>
+                  <th><%= translation.ADMIN_AVAILABLE_APPOINTMEN.HRU %></th>
+                  <th><%= translation.ADMIN_AVAILABLE_APPOINTMEN.LICENSE %></th>
+                  <th><%= translation.ADMIN_AVAILABLE_APPOINTMEN.CANCEL %></th>
                 </thead>
               </table>
             </div>
@@ -43,15 +43,15 @@
   </div>
   <dialog id="directionDialog" style="width: 50%;">
     <section class="text-center">
-      Actualizar dirección:
+      <%= translation.ADMIN_AVAILABLE_APPOINTMEN.UPDATE_DIRECTION %>
     </section>
     <!-- <input type="text" class="text-center" style="width: 100%;"> -->
     <section class="text-center">
       <textarea name="direction" id="direction" style="width: 100%;" rows="10"></textarea>
     </section>
     <section class="text-center">
-      <button id="cancelDirectionButton">Cancelar</button>
-      <button id="submitDirectionButton">Aceptar</button>
+      <button id="cancelDirectionButton"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.CANCEL %></button>
+      <button id="submitDirectionButton"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.SUBMIT_DIRECTION %></button>
     </section>
   </dialog>
 </body>

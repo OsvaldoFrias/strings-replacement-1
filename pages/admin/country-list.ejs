@@ -20,16 +20,16 @@
       <div class="container py-4">
         <div class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
-            <h2>Países</h2>
+            <h2><%= translation.ADMIN_COUNTRY_LIST.COUNTRIES %></h2>
             <div class="col-md-12 text-right">
-              <button class="btn btn-primary" onclick="addNewCountry()">Agregar país</button>
+              <button class="btn btn-primary" onclick="addNewCountry()"><%= translation.ADMIN_COUNTRY_LIST.ADD_COUNTRY %></button>
             </div>
             <br>
             <div>
               <table id="countries-list">
                 <thead>
-                  <th>Nombre</th>
-                  <th>Acción</th>
+                  <th><%= translation.ADMIN_COUNTRY_LIST.NAME %></th>
+                  <th><%= translation.ADMIN_COUNTRY_LIST.ACTION %></th>
                 </thead>
               </table>
             </div>

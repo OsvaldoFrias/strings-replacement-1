@@ -30,13 +30,12 @@
           class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div>
-              <h2>Agendar próxima sesión</h2>
+              <h2><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.SCHEDULE_NEXT_SESSION %></h2>
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label class="form-label"
-                      for="appointmentStartDatetime">Fecha y hora
-                      inicial:</label>
+                      for="appointmentStartDatetime"><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.START_DATE_TIME %></label>
                     <div class="input-group date"
                       id="fechaInicialGroup">
                       <input type="datetime-local"
@@ -48,8 +47,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label class="form-label"
-                      for="appointmentFinishDatetime">Fecha y hora
-                      final:</label>
+                      for="appointmentFinishDatetime"><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.FINISH_DATE_TIME %></label>
                     <div class="input-group date"
                       id="fechaFinalGroup">
                       <input type="datetime-local"
@@ -62,15 +60,16 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="serviceId">Tipo de sesión:</label>
+                    <label for="serviceId"><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.    "SESSION_TYPE": "Tipo de sesión:",
+                      %></label>
                     <select id="serviceId" name="serviceId"
                       class="form-control">
-                      <option value="" selected>Choose...</option>
+                      <option value="" selected><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.OPTION %></option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label
-                      for="overrideAttendantsNumber">Cupo:</label>
+                      for="overrideAttendantsNumber"><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.CAPACITY %></label>
                     <input type="number" class="form-control"
                       id="overrideAttendantsNumber"
                       name="overrideAttendantsNumber" disabled>
@@ -82,11 +81,11 @@
                     <input class="form-check-input" type="checkbox"
                       id="sessionType" checked>
                     <label class="form-check-label" for="sessionType">
-                      Sesión remota
+                      <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.REMOTE_SESSION %>
                     </label>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="meetingUrl">Enlace de sesión:</label>
+                    <label for="meetingUrl"><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.SESSION_LINK %></label>
                     <input type="text" class="form-control"
                       id="meetingUrl" name="meetingUrl"
                       placeholder="https://teams.microsoft.com/dl/launcher/launcher.html">
@@ -94,36 +93,35 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="countryId">País:</label>
+                    <label for="countryId"><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.COUNTRY %></label>
                     <select id="countryId" name="countryId"
                       class="form-control">
-                      <option value="" selected>Choose...</option>
+                      <option value="" selected><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.OPTION %></option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="stateId">Ciudad:</label>
+                    <label for="stateId"><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.STATE %></label>
                     <select id="stateId" name="stateId"
                       class="form-control">
-                      <option value="" selected>Choose...</option>
+                      <option value="" selected><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.OPTION %></option>
                     </select>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="trainerId">Instructor:</label>
+                    <label for="trainerId"><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.TRAINER %></label>
                     <select id="trainerId" name="trainerId"
                       class="form-control">
-                      <option value="" selected>Choose...</option>
+                      <option value="" selected><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.OPTION %></option>
                     </select>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="direction">Instrucciones de la
-                      dirección de este curso:</label>
+                    <label for="direction"><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.DIRECTION %></label>
                     <textarea type="text" class="form-control"
                       id="direction" name="direction" rows="10"
-                      placeholder="No es obligatoria, si se actualiza más adelante, se notifica a cada asistente registrado..."></textarea>
+                      placeholder="<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.DIRECTION_INDICATION %>"></textarea>
                   </div>
                 </div>
                 <div id="error"
@@ -132,7 +130,7 @@
                 </div>
                 <div class="col-md-12 text-right">
                   <button type="button" class="btn btn-primary"
-                    onclick="saveAppointment()">Agendar</button>
+                    onclick="saveAppointment()"><%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.SCHEDULE %></button>
                 </div>
                 <div id="loading"></div>
               </form>

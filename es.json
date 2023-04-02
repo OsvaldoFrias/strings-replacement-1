@@ -267,5 +267,91 @@
     "TOPIC": "Tema",
     "REGISTERS": "Registros",
     "RESERVE": "Reservar"
+  },
+  "ADMIN_ATTENDANT_LIST":{
+    "USER_LIST": "Lista de usuarios",
+    "ASSISTANT": "Asistente",
+    "MAIL": "Correo",
+    "COMPANY": "Empresa",
+    "HRU": "HRU",
+    "COUNTRY": "País"
+  },
+  "ADMIN_ATTENDANT_PROFILE":{
+    "USER_PROFILE": "Perfil de usuario",
+    "EMAIL_PROFILE_1": "Correo electrónico:",
+    "EMAIL_PROFILE_2": "Email",
+    "COUNTRY_PROFILE_1": "País:",
+    "COUNTRY_PROFILE_2": "País",
+    "FIRST_NAME": "Nombres(s):",
+    "lAST_NAME": "Apellido(s):",
+    "BUSINESS_NAME": "Empresa:",
+    "RSM_NAME": "RSM asociado:",
+    "OPTION": "Choose...",
+    "UPDATE": "Actualizar",
+    "COUPONS": "Cupones",
+    "PRODUCT": "Producto",
+    "COUPON": "Cupón",
+    "COMPANY": "Empresa",
+    "NEXT_ASSISTANCES": "Próximas asistencias",
+    "BROWSING_HISTORY": "Historial"
+  },
+  "ADMIN_AVAILABLE_APPOINTMEN_ADD":{
+    "SCHEDULE_NEXT_SESSION": "Agendar próxima sesión",
+    "START_DATE_TIME": "Fecha y hora inicial:",
+    "FINISH_DATE_TIME": "Fecha y hora final:",
+    "SESSION_TYPE": "Tipo de sesión:",
+    "OPTION": "Choose...",
+    "CAPACITY": "Cupo:",
+    "REMOTE_SESSION": "Sesión remota",
+    "SESSION_LINK": "Enlace de sesión",
+    "COUNTRY": "País:",
+    "STATE": "Ciudad:",
+    "TRAINER": "Instructor",
+    "DIRECTION": "Instrucciones de la dirección de este curso:",
+    "DIRECTION_INDICATION": "No es obligatoria, si se actualiza más adelante, se notifica a cada asistente registrado...",
+    "SCHEDULE": "Agendar"
+  },
+  "ADMIN_AVAILABLE_APPOINTMEN":{
+    "ASSISTANT": "Asistente",
+    "MAIL": "Correo",
+    "COMPANY": "Empresa",
+    "HRU": "HRU",
+    "LICENSE": "Licencia",
+    "CANCEL": "Cancelar",
+    "UPDATE_DIRECTION": "Actualizar dirección:",
+    "SUBMIT_DIRECTION": "Aceptar"
+  },
+  "ADMIN_COUNTRY_LIST":{
+    "COUNTRIES": "Países",
+    "ADD_COUNTRY": "Agregar país",
+    "NAME": "Nombre",
+    "ACTION": "Acción"
+  },
+  "ADMIN_COUPON_ADD":{
+    "GENERATE_COUPONS": "Generar cupones a partir de PO",
+    "PO_CODE": "Núm. factura (PO):",
+    "SEQUENCE": "Cantidad de cupones:",
+    "BUSINESS_NAME": "Empresa:",
+    "RSM_NAME": "RSM:",
+    "SOLD_COUPON": "Cupón vendido",
+    "PRODUCT_TYPE": "Tipo de producto:",
+    "OPTION": "Choose...",
+    "GENERATE": "Generar"
+    
+  },
+  "ADMIN_COUPON":{
+    "GENERATE_COUPONS": "Generar cupones",
+    "GENERATED_COUPONS": "Cupones generados",
+    "DOWNLOAD_REPORT": "Descargar reporte",
+    "INVOICE_NUMBER": "Núm. Factura",
+    "CONSECUTIVE": "Consecutivo",
+    "PRODUCT": "Producto",
+    "USER": "Usuario",
+    "COUPON": "Cupón",
+    "COMPANY": "Empresa",
+    "RSM": "RSM",
+    "TYPE": "Tipo",
+    "EXPIRATION": "Vencimiento",
+    "REMOVE_COUPON": "Eliminar cupón"
   }
 }

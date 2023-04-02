@@ -16,39 +16,39 @@
         <div class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div>
-              <h2>Generar cupones a partir de PO</h2>
+              <h2><%= translation.ADMIN_COUPON_ADD.GENERATE_COUPONS %></h2>
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="poCode">Núm. factura (PO):</label>
+                    <label for="poCode"><%= translation.ADMIN_COUPON_ADD.PO_CODE %></label>
                     <input type="text" class="form-control" id="poCode" name="poCode" placeholder="ABC-123-DFG-0">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="sequence">Cantidad de cupones:</label>
+                    <label for="sequence"><%= translation.ADMIN_COUPON_ADD.SEQUENCE %></label>
                     <input type="number" class="form-control" id="sequence" name="sequence">
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="businessName">Empresa:</label>
+                    <label for="businessName"><%= translation.ADMIN_COUPON_ADD.BUSINESS_NAME %></label>
                     <input type="text" class="form-control" id="businessName" name="businessName">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="rsmName">RSM:</label>
+                    <label for="rsmName"><%= translation.ADMIN_COUPON_ADD.RSM_NAME %></label>
                     <input type="text" class="form-control" id="rsmName" name="rsmName">
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6 text-center" style="margin: auto;">
                     <label class="form-check-label" for="type">
-                      Cupón vendido
+                      <%= translation.ADMIN_COUPON_ADD.SOLD_COUPON %>
                     </label>&nbsp;&nbsp;&nbsp;
                     <input class="form-check-input" type="checkbox" value="" id="type" checked>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="serviceId">Tipo de producto:</label>
+                    <label for="serviceId"><%= translation.ADMIN_COUPON_ADD.PRODUCT_TYPE %></label>
                     <select id="serviceId" name="serviceId" class="form-control">
-                      <option value="" selected>Choose...</option>
+                      <option value="" selected><%= translation.ADMIN_COUPON_ADD.OPTION %></option>
                     </select>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
                   <div id="error-message"></div>
                 </div>
                 <div class="col-md-12 text-right">
-                  <button type="button" class="btn btn-primary" onclick="saveCoupon()">Generar</button>
+                  <button type="button" class="btn btn-primary" onclick="saveCoupon()"><%= translation.ADMIN_COUPON_ADD.GENERATE %></button>
                 </div>
               </form>
             </div>

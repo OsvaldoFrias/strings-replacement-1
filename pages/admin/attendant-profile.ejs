@@ -20,41 +20,41 @@
       <div class="container py-4">
         <div class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
-            <h2>Perfil de usuario</h2>
+            <h2><%= translation.ADMIN_ATTENDANT_PROFILE.USER_PROFILE %></h2>
             <form>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="email">Correo electrónico:</label>
+                  <label for="email"><%= translation.ADMIN_ATTENDANT_PROFILE.EMAIL_PROFILE_1 %></label>
                   <br>
-                  <label id="email">Email</label>
+                  <label id="email"><%= translation.ADMIN_ATTENDANT_PROFILE.EMAIL_PROFILE_2 %></label>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="country">País:</label>
+                  <label for="country"><%= translation.ADMIN_ATTENDANT_PROFILE.COUNTRY_PROFILE_1 %></label>
                   <br>
-                  <label id="country">País</label>
+                  <label id="country"><%= translation.ADMIN_ATTENDANT_PROFILE.COUNTRY_PROFILE_2 %></label>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="firstName">Nombre(s):</label>
+                  <label for="firstName"><%= translation.ADMIN_ATTENDANT_PROFILE.FIRST_NAME %></label>
                   <input type="text" class="form-control" id="firstName" name="firstName">
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="lastName">Apellido(s):</label>
+                  <label for="lastName"><%= translation.ADMIN_ATTENDANT_PROFILE.LAST_NAME %></label>
                   <input type="text" class="form-control" id="lastName" name="lastName">
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <label for="businessName">Empresa:</label>
+                  <label for="businessName"><%= translation.ADMIN_ATTENDANT_PROFILE.BUSINESS_NAME %></label>
                   <input type="text" class="form-control" id="businessName" name="businessName">
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="rsmName">RSM asociado:</label>
+                  <label for="rsmName"><%= translation.ADMIN_ATTENDANT_PROFILE.RSM_NAME %></label>
                   <select id="rsmName" name="rsmName" class="form-control">
-                    <option value="" selected>Choose...</option>
+                    <option value="" selected><%= translation.ADMIN_ATTENDANT_PROFILE.OPTION %></option>
                   </select>
                 </div>
               </div>
@@ -62,17 +62,17 @@
                 <div id="error-message"></div>
               </div>
               <div class="form-group col-md-12 text-right">
-                <button type="button" class="btn btn-primary" onclick="updateAttendant()">Actualizar</button>
+                <button type="button" class="btn btn-primary" onclick="updateAttendant()"><%= translation.ADMIN_ATTENDANT_PROFILE.UPDATE %></button>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <h3>Cupones</h3>
+                  <h3><%= translation.ADMIN_ATTENDANT_PROFILE.COUPONS %></h3>
                   <table id="coupons-list">
                     <thead>
                       <tr>
-                        <th>Producto</th>
-                        <th>Cupón</th>
-                        <th>Empresa</th>
+                        <th><%= translation.ADMIN_ATTENDANT_PROFILE.PRODUCT %></th>
+                        <th><%= translation.ADMIN_ATTENDANT_PROFILE.COUPON %></th>
+                        <th><%= translation.ADMIN_ATTENDANT_PROFILE.COMPANY %></th>
                       </tr>
                     </thead>
                   </table>
@@ -80,13 +80,13 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <h3>Próximas asistencias</h3>
+                  <h3><%= translation.ADMIN_ATTENDANT_PROFILE.NEXT_ASSISTANCES %></h3>
                   <div id="appointments"></div>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <h3>Historial</h3>
+                  <h3><%= translation.ADMIN_ATTENDANT_PROFILE.BROWSING_HISTORY %></h3>
                   <table id="grades-list"></table>
                 </div>
               </div>

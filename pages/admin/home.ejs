@@ -27,21 +27,21 @@
         <div class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div class="col-md-12 text-right">
-              <a href="/available-appointment/add" class="btn btn-primary">Agendar nuevas sesiones</a>
+              <a href="/available-appointment/add" class="btn btn-primary"><%= translation.ADMIN_HOME.SCHEDULE_NEW_SESSIONS %></a>
             </div>
             <div id="loading"></div>
-            <h2>Próximas sesiones</h2>
+            <h2><%= translation.ADMIN_HOME.UPCOMING_SESSIONS %></h2>
             <div id="appointments"></div>
             <div id="availableAppointments">
               <table id="availableAppointments-list" class="compact" style="width:100%">
                 <thead>
                   <tr>
-                    <th>Sesión</th>
-                    <th>Fecha/Hora</th>
-                    <th>Enlace</th>
-                    <th>Instructor</th>
-                    <th>Reservaciones</th>
-                    <th>Cancelar</th>
+                    <th><%= translation.ADMIN_HOME.SESSION %></th>
+                    <th><%= translation.ADMIN_HOME.DATE_HOUR %></th>
+                    <th><%= translation.ADMIN_HOME.LINK %></th>
+                    <th><%= translation.ADMIN_HOME.TRAINER %></th>
+                    <th><%= translation.ADMIN_HOME.RESERVATIONS %></th>
+                    <th><%= translation.ADMIN_HOME.CANCEL %></th>
                   </tr>
                 </thead>
               </table>

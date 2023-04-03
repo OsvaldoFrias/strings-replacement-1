@@ -353,5 +353,47 @@
     "TYPE": "Tipo",
     "EXPIRATION": "Vencimiento",
     "REMOVE_COUPON": "Eliminar cupón"
+  },
+  "ADMIN_GRADE_LIST":{
+    "RATINGS": "Calificaciones",
+    "DOWNLOAD_REPORT": "Descargar reporte"
+  },
+  "ADMIN_HOME":{
+    "SCHEDULE_NEW_SESSIONS": "Agendar nuevas sesiones",
+    "UPCOMING_SESSIONS": "Próximas sesiones",
+    "SESSION":"Sesión",
+    "DATE_HOUR": "Fecha/Hora",
+    "LINK": "Enlace",
+    "TRAINER": "Instructor",
+    "RESERVATIONS": "Reservaciones",
+    "CANCEL": "Cancelar"
+  },
+  "ADMIN_SERVICE_CATEGORY_EDIT":{
+    "NAME": "Nombre",
+    "LEVEL": "Nivel:",
+    "UPDATE": "Actualizar"
+  },
+  "ADMIN_SERVICE_CATEGORY_LIST":{
+    "NAME": "Nombre",
+    "LEVEL": "Nivel"
+  },
+  "ADMIN_SYSTEM_USER_DATA_ADD":{
+    "CREATE_SYSTEM_USER": "Crear usuario del sistema",
+    "FIRST_NAME": "Nombres(s):",
+    "LAST_NAME": "Apellido(s):",
+    "EMAIL": "Correo electrónico:",
+    "ROLE": "Rol:",
+    "OPTION": "Choose...",
+    "RSM": "RSM",
+    "TRAINER": "Instructor",
+    "ADMIN": "Administrador",
+    "ADD": "Agregar"
+  },
+  "ADMIN_SYSTEM_USER_DATA_LIST":{
+    "SYSTEM_USERS": "Usuarios del sistema",
+    "SCHEDULE_USER": "Agendar usuario",
+    "NAME": "Nombre",
+    "EMAIL": "Email",
+    "ROLE": "Rol"
   }
 }

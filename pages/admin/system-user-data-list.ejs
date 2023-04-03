@@ -20,17 +20,17 @@
       <div class="container py-4">
         <div class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
-            <h2>Usuarios del sistema</h2>
+            <h2><%= translation.ADMIN_SYSTEM_USER_DATA_LIST.SYSTEM_USERS %></h2>
             <div class="col-md-12 text-right">
-              <a href="/system-users/add" class="btn btn-primary">Agendar usuario</a>
+              <a href="/system-users/add" class="btn btn-primary"><%= translation.ADMIN_SYSTEM_USER_DATA_LIST.SCHEDULE_USER %></a>
             </div>
             <br>
             <div>
               <table id="appointments-list">
                 <thead>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Rol</th>
+                  <th><%= translation.ADMIN_SYSTEM_USER_DATA_LIST.NAME %></th>
+                  <th><%= translation.ADMIN_SYSTEM_USER_DATA_LIST.EMAIL %></th>
+                  <th><%= translation.ADMIN_SYSTEM_USER_DATA_LIST.ROLE %></th>
                 </thead>
               </table>
             </div>

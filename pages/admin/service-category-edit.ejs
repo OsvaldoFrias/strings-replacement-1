@@ -27,11 +27,11 @@
                   <form>
                     <div class="form-row">
                       <div class="form-group col-md-6">
-                        <label for="name">Nombre</label>
+                        <label for="name"><%= translation.ADMIN_SERVICE_CATEGORY_EDIT.NAME %></label>
                         <input type="text" class="form-control" id="name" name="name">
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="level">Nivel:</label>
+                        <label for="level"><%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LEVEL %></label>
                         <input type="text" class="form-control" id="level" name="level">
                       </div>
                     </div>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="form-group col-md-12 text-right">
                       <button type="button" class="btn btn-primary"
-                        onclick="updateServiceCategory()">Actualizar</button>
+                        onclick="updateServiceCategory()"><%= translation.ADMIN_SERVICE_CATEGORY_EDIT.UPDATE %></button>
                       <div id="error" class="alert alert-danger alert-dismissible d-none">
                         <div id="error-message"></div>
                       </div>

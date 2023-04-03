@@ -23,31 +23,31 @@
         <div class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div>
-              <h2>Crear usuario del sistema</h2>
+              <h2><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.CREATE_SYSTEM_USER %></h2>
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="firstName">Nombre(s):</label>
+                    <label for="firstName"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.FIRST_NAME %></label>
                     <input type="text" class="form-control" id="firstName" name="firstName">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="lastName">Apellido(s):</label>
+                    <label for="lastName"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.LAST_NAME %></label>
                     <input type="text" class="form-control" id="lastName" name="lastName">
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label class="form-label" for="email">Correo electrónico:</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Correo electrónico:"
+                    <label class="form-label" for="email"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.EMAIL %></label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="<%= translation.ADMIN_SYSTEM_USER_DATA_ADD.EMAIL %>"
                       required />
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="role">Rol:</label>
+                    <label for="role"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ROLE %></label>
                     <select id="role" name="role" class="form-control">
-                      <option value="" selected>Choose...</option>
-                      <option value="rsm">RSM</option>
-                      <option value="trainer">Instructor</option>
-                      <option value="admin">Administrador</option>
+                      <option value="" selected><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.OPTION %></option>
+                      <option value="rsm"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.RSM %></option>
+                      <option value="trainer"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.TRAINER %></option>
+                      <option value="admin"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ADMIN %></option>
                     </select>
                   </div>
                 </div>
@@ -55,7 +55,7 @@
                   <div id="error-message"></div>
                 </div>
                 <div class="col-md-12 text-right">
-                  <button type="button" class="btn btn-primary" onclick="saveSystemUser()">Agregar</button>
+                  <button type="button" class="btn btn-primary" onclick="saveSystemUser()"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ADD %></button>
                 </div>
                 <div id="loading"></div>
               </form>

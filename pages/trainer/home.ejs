@@ -123,11 +123,11 @@
     div.innerHTML = `<table id="availableAppointments-list" class="compact" style="width:100%">
       <thead>
         <tr>
-          <th>Sesión</th>
-          <th>Fecha/Hora</th>
-          <th>Enlace</th>
-          <th>Instructor</th>
-          <th>Reservaciones</th>
+          <th><%= translation.TRAINER_HOME.SESSION %></th>
+          <th><%= translation.TRAINER_HOME.DATE_HOUR %></th>
+          <th><%= translation.TRAINER_HOME.LINK %></th>
+          <th><%= translation.TRAINER_HOME.TRAINER_1 %></th>
+          <th><%= translation.TRAINER_HOME.RESERVATIONS %></th>
         </tr>
       </thead>
     </table>`;
@@ -166,9 +166,9 @@
     })
       .then(res => {
         if (res.status === 201) {
-          alert('Cita agendada.');
+          alert('<%= translation.TRAINER_HOME.LABEL_1 %>');
         } else {
-          alert('Hubo un problema agendando la cita, favor de intentar más tarde.');
+          alert('<%= translation.TRAINER_HOME.LABEL_2 %>');
         }
         location.reload(true);
       })
@@ -218,18 +218,18 @@
         .attendantsNumber;
       const serviceCategoryName = availableAppointment.service.serviceCategory.name;
       const serviceCategoryDescription = availableAppointment.service.serviceCategory.description;
-      const sessionType = availableAppointment.sessionType === "remote" ? "Remoto" : "Presencial";
+      const sessionType = availableAppointment.sessionType === "remote" ? "<%= translation.TRAINER_HOME.REMOTE %>" : "<%= translation.TRAINER_HOME.PRESENTIAL %>";
       const state = availableAppointment.state;
       const country = availableAppointment.state.country;
       const location = serviceType === 'exam' ? '' : availableAppointment.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-      const linkTitle = availableAppointment.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
+      const linkTitle = availableAppointment.sessionType === "remote" ? "<%= translation.TRAINER_HOME.ENTER_CONFERENCE %>" : "<%= translation.TRAINER_HOME.DIRECTION %>";
 
       availableAppointmentsTable
         .row
         .add([
           `<div><a href="/available-appointment/${availableAppointmentId}">${serviceName} - ${sessionType}${location ? " - " + location : ''}</a></div>`,
           `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}`,
-          `${(meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle}</a>` : '<span style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</span>')}`,
+          `${(meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle}</a>` : '<span style="font-style: italic;color: #999999;"><%= translation.TRAINER_HOME.LABEL_3 %></span>')}`,
           // `${trainerMail ? `<a href="mailto:${trainerMail}">${trainerMail}</a>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido asignado un instructor.</span>'}<div id="availableAppointmentId-${availableAppointmentId}"></div>`,
           trainersMail,
           `${totalAppointments} de ${serviceAttendantsNumber}`,
@@ -255,7 +255,7 @@
         container.appendChild(select);
 
         const cancelBtn = document.createElement('button');
-        cancelBtn.innerText = "Cancelar";
+        cancelBtn.innerText = "<%= translation.TRAINER_HOME.CANCEL %>";
         cancelBtn.onclick = (e) => {
           const availableAppointmentId = htmlDivId.replace('availableAppointmentId-', '');
           const trainerEdit = document.getElementById(`trainerEdit-${availableAppointmentId}`);
@@ -266,7 +266,7 @@
         container.appendChild(cancelBtn);
 
         const button = document.createElement('button');
-        button.innerText = "Guardar";
+        button.innerText = "<%= translation.TRAINER_HOME.SAVE %>";
         button.onclick = (e) => {
           const trainerId = select.options[select.selectedIndex].value;
           const availableAppointmentId = container.id.replace('availableAppointmentId-', '');
@@ -292,9 +292,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Instructor actualizado.');
+          alert('<%= translation.TRAINER_HOME.LABEL_4 %>');
         } else {
-          alert('Hubo un problema actualizando al instructor de la sesión, favor de intentar más tarde.');
+          alert('<%= translation.TRAINER_HOME.LABEL_5 %>');
         }
         location.reload(true);
       })

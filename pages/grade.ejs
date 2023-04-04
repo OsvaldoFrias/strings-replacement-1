@@ -36,13 +36,13 @@
           </div>
           <div class="col-lg-4 d-flex justify-content-center">
             <div>
-              <p>Nombre del asistente:
+              <p><%= translation.PAGES_GRADE.ASSISTANT_NAME %>
                 <strong><%= `${grade.appointment.attendant.firstName} ${grade.appointment.attendant.lastName}` %></strong>
               </p>
-              <p>Certificado: <strong><%= grade.appointment.available.service.serviceCategory.name %></strong></p>
-              <p>Estatus: <strong><%= grade.gradeType.name %></strong></p>
-              <p>Emitido en: <strong><%= issuedAt %></strong> </p>
-              <p>Fecha de expiración: <strong><%= expirationTime %></strong></p>
+              <p><%= translation.PAGES_GRADE.CERTIFICATE %> <strong><%= grade.appointment.available.service.serviceCategory.name %></strong></p>
+              <p><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.STATUS %> <strong><%= grade.gradeType.name %></strong></p>
+              <p><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ISSUED_AT %> <strong><%= issuedAt %></strong> </p>
+              <p><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.EXPIRATION_TIME %> <strong><%= expirationTime %></strong></p>
             </div>
           </div>
         </div>

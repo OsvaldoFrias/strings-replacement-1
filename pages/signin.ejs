@@ -83,25 +83,25 @@
       </div>
       <div class="right-col">
         <br>
-        <h1>BIENVENIDO</h1>
-        <h4>ISS Appointments Portal</h4>
+        <h1><%= translation.PAGES_SIGNIN.WELCOME %></h1>
+        <h4><%= translation.PAGES_SIGNIN.DESCRIPTION %></h4>
         <form>
           <div class="form-outline">
             <input onkeydown="clickPress(event)" type="email" name="email" id="email"
-              class="form-control form-control-lg" placeholder="Correo electrónico" required />
+              class="form-control form-control-lg" placeholder="<%= translation.PAGES_SIGNIN.EMAIL %>" required />
           </div>
           <div class="form-outline">
             <input onkeydown="clickPress(event)" type="password" name="password" id="password"
-              class="form-control form-control-lg" placeholder="Contraseña" required />
+              class="form-control form-control-lg" placeholder="<%= translation.PAGES_SIGNIN.PASSWORD %>" required />
             <div class="col-md-12 text-right mb-4" style="padding: 0;">
-              <a href="/recovery" class="btn btn-link">Olvidé mi contraseña</a>
+              <a href="/recovery" class="btn btn-link"><%= translation.PAGES_SIGNIN.FORGOT_PASSWORD %></a>
             </div>
           </div>
           <div id="error" class="alert alert-danger alert-dismissible d-none">
             <div id="error-message"></div>
           </div>
-          <button type="button" onclick="signIn()" class="btn btn-primary btn-lg btn-block">INGRESAR</button>
-          <a href="/signup" class="btn btn-secondary btn-lg btn-block">REGISTRARSE</a>
+          <button type="button" onclick="signIn()" class="btn btn-primary btn-lg btn-block"><%= translation.PAGES_SIGNIN.SIGNIN %></button>
+          <a href="/signup" class="btn btn-secondary btn-lg btn-block"><%= translation.PAGES_SIGNIN.CHECKIN %></a>
         </form>
       </div>
     </div>

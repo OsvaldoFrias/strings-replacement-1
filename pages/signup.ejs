@@ -14,37 +14,35 @@
         </div>
         <div class="row d-flex align-items-center justify-content-center h-80">
           <div class="col-md-7 col-lg-5 col-xl-5">
-            <h1>Registro</h1>
+            <h1><%= translation.PAGES_SIGNUP.RECORD %></h1>
             <form>
               <div class="form-row">
-                <label><em style="color: firebrick;">* Los datos de Nombre(s) y Apellido(s) aparecerán sin modificación
-                    en el certificado</em></label>
+                <label><em style="color: firebrick;"><%= translation.PAGES_SIGNUP.LABEL_1 %></em></label>
                 <div class="form-group col-md-6">
-                  <label for="firstName">Nombre(s):</label>
+                  <label for="firstName"><%= translation.PAGES_SIGNUP.NAME %></label>
                   <input type="text" class="form-control form-control-lg" name="firstName" id="firstName"
-                    placeholder="Nombre(s)" required>
+                    placeholder="<%= translation.PAGES_SIGNUP.NAME_1 %>" required>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="lastName">Apellido(s):</label>
+                  <label for="lastName"><%= translation.PAGES_SIGNUP.LAST_NAME %></label>
                   <input type="text" class="form-control form-control-lg" name="lastName" id="lastName"
-                    placeholder="Apellido(s)" required>
+                    placeholder="<%= translation.PAGES_SIGNUP.LAST_NAME_1 %>" required>
                 </div>
               </div>
               <div class="form-outline mb-4">
-                <label class="form-label" for="businessName">Empresa: <em style="color: firebrick;">* Este dato
-                    aparecerá sin modificación en el certificado</em></label>
+                <label class="form-label" for="businessName"><%= translation.PAGES_SIGNUP.COMPANY %> <em style="color: firebrick;"><%= translation.PAGES_SIGNUP.LABEL_2 %></em></label>
                 <input type="text" class="form-control form-control-lg" name="businessName" id="businessName"
-                  placeholder="Empresa" required />
+                  placeholder="<%= translation.PAGES_SIGNUP.COMPANY_1 %>" required />
               </div>
               <div class="form-outline mb-4">
-                <label class="form-label" for="email">Correo electrónico:</label>
+                <label class="form-label" for="email"><%= translation.PAGES_SIGNUP.EMAIL %></label>
                 <input type="email" name="email" id="email" class="form-control form-control-lg"
-                  placeholder="Correo electrónico:" required />
+                  placeholder="<%= translation.PAGES_SIGNUP.EMAIL %>" required />
               </div>
               <div class="form-outline mb-4">
-                <label for="countryId">País:</label>
+                <label for="countryId"><%= translation.PAGES_SIGNUP.COUNTRY %></label>
                 <select id="countryId" name="countryId" class="form-control">
-                  <option value="" selected>Choose...</option>
+                  <option value="" selected><%= translation.PAGES_SIGNUP.OPTION %></option>
                 </select>
               </div>
               <!-- <div class="form-outline mb-4">
@@ -61,10 +59,10 @@
                 <div class="col-md-6 offset-xl-3"
                   style="background-color: #10a5e0;border-radius: 5px; border: 2px solid #333;">
                   <div id="captcha"></div>
-                  <input class="form-control" id="captchaUser" placeholder="Ingresar captcha" type="search" required>
+                  <input class="form-control" id="captchaUser" placeholder="<%= translation.PAGES_SIGNUP.ENTER_CAPTCHA %>" type="search" required>
                   <div class="row">
-                    <input type="button" id="checkCaptcha" class="btn btn-success col-md-6" value="Validar">
-                    <input type="button" id="updateCaptcha" class="btn btn-primary col-md-6" value="Cambiar">
+                    <input type="button" id="checkCaptcha" class="btn btn-success col-md-6" value="<%= translation.PAGES_SIGNUP.VALIDATE %>">
+                    <input type="button" id="updateCaptcha" class="btn btn-primary col-md-6" value="<%= translation.PAGES_SIGNUP.CHANGE %>">
                   </div>
                 </div>
               </div>
@@ -138,7 +136,7 @@
                     const button = document.createElement('button');
                     button.classList.value = "btn btn-primary btn-lg btn-block";
                     button.onclick = signUp;
-                    button.innerText = "Registro";
+                    button.innerText = "<%= translation.PAGES_SIGNUP.RECORD %>";
 
                     form.appendChild(button);
                   }
@@ -159,19 +157,19 @@
                 const errors = [];
 
                 if (!firstName) {
-                  errors.push("El nombre es requerido.");
+                  errors.push("<%= translation.PAGES_SIGNUP.ALERT_1 %>");
                 }
                 if (!lastName) {
-                  errors.push("El apellido es requerido.");
+                  errors.push("<%= translation.PAGES_SIGNUP.ALERT_2 %>");
                 }
                 if (!businessName) {
-                  errors.push("El nombre de la empresa de origen es requerido.");
+                  errors.push("<%= translation.PAGES_SIGNUP.ALERT_3 %>");
                 }
                 if (!countryId) {
-                  errors.push("Debe seleccionar un país de origen.");
+                  errors.push("<%= translation.PAGES_SIGNUP.ALERT_4 %>");
                 }
                 if (!email) {
-                  errors.push("El correo electrónico es requerido.");
+                  errors.push("<%= translation.PAGES_SIGNUP.ALERT_5 %>");
                 }
                 // if (!password) {
                 //   errors.push("La contraseña es requerida.");
@@ -260,7 +258,7 @@
                           if (res.statusCode) {
                             displayErrors([res.message]);
                           } else {
-                            alert('Registro realizado con éxito, favor de revisar el correo proporcionado.');
+                            alert('<%= translation.PAGES_SIGNUP.ALERT_6 %>');
                             window.location.href = "/";
                           }
                         })

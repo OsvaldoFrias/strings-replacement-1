@@ -102,12 +102,12 @@
     const serviceCategoryDescription = available.service.serviceCategory.description;
     const serviceInfoTemplate = available.service.serviceCategory.infoTemplate;
     const serviceAttendantsNumber = available.overrideAttendantsNumber || available.service.attendantsNumber;
-    const sessionType = available.sessionType === "remote" ? "Remoto" : "Presencial";
+    const sessionType = available.sessionType === "remote" ? "<%= translation.RSM_AVAILABLE_APPOINTMEN.REMOTE %>" : "<%= translation.RSM_AVAILABLE_APPOINTMEN.PRESENTIAL %>";
     const state = available.state;
     const country = available.state.country;
     const location = serviceType === 'exam' ? '' : available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-    const linkTitle = available.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
-    const directionType = available.sessionType === "remote" ? "Indicaciones" : "Dirección";
+    const linkTitle = available.sessionType === "remote" ? "<%= translation.RSM_AVAILABLE_APPOINTMEN.ENTER_CONFERENCE %>" : "<%= translation.RSM_AVAILABLE_APPOINTMEN.DIRECTION %>";
+    const directionType = available.sessionType === "remote" ? "<%= translation.RSM_AVAILABLE_APPOINTMEN.INDICATIONS %>" : "<%= translation.RSM_AVAILABLE_APPOINTMEN.DIRECTION %>";
     const direction = available.direction;
 
     const cardTemplate = `<div class="card-1">
@@ -125,11 +125,11 @@
               <div>${sessionType}${location ? " - " + location : ''}</div>
               <table>
                 <tr>
-                  <td>Cita: </td>
+                  <td><%= translation.RSM_AVAILABLE_APPOINTMEN.DATE %> </td>
                   <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
                 </tr>
               </table>
-              <!--${meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle} ${sessionType}${location ? " - " + location : ''}</a>` : '<p style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</p>'} -->
+              <!--${meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle} ${sessionType}${location ? " - " + location : ''}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_1 %></p>'} -->
               <p>${directionType}:</p>
               <p>${direction ? direction.replace(/\n/gi, '<br>') : '-'}</p>
             </div>
@@ -138,7 +138,7 @@
             <div class="cell-2">
               <div>${totalAppointments} de ${serviceAttendantsNumber} asistentes</div>
               ${trainersMail}
-              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</p>'}
+              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_1 %></p>'}
             </div>
           </div>
         </div>
@@ -175,7 +175,7 @@
           `<a href="mailto:${email}">${email}</a>`,
           `${businessName}`,
           hru,
-          `<img style="cursor:pointer;" onclick="setLicenseKeyUrl(${id}, '${fullName}')" src="/public/img/edit.png" alt="Editar enlace de la licencia" width="15px"/> ${(licenseKey ? `<a target="_blank" href="${licenseKey}">Licencia</a>` : '<span style="font-style: italic;color: #999999;">No ha colocado una licencia.</span>')}`,
+          `<img style="cursor:pointer;" onclick="setLicenseKeyUrl(${id}, '${fullName}')" src="/public/img/edit.png" alt="<%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_2 %>" width="15px"/> ${(licenseKey ? `<a target="_blank" href="${licenseKey}"><%= translation.RSM_AVAILABLE_APPOINTMEN.LICENSE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_3 %></span>')}`,
         ])
         .draw()
         .node();
@@ -183,7 +183,7 @@
   }
 
   function setLicenseKeyUrl(attendantId, fullAttendantName) {
-    let licenseKey = prompt(`Enlace para licencia de ${fullAttendantName}`);
+    let licenseKey = prompt(`<%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_4 %> ${fullAttendantName}`);
     if (!licenseKey) {
       return;
     }
@@ -201,9 +201,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Enlace actualizado.');
+          alert('<%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_5 %>');
         } else {
-          alert('Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde.');
+          alert('<%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_6 %>');
         }
         location.reload(true);
       })

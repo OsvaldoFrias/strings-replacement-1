@@ -173,11 +173,11 @@
       const serviceName = appointment.available.service.name;
       const serviceCategoryName = appointment.available.service.serviceCategory.name;
       const serviceCategoryDescription = appointment.available.service.serviceCategory.description;
-      const sessionType = appointment.available.sessionType === "remote" ? "Remoto" : "Presencial";
+      const sessionType = appointment.available.sessionType === "remote" ? "<%= translation.RSM_ATTENDANT_PROFILE.REMOTE %>" : "<%= translation.RSM_ATTENDANT_PROFILE.PRESENTIAL %>";
       const state = appointment.available.state;
       const country = appointment.available.state.country;
       const location = appointment.available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-      const linkTitle = appointment.available.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
+      const linkTitle = appointment.available.sessionType === "remote" ? "<%= translation.RSM_ATTENDANT_PROFILE.ENTER_CONFERENCE %>" : "<%= translation.RSM_ATTENDANT_PROFILE.DIRECTION %>";
 
       const cardTemplate = `<div class="card-1">
       <div class="d-flex flex-wrap justify-content-center">
@@ -194,7 +194,7 @@
             <div>${sessionType} - ${location}</div>
             <table>
               <tr>
-                <td>Cita: </td>
+                <td><%= translation.RSM_ATTENDANT_PROFILE.DATE %> </td>
                 <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
               </tr>
             </table>
@@ -202,7 +202,7 @@
         </div>
         <div class="ml-auto p-2">
           <div class="cell-2">
-            ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</p>'}
+            ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.RSM_ATTENDANT_PROFILE.LABEL_1 %></p>'}
           </div>
         </div>
       </div>
@@ -213,14 +213,14 @@
     if (appointmentsTemplate && appointmentsTemplate.length > 0) {
       appointments.innerHTML = appointmentsTemplate.join('\n');
     } else {
-      appointments.innerHTML = '<p>Aún no se han hecho reservaciones.</p>'
+      appointments.innerHTML = '<p><%= translation.RSM_ATTENDANT_PROFILE.LABEL_2 %></p>'
     }
 
   }
 
   function parseGrades(grades, type) {
     const gradesList = document.getElementById('grades-list');
-    gradesList.innerHTML = `<thead><tr><th>Sesión</th><th>Fecha</th><th>Nombre</th><th>Email</th><th>Empresa</th><th>Resultado</th></tr></thead>`;
+    gradesList.innerHTML = `<thead><tr><th><%= translation.RSM_ATTENDANT_PROFILE.SESSION %></th><th><%= translation.RSM_ATTENDANT_PROFILE.DAY %></th><th><%= translation.RSM_ATTENDANT_PROFILE.NAME %></th><th><%= translation.RSM_ATTENDANT_PROFILE.EMAIL %></th><th><%= translation.RSM_ATTENDANT_PROFILE.COMPANY %></th><th><%= translation.RSM_ATTENDANT_PROFILE.RESULT %></th></tr></thead>`;
 
     let gradesTable = $('#grades-list').DataTable({
       "ordering": false,
@@ -280,12 +280,12 @@
         `${fullName}`,
         `<a href="mailto:${email}">${email}</a>`,
         `${businessName}`,
-        `${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido evaluado.</span>'}<div id="gradeType-${appointmentId}"></div>`,
+        `${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_ATTENDANT_PROFILE.LABEL_3 %></span>'}<div id="gradeType-${appointmentId}"></div>`,
       ];
 
       if (type === 'exam') {
-        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}">Certificado</a>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido generado el certificado.</span>'}<div id="meetingUrl-${appointmentId}"></div>`);
-        rowData.push(`${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}">Evaluación</a>` : '<span style="font-style: italic;color: #999999;">No hay evaluación.</span>')}`);
+        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}"><%= translation.RSM_ATTENDANT_PROFILE.CERTIFICATE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_ATTENDANT_PROFILE.LABEL_4 %></span>'}<div id="meetingUrl-${appointmentId}"></div>`);
+        rowData.push(`${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}"><%= translation.RSM_ATTENDANT_PROFILE.EVALUATION %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_ATTENDANT_PROFILE.LABEL_5 %></span>')}`);
       }
 
       rowData.push(`${trainerMail}`);
@@ -352,9 +352,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Usuario actualizado.');
+          alert('<%= translation.RSM_ATTENDANT_PROFILE.LABEL_6 %>');
         } else {
-          alert('Hubo un problema actualizando los datos del usuario, favor de intentar más tarde.');
+          alert('<%= translation.RSM_ATTENDANT_PROFILE.LABEL_7 %>');
         }
         window.location.href = "/attendant";
       })

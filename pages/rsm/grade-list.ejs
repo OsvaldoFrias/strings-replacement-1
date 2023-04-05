@@ -67,9 +67,9 @@
     const appointmentsList = document.getElementById('appointments-list');
 
     if (type === 'exam') {
-      appointmentsList.innerHTML = `<thead><tr><th>Sesión</th><th>Fecha</th><th>Nombre</th><th>Email</th><th>Empresa</th><th>Resultado</th><th>URL Certificado</th><th>Evaluación</th></tr></thead>`;
+      appointmentsList.innerHTML = `<thead><tr><th><%= translation.RSM_GRADE_LIST.SESSION %></th><th><%= translation.RSM_GRADE_LIST.DAY %></th><th><%= translation.RSM_GRADE_LIST.NAME %></th><th><%= translation.RSM_GRADE_LIST.EMAIL %></th><th><%= translation.RSM_GRADE_LIST.COMPANY %></th><th><%= translation.RSM_GRADE_LIST.RESULT %></th><th><%= translation.RSM_GRADE_LIST.CERTIFICATE_URL %></th><th><%= translation.RSM_GRADE_LIST.EVALUATION %></th></tr></thead>`;
     } else if (type === 'course') {
-      appointmentsList.innerHTML = `<thead><tr><th>Sesión</th><th>Fecha</th><th>Nombre</th><th>Email</th><th>Empresa</th><th>Resultado</th></tr></thead>`;
+      appointmentsList.innerHTML = `<thead><tr><th><%= translation.RSM_GRADE_LIST.SESSION %></th><th><%= translation.RSM_GRADE_LIST.DAY %></th><th><%= translation.RSM_GRADE_LIST.NAME %></th><th><%= translation.RSM_GRADE_LIST.EMAIL %></th><th><%= translation.RSM_GRADE_LIST.COMPANY %></th><th><%= translation.RSM_GRADE_LIST.RESULT %></th></tr></thead>`;
     }
 
     let appointmentsTable = $('#appointments-list').DataTable({
@@ -131,12 +131,12 @@
         `${fullName}`,
         `<a href="mailto:${email}">${email}</a>`,
         `${businessName}`,
-        `<img id="gradeEdit-${appointmentId}" style="cursor:pointer;" onclick="populateGradeList('${appointmentId}', '${serviceType}')" src="/public/img/edit.png" alt="Editar calificación" width="15px"/> ${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido evaluado.</span>'}<div id="gradeType-${appointmentId}"></div>`,
+        `<img id="gradeEdit-${appointmentId}" style="cursor:pointer;" onclick="populateGradeList('${appointmentId}', '${serviceType}')" src="/public/img/edit.png" alt="<%= translation.RSM_GRADE_LIST.EDIT_RATING %>" width="15px"/> ${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_GRADE_LIST.LABEL_1 %></span>'}<div id="gradeType-${appointmentId}"></div>`,
       ];
 
       if (type === 'exam') {
-        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}">Certificado</a>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido generado el certificado.</span>'}<div id="meetingUrl-${appointmentId}"></div>`);
-        rowData.push(`<img style="cursor:pointer;" onclick="setFeedbackUrl(${gradeId}, '${fullName}','${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="Editar enlace de la evaluación" width="15px"/> ${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}">Evaluación</a>` : '<span style="font-style: italic;color: #999999;">No hay evaluación.</span>')}`);
+        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}"><%= translation.RSM_GRADE_LIST.CERTIFICATE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_GRADE_LIST.LABEL_2 %></span>'}<div id="meetingUrl-${appointmentId}"></div>`);
+        rowData.push(`<img style="cursor:pointer;" onclick="setFeedbackUrl(${gradeId}, '${fullName}','${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="<%= translation.RSM_GRADE_LIST.LABEL_3 %>" width="15px"/> ${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}"><%= translation.RSM_GRADE_LIST.EVALUATION %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_GRADE_LIST.LABEL_4 %></span>')}`);
       }
 
       appointmentsTable
@@ -148,7 +148,7 @@
   }
 
   function setFeedbackUrl(gradeId, fullAttendantName, serviceName, datetime) {
-    let feedbackUrl = prompt(`Enlace para evaluación de ${fullAttendantName} de ${serviceName} de ${datetime}`);
+    let feedbackUrl = prompt(`<%= translation.RSM_GRADE_LIST.LABEL_5 %> ${fullAttendantName} <%= translation.RSM_GRADE_LIST.OF %> ${serviceName} <%= translation.RSM_GRADE_LIST.OF %> ${datetime}`);
     if (!feedbackUrl) {
       return;
     }
@@ -166,9 +166,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Enlace actualizado.');
+          alert('<%= translation.RSM_GRADE_LIST.LABEL_6 %>');
         } else {
-          alert('Hubo un problema actualizando el enlace del feedback de la evaluación, favor de intentar más tarde.');
+          alert('<%= translation.RSM_GRADE_LIST.LABEL_7 %>');
         }
         location.reload(true);
       })
@@ -210,7 +210,7 @@
         container.appendChild(select);
 
         const cancelBtn = document.createElement('button');
-        cancelBtn.innerText = "Cancelar";
+        cancelBtn.innerText = "<%= translation.RSM_GRADE_LIST.CANCEL %>";
         cancelBtn.onclick = (e) => {
           const appointmentId = divId.replace('gradeType-', '');
           const gradeEdit = document.getElementById(`gradeEdit-${appointmentId}`);
@@ -221,14 +221,14 @@
         container.appendChild(cancelBtn);
 
         const button = document.createElement('button');
-        button.innerText = "Guardar";
+        button.innerText = "<%= translation.RSM_GRADE_LIST.SAVE %>";
         button.onclick = (e) => {
           displayLoading();
           const gradeTypeId = select.options[select.selectedIndex].value;
           const gradeTypeText = select.options[select.selectedIndex].text;
           const appointmentId = divId.replace('gradeType-', '');
           container.innerHTML = '';
-          if (confirm(`El asistente se evaulará como: ${gradeTypeText.toUpperCase()}.\n¿Desea continuar?`)) {
+          if (confirm(`<%= translation.RSM_GRADE_LIST.LABEL_8 %> ${gradeTypeText.toUpperCase()}.\n<%= translation.RSM_GRADE_LIST.LABEL_9 %>`)) {
             setAppointmentGrade(gradeTypeId, appointmentId);
           } else {
             const gradeEdit = document.getElementById(`gradeEdit-${appointmentId}`);
@@ -255,10 +255,10 @@
     })
       .then(res => {
         if (res.status === 201) {
-          alert('Evaluación actualizada.');
+          alert('<%= translation.RSM_GRADE_LIST.LABEL_10 %>');
           // container.innerHTML = '';
         } else {
-          alert('Hubo un problema estableciendo la evaluación del usuario, favor de intentar más tarde.');
+          alert('<%= translation.RSM_GRADE_LIST.LABEL_11 %>');
         }
         location.reload(true);
       })

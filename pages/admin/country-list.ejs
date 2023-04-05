@@ -78,8 +78,8 @@
         .add([
           `${name}`,
           `<div>
-            <button class="btn btn-secondary" onclick="setCountryName(${id}, '${name}')">Actualizar</button>
-            <button class="btn btn-dark" onclick="deleteCountry(${id}, '${name}')">Borrar</button>
+            <button class="btn btn-secondary" onclick="setCountryName(${id}, '${name}')"><%= translation.ADMIN_COUNTRY_LIST.UPDATE %></button>
+            <button class="btn btn-dark" onclick="deleteCountry(${id}, '${name}')"><%= translation.ADMIN_COUNTRY_LIST.DELETE %></button>
           </div>`,
         ])
         .draw()
@@ -88,7 +88,7 @@
   }
 
   function addNewCountry() {
-    let name = prompt(`Agregar país:`);
+    let name = prompt(`<%= translation.ADMIN_COUNTRY_LIST.ADD_COUNTRY_1 %>`);
     if (!name) {
       return;
     }
@@ -106,9 +106,9 @@
     })
       .then(res => {
         if (res.status === 201) {
-          alert('País agregado.');
+          alert('<%= translation.ADMIN_COUNTRY_LIST.ADDED_COUNTRY %>');
         } else {
-          alert('Hubo un problema agregando el nombre del país, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_COUNTRY_LIST.LABEL_1 %>');
         }
         location.reload(true);
       })
@@ -118,7 +118,7 @@
   }
 
   function setCountryName(countryId, countryName) {
-    let name = prompt(`Actualizar nombre: ${countryName}`);
+    let name = prompt(`<%= translation.ADMIN_COUNTRY_LIST.LABEL_2 %> ${countryName}`);
     if (!name) {
       return;
     }
@@ -136,9 +136,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Nombre actualizado.');
+          alert('<%= translation.ADMIN_COUNTRY_LIST.LABEL_3 %>');
         } else {
-          alert('Hubo un problema actualizando nombre del país, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_COUNTRY_LIST.LABEL_4 %>');
         }
         location.reload(true);
       })
@@ -151,7 +151,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `¿Desea eliminar el registro del país: ${countryName}?`
+      `<%= translation.ADMIN_COUNTRY_LIST.LABEL_5 %> ${countryName}?`
     )) {
       return;
     }
@@ -165,7 +165,7 @@
         // console.log(res);
         if (res.status) {
           if (res.status !== 200) {
-            alert('No fue posible eliminar el país.');
+            alert('<%= translation.ADMIN_COUNTRY_LIST.LABEL_6 %>');
           }
         }
         window.location = '/countries';

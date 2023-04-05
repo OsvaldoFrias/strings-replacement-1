@@ -236,19 +236,19 @@
     const errors = [];
 
     if (!serviceId) {
-      errors.push('Selecciona un tipo de sesión.');
+      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_1 %>');
     }
     if (!appointmentStartDatetime) {
-      errors.push('Selecciona una fecha de inicio.');
+      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_2 %>');
     }
     if (!appointmentFinishDatetime) {
-      errors.push('Selecciona una fecha de final.');
+      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_3 %>');
     }
     if (!trainerId) {
-      errors.push('Selecciona a un instructor.');
+      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_4 %>');
     }
     if (!stateId) {
-      errors.push('Selecciona un país y una región.');
+      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_5 %>');
     }
 
     if (errors.length > 0) {
@@ -332,7 +332,7 @@
 
     const option = document.createElement('option');
     option.value = '';
-    option.innerText = 'Choose...';
+    option.innerText = '<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.OPTION %>';
     option.selected = true;
 
     select.appendChild(option);

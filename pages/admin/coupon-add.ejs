@@ -117,21 +117,21 @@
     const errors = [];
 
     if (!serviceId) {
-      errors.push('Seleccione un tipo de producto.');
+      errors.push('<%= translation.ADMIN_COUPON_ADD.LABEL_1 %>');
     }
     if (!sequence) {
-      errors.push('Indique un consecutivo.');
+      errors.push('<%= translation.ADMIN_COUPON_ADD.LABEL_2 %>');
     }
     if (type === 'sold') {
       if (!poCode) {
-        errors.push('Ingrese un número de factura.');
+        errors.push('<%= translation.ADMIN_COUPON_ADD.LABEL_3 %>');
       }
     }
     if (!businessName) {
-      errors.push('Indique la empresa que compró el cupón.');
+      errors.push('<%= translation.ADMIN_COUPON_ADD.LABEL_4 %>');
     }
     if (!rsmName) {
-      errors.push('Indique el nombre del RSM asociado.');
+      errors.push('<%= translation.ADMIN_COUPON_ADD.LABEL_5 %>');
     }
 
     if (errors.length > 0) {

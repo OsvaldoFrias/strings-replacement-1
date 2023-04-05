@@ -121,12 +121,12 @@
     const serviceCategoryDescription = available.service.serviceCategory.description;
     const serviceInfoTemplate = available.service.serviceCategory.infoTemplate;
     const serviceAttendantsNumber = available.overrideAttendantsNumber || available.service.attendantsNumber;
-    const sessionType = available.sessionType === "remote" ? "Remoto" : "Presencial";
+    const sessionType = available.sessionType === "remote" ? "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.REMOTE %>" : "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.PRESENTIAL %>";
     const state = available.state;
     const country = available.state.country;
     const location = serviceType === 'exam' ? '' : available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-    const linkTitle = available.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
-    const directionType = available.sessionType === "remote" ? "Indicaciones" : "Dirección";
+    const linkTitle = available.sessionType === "remote" ? "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.ENTER_CONFERENCE %>" : "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.DIRECTION %>";
+    const directionType = available.sessionType === "remote" ? "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.INDICATIONS %>" : "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.DIRECTION %>";
     const direction = available.direction;
 
     const cardTemplate = `<div class="card-1">
@@ -144,21 +144,21 @@
               <div>${sessionType}${location ? " - " + location : ''}</div>
               <table>
                 <tr>
-                  <td>Cita: </td>
+                  <td><%= translation.ADMIN_AVAILABLE_APPOINTMEN.DATE %> </td>
                   <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
                 </tr>
               </table>
-              <img style="cursor:pointer;" onclick="updateMeetingUrl(${availableAppointmentId})" src="/public/img/edit.png" alt="Editar enlace" width="15px"/>
-              ${meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle} ${sessionType}${location ? " - " + location : ''}</a>` : '<p style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</p>'}
-              <p><img style="cursor:pointer;" onclick="showModalDirection(${availableAppointmentId})" src="/public/img/edit.png" alt="Editar dirección" width="15px"/> ${directionType}:</p>
+              <img style="cursor:pointer;" onclick="updateMeetingUrl(${availableAppointmentId})" src="/public/img/edit.png" alt="<%= translation.ADMIN_AVAILABLE_APPOINTMEN.EDIT_LINK %>" width="15px"/>
+              ${meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle} ${sessionType}${location ? " - " + location : ''}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_1 %></p>'}
+              <p><img style="cursor:pointer;" onclick="showModalDirection(${availableAppointmentId})" src="/public/img/edit.png" alt="<%= translation.ADMIN_AVAILABLE_APPOINTMEN.EDIT_DIRECTION %>" width="15px"/> ${directionType}:</p>
               <p>${direction ? direction.replace(/\n/gi, '<br>') : '-'}</p>
             </div>
           </div>
           <div class="ml-auto p-2">
             <div class="cell-2">
-              <div><img style="cursor:pointer;" onclick="updateOverrideAttendantsNumber(${availableAppointmentId})" src="/public/img/edit.png" alt="Editar cantidad de asistentes" width="15px"/> ${totalAppointments} de ${serviceAttendantsNumber} asistentes</div>
+              <div><img style="cursor:pointer;" onclick="updateOverrideAttendantsNumber(${availableAppointmentId})" src="/public/img/edit.png" alt="<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_2 %>" width="15px"/> ${totalAppointments} <%= translation.ADMIN_AVAILABLE_APPOINTMEN.OF %> ${serviceAttendantsNumber} <%= translation.ADMIN_AVAILABLE_APPOINTMEN.ASSISTANTS %></div>
               ${trainersMail}
-              <div><button class="btn btn-danger" onclick="cancelAvailableAppointment(${availableAppointmentId}, '${serviceCategoryName}', '${intervalDate}')">Cancelar Curso</button></div>
+              <div><button class="btn btn-danger" onclick="cancelAvailableAppointment(${availableAppointmentId}, '${serviceCategoryName}', '${intervalDate}')"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.CANCEL_COURSE %></button></div>
             </div>
           </div>
         </div>
@@ -194,8 +194,8 @@
           `<a href="mailto:${email}">${email}</a>`,
           `${businessName}`,
           hru,
-          `<img style="cursor:pointer;" onclick="setLicenseKeyUrl(${id}, '${fullName}')" src="/public/img/edit.png" alt="Editar enlace de la licencia" width="15px"/> ${(licenseKey ? `<a target="_blank" href="${licenseKey}">Licencia</a>` : '<span style="font-style: italic;color: #999999;">No ha colocado una licencia.</span>')}`,
-          `<img style="cursor:pointer;" onclick="cancelAppointment('${hash}', '${serviceCategoryName}', '${intervalDate}')" src="/public/img/cancel-book.png" alt="Cancelar" width="30px"/>`,
+          `<img style="cursor:pointer;" onclick="setLicenseKeyUrl(${id}, '${fullName}')" src="/public/img/edit.png" alt="<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_3 %>" width="15px"/> ${(licenseKey ? `<a target="_blank" href="${licenseKey}"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.LICENSE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_4 %></span>')}`,
+          `<img style="cursor:pointer;" onclick="cancelAppointment('${hash}', '${serviceCategoryName}', '${intervalDate}')" src="/public/img/cancel-book.png" alt="<%= translation.ADMIN_AVAILABLE_APPOINTMEN.CANCEL %>" width="30px"/>`,
         ])
         .draw()
         .node();
@@ -203,7 +203,7 @@
   }
 
   function updateOverrideAttendantsNumber(availableAppointmentId) {
-    let overrideAttendantsNumber = prompt(`Actualizar cantidad de asistentes`);
+    let overrideAttendantsNumber = prompt(`<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_5 %>`);
     if (!overrideAttendantsNumber) {
       return;
     }
@@ -221,9 +221,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Cantidad de asistentes actualizada.');
+          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_6 %>');
         } else {
-          alert('Hubo un problema actualizando la cantidad de asistentes, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_7 %>');
         }
         location.reload(true);
       })
@@ -253,7 +253,7 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Dirección actualizada. Se enviarán notificaciones.');
+          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_8 %>');
           return fetch(`/api/v1/notification/update/available-appointment/${availableAppointmentId}`, {
             headers: myHeaders,
             credentials: "same-origin",
@@ -263,7 +263,7 @@
             })
           })
         } else {
-          alert('Hubo un problema actualizando la dirección, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_9 %>');
           location.reload(true);
         }
         // location.reload(true);
@@ -294,7 +294,7 @@
   });
 
   function updateMeetingUrl(availableAppointmentId) {
-    let meetingUrl = prompt(`Enlace de la dirección`);
+    let meetingUrl = prompt(`<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_10 %>`);
     if (!meetingUrl) {
       return;
     }
@@ -312,9 +312,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Enlace actualizado.');
+          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_11 %>');
         } else {
-          alert('Hubo un problema actualizando el enlace de la dirección, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_12 %>');
         }
         location.reload(true);
       })
@@ -324,7 +324,7 @@
   }
 
   function setLicenseKeyUrl(attendantId, fullAttendantName) {
-    let licenseKey = prompt(`Enlace para licencia de ${fullAttendantName}`);
+    let licenseKey = prompt(`<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_13 %> ${fullAttendantName}`);
     if (!licenseKey) {
       return;
     }
@@ -342,9 +342,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Enlace actualizado.');
+          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_11 %>');
         } else {
-          alert('Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_14 %>');
         }
         location.reload(true);
       })
@@ -357,7 +357,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`
+      `<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_15 %> ${serviceCategoryName} <%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_16 %> ${intervalDate}?`
     )) {
       return;
     }
@@ -386,7 +386,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`
+      `<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_15 %> ${serviceCategoryName} <%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_16 %> ${intervalDate}?`
     )) {
       return;
     }

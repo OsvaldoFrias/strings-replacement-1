@@ -80,10 +80,10 @@
   }
 
   async function saveCoupon() {
-    const coupon = prompt('Ingresa el cupón válido para acceder a la información del curso o examen:');
+    const coupon = prompt('<%= translation.ATTENDANT_HOME.LABEL_1 %>');
 
     if (coupon) {
-      if (confirm('Esta operación es IRREVERSIBLE. ¿Desea continuar?')) {
+      if (confirm('<%= translation.ATTENDANT_HOME.LABEL_2 %>')) {
         // Register coupon
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
@@ -97,26 +97,26 @@
           })
         })
         if (res1.status === 201) {
-          alert('Cupón registrado con éxito.');
+          alert('<%= translation.ATTENDANT_HOME.LABEL_3 %>');
           return res1;
         } else if (res1.status === 404) {
-          alert('El cupón ya fue utilizado o no existe en el registro, favor de contactar a su RSM.');
+          alert('<%= translation.ATTENDANT_HOME.LABEL_4 %>');
         } else if (res1.status === 400) {
           const body = await res1.json();
           if (body) {
             alert(body.message);
           } else {
-            alert('Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.');
+            alert('<%= translation.ATTENDANT_HOME.LABEL_5 %>');
           }
         } else if (res1.status === 408) {
           const body = await res1.json();
           if (body && body.message === 'token expired') {
-            alert('El cupón ha expirado');
+            alert('<%= translation.ATTENDANT_HOME.LABEL_6 %>');
           } else {
-            alert('Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.');
+            alert('<%= translation.ATTENDANT_HOME.LABEL_5 %>');
           }
         } else {
-          alert('Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.');
+          alert('<%= translation.ATTENDANT_HOME.LABEL_5 %>');
         }
 
       } // else {
@@ -143,7 +143,7 @@
       let serviceName = availableAppointment.service.name;
       let serviceType = availableAppointment.service.type;
       let availableAppointmentId = availableAppointment.id;
-      let sessionType = availableAppointment.sessionType === "remote" ? "Remoto" : "Presencial";
+      let sessionType = availableAppointment.sessionType === "remote" ? "<%= translation.ATTENDANT_HOME.REMOTE %>" : "<%= translation.ATTENDANT_HOME.PRESENTIAL %>";
       let state = availableAppointment.state;
       let country = availableAppointment.state.country;
       let location =
@@ -155,7 +155,7 @@
           `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}`,
           `${serviceName}${location ? " - " + location : ''}`,
           `${totalAppointments} de ${serviceAttendantsNumber}`,
-          `<img style="cursor:pointer;" onclick="fixAppointment(${availableAppointmentId},'${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/book.png" alt="Agendar" width="30px"/>`
+          `<img style="cursor:pointer;" onclick="fixAppointment(${availableAppointmentId},'${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/book.png" alt="<%= translation.ATTENDANT_HOME.SCHEDULE %>" width="30px"/>`
         ])
         .draw()
         .node();
@@ -163,7 +163,7 @@
   }
 
   async function fixAppointment(availableAppointmentId, serviceName, datetime) {
-    if (!confirm(`¿Desea reservar para ${serviceName} para ${datetime}?`)) {
+    if (!confirm(`<%= translation.ATTENDANT_HOME.LABEL_7 %> ${serviceName} <%= translation.ATTENDANT_HOME.FOR %> ${datetime}?`)) {
       return;
     }
     const myHeaders = new Headers();
@@ -194,7 +194,7 @@
         });
 
         if (res3.status === 201) {
-          alert('Cita agendada.');
+          alert('<%= translation.ATTENDANT_HOME.LABEL_8 %>');
         } else {
           res3.json().then(obj => {
             alert(obj.message);
@@ -204,7 +204,7 @@
         location.reload(true);
         hideLoading();
       } else {
-        alert('Error desconocido.')
+        alert('<%= translation.ATTENDANT_HOME.LABEL_9 %>')
       }
     } catch (e) {
       console.error(e);
@@ -226,11 +226,11 @@
       const serviceType = appointment.available.service.type;
       const serviceCategoryName = appointment.available.service.serviceCategory.name;
       const serviceCategoryDescription = appointment.available.service.serviceCategory.description;
-      const sessionType = appointment.available.sessionType === "remote" ? "Remoto" : "Presencial";
+      const sessionType = appointment.available.sessionType === "remote" ? "<%= translation.ATTENDANT_HOME.REMOTE %>" : "<%= translation.ATTENDANT_HOME.PRESENTIAL %>";
       const state = appointment.available.state;
       const country = appointment.available.state.country;
       const location = serviceType === 'exam' ? '' : appointment.available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-      const linkTitle = appointment.available.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
+      const linkTitle = appointment.available.sessionType === "remote" ? "<%= translation.ATTENDANT_HOME.ENTER_CONFERENCE %>" : "<%= translation.ATTENDANT_HOME.DIRECTION %>";
 
       const cardTemplate = `<div class="card-1">
         <div class="d-flex flex-wrap justify-content-center">
@@ -247,7 +247,7 @@
               <div>${location}</div>
               <table>
                 <tr>
-                  <td>Cita: </td>
+                  <td><%= translation.ATTENDANT_HOME.DATE %> </td>
                   <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
                 </tr>
               </table>
@@ -255,7 +255,7 @@
           </div>
           <div class="ml-auto p-2">
             <div class="cell-2">
-              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</p>'}
+              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.ATTENDANT_HOME.LABEL_10 %></p>'}
             </div>
           </div>
         </div>
@@ -266,7 +266,7 @@
     if (appointmentsTemplate && appointmentsTemplate.length > 0) {
       appointments.innerHTML = appointmentsTemplate.join('\n');
     } else {
-      appointments.innerHTML = '<p>Aún no se han hecho reservaciones.</p>'
+      appointments.innerHTML = '<p><%= translation.ATTENDANT_HOME.LABEL_11 %></p>'
     }
 
   }

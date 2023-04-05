@@ -166,7 +166,7 @@
         .row
         .add([
           `${serviceName}`,
-          `<img style="cursor:pointer;" onclick="prompt('Copiar al portapapeles: CTRL + C, Enter','${couponCode}')" src="/public/img/copy-icon.png" alt="Copiar" width="30px"/>${couponCode}`,
+          `<img style="cursor:pointer;" onclick="prompt('<%= translation.ATTENDANT_ATTENDANT_PROFILE.LABEL_1 %>','${couponCode}')" src="/public/img/copy-icon.png" alt="<%= translation.ATTENDANT_ATTENDANT_PROFILE.COPY %>" width="30px"/>${couponCode}`,
           `${businessName}`,
         ])
         .draw()
@@ -224,7 +224,7 @@
     lastName.innerHTML = attendant.lastName;
     businessName.innerHTML = attendant.businessName;
     const licenseKeyValue = attendant.licenseKey;
-    licenseKey.innerHTML = `${(licenseKeyValue ? `<a target="_blank" href="${licenseKeyValue}">Licencia</a>` : '<span style="font-style: italic;color: #999999;">No ha colocado una licencia.</span>')}`;
+    licenseKey.innerHTML = `${(licenseKeyValue ? `<a target="_blank" href="${licenseKeyValue}"><%= translation.ATTENDANT_ATTENDANT_PROFILE.LICENSE_2 %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ATTENDANT_ATTENDANT_PROFILE.LABEL_2 %></span>')}`;
     email.value = attendant.user.email;
     hru.value = attendant.hru;
 
@@ -241,10 +241,10 @@
     const errors = [];
 
     if (!email) {
-      errors.push("Se requiere el correo electrónico del usuario.");
+      errors.push("<%= translation.ATTENDANT_ATTENDANT_PROFILE.LABEL_3 %>");
     }
     if (!countryId) {
-      errors.push("Debe seleccionar un país de origen.");
+      errors.push("<%= translation.ATTENDANT_ATTENDANT_PROFILE.LABEL_4 %>");
     }
 
     displayErrors(errors);
@@ -288,9 +288,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Perfil actualizado.');
+          alert('<%= translation.ATTENDANT_ATTENDANT_PROFILE.LABEL_5 %>');
         } else {
-          alert('Hubo un problema actualizando el perfil del usuario, favor de intentar más tarde.');
+          alert('<%= translation.ATTENDANT_ATTENDANT_PROFILE.LABEL_6 %>');
         }
         window.location.href = "/my-profile";
       })

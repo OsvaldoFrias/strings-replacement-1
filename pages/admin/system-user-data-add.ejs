@@ -102,16 +102,16 @@
     const errors = [];
 
     if (!firstName) {
-      errors.push('Indica el nombre del usuario.');
+      errors.push('<%= translation.ADMIN_SYSTEM_USER_DATA_ADD.LABEL_1 %>');
     }
     if (!lastName) {
-      errors.push('Indica el apellido del usuario.');
+      errors.push('<%= translation.ADMIN_SYSTEM_USER_DATA_ADD.LABEL_2 %>');
     }
     if (!email) {
-      errors.push('Indica el correo del usuario.');
+      errors.push('<%= translation.ADMIN_SYSTEM_USER_DATA_ADD.LABEL_3 %>');
     }
     if (!role) {
-      errors.push('Selecciona a un rol para el usuario.');
+      errors.push('<%= translation.ADMIN_SYSTEM_USER_DATA_ADD.LABEL_4 %>');
     }
 
     if (errors.length > 0) {

@@ -82,7 +82,7 @@
   }
 
   function setLicenseKeyUrl(attendantId, fullAttendantName) {
-    let licenseKey = prompt(`Enlace para licencia de ${fullAttendantName}`);
+    let licenseKey = prompt(`<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_1 %> ${fullAttendantName}`);
     if (!licenseKey) {
       return;
     }
@@ -100,9 +100,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Enlace actualizado.');
+          alert('<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_2 %>');
         } else {
-          alert('Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_3 %>');
         }
         location.reload(true);
       })
@@ -115,7 +115,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-        `¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`
+        `<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_4 %> ${serviceCategoryName} <%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_5 %> ${intervalDate}?`
       )) {
       return;
     }
@@ -144,7 +144,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-        `¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`
+        `<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_4 %> ${serviceCategoryName} <%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_5 %> ${intervalDate}?`
       )) {
       return;
     }

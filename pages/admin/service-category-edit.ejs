@@ -105,13 +105,13 @@
     const errors = [];
 
     if (!name) {
-      errors.push("Se requiere el nombre del servicio.");
+      errors.push("<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_1 %>");
     }
     if (!level) {
-      errors.push("Se requiere el nivel del servicio.");
+      errors.push("<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_2 %>");
     }
     if (!infoTemplate) {
-      errors.push("Se requiere el nombre de la empresa a la que pertenece el usuario.");
+      errors.push("<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_3 %>");
     }
 
     displayErrors(errors);
@@ -146,9 +146,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Servicio actualizado.');
+          alert('<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_4 %>');
         } else {
-          alert('Hubo un problema actualizando los datos del usuario, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_5 %>');
         }
         window.location.href = "/service-categories";
       })
@@ -278,7 +278,7 @@
   }
 
   function setLicenseKeyUrl(attendantId, fullAttendantName) {
-    let licenseKey = prompt(`Enlace para licencia de ${fullAttendantName}`);
+    let licenseKey = prompt(`<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_6 %> ${fullAttendantName}`);
     if (!licenseKey) {
       return;
     }
@@ -296,9 +296,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Enlace actualizado.');
+          alert('<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_7 %>');
         } else {
-          alert('Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_8 %>');
         }
         location.reload(true);
       })
@@ -311,7 +311,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`
+      `<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_9 %> ${serviceCategoryName} <%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_10 %> ${intervalDate}?`
     )) {
       return;
     }
@@ -340,7 +340,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`
+      `<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_9 %> ${serviceCategoryName} <%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_10 %> ${intervalDate}?`
     )) {
       return;
     }

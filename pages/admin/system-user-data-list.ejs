@@ -89,7 +89,7 @@
           `<img id="roleEdit-${user.id}" style="cursor:pointer;" 
             onclick="populateRoles(${user.id})" 
             src="/public/img/edit.png" 
-            alt="Editar rol del usuario" width="15px"/> 
+            alt="<%= translation.ADMIN_SYSTEM_USER_DATA_LIST.LABEL_1 %>" width="15px"/> 
             ${role} 
             <div id="userId-${user.id}"></div>`,
         ])
@@ -112,9 +112,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Role de usuario actualizado.');
+          alert('<%= translation.ADMIN_SYSTEM_USER_DATA_LIST.LABEL_2 %>');
         } else {
-          alert('Hubo un problema actualizando el rol de usuario, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_SYSTEM_USER_DATA_LIST.LABEL_3 %>');
         }
         location.reload(true);
       })
@@ -131,10 +131,10 @@
     myHeaders.append('Content-Type', 'application/json');
 
     const rolesCatalog = [
-      { type: 'rsm', name: 'RSM' },
-      { type: 'trainer', name: 'Instructor' },
-      { type: 'admin', name: 'Administrador' },
-      { type: 'disabled', name: 'Deshabilitado' }
+      { type: 'rsm', name: '<%= translation.ADMIN_SYSTEM_USER_DATA_LIST.RSM %>' },
+      { type: 'trainer', name: '<%= translation.ADMIN_SYSTEM_USER_DATA_LIST.TRAINER %>' },
+      { type: 'admin', name: '<%= translation.ADMIN_SYSTEM_USER_DATA_LIST.ADMIN %>' },
+      { type: 'disabled', name: '<%= translation.ADMIN_SYSTEM_USER_DATA_LIST.DISABLED %>' }
     ];
 
     try {
@@ -160,7 +160,7 @@
         container.appendChild(select);
 
         const cancelBtn = document.createElement('button');
-        cancelBtn.innerText = "Cancelar";
+        cancelBtn.innerText = "<%= translation.ADMIN_SYSTEM_USER_DATA_LIST.CANCEL %>";
         cancelBtn.onclick = (e) => {
           const userId = htmlDivId.replace('userId-', '');
           const roleEdit = document.getElementById(`roleEdit-${userId}`);
@@ -171,7 +171,7 @@
         container.appendChild(cancelBtn);
 
         const button = document.createElement('button');
-        button.innerText = "Guardar";
+        button.innerText = "<%= translation.ADMIN_SYSTEM_USER_DATA_LIST.SAVE %>";
         button.onclick = (e) => {
           const role = select.options[select.selectedIndex].value;
           const userId = container.id.replace('userId-', '');

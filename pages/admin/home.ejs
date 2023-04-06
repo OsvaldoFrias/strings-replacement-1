@@ -83,9 +83,9 @@
     })
       .then(res => {
         if (res.status === 201) {
-          alert('Cita agendada.');
+          alert('<%= translation.ADMIN_HOME.LABEL_1 %>');
         } else {
-          alert('Hubo un problema agendando la cita, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_HOME.LABEL_2 %>');
         }
         location.reload(true);
       })
@@ -121,8 +121,8 @@
       // }
 
       let trainersMail = `
-        <img id="trainerEdit-${availableAppointmentId}" style="cursor:pointer;" onclick="populateTrainerList('${availableAppointmentId}')" src="/public/img/add-btn.png" alt="Agregar instructor de sesión remota" width="25px"/>
-        <span style="font-style: italic;color: #999999;">Agregar instructor.</span>
+        <img id="trainerEdit-${availableAppointmentId}" style="cursor:pointer;" onclick="populateTrainerList('${availableAppointmentId}')" src="/public/img/add-btn.png" alt="<%= translation.ADMIN_HOME.LABEL_3 %>" width="25px"/>
+        <span style="font-style: italic;color: #999999;"><%= translation.ADMIN_HOME.LABEL_4 %></span>
         <div id="availableAppointmentId-${availableAppointmentId}"></div>`;
       if (availableAppointment.trainers && availableAppointment.trainers.length !== 0) {
         let acc = '';
@@ -141,22 +141,22 @@
         .attendantsNumber;
       const serviceCategoryName = availableAppointment.service.serviceCategory.name;
       const serviceCategoryDescription = availableAppointment.service.serviceCategory.description;
-      const sessionType = availableAppointment.sessionType === "remote" ? "Remoto" : "Presencial";
+      const sessionType = availableAppointment.sessionType === "remote" ? "<%= translation.ADMIN_HOME.REMOTE %>" : "<%= translation.ADMIN_HOME.PRESENTIAL %>";
       const state = availableAppointment.state;
       const country = availableAppointment.state.country;
       const location = serviceType === 'exam' ? '' : availableAppointment.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-      const linkTitle = availableAppointment.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
+      const linkTitle = availableAppointment.sessionType === "remote" ? "<%= translation.ADMIN_HOME.ENTER_CONFERENCE %>" : "<%= translation.ADMIN_HOME.DIRECTION %>";
 
       availableAppointmentsTable
         .row
         .add([
           `<div><a href="/available-appointment/${availableAppointmentId}">${serviceName} - ${sessionType}${location ? " - " + location : ''}</a></div>`,
           `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}`,
-          `<img style="cursor:pointer;" onclick="setMeetingUrl(${availableAppointmentId},'${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="Editar enlace de sesión remota" width="15px"/> ${(meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle}</a>` : '<span style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</span>')}`,
+          `<img style="cursor:pointer;" onclick="setMeetingUrl(${availableAppointmentId},'${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="<%= translation.ADMIN_HOME.LABEL_5 %>" width="15px"/> ${(meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle}</a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_HOME.LABEL_6 %></span>')}`,
           // `<img id="trainerEdit-${availableAppointmentId}" style="cursor:pointer;" onclick="populateTrainerList('${availableAppointmentId}')" src="/public/img/edit.png" alt="Editar instructor de sesión remota" width="15px"/> ${trainerMail ? `<a href="mailto:${trainerMail}">${trainerMail}</a>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido asignado un instructor.</span>'}<div id="availableAppointmentId-${availableAppointmentId}"></div>`,
           trainersMail,
           `${totalAppointments} de ${serviceAttendantsNumber}`,
-          `<img style="cursor:pointer;" onclick="cancelAvailableAppointment(${availableAppointmentId}, '${serviceCategoryName}', '${intervalDate}')" src="/public/img/cancel-book.png" alt="Cancelar" width="30px"/>`
+          `<img style="cursor:pointer;" onclick="cancelAvailableAppointment(${availableAppointmentId}, '${serviceCategoryName}', '${intervalDate}')" src="/public/img/cancel-book.png" alt="<%= translation.ADMIN_HOME.CANCEL %>" width="30px"/>`
         ])
         .draw()
         .node();
@@ -201,7 +201,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`
+      `<%= translation.ADMIN_HOME.LABEL_7 %> ${serviceCategoryName} <%= translation.ADMIN_HOME.LABEL_8 %> ${intervalDate}?`
     )) {
       return;
     }
@@ -263,7 +263,7 @@
         container.appendChild(select);
 
         const cancelBtn = document.createElement('button');
-        cancelBtn.innerText = "Cancelar";
+        cancelBtn.innerText = "<%= translation.ADMIN_HOME.CANCEL %>";
         cancelBtn.onclick = (e) => {
           const availableAppointmentId = htmlDivId.replace('availableAppointmentId-', '');
           const trainerEdit = document.getElementById(`trainerEdit-${availableAppointmentId}`);
@@ -274,7 +274,7 @@
         container.appendChild(cancelBtn);
 
         const button = document.createElement('button');
-        button.innerText = "Guardar";
+        button.innerText = "<%= translation.ADMIN_HOME.SAVE %>";
         button.onclick = (e) => {
           const trainerId = select.options[select.selectedIndex].value;
           const availableAppointmentId = container.id.replace('availableAppointmentId-', '');
@@ -300,9 +300,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Instructor actualizado.');
+          alert('<%= translation.ADMIN_HOME.LABEL_9 %>');
         } else {
-          alert('Hubo un problema actualizando al instructor de la sesión, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_HOME.LABEL_10 %>');
         }
         location.reload(true);
       })
@@ -316,7 +316,7 @@
   }
 
   function setMeetingUrl(availableAppointmentId, serviceName, datetime) {
-    let meetingUrl = prompt(`Enlace para la sesión remota de ${serviceName} de ${datetime}`);
+    let meetingUrl = prompt(`<%= translation.ADMIN_HOME.LABEL_11 %> ${serviceName} <%= translation.ADMIN_HOME.OF %> ${datetime}`);
     if (!meetingUrl) {
       return;
     }
@@ -334,9 +334,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Enlace actualizado.');
+          alert('<%= translation.ADMIN_HOME.LABEL_12 %>');
         } else {
-          alert('Hubo un problema actualizando el enlace de la cita, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_HOME.LABEL_13 %>');
         }
         location.reload(true);
       })

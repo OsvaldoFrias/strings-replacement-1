@@ -63,26 +63,26 @@
 
     if (type === 'exam') {
       appointmentsList.innerHTML = `<thead><tr>
-          <th>Sesión</th>
-          <th>Fecha</th>
-          <th>Nombre</th>
-          <th>Email</th>
-          <th>Empresa</th>
-          <th>Resultado</th>
-          <th>URL Certificado</th>
-          <th>Evaluación</th>
-          <th>Instructor</th>
+          <th><%= translation.ADMIN_GRADE_LIST.SESSION %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.DAY %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.NAME %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.EMAIL %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.COMPANY %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.RESULT %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.CERTIFICATE_URL %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.EVALUATION %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.TRAINER %></th>
         </tr></thead>`;
     } else if (type === 'course') {
       appointmentsList.innerHTML = `<thead><tr>
-          <th>Sesión</th>
-          <th>Fecha</th>
-          <th>Nombre</th>
-          <th>Email</th>
-          <th>Empresa</th>
-          <th>Cupón</th>
-          <th>Asistencia</th>
-          <th>Instructor</th>
+          <th><%= translation.ADMIN_GRADE_LIST.SESSION %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.DAY %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.NAME %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.EMAIL %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.COMPANY %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.COUPON %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.ATTENDANCE %></th>
+          <th><%= translation.ADMIN_GRADE_LIST.TRAINER %></th>
         </tr></thead>`;
     }
 
@@ -154,7 +154,7 @@
         `<a href="/attendant/${id}">${fullName}</a>`,
         `<a href="mailto:${email}">${email}</a>`,
         `${businessName}`,
-        `<img id="gradeEdit-${appointmentId}" style="cursor:pointer;" onclick="populateGradeList('${appointmentId}', '${serviceType}')" src="/public/img/edit.png" alt="Editar calificación" width="15px"/> ${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido evaluado.</span>'}<div id="gradeType-${appointmentId}"></div>`,
+        `<img id="gradeEdit-${appointmentId}" style="cursor:pointer;" onclick="populateGradeList('${appointmentId}', '${serviceType}')" src="/public/img/edit.png" alt="<%= translation.ADMIN_GRADE_LIST.EDIT_RATING %>" width="15px"/> ${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_GRADE_LIST.LABEL_1 %></span>'}<div id="gradeType-${appointmentId}"></div>`,
       ];
 
       if (type === 'course') {
@@ -162,8 +162,8 @@
       }
 
       if (type === 'exam') {
-        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}">Certificado</a>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido generado el certificado.</span>'}<div id="meetingUrl-${appointmentId}"></div>`);
-        rowData.push(`<img style="cursor:pointer;" onclick="setFeedbackUrl(${gradeId}, '${fullName}','${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="Editar enlace de la evaluación" width="15px"/> ${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}">Evaluación</a>` : '<span style="font-style: italic;color: #999999;">No hay evaluación.</span>')}`);
+        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}"><%= translation.ADMIN_GRADE_LIST.CERTIFICATE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_GRADE_LIST.LABEL_2 %></span>'}<div id="meetingUrl-${appointmentId}"></div>`);
+        rowData.push(`<img style="cursor:pointer;" onclick="setFeedbackUrl(${gradeId}, '${fullName}','${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="<%= translation.ADMIN_GRADE_LIST.EDIT_LINK %>" width="15px"/> ${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}"><%= translation.ADMIN_GRADE_LIST.EVALUATION %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_GRADE_LIST.LABEL_3 %></span>')}`);
       }
 
       rowData.push(`${trainersMail}`);
@@ -177,7 +177,7 @@
   }
 
   function setFeedbackUrl(gradeId, fullAttendantName, serviceName, datetime) {
-    let feedbackUrl = prompt(`Enlace para evaluación de ${fullAttendantName} de ${serviceName} de ${datetime}`);
+    let feedbackUrl = prompt(`<%= translation.ADMIN_GRADE_LIST.LABEL_4 %> ${fullAttendantName} <%= translation.ADMIN_GRADE_LIST.OF %> ${serviceName} <%= translation.ADMIN_GRADE_LIST.OF %> ${datetime}`);
     if (!feedbackUrl) {
       return;
     }
@@ -195,9 +195,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Enlace actualizado.');
+          alert('<%= translation.ADMIN_GRADE_LIST.LABEL_5 %>');
         } else {
-          alert('Hubo un problema actualizando el enlace del feedback de la evaluación, favor de intentar más tarde.');
+          alert('<%= translation.ADMIN_GRADE_LIST.LABEL_6 %>');
         }
         location.reload(true);
       })
@@ -239,7 +239,7 @@
         container.appendChild(select);
 
         const cancelBtn = document.createElement('button');
-        cancelBtn.innerText = "Cancelar";
+        cancelBtn.innerText = "<%= translation.ADMIN_GRADE_LIST.CANCEL %>";
         cancelBtn.onclick = (e) => {
           const appointmentId = divId.replace('gradeType-', '');
           const gradeEdit = document.getElementById(`gradeEdit-${appointmentId}`);
@@ -250,14 +250,14 @@
         container.appendChild(cancelBtn);
 
         const button = document.createElement('button');
-        button.innerText = "Guardar";
+        button.innerText = "<%= translation.ADMIN_GRADE_LIST.SAVE %>";
         button.onclick = (e) => {
           displayLoading();
           const gradeTypeId = select.options[select.selectedIndex].value;
           const gradeTypeText = select.options[select.selectedIndex].text;
           const appointmentId = divId.replace('gradeType-', '');
           container.innerHTML = '';
-          if (confirm(`El asistente se evaulará como: ${gradeTypeText.toUpperCase()}.\n¿Desea continuar?`)) {
+          if (confirm(`<%= translation.ADMIN_GRADE_LIST.LABEL_7 %> ${gradeTypeText.toUpperCase()}.\n<%= translation.ADMIN_GRADE_LIST.LABEL_8 %>`)) {
             setAppointmentGrade(gradeTypeId, appointmentId);
           } else {
             const gradeEdit = document.getElementById(`gradeEdit-${appointmentId}`);
@@ -285,7 +285,7 @@
       });
 
       if (res1.status === 201) {
-        alert('Evaluación actualizada.');
+        alert('<%= translation.ADMIN_GRADE_LIST.LABEL_9 %>');
         // No se generan cupones en automático a partir de un examen
         if ('<%= type %>' === 'exam') {
           location.reload(true);
@@ -304,15 +304,15 @@
         });
 
         if (res2.status === 201) {
-          alert('Cupón creado y asignado con éxito.');
+          alert('<%= translation.ADMIN_GRADE_LIST.LABEL_10 %>');
         } else {
           const resultadoPrueba = await res2.json();
           const { error } = resultadoPrueba;
-          alert(error ? error : 'Hubo un error con el cupón.');
+          alert(error ? error : '<%= translation.ADMIN_GRADE_LIST.LABEL_11 %>');
         }
         location.reload(true);
       } else {
-        alert('Hubo un problema estableciendo la evaluación del usuario, favor de intentar más tarde.');
+        alert('<%= translation.ADMIN_GRADE_LIST.LABEL_12 %>');
         location.reload(true);
       }
     } catch (err) {

@@ -888,5 +888,97 @@
     "LABEL_73": "para aprobar el examen. Si el usuario no aprueba el examen en su último intento, deberá volver a tomar el curso de capacitación correspondiente al nivel para poder volver a realizar el examen.",
     "LABEL_74": "¿Tu pregunta no está en el listado de arriba?",
     "LABEL_75": "Si tu pregunta no se puede resolver con esta información, favor de contactar a su RSM local o envía un correo a"
+  },
+  "APPOINTMENT_REMINDER_EMAIL":{
+    "LABEL_1": "Recordatorio de",
+    "LABEL_2": "Le recordamos que falta(n)",
+    "LABEL_3": "día(s) para",
+    "LABEL_4": "del",
+    "LABEL_5": "al",
+    "LABEL_6": "Favor de ingresar a la",
+    "LABEL_7": "plataforma",
+    "LABEL_8": "y seguir las recomendaciones previas."
+  },
+  "ASSIGNMENT_NOTICE_EMAIL":{
+    "LABEL_1": "Asignación de",
+    "LABEL_2": "Se te ha asignado impartir",
+    "LABEL_3": "del",
+    "LABEL_4": "al",
+    "LABEL_5": "Haz click en el siguiente enlace para",
+    "LABEL_6": "entrar a la conferencia o consultar la ubicación",
+    "LABEL_7": "O copia y pega el siguiente enlace en la barra de búsqueda del navegador:"
+  },
+  "ATTENDANCE_NOTIFICATION_EMAIL":{
+    "LABEL_1": "Registro de asistencia",
+    "LABEL_2": "Se ha confirmado su participación en",
+    "LABEL_3": "Ingrese al sitio de capacitaciones y certificaciones para verificar y reservar su examen.",
+    "LABEL_4": "Ingresar al sitio de Certificación"
+  },
+  "CONFIRMATION_EMAIL":{
+    "LABEL_1": "Bienvenido al sitio de Certificación ISS",
+    "LABEL_2": "Verifica tu correo electrónico.",
+    "LABEL_3": "Para poder utilizar el sitio de Certificación ISS, favor de verificar esta cuenta de correo.",
+    "LABEL_4": "Verificar correo electrónico",
+    "LABEL_5": "Si no hizo el registro en el sitio, favor de ignorar el correo, la cuenta se ELIMINARÁ eventualmente.",
+    "LABEL_6": "Para der utilizar el sitio de Certificación ISS, favor de verificar esta cuenta de correo usando el siguiente enlace:"
+  },
+  "COUPON_NOTIFICATION_EMAIL":{
+    "LABEL_1": "Cupón de",
+    "LABEL_2": "Buenas tardes,",
+    "LABEL_3": "El siguiente cupón deberá ser utilizado para iniciar su proceso de inscripción al",
+    "LABEL_4": "de la plataforma SecurOS:",
+    "LABEL_5": "Una vez registrado el cupón, verifique las fechas disponibles para hacer su registro."
+  },
+  "DIRECTION_UPDATE_NOTICE":{
+    "LABEL_1": "La ubicación de la sesión ha sido actualizada",
+    "LABEL_2": "Se actualizó en el sitio de cursos y certificaciones ISS la ubicación del Curso de Certificación Nivel 1, favor de revisar la información del curso en el sitio.",
+    "LABEL_3": "Ubicación actualizada:",
+    "LABEL_4": "Saludos cordiales.",
+    "LABEL_5": "Ingresar al sitio de Certificación"
+  },
+  "EXAM_FAILED_NOTICE_EMAIL":{
+    "LABEL_1": "Notificación de evaluación",
+    "LABEL_2": "Lamentamos informarle que su evaluación del examen de certificación",
+    "LABEL_3": "ha resultado",
+    "LABEL_4": "REPROBATORIA",
+    "LABEL_5": "Sin embargo, tiene oportunidad de agendar de nuevo para presentar el mismo examen en otra fecha.",
+    "LABEL_6": "Favor de ingresar al sitio de capacitaciones y certificaciones para consultar las fechas disponibles.",
+    "LABEL_7": "Ingresar al sitio de Certificación"
+  },
+  "GRADE_NOTIFICATION_EMAIL":{
+    "LABEL_1": "Notificación de evaluación",
+    "LABEL_2": "Se ha evaluado su participación en",
+    "LABEL_3": "Ingrese al sitio de capacitaciones y certificaciones para verificar.",
+    "LABEL_4": "Ingresar al sitio de Certificación"
+  },
+  "RECOVERY_PASSWORD_EMAIL":{
+    "LABEL_1": "Establecer contraseña",
+    "LABEL_2": "Para establecer la contraseña ingresa a este link",
+    "LABEL_3": "El enlace expira en 15 minutos.",
+    "LABEL_4": "Establecer contraseña"
+  },
+  "RESERVATION_EMAIL":{
+    "LABEL_1": "Reservación de",
+    "LABEL_2": "Se ha completado la reservación de",
+    "LABEL_3": "que se llevará a cabo del",
+    "LABEL_4": "al",
+    "LABEL_5": "Haz click en el siguiente enlace para",
+    "LABEL_6": "entrar a la conferencia o consultar la ubicación",
+    "LABEL_7": "O copia y pega el siguiente enlace en la barra de búsqueda del navegador:",
+    "LABEL_8": "Nota:",
+    "LABEL_9": "las reservaciones se pueden cancelar MÁXIMO 24 h ANTES.",
+    "LABEL_10": "Copia y pega el siguiente enlace en la barra de búsqueda del navegador para entrar a la conferencia o consultar la ubicación:"
+  },
+  "SATISFACTION_SURVEY_EMAIL":{
+    "LABEL_1": "Estimado",
+    "LABEL_2": "Queremos agradecerte por haber tomado el",
+    "LABEL_3": "y por tu tiempo para aprender acerca de SecurOS.",
+    "LABEL_4": "En un esfuerzo por continuar mejorando nuestros cursos y asegurarnos de que estamos cumpliendo con tus expectativas, nos gustaría pedirte que respondas una encuesta de satisfacción sobre tu experiencia en el curso. Esta encuesta nos ayudará a identificar áreas en las que podemos mejorar y a asegurarnos de que estamos brindando el mejor servicio posible.",
+    "LABEL_5": "La encuesta es completamente voluntaria y no tiene carácter de urgente ni de obligatorio, pero agradeceríamos mucho si pudieras tomarte unos minutos para responderla. Puedes encontrar el enlace a la encuesta en este correo, o también puedes responderla en el siguiente enlace:",
+    "LABEL_6": "Gracias de nuevo por tomarte el tiempo para aprender sobre SecurOS y por ayudarnos a mejorar nuestros cursos. Si tienes alguna pregunta o comentario adicional, no dudes en ponerte en contacto con nosotros.",
+    "LABEL_7": "Saludos cordiales,",
+    "LABEL_8": "Equipo ISS",
+    "LABEL_9": "Encuesta de satisfacción del curso de certificación de SecurOS:",
+    "LABEL_10": "Espero que te estés recuperando bien después de haber completado nuestro curso de certificación de SecurOS. Queríamos agradecerte por haber tomado el curso y por tu tiempo para aprender sobre esta herramienta de video vigilancia."
   }
 }

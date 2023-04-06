@@ -1,5 +1,5 @@
-Notificación de evaluación
+<%= translation.GRADE_NOTIFICATION_EMAIL.LABEL_1 %>
 
-Se ha evaluado su partificación en $SERVICE_NAME. Ingrese al sitio de certificación para verificar.
+<%= translation.GRADE_NOTIFICATION_EMAIL.LABEL_2 %> $SERVICE_NAME. <%= translation.GRADE_NOTIFICATION_EMAIL.LABEL_3 %>
 
-Ingresar al sitio de Certificación: https://training.issivs.com
+<%= translation.GRADE_NOTIFICATION_EMAIL.LABEL_4 %>: https://training.issivs.com

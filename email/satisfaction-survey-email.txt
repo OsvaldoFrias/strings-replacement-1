@@ -1,33 +1,33 @@
-Estimado [Nombre del asistente al curso],
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_1 %> [Nombre del asistente al curso],
 
-Queremos agradecerte por haber tomado el [curso de certificación] y por tu tiempo para aprender acerca de SecurOS.
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_2 %> [curso de certificación] <%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_3 %>
 
-En un esfuerzo por continuar mejorando nuestros cursos y asegurarnos de que estamos cumpliendo con tus expectativas, nos gustaría pedirte que respondas una encuesta de satisfacción sobre tu experiencia en el curso. Esta encuesta nos ayudará a identificar áreas en las que podemos mejorar y a asegurarnos de que estamos brindando el mejor servicio posible.
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_4 %>
 
-La encuesta es completamente voluntaria y no tiene carácter de urgente ni de obligatorio, pero agradeceríamos mucho si pudieras tomarte unos minutos para responderla. Puedes encontrar el enlace a la encuesta en este correo, o también puedes responderla en el siguiente enlace: [enlace a la encuesta](https://forms.office.com/r/qr17P8LVH7).
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_5 %> [enlace a la encuesta](https://forms.office.com/r/qr17P8LVH7).
 
-Gracias de nuevo por tomarte el tiempo para aprender sobre SecurOS y por ayudarnos a mejorar nuestros cursos. Si tienes alguna pregunta o comentario adicional, no dudes en ponerte en contacto con nosotros.
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_6 %>
 
-Saludos cordiales,
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_7 %>
 
-Equipo ISS
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_8 %>
 
-Encuesta de satisfacción del curso de certificación de SecurOS: [enlace a la encuesta](https://forms.office.com/r/qr17P8LVH7).
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_9 %> [enlace a la encuesta](https://forms.office.com/r/qr17P8LVH7).
 
 
 ////////////////////////////////////////////////////////////*************
-Estimado [Nombre del asistente al curso],
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_1 %> [Nombre del asistente al curso],
 
-Espero que te estés recuperando bien después de haber completado nuestro curso de certificación de SecurOS. Queríamos agradecerte por haber tomado el curso y por tu tiempo para aprender sobre esta herramienta de video vigilancia.
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_10 %>
 
-En un esfuerzo por continuar mejorando nuestros cursos y asegurarnos de que estamos cumpliendo con tus expectativas, nos gustaría pedirte que respondas una encuesta de satisfacción sobre tu experiencia en el curso. Esta encuesta nos ayudará a identificar áreas en las que podemos mejorar y a asegurarnos de que estamos brindando el mejor servicio posible.
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_4 %>
 
-La encuesta es completamente voluntaria y no tiene carácter de urgente ni de obligatorio, pero agradeceríamos mucho si pudieras tomarte unos minutos para responderla. Puedes encontrar el enlace a la encuesta en este correo, o también puedes responderla en el siguiente enlace: [enlace a la encuesta].
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_5 %> [enlace a la encuesta].
 
-Gracias de nuevo por tomarte el tiempo para aprender sobre SecurOS y por ayudarnos a mejorar nuestros cursos. Si tienes alguna pregunta o comentario adicional, no dudes en ponerte en contacto con nosotros.
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_6 %>
 
-Saludos cordiales,
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_7 %>
 
 [Tu nombre]
 
-Encuesta de satisfacción del curso de certificación de SecurOS: [enlace a la encuesta]
+<%= translation.SATISFACTION_SURVEY_EMAIL.LABEL_9 %> [enlace a la encuesta]

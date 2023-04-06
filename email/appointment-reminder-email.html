@@ -16,14 +16,13 @@
   <center>
     <img style="width: 80%;max-width:600px;"
       src="https://secureservercdn.net/166.62.114.250/0ml.fb9.myftpupload.com/wp-content/uploads/2020/01/Logo-web-ISS-06.png" />
-    <h1>Recordatorio de $SERVICE_NAME</h1>
+    <h1><%= translation.APPOINTMENT_REMINDER_EMAIL.LABEL_1 %> $SERVICE_NAME</h1>
     <!-- <img style="width: 80px"
       src="https://letmewritethatdownforyou.com/wp-content/uploads/2020/04/let-me-write-that-down-for-you-logo-square.png" /> -->
     <hr style="width: 80%" />
     <p style="font-size: 18px;">
-      Le recordamos que falta(n) $REMAINING_DAYS día(s) para $SERVICE_NAME del <strong>$START_DATETIME</strong> al
-      <strong>$FINISH_DATETIME</strong>. Favor de ingresar a la <a href="$MEETING_URL">plataforma</a> y seguir las
-      recomendaciones previas.
+      <%= translation.APPOINTMENT_REMINDER_EMAIL.LABEL_2 %> $REMAINING_DAYS <%= translation.APPOINTMENT_REMINDER_EMAIL.LABEL_3 %> $SERVICE_NAME <%= translation.APPOINTMENT_REMINDER_EMAIL.LABEL_4 %> <strong>$START_DATETIME</strong> <%= translation.APPOINTMENT_REMINDER_EMAIL.LABEL_5 %>
+      <strong>$FINISH_DATETIME</strong>. <%= translation.APPOINTMENT_REMINDER_EMAIL.LABEL_6 %> <a href="$MEETING_URL"><%= translation.APPOINTMENT_REMINDER_EMAIL.LABEL_7 %></a> <%= translation.APPOINTMENT_REMINDER_EMAIL.LABEL_8 %>
     </p>
   </center>
 </body>

@@ -1,9 +1,9 @@
-Cupón de $SERVICE_NAME
+<%= translation.COUPON_NOTIFICATION_EMAIL.LABEL_1 %> $SERVICE_NAME
 
-Buenas tardes,
+<%= translation.COUPON_NOTIFICATION_EMAIL.LABEL_2 %>
 
-El siguiente cupón deberá ser utilizado para iniciar su proceso de inscripción al $SERVICE_NAME de la plataforma SecurOS:
+<%= translation.COUPON_NOTIFICATION_EMAIL.LABEL_3 %> $SERVICE_NAME <%= translation.COUPON_NOTIFICATION_EMAIL.LABEL_4 %>
 
 $COUPON
 
-Una vez registrado el cupón, verifique las fechas disponibles para hacer su registro.
+<%= translation.COUPON_NOTIFICATION_EMAIL.LABEL_5 %>

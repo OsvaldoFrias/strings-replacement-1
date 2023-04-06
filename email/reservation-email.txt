@@ -1,7 +1,7 @@
-Reservación de $SERVICE_NAME
+<%= translation.RESERVATION_EMAIL.LABEL_1 %> $SERVICE_NAME
 
-Se ha completado la reservación de $SERVICE_NAME que se llevará a cabo del $START_DATETIME al $FINISH_DATETIME. Copia y pega el siguiente enlace en la barra de búsqueda del navegador para entrar a la conferencia o consultar la ubicación:
+<%= translation.RESERVATION_EMAIL.LABEL_2 %> $SERVICE_NAME <%= translation.RESERVATION_EMAIL.LABEL_3 %> $START_DATETIME <%= translation.RESERVATION_EMAIL.LABEL_4 %> $FINISH_DATETIME. <%= translation.RESERVATION_EMAIL.LABEL_10 %>
 
 $MEETING_URL
 
-Nota:  las reservaciones se pueden cancelar MÁXIMO 24 h ANTES.
+<%= translation.RESERVATION_EMAIL.LABEL_8 %>  <%= translation.RESERVATION_EMAIL.LABEL_9 %>

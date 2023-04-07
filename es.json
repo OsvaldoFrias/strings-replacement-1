@@ -841,6 +841,7 @@
     "LABEL_26": "Saltar el paso de la licencia.",
     "LABEL_27": "Seleccionar el idioma del software (para curso presencial favor de elegir idioma",
     "LABEL_28": "Español",
+    "LABEL_28_1": ").",
     "LABEL_29": "Marcar o dejar marcada la casilla de instalación del Integrated Device Pack.",
     "LABEL_30": "Quitar la marca de la casilla de iniciar servicio después de que la instalación termine.",
     "LABEL_31": "Iniciar la instalación.",
@@ -867,7 +868,7 @@
     "LABEL_52": "Warning! Only 64-bit versions of operation systems listed above are supported.",
     "LABEL_53": "CPU",
     "LABEL_54": "Intel Core i5+8400",
-    "LABEL_55": "or above",
+    "LABEL_55": "or above/",
     "LABEL_56": "AMD FX-8800P",
     "LABEL_57": "or above.",
     "LABEL_58": "Warning! Hardware decompression of H.264/H.265 stream is not supported by AMD CPUs.",
@@ -884,10 +885,11 @@
     "LABEL_69": "24 horas antes",
     "LABEL_70": "de la cita programada. Una vez que se ha cancelado una cita, se puede reprogramar en cualquier momento que el usuario lo necesite o requiera de acuerdo a la disponibilidad de fechas.",
     "LABEL_71": "¿Cuántos intentos tengo para aprobar el examen de certificación en línea?",
-    "LABEL_72": "Los exámenes en línea ofrecen hasta un <strong>máximo de 2 intentos",
-    "LABEL_73": "para aprobar el examen. Si el usuario no aprueba el examen en su último intento, deberá volver a tomar el curso de capacitación correspondiente al nivel para poder volver a realizar el examen.",
-    "LABEL_74": "¿Tu pregunta no está en el listado de arriba?",
-    "LABEL_75": "Si tu pregunta no se puede resolver con esta información, favor de contactar a su RSM local o envía un correo a"
+    "LABEL_72": "Los exámenes en línea ofrecen hasta un",
+    "LABEL_73": "máximo de 2 intentos",
+    "LABEL_74": "para aprobar el examen. Si el usuario no aprueba el examen en su último intento, deberá volver a tomar el curso de capacitación correspondiente al nivel para poder volver a realizar el examen.",
+    "LABEL_75": "¿Tu pregunta no está en el listado de arriba?",
+    "LABEL_76": "Si tu pregunta no se puede resolver con esta información, favor de contactar a su RSM local o envía un correo a"
   },
   "APPOINTMENT_REMINDER_EMAIL":{
     "LABEL_1": "Recordatorio de",

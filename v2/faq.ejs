@@ -1,6 +1,6 @@
 <!-- <link href="https://vjs.zencdn.net/7.19.2/video-js.css" rel="stylesheet" /> -->
 
-<h1>Preguntas frecuentes</h1>
+<h1><%= translation.PAGES_FAQ.LABEL_1 %></h1>
 
 <div class="accordion" id="accordionExample">
   <div class="card">
@@ -9,7 +9,7 @@
         <button class="btn btn-link btn-block text-left" type="button"
           data-toggle="collapse" data-target="#collapse1"
           aria-expanded="true" aria-controls="collapse1">
-          ¿Por qué el listado de próximas fechas está vacío?
+          <%= translation.PAGES_FAQ.LABEL_2 %>
         </button>
       </h2>
     </div>
@@ -17,21 +17,18 @@
     <div id="collapse1" class="collapse" aria-labelledby="heading1"
       data-parent="#accordionExample">
       <div class="card-body">
-        El listado de próximas fechas se llena con las próximas fechas
-        disponibles que cumplen con las siguientes características:
+        <%= translation.PAGES_FAQ.LABEL_3 %>
         <br>
         <br>
         <ul>
-          <li>Fechas de máximo 1 día de anticipación.</li>
-          <li>Fechas con cupo disponible.</li>
+          <li><%= translation.PAGES_FAQ.LABEL_4 %></li>
+          <li><%= translation.PAGES_FAQ.LABEL_5 %></li>
         </ul>
         <!-- Adicionalmente, es necesario registrar el cupón
         correspondiente para que el listado de fechas sea
         liberado. -->
 
-        Si el listado de fechas aparece vacío significa que no existen
-        próximas fechas disponibles. Favor de seguir
-        al pendiente de la página para reservar su lugar.
+        <%= translation.PAGES_FAQ.LABEL_6 %>
       </div>
     </div>
   </div>
@@ -42,28 +39,22 @@
           type="button" data-toggle="collapse"
           data-target="#collapse2" aria-expanded="false"
           aria-controls="collapse2">
-          ¿Cómo obtengo un cupón?
+          <%= translation.PAGES_FAQ.LABEL_7 %>
         </button>
       </h2>
     </div>
     <div id="collapse2" class="collapse" aria-labelledby="heading2"
       data-parent="#accordionExample">
       <div class="card-body">
-        Los cupones se adquieren a través de una orden de compra. Por
-        cada unidad, se envía por correo el cupón para el curso, el
-        cupón para el examen se envía una vez tomado el curso.
-
-        Se recomienda registrar los cupones una vez que hayan sido
-        recibidos debido a que los cupones tienen vigencia.
+        <%= translation.PAGES_FAQ.LABEL_8 %>
         <br>
         <br>
         <ul>
-          <li>1 año cupones vendidos</li>
-          <li>30 días los cupones regalados</li>
+          <li><%= translation.PAGES_FAQ.LABEL_9 %></li>
+          <li><%= translation.PAGES_FAQ.LABEL_10 %></li>
         </ul>
 
-        Favor de contactar a su agente de ventas si es que su cupón ya
-        expiró.
+        <%= translation.PAGES_FAQ.LABEL_11 %>
       </div>
     </div>
   </div>
@@ -74,18 +65,14 @@
           type="button" data-toggle="collapse"
           data-target="#collapse3" aria-expanded="false"
           aria-controls="collapse3">
-          ¿Por qué cada que entro tengo que cambiar mi contraseña?
+          <%= translation.PAGES_FAQ.LABEL_12 %>
         </button>
       </h2>
     </div>
     <div id="collapse3" class="collapse" aria-labelledby="heading3"
       data-parent="#accordionExample">
       <div class="card-body">
-        Verifique que no esté usando una contraseña guardada para
-        algún otro sitio del dominio <strong>.issivs.com</strong>,
-        como por ejemplo el sitio de soporte. En cuyo caso, intente
-        escribir directamente la contraseña correspondiente a este
-        sitio.
+        <%= translation.PAGES_FAQ.LABEL_13 %>
       </div>
     </div>
   </div>
@@ -96,20 +83,14 @@
           type="button" data-toggle="collapse"
           data-target="#collapse4" aria-expanded="false"
           aria-controls="collapse4">
-          ¿Qué puedo hacer si ya hice mi examen y aún no tengo mi
-          evaluación?
+          <%= translation.PAGES_FAQ.LABEL_16 %>
         </button>
       </h2>
     </div>
     <div id="collapse4" class="collapse" aria-labelledby="heading4"
       data-parent="#accordionExample">
       <div class="card-body">
-        Las evaluaciones requieren tiempo dedicado para revisar cada
-        aspecto, razón por la cual, el resultado de la evaluación
-        puede demorar hasta 2 semanas.
-
-        Una vez asentada la calificación el sitio le notificará vía
-        correo electrónico que ha recibido una evaluación.
+        <%= translation.PAGES_FAQ.LABEL_17 %>
       </div>
     </div>
   </div>
@@ -120,7 +101,7 @@
           type="button" data-toggle="collapse"
           data-target="#collapse5" aria-expanded="false"
           aria-controls="collapse5">
-          ¿Cómo instalo el software (SecurOS)?
+          <%= translation.PAGES_FAQ.LABEL_18 %>
         </button>
       </h2>
     </div>
@@ -129,39 +110,31 @@
       <div class="card-body">
         <ol>
           <li>
-            Descargar el software desde la página de información del
-            curso.
+            <%= translation.PAGES_FAQ.LABEL_19 %>
           </li>
-          <li>Ejecutar el instalador con permisos de <strong>
-              Administrador</strong>.</li>
-          <li>Indicar el idioma de los pasos de instalación.</li>
-          <li>Aceptar los términos y condiciones de la licencia.</li>
-          <li>Seleccionar tipo de instalación típica.</li>
-          <li>Seleccionar tipo de servidor de configuración.</li>
-          <li>Saltar el paso de la licencia.</li>
-          <li>Seleccionar el idioma del software (para curso
-            presencial favor de elegir idioma <strong>
-              Español</strong>).</li>
-          <li>Marcar o dejar marcada la casilla de instalación del
-            Integrated Device Pack.</li>
-          <li>Quitar la marca de la casilla de iniciar servicio
-            después de que la instalación termine.</li>
-          <li>Iniciar la instalación.</li>
+          <li><%= translation.PAGES_FAQ.LABEL_20 %></li>
+          <li><%= translation.PAGES_FAQ.LABEL_22 %></li>
+          <li><%= translation.PAGES_FAQ.LABEL_23 %></li>
+          <li><%= translation.PAGES_FAQ.LABEL_24 %></li>
+          <li><%= translation.PAGES_FAQ.LABEL_25 %></li>
+          <li><%= translation.PAGES_FAQ.LABEL_26 %></li>
+          <li><%= translation.PAGES_FAQ.LABEL_27 %></li>
+          <li><%= translation.PAGES_FAQ.LABEL_29 %></li>
+          <li><%= translation.PAGES_FAQ.LABEL_30 %></li>
+          <li><%= translation.PAGES_FAQ.LABEL_31 %></li>
         </ol>
-        Al concluir la instalación se debe extraer el Código de
-        Hardware del equipo (HRU) y enviarlo al correo de <a
-          href="mailto:soportemexico@issivs.com">soportemexico@issivs.com</a>
+        <%= translation.PAGES_FAQ.LABEL_32 %> <a
+          href="mailto:soportemexico@issivs.com"><%= translation.PAGES_FAQ.LABEL_33 %></a>
         o
         <% if (locals.role) { %>
         <% if (role==='attendant' ) { %>
-        <a href="/my-profile">subirlo al perfil</a>
+        <a href="/my-profile"><%= translation.PAGES_FAQ.LABEL_34 %></a>
         <% } %>
         <% if (role !=='attendant' ) { %>
-        <span>subirlo al perfil</span>
+        <span><%= translation.PAGES_FAQ.LABEL_34 %></span>
         <% } %>
         <% } %>
-        o guardarlo en un archivo txt para compartirlo con el
-        instructor por el medio que sea indicado.
+        <%= translation.PAGES_FAQ.LABEL_35 %>
       </div>
     </div>
   </div>
@@ -172,23 +145,18 @@
           type="button" data-toggle="collapse"
           data-target="#collapse6" aria-expanded="false"
           aria-controls="collapse6">
-          ¿Cómo obtengo el Código de Hardware (HRU) o cómo obtengo mi
-          licencia?
+          <%= translation.PAGES_FAQ.LABEL_36 %>
         </button>
       </h2>
     </div>
     <div id="collapse6" class="collapse" aria-labelledby="heading6"
       data-parent="#accordionExample">
       <div class="card-body">
-        Para propósito de los cursos, las licencias a distribuir son
-        temporales y deberán ser solicitadas con el
-        código HRU que se puede obtener mediante el siguiente
-        procedimiento:
+        <%= translation.PAGES_FAQ.LABEL_37 %>
         <ol>
-          <li>Abrir el inicio de tareas de Windows.</li>
+          <li><%= translation.PAGES_FAQ.LABEL_38 %></li>
           <li>
-            En la sección de SecurOS buscar y ejecutar el programa
-            Hardware Report Utility.
+            <%= translation.PAGES_FAQ.LABEL_39 %>
           </li>
           <!-- <li>
             Copiar el contenido de la ventana emergente en
@@ -202,25 +170,22 @@
             <% } %> de usuario del sitio de cursos y certificaciones.
           </li> -->
           <li>
-            Copiar el código y enviarlo al correo de <a
-              href="mailto:soportemexico@issivs.com">soportemexico@issivs.com</a>
+            <%= translation.PAGES_FAQ.LABEL_40 %> <a
+              href="mailto:soportemexico@issivs.com"><%= translation.PAGES_FAQ.LABEL_33 %></a>
             o
             <% if (locals.role) { %>
             <% if (role==='attendant' ) { %>
-            <a href="/my-profile">subirlo al perfil</a>
+            <a href="/my-profile">s<%= translation.PAGES_FAQ.LABEL_34 %></a>
             <% } %>
             <% if (role !=='attendant' ) { %>
-            <span>subirlo al perfil</span>
+            <span><%= translation.PAGES_FAQ.LABEL_34 %></span>
             <% } %>
             <% } %>
-            o guardarlo en un archivo txt para compartirlo con el
-            instructor por el medio que sea indicado.
+            <%= translation.PAGES_FAQ.LABEL_35 %>
           </li>
         </ol>
 
-        Una vez colocado el Código de Hardware (HRU), esperar al
-        trámite de la licencia. La licencia temporal se
-        entrega hasta que inicie el curso.
+        <%= translation.PAGES_FAQ.LABEL_41 %>
       </div>
     </div>
   </div>
@@ -231,18 +196,14 @@
           type="button" data-toggle="collapse"
           data-target="#collapse7" aria-expanded="false"
           aria-controls="collapse7">
-          ¿Recibiré un certificado después de completar el curso de
-          capacitación presencial?
+          <%= translation.PAGES_FAQ.LABEL_42 %>
         </button>
       </h2>
     </div>
     <div id="collapse7" class="collapse" aria-labelledby="heading7"
       data-parent="#accordionExample">
       <div class="card-body">
-        Se emite un certificado de cualquier nivel una vez que el
-        usuario haya tomado y aprobado el examen de certificación
-        correspondiente. Los usuarios pueden agendar estos exámenes a
-        través de este sitio web.
+        <%= translation.PAGES_FAQ.LABEL_43 %>
       </div>
     </div>
   </div>
@@ -253,17 +214,14 @@
           type="button" data-toggle="collapse"
           data-target="#collapse8" aria-expanded="false"
           aria-controls="collapse8">
-          ¿Cómo puedo encontrar la ubicación exacta del curso de
-          capacitación presencial?
+          <%= translation.PAGES_FAQ.LABEL_44 %>
         </button>
       </h2>
     </div>
     <div id="collapse8" class="collapse" aria-labelledby="heading8"
       data-parent="#accordionExample">
       <div class="card-body">
-        La sección de información del curso incluye detalles sobre la
-        ubicación del curso de capacitación. Se proporcionará tanta
-        información como sea necesaria para cada curso.
+        <%= translation.PAGES_FAQ.LABEL_45 %>
       </div>
     </div>
   </div>
@@ -274,7 +232,7 @@
           type="button" data-toggle="collapse"
           data-target="#collapse9" aria-expanded="false"
           aria-controls="collapse9">
-          ¿Qué debo llevar al curso de capacitación presencial?
+          <%= translation.PAGES_FAQ.LABEL_46 %>
         </button>
       </h2>
     </div>
@@ -282,73 +240,61 @@
       data-parent="#accordionExample">
       <div class="card-body">
         <p>
-          El usuario deberá llevar su propio equipo de cómputo para
-          poder realizar los ejercicios y ejemplos del curso. Se
-          requiere que el equipo cuente con las siguientes
-          especificaciones MÍNIMAS:
+          <%= translation.PAGES_FAQ.LABEL_47 %>
         </p>
         <table
           style="border: 1px solid black;border-collapse: collapse;">
           <tbody>
             <tr>
               <td style="border: 1px solid black;">
-                <p><b>Parameter</b></p>
+                <p><b><%= translation.PAGES_FAQ.LABEL_48 %></b></p>
               </td>
               <td style="border: 1px solid black;">
-                <p><b>Description</b></p>
-              </td>
-            </tr>
-            <tr>
-              <td style="border: 1px solid black;">
-                <p><b>Sistema Operativo</b></p>
-              </td>
-              <td style="border: 1px solid black;">
-                <p>Windows 8.1 —all editions; Windows Server 2012 R2
-                  —all editions; Windows 10 —Home, Pro, Enterprise,
-                  Education; Windows Server 2016 —Standard,
-                  Datacenter; Windows Server 2019 —Standard,
-                  Datacenter.</p>
-                <p><i>Warning! Only 64-bit versions of operation
-                    systems listed above are supported.</i></p>
+                <p><b><%= translation.PAGES_FAQ.LABEL_49 %></b></p>
               </td>
             </tr>
             <tr>
               <td style="border: 1px solid black;">
-                <p><b>CPU</b></p>
+                <p><b><%= translation.PAGES_FAQ.LABEL_50 %></b></p>
               </td>
               <td style="border: 1px solid black;">
-                <p>Intel Core i5+8400&nbsp;<span
-                    style="font-size: 1rem;">or above/</span>AMD
-                  FX-8800P<span style="font-size: 1rem;">&nbsp;or
-                    above.</span></p>
-                <p> <i>Warning! Hardware decompression of H.264/H.265
-                    stream is not supported by AMD CPUs.</i></p>
+                <p><%= translation.PAGES_FAQ.LABEL_51 %></p>
+                <p><i><%= translation.PAGES_FAQ.LABEL_52 %></i></p>
               </td>
             </tr>
             <tr>
               <td style="border: 1px solid black;">
-                <p><b>RAM</b></p>
+                <p><b><%= translation.PAGES_FAQ.LABEL_53 %></b></p>
               </td>
               <td style="border: 1px solid black;">
-                <p>8 GB or above</p>
-              </td>
-            </tr>
-            <tr>
-              <td style="border: 1px solid black;">
-                <p><b>HDD</b></p>
-              </td>
-              <td style="border: 1px solid black;">
-                <p>250 GB</p>
+                <p><%= translation.PAGES_FAQ.LABEL_54 %>&nbsp;<span
+                    style="font-size: 1rem;"><%= translation.PAGES_FAQ.LABEL_55 %></span><%= translation.PAGES_FAQ.LABEL_56 %><span style="font-size: 1rem;">&nbsp;<%= translation.PAGES_FAQ.LABEL_57 %></span></p>
+                <p> <i><%= translation.PAGES_FAQ.LABEL_58 %></i></p>
               </td>
             </tr>
             <tr>
               <td style="border: 1px solid black;">
-                <p><b>HDD free space for software installation</b></p>
+                <p><b><%= translation.PAGES_FAQ.LABEL_59 %></b></p>
               </td>
               <td style="border: 1px solid black;">
-                <p>Not less than 5 GB</p>
-                <p> <i>Note. Additional intelligent modules require
-                    additional disk space.</i></p>
+                <p><%= translation.PAGES_FAQ.LABEL_60 %></p>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid black;">
+                <p><b><%= translation.PAGES_FAQ.LABEL_61 %></b></p>
+              </td>
+              <td style="border: 1px solid black;">
+                <p><%= translation.PAGES_FAQ.LABEL_62 %></p>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid black;">
+                <p><b><%= translation.PAGES_FAQ.LABEL_63 %></b></p>
+              </td>
+              <td style="border: 1px solid black;">
+                <p><%= translation.PAGES_FAQ.LABEL_64 %></p>
+                <p> <i><%= translation.PAGES_FAQ.LABEL_65 %></i></p>
               </td>
             </tr>
           </tbody>
@@ -358,8 +304,7 @@
           <u>
             <font color="#000000"
               style="background-color: rgb(255, 255, 0);">
-              El equipo debe contar con una cuenta de usuario local de
-              Windows y no estar en un dominio.
+              <%= translation.PAGES_FAQ.LABEL_66 %>
             </font>
           </u>
         </p>
@@ -373,22 +318,14 @@
           type="button" data-toggle="collapse"
           data-target="#collapse10" aria-expanded="false"
           aria-controls="collapse10">
-          ¿Puedo cambiar la fecha de mi reserva para el curso de
-          capacitación presencial o examen en línea?
+          <%= translation.PAGES_FAQ.LABEL_67 %>
         </button>
       </h2>
     </div>
     <div id="collapse10" class="collapse" aria-labelledby="heading10"
       data-parent="#accordionExample">
       <div class="card-body">
-        Sí, es posible, en la página principal al hacer clic en el
-        título del curso o examen, en la sección de información se
-        mostrará un botón para cancelar la sesión. Es importante
-        destacar que el sistema solo permite cancelaciones de
-        reservaciones hasta <strong>24 horas antes</strong> de la cita
-        programada. Una vez que se ha cancelado una cita, se puede
-        reprogramar en cualquier momento que el usuario lo necesite o
-        requiera de acuerdo a la disponibilidad de fechas.
+        <%= translation.PAGES_FAQ.LABEL_68 %>
       </div>
     </div>
   </div>
@@ -399,19 +336,14 @@
           type="button" data-toggle="collapse"
           data-target="#collapse11" aria-expanded="false"
           aria-controls="collapse11">
-          ¿Cuántos intentos tengo para aprobar el examen de
-          certificación en línea?
+          <%= translation.PAGES_FAQ.LABEL_71 %>
         </button>
       </h2>
     </div>
     <div id="collapse11" class="collapse" aria-labelledby="heading11"
       data-parent="#accordionExample">
       <div class="card-body">
-        Los exámenes en línea ofrecen hasta un <strong>máximo de 2
-          intentos</strong> para aprobar el examen. Si el usuario no
-        aprueba el examen en su último intento, deberá volver a tomar
-        el curso de capacitación correspondiente al nivel para poder
-        volver a realizar el examen.
+        <%= translation.PAGES_FAQ.LABEL_72 %>
       </div>
     </div>
   </div>
@@ -492,10 +424,9 @@
   </script> -->
 <br>
 <center>
-  <h2>¿Tu pregunta no está en el listado de arriba?</h2>
-  <p>Si tu pregunta no se puede resolver con esta información, favor
-    de contactar a su RSM local o envía un correo a <a
-      href="mailto:soportemexico@issivs.com">soportemexico@issivs.com</a>.
+  <h2><%= translation.PAGES_FAQ.LABEL_75 %></h2>
+  <p><%= translation.PAGES_FAQ.LABEL_76 %> <a
+      href="mailto:soportemexico@issivs.com"><%= translation.PAGES_FAQ.LABEL_33 %></a>.
   </p>
 </center>
 <br>

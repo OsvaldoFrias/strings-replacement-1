@@ -4,11 +4,14 @@
 <head>
   <%- include('../../partials/head'); %>
   <!-- Data table -->
-  <link rel="stylesheet" type="text/css" href="/public/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="/public/js/jquery.dataTables.js">
-  </script>
+  <link rel="stylesheet" type="text/css"
+    href="/public/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/jquery.dataTables.js">
+    </script>
   <!--/ Data table -->
-  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.date.js"></script>
   <link rel="stylesheet" type="text/css" href="/public/css/home.css">
 </head>
 
@@ -18,17 +21,30 @@
   <div class="container">
     <section>
       <div class="container py-4">
-        <div class="row d-flex align-items-center justify-content-center">
+        <div
+          class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div>
               <table id="appointments-list">
                 <thead>
-                  <th><%= translation.ADMIN_AVAILABLE_APPOINTMEN.ASSISTANT %></th>
-                  <th><%= translation.ADMIN_AVAILABLE_APPOINTMEN.MAIL %></th>
-                  <th><%= translation.ADMIN_AVAILABLE_APPOINTMEN.COMPANY %></th>
-                  <th><%= translation.ADMIN_AVAILABLE_APPOINTMEN.HRU %></th>
-                  <th><%= translation.ADMIN_AVAILABLE_APPOINTMEN.LICENSE %></th>
-                  <th><%= translation.ADMIN_AVAILABLE_APPOINTMEN.CANCEL %></th>
+                  <th>
+                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN.ASSISTANT %>
+                  </th>
+                  <th>
+                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN.MAIL %>
+                  </th>
+                  <th>
+                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN.COMPANY %>
+                  </th>
+                  <th>
+                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN.HRU %>
+                  </th>
+                  <th>
+                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN.LICENSE %>
+                  </th>
+                  <th>
+                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN.CANCEL %>
+                  </th>
                 </thead>
               </table>
             </div>
@@ -47,11 +63,16 @@
     </section>
     <!-- <input type="text" class="text-center" style="width: 100%;"> -->
     <section class="text-center">
-      <textarea name="direction" id="direction" style="width: 100%;" rows="10"></textarea>
+      <textarea name="direction" id="direction" style="width: 100%;"
+        rows="10"></textarea>
     </section>
     <section class="text-center">
-      <button id="cancelDirectionButton"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.CANCEL %></button>
-      <button id="submitDirectionButton"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.SUBMIT_DIRECTION %></button>
+      <button id="cancelDirectionButton">
+        <%= translation.ADMIN_AVAILABLE_APPOINTMEN.CANCEL %>
+      </button>
+      <button id="submitDirectionButton">
+        <%= translation.ADMIN_AVAILABLE_APPOINTMEN.SUBMIT_DIRECTION %>
+      </button>
     </section>
   </dialog>
 </body>
@@ -121,12 +142,22 @@
     const serviceCategoryDescription = available.service.serviceCategory.description;
     const serviceInfoTemplate = available.service.serviceCategory.infoTemplate;
     const serviceAttendantsNumber = available.overrideAttendantsNumber || available.service.attendantsNumber;
-    const sessionType = available.sessionType === "remote" ? "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.REMOTE %>" : "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.PRESENTIAL %>";
+    const sessionType = available.sessionType === "remote" ?
+      "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.REMOTE %>"
+      : "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.PRESENTIAL %>";
     const state = available.state;
     const country = available.state.country;
-    const location = serviceType === 'exam' ? '' : available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-    const linkTitle = available.sessionType === "remote" ? "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.ENTER_CONFERENCE %>" : "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.DIRECTION %>";
-    const directionType = available.sessionType === "remote" ? "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.INDICATIONS %>" : "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.DIRECTION %>";
+    const location = serviceType === 'exam' ?
+      ''
+      : available.sessionType === "remote" ?
+        country.name
+        : `${country.name} ${state.name}`;
+    const linkTitle = available.sessionType === "remote" ?
+      "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.ENTER_CONFERENCE %>"
+      : "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.DIRECTION %>";
+    const directionType = available.sessionType === "remote" ?
+      "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.INDICATIONS %>"
+      : "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.DIRECTION %>";
     const direction = available.direction;
 
     const cardTemplate = `<div class="card-1">

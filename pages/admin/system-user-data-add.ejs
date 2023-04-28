@@ -4,13 +4,19 @@
 <head>
   <%- include('../../partials/head'); %>
   <!-- Include Moment.js CDN -->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    rel="stylesheet">
   <!-- Date Range Picker -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="/public/css/datetimepicker.css">
-  <script type="text/javascript" charset="utf8" src="/public/js/datetimepicker.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+  <link rel="stylesheet" type="text/css"
+    href="/public/css/datetimepicker.css">
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/datetimepicker.js"></script>
 
-  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.date.js"></script>
   <link rel="stylesheet" type="text/css" href="/public/css/home.css">
 </head>
 
@@ -20,42 +26,70 @@
   <div class="container">
     <section>
       <div class="container py-4">
-        <div class="row d-flex align-items-center justify-content-center">
+        <div
+          class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div>
-              <h2><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.CREATE_SYSTEM_USER %></h2>
+              <h2>
+                <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.CREATE_SYSTEM_USER %>
+              </h2>
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="firstName"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.FIRST_NAME %></label>
-                    <input type="text" class="form-control" id="firstName" name="firstName">
+                    <label for="firstName">
+                      <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.FIRST_NAME %>
+                    </label>
+                    <input type="text" class="form-control"
+                      id="firstName" name="firstName">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="lastName"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.LAST_NAME %></label>
-                    <input type="text" class="form-control" id="lastName" name="lastName">
+                    <label for="lastName">
+                      <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.LAST_NAME %>
+                    </label>
+                    <input type="text" class="form-control"
+                      id="lastName" name="lastName">
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label class="form-label" for="email"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.EMAIL %></label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="<%= translation.ADMIN_SYSTEM_USER_DATA_ADD.EMAIL %>"
+                    <label class="form-label" for="email">
+                      <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.EMAIL %>
+                    </label>
+                    <input type="email" name="email" id="email"
+                      class="form-control"
+                      placeholder="<%= translation.ADMIN_SYSTEM_USER_DATA_ADD.EMAIL %>"
                       required />
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="role"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ROLE %></label>
-                    <select id="role" name="role" class="form-control">
-                      <option value="" selected><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.OPTION %></option>
-                      <option value="rsm"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.RSM %></option>
-                      <option value="trainer"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.TRAINER %></option>
-                      <option value="admin"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ADMIN %></option>
+                    <label for="role">
+                      <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ROLE %>
+                    </label>
+                    <select id="role" name="role"
+                      class="form-control">
+                      <option value="" selected>
+                        <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.OPTION %>
+                      </option>
+                      <option value="rsm">
+                        <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.RSM %>
+                      </option>
+                      <option value="trainer">
+                        <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.TRAINER %>
+                      </option>
+                      <option value="admin">
+                        <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ADMIN %>
+                      </option>
                     </select>
                   </div>
                 </div>
-                <div id="error" class="alert alert-danger alert-dismissible d-none">
+                <div id="error"
+                  class="alert alert-danger alert-dismissible d-none">
                   <div id="error-message"></div>
                 </div>
                 <div class="col-md-12 text-right">
-                  <button type="button" class="btn btn-primary" onclick="saveSystemUser()"><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ADD %></button>
+                  <button type="button" class="btn btn-primary"
+                    onclick="saveSystemUser()">
+                    <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ADD %>
+                  </button>
                 </div>
                 <div id="loading"></div>
               </form>
@@ -69,7 +103,8 @@
     </section>
   </div>
 </body>
-<script type="text/javascript" charset="utf8" src="/public/js/custom.home.js"></script>
+<script type="text/javascript" charset="utf8"
+  src="/public/js/custom.home.js"></script>
 <script>
   function getBasicInfo() {
   }

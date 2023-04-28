@@ -24,17 +24,17 @@
               <!-- <button onclick="saveCoupon()" class="btn btn-primary">Registrar cupón</button> -->
             </div>
             <div id="loading"></div>
-            <h2><%= translation.ATTENDANT_OPEN_TRAINING.RESERVATIONS %></h2>
+            <h2>Reservaciones</h2>
             <div id="appointments">
             </div>
-            <h2><%= translation.ATTENDANT_OPEN_TRAINING.NEXT_DATES %></h2>
+            <h2>Próximas fechas</h2>
             <div id="availableAppointments">
               <table id="availableAppointments-list">
                 <thead>
                   <tr>
-                    <th><%= translation.ATTENDANT_OPEN_TRAINING.START_DATE %></th>
-                    <th><%= translation.ATTENDANT_OPEN_TRAINING.TOPIC %></th>
-                    <th><%= translation.ATTENDANT_OPEN_TRAINING.RESERVE %></th>
+                    <th>Fecha/Inicio</th>
+                    <th>Tema</th>
+                    <th>Reservar</th>
                   </tr>
                 </thead>
               </table>
@@ -78,7 +78,7 @@
   }
 
   function fixOpenTraining(availableAppointmentId, serviceName, datetime) {
-    if (!confirm(`<%= translation.ATTENDANT_OPEN_TRAINING.LABEL_1 %> ${serviceName} <%= translation.ATTENDANT_OPEN_TRAINING.FOR %> ${datetime}?`)) {
+    if (!confirm(`¿Desea reservar para ${serviceName} para ${datetime}?`)) {
       return;
     }
     displayLoading();
@@ -92,9 +92,9 @@
     })
       .then(res => {
         if (res.status === 201) {
-          alert('<%= translation.ATTENDANT_OPEN_TRAINING.LABEL_2 %>');
+          alert('Cita agendada.');
         } else {
-          alert('<%= translation.ATTENDANT_OPEN_TRAINING.LABEL_3 %>');
+          alert('Hubo un problema agendando la cita, favor de intentar más tarde.');
         }
         location.reload(true);
       })
@@ -119,7 +119,7 @@
       let finishDatetime = parseDateToJson(appointmentFinishDatetime);
       let serviceName = availableAppointment.service.name;
       let availableAppointmentId = availableAppointment.id;
-      let sessionType = availableAppointment.sessionType === "remote" ? "<%= translation.ATTENDANT_OPEN_TRAINING.REMOTE %>" : "<%= translation.ATTENDANT_OPEN_TRAINING.PRESENTIAL %>";
+      let sessionType = availableAppointment.sessionType === "remote" ? "Remoto" : "Presencial";
       let state = availableAppointment.state;
       let country = availableAppointment.state.country;
       let location = availableAppointment.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
@@ -129,7 +129,7 @@
         .add([
           `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}`,
           `${serviceName} - ${sessionType} - ${location}`,
-          `<img style="cursor:pointer;" onclick="fixOpenTraining(${availableAppointmentId},'${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/book.png" alt="<%= translation.ATTENDANT_OPEN_TRAINING.SCHEDULE %>" width="30px"/>`
+          `<img style="cursor:pointer;" onclick="fixOpenTraining(${availableAppointmentId},'${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/book.png" alt="Agendar" width="30px"/>`
         ])
         .draw()
         .node();
@@ -150,11 +150,11 @@
       const serviceName = appointment.available.service.name;
       const serviceCategoryName = appointment.available.service.serviceCategory.name;
       const serviceCategoryDescription = appointment.available.service.serviceCategory.description;
-      const sessionType = appointment.available.sessionType === "remote" ? "<%= translation.ATTENDANT_OPEN_TRAINING.REMOTE %>" : "<%= translation.ATTENDANT_OPEN_TRAINING.PRESENTIAL %>";
+      const sessionType = appointment.available.sessionType === "remote" ? "Remoto" : "Presencial";
       const state = appointment.available.state;
       const country = appointment.available.state.country;
       const location = appointment.available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-      const linkTitle = appointment.available.sessionType === "remote" ? "<%= translation.ATTENDANT_OPEN_TRAINING.ENTER_CONFERENCE %>" : "<%= translation.ATTENDANT_OPEN_TRAINING.DIRECTION %>";
+      const linkTitle = appointment.available.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
 
       const cardTemplate = `<div class="card-1">
         <div class="d-flex flex-wrap justify-content-center">
@@ -171,7 +171,7 @@
               <div>${sessionType} - ${location}</div>
               <table>
                 <tr>
-                  <td><%= translation.ATTENDANT_OPEN_TRAINING.DATE %> </td>
+                  <td>Cita: </td>
                   <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
                 </tr>
               </table>
@@ -179,7 +179,7 @@
           </div>
           <div class="ml-auto p-2">
             <div class="cell-2">
-              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.ATTENDANT_OPEN_TRAINING.LABEL_4 %></p>'}
+              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</p>'}
             </div>
           </div>
         </div>
@@ -190,7 +190,7 @@
     if (appointmentsTemplate && appointmentsTemplate.length > 0) {
       appointments.innerHTML = appointmentsTemplate.join('\n');
     } else {
-      appointments.innerHTML = '<p><%= translation.ATTENDANT_OPEN_TRAINING.LABEL_5 %></p>'
+      appointments.innerHTML = '<p>Aún no se han hecho reservaciones.</p>'
     }
 
   }

@@ -19,10 +19,10 @@
 <script>
 
   function saveCoupon() {
-    const coupon = prompt('<%= translation.ATTENDANT_HEADER.LABEL_1 %>');
+    const coupon = prompt('Ingresa el cupón válido para acceder a la información del curso o examen:');
 
     if (coupon) {
-      if (confirm('<%= translation.ATTENDANT_HEADER.LABEL_2 %>')) {
+      if (confirm('Esta operación es IRREVERSIBLE. ¿Desea continuar?')) {
         registerCoupon(coupon);
       } else {
         // console.log('no se guardó');
@@ -44,25 +44,25 @@
     })
       .then(async (res) => {
         if (res.status === 201) {
-          alert('<%= translation.ATTENDANT_HEADER.LABEL_3 %>');
+          alert('Cupón registrado con éxito. Favor de seleccionar una fecha para terminar su registro.');
         } else if (res.status === 404) {
-          alert('<%= translation.ATTENDANT_HEADER.LABEL_4 %>');
+          alert('El cupón ya fue utilizado o no existe en el registro, favor de contactar a su RSM.');
         } else if (res.status === 400) {
           const body = await res.json();
           if (body) {
             alert(body.message);
           } else {
-            alert('<%= translation.ATTENDANT_HEADER.LABEL_5 %>');
+            alert('Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.');
           }
         } else if (res.status === 408) {
           const body = await res.json();
           if (body && body.message === 'token expired') {
-            alert('<%= translation.ATTENDANT_HEADER.LABEL_6 %>');
+            alert('El cupón ha expirado');
           } else {
-            alert('<%= translation.ATTENDANT_HEADER.LABEL_5 %>');
+            alert('Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.');
           }
         } else {
-          alert('<%= translation.ATTENDANT_HEADER.LABEL_5 %>');
+          alert('Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.');
         }
         location.reload(true);
       })

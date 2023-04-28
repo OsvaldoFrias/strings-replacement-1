@@ -1,5 +1,3 @@
-<!-- <link href="https://vjs.zencdn.net/7.19.2/video-js.css" rel="stylesheet" /> -->
-
 <h1><%= translation.PAGES_FAQ.LABEL_1 %></h1>
 
 <div class="accordion" id="accordionExample">
@@ -24,10 +22,6 @@
           <li><%= translation.PAGES_FAQ.LABEL_4 %></li>
           <li><%= translation.PAGES_FAQ.LABEL_5 %></li>
         </ul>
-        <!-- Adicionalmente, es necesario registrar el cupón
-        correspondiente para que el listado de fechas sea
-        liberado. -->
-
         <%= translation.PAGES_FAQ.LABEL_6 %>
       </div>
     </div>
@@ -128,7 +122,8 @@
         o
         <% if (locals.role) { %>
         <% if (role==='attendant' ) { %>
-        <a href="/my-profile"><%= translation.PAGES_FAQ.LABEL_34 %></a>
+        <a
+          href="/my-profile"><%= translation.PAGES_FAQ.LABEL_34 %></a>
         <% } %>
         <% if (role !=='attendant' ) { %>
         <span><%= translation.PAGES_FAQ.LABEL_34 %></span>
@@ -158,24 +153,14 @@
           <li>
             <%= translation.PAGES_FAQ.LABEL_39 %>
           </li>
-          <!-- <li>
-            Copiar el contenido de la ventana emergente en
-            <% if (locals.role) { %>
-            <% if (role==='attendant' ) { %>
-            <a href="/my-profile">el perfil</a>
-            <% } %>
-            <% if (role !=='attendant' ) { %>
-            <span>el perfil</span>
-            <% } %>
-            <% } %> de usuario del sitio de cursos y certificaciones.
-          </li> -->
           <li>
             <%= translation.PAGES_FAQ.LABEL_40 %> <a
               href="mailto:soportemexico@issivs.com"><%= translation.PAGES_FAQ.LABEL_33 %></a>
             o
             <% if (locals.role) { %>
             <% if (role==='attendant' ) { %>
-            <a href="/my-profile">s<%= translation.PAGES_FAQ.LABEL_34 %></a>
+            <a
+              href="/my-profile">s<%= translation.PAGES_FAQ.LABEL_34 %></a>
             <% } %>
             <% if (role !=='attendant' ) { %>
             <span><%= translation.PAGES_FAQ.LABEL_34 %></span>
@@ -268,7 +253,9 @@
               </td>
               <td style="border: 1px solid black;">
                 <p><%= translation.PAGES_FAQ.LABEL_54 %>&nbsp;<span
-                    style="font-size: 1rem;"><%= translation.PAGES_FAQ.LABEL_55 %></span><%= translation.PAGES_FAQ.LABEL_56 %><span style="font-size: 1rem;">&nbsp;<%= translation.PAGES_FAQ.LABEL_57 %></span></p>
+                    style="font-size: 1rem;"><%= translation.PAGES_FAQ.LABEL_55 %></span><%= translation.PAGES_FAQ.LABEL_56 %><span
+                    style="font-size: 1rem;">&nbsp;<%= translation.PAGES_FAQ.LABEL_57 %></span>
+                </p>
                 <p> <i><%= translation.PAGES_FAQ.LABEL_58 %></i></p>
               </td>
             </tr>
@@ -349,79 +336,6 @@
   </div>
 </div>
 <br>
-<!-- <h2>Galería</h2>
-    <video id="my-video" class="video-js" controls preload="auto" height="480" poster="/public/img/logo_213x68v2.png"
-      data-setup="{}">
-      <source src="/public/video/1.Generacion Licencia-v2.mp4" type="video/mp4" />
-      <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a
-        web browser that
-        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-      </p>
-    </video> -->
-
-<!-- <script src="https://vjs.zencdn.net/7.19.2/video.min.js"></script> -->
-<!-- <script>
-    // Get the Component base class from Video.js
-    var Component = videojs.getComponent('Component');
-
-    // The videojs.extend function is used to assist with inheritance. In
-    // an ES6 environment, `class TitleBar extends Component` would work
-    // identically.
-    var TitleBar = videojs.extend(Component, {
-
-      // The constructor of a component receives two arguments: the
-      // player it will be associated with and an object of options.
-      constructor: function (player, options) {
-
-        // It is important to invoke the superclass before anything else, 
-        // to get all the features of components out of the box!
-        Component.apply(this, arguments);
-
-        // If a `text` option was passed in, update the text content of 
-        // the component.
-        if (options.text) {
-          this.updateTextContent(options.text);
-        }
-      },
-
-      // The `createEl` function of a component creates its DOM element.
-      createEl: function () {
-        return videojs.createEl('div', {
-
-          // Prefixing classes of elements within a player with "vjs-" 
-          // is a convention used in Video.js.
-          className: 'vjs-title-bar'
-        });
-      },
-
-      // This function could be called at any time to update the text 
-      // contents of the component.
-      updateTextContent: function (text) {
-
-        // If no text was provided, default to "Title Unknown"
-        if (typeof text !== 'string') {
-          text = 'Title Unknown';
-        }
-
-        // Use Video.js utility DOM methods to manipulate the content
-        // of the component's element.
-        videojs.emptyEl(this.el());
-        videojs.appendContent(this.el(), text);
-      }
-    });
-
-    // Register the component with Video.js, so it can be used in players.
-    videojs.registerComponent('TitleBar', TitleBar);
-
-    // Create a player.
-    var player = videojs('my-video');
-
-    // Add the TitleBar as a child of the player and provide it some text 
-    // in its options.
-    player.addChild('TitleBar', { text: 'Obtener HRU y subirlo al perfil' });
-
-  </script> -->
 <br>
 <center>
   <h2><%= translation.PAGES_FAQ.LABEL_75 %></h2>

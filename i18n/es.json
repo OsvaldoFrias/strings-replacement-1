@@ -34,7 +34,7 @@
     "MENU_11": "Catálogos",
     "MENU_12": "Países",
     "MENU_13": "Usuarios del sistema",
-    "MENU_14": "Preguntas frecuentes"
+    "MENU_14": "Capacitaciones gratuitas"
   },
   "HOME": {
     "BADGE_1_TITLE": "Mis reservaciones",
@@ -43,7 +43,7 @@
     "LIST_1_EMPTY": "Aún no se han hecho reservaciones."
   },
   "APPOINTMENT": {
-    "CANCEL_BUTTON": "Cancelar Curso",
+    "CANCEL_BUTTON": "Cancelar",
     "CANCEL_PROMPT": "¿Desea cancelar la sesión de $0 para el $1?",
     "FIX_APPOINTMENT_PROMPT": "¿Desea reservar para $0 para $1?",
     "FIXED": "Cita agendada."
@@ -83,6 +83,7 @@
     "REVIEW_TITLE": "Evaluación"
   },
   "PROFILE": {
+    "TITLE": "Perfil de usuario",
     "NAME_TITLE": "Nombre(s)",
     "LAST_NAME_TITLE": "Apellido(s)",
     "BUSINESS_TITLE": "Empresa",
@@ -109,11 +110,33 @@
     "LABEL_4": "Emitido en",
     "LABEL_5": "Fecha de expiración"
   },
-  "FOOTER": {
-    "COPYRIGHT": "1480 U.S. Highway 9 North, Suite 202, Woodbridge, NJ 07095, Ph: 732.855.1111 © 1999–2022 ISS Corp. All rights reserved. Reprinting of materials permitted only with written agreement from ISS."
-
+  "SERVICE": {
+    "TITLE_1": "Servicios",
+    "LABEL_1": "Nombre",
+    "LABEL_2": "Nivel",
+    "LABEL_3": "Estimación de asistentes/Cupo",
+    "LABEL_4": "Tipo de servicio",
+    "OPTION_1": "Curso",
+    "OPTION_2": "Examen",
+    "LABEL_5": "Depende del servicio",
+    "OPTION_3": "Choose...",
+    "LABEL_6": "Genera cupón para el servicio",
+    "LABEL_7": "Servicio gratuito (no requiere cupón)",
+    "LABEL_8": "Texto del certificado",
+    "LABEL_9": "Información para el asistente",
+    "BUTTON_1": "Crear",
+    "LABEL_11": "Se requiere el nombre del servicio.",
+    "LABEL_12": "Se requiere el nivel del servicio.",
+    "LABEL_13": "Se requiere la estimación de asistentes/cupo.",
+    "LABEL_14": "Se requiere la información del curso.",
+    "LABEL_15": "Servicio creado.",
+    "LABEL_16": "Hubo un problema creando el servicio, favor de intentar más tarde.",
+    "BUTTON_2": "Actualizar",
+    "LABEL_17": "Servicio actualizado.",
+    "LABEL_18": "Hubo un problema actualizando los datos del servicio, favor de intentar más tarde.",
+    "BUTTON_3": "Agregar servicio"
   },
-  "TRAINER_ATTENDANT_LIST":{
+  "TRAINER_ATTENDANT_LIST": {
     "USER_LIST": "Lista de usuarios",
     "ASSISTANTS": "Asistentes",
     "MAIL": "Correo",
@@ -121,7 +144,7 @@
     "HRU": "HRU",
     "COUNTRY": "País"
   },
-  "TRAINER_ATTENDANT_PROFILE":{
+  "TRAINER_ATTENDANT_PROFILE": {
     "USER_PROFILE": "Perfil de usuario",
     "EMAIL_PROFILE_1": "Correo electrónico:",
     "EMAIL_PROFILE_2": "Email",
@@ -161,7 +184,7 @@
     "LABEL_7": "Usuario actualizado.",
     "LABEL_8": "Hubo un problema actualizando los datos del usuario, favor de intentar más tarde."
   },
-  "TRAINER_AVAILABLE_APPOINTMEN":{
+  "TRAINER_AVAILABLE_APPOINTMEN": {
     "ASSISTANT": "Asistente",
     "MAIL": "Correo",
     "COMPANY": "Empresa",
@@ -180,7 +203,7 @@
     "LABEL_5": "Enlace actualizado.",
     "LABEL_6": "Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde."
   },
-  "TRAINER_COUPON":{
+  "TRAINER_COUPON": {
     "GENERATED_COUPONS": "Cupones generados",
     "INVOICE_NUMBER": "Núm. Factura",
     "CONSECUTIVE": "Consecutivo",
@@ -194,7 +217,7 @@
     "LABEL_2": "Copiar al portapapeles: CTRL + C, Enter",
     "COPY": "Copiar"
   },
-  "TRAINER_GRADE_LIST":{
+  "TRAINER_GRADE_LIST": {
     "RATINGS": "Calificaciones",
     "SESSION": "Sesión",
     "DAY": "Fecha",
@@ -223,7 +246,7 @@
     "LABEL_10": "Evaluación actualizada.",
     "LABEL_11": "Hubo un problema estableciendo la evaluación del usuario, favor de intentar más tarde."
   },
-  "TRAINER_HOME":{
+  "TRAINER_HOME": {
     "UPCOMING_SESSIONS": "Próximas sesiones",
     "TRAINER": "Instructor:",
     "OPTION": "Choose...",
@@ -245,7 +268,7 @@
     "LABEL_4": "Instructor actualizado.",
     "LABEL_5": "Hubo un problema actualizando al instructor de la sesión, favor de intentar más tarde."
   },
-  "RSM_ATTENDANT_LIST":{
+  "RSM_ATTENDANT_LIST": {
     "USER_LIST": "Lista de usuarios",
     "ASSISTANT": "Asistente",
     "MAIL": "Correo",
@@ -253,7 +276,7 @@
     "HRU": "HRU",
     "COUNTRY": "País"
   },
-  "RSM_ATTENDANT_PROFILE":{
+  "RSM_ATTENDANT_PROFILE": {
     "USER_PROFILE": "Perfil de usuario",
     "EMAIL_PROFILE_1": "Correo electrónico:",
     "EMAIL_PROFILE_2": "Email",
@@ -288,7 +311,7 @@
     "LABEL_6": "Usuario actualizado",
     "LABEL_7": "Hubo un problema actualizando los datos del usuario, favor de intentar más tarde."
   },
-  "RSM_AVAILABLE_APPOINTMEN":{
+  "RSM_AVAILABLE_APPOINTMEN": {
     "ASSISTANT": "Asistente",
     "MAIL": "Correo",
     "COMPANY": "Empresa",
@@ -307,9 +330,9 @@
     "LABEL_5": "Enlace actualizado.",
     "LABEL_6": "Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde."
   },
-  "RSM_COUPON":{
+  "RSM_COUPON": {
     "GENERATED_COUPONS": "Cupones generados",
-    "DOWNLOAD_REPORT":  "Descargar reporte",
+    "DOWNLOAD_REPORT": "Descargar reporte",
     "INVOICE_NUMBER": "Núm. Factura",
     "CONSECUTIVE": "Consecutivo",
     "PRODUCT": "Producto",
@@ -322,7 +345,7 @@
     "LABEL_2": "Copiar al portapapeles: CTRL + C, Enter",
     "COPY": "Copiar"
   },
-  "RSM_GRADE_LIST":{
+  "RSM_GRADE_LIST": {
     "RATINGS": "Calificaciones",
     "DOWNLOAD_REPORT": "Descargar reporte",
     "SESSION": "Sesión",
@@ -338,19 +361,19 @@
     "CERTIFICATE": "Certificado",
     "LABEL_2": "Aún no ha sido generado el certificado.",
     "LABEL_3": "Editar enlace de la evaluación",
-    "LABEL_4":"No hay evaluación.",
-    "LABEL_5":"Enlace para evaluación de",
+    "LABEL_4": "No hay evaluación.",
+    "LABEL_5": "Enlace para evaluación de",
     "OF": "de",
     "LABEL_6": "Enlace actualizado.",
     "LABEL_7": "Hubo un problema actualizando el enlace del feedback de la evaluación, favor de intentar más tarde.",
     "CANCEL": "Cancelar",
     "SAVE": "Guardar",
     "LABEL_8": "El asistente se evaulará como:",
-    "LABEL_9":"¿Desea continuar?",
+    "LABEL_9": "¿Desea continuar?",
     "LABEL_10": "Evaluación actualizada.",
-    "LABEL_11": "Hubo un problema estableciendo la evaluación del usuario, favor de intentar más tarde." 
+    "LABEL_11": "Hubo un problema estableciendo la evaluación del usuario, favor de intentar más tarde."
   },
-  "RSM_HOME":{
+  "RSM_HOME": {
     "UPCOMING_SESSIONS": "Próximas sesiones",
     "TRAINER": "Instructor:",
     "OPTION": "Choose...",
@@ -372,7 +395,7 @@
     "LABEL_4": "Instructor actualizado.",
     "LABEL_5": "Hubo un problema actualizando al instructor de la sesión, favor de intentar más tarde."
   },
-  "ATTENDANT_APPOINTMENT":{
+  "ATTENDANT_APPOINTMENT": {
     "REMOTE": "Remoto",
     "PRESENTIAL": "Presencial",
     "ENTER_CONFERENCE": "Entrar a conferencia",
@@ -384,7 +407,7 @@
     "LABEL_3": "¿Desea cancelar la sesión de",
     "LABEL_4": "para el"
   },
-  "ATTENDANT_ATTENDANT_PROFILE":{
+  "ATTENDANT_ATTENDANT_PROFILE": {
     "USER_PROFILE": "Perfil de usuario",
     "FIRST_NAME_1": "Nombres(s):",
     "FIRST_NAME_2": "Nombres(s)",
@@ -411,7 +434,7 @@
     "LABEL_5": "Perfil actualizado",
     "LABEL_6": "Hubo un problema actualizando el perfil del usuario, favor de intentar más tarde."
   },
-  "ATTENDANT_GRADE_LIST":{
+  "ATTENDANT_GRADE_LIST": {
     "RATINGS": "Calificaciones",
     "SESSION": "Sesión",
     "DAY": "Fecha",
@@ -426,7 +449,7 @@
     "LABEL_2": "Aún no ha sido generado el certificado.",
     "LABEL_3": "No hay evaluación"
   },
-  "ATTENDANT_HEADER":{
+  "ATTENDANT_HEADER": {
     "LABEL_1": "Ingresa el cupón válido para acceder a la información del curso o examen:",
     "LABEL_2": "Esta operación es IRREVERSIBLE. ¿Desea continuar?",
     "LABEL_3": "Cupón registrado con éxito. Favor de seleccionar una fecha para terminar su registro.",
@@ -434,7 +457,7 @@
     "LABEL_5": "Hubo un error al intentar registrar el cupón, favor de contactar a su RSM.",
     "LABEL_6": "El cupón ha expirado"
   },
-  "ATTENDANT_HOME":{
+  "ATTENDANT_HOME": {
     "RESERVATIONS": "Reservaciones",
     "NEXT_DATES": "Próximas fechas",
     "START_DATE": "Fecha/Inicio",
@@ -460,7 +483,7 @@
     "LABEL_10": "Aún no está disponible el enlace para unirse.",
     "LABEL_11": "Aún no se han hecho reservaciones"
   },
-  "ATTENDANT_OPEN_TRAINING":{
+  "ATTENDANT_OPEN_TRAINING": {
     "RESERVATIONS": "Reservaciones",
     "NEXT_DATES": "Próximas fechas",
     "START_DATE": "Fecha/Inicio",
@@ -479,7 +502,7 @@
     "LABEL_4": "Aún no está disponible el enlace para unirse.",
     "LABEL_5": "Aún no se han hecho reservaciones."
   },
-  "ADMIN_ATTENDANT_LIST":{
+  "ADMIN_ATTENDANT_LIST": {
     "USER_LIST": "Lista de usuarios",
     "ASSISTANT": "Asistente",
     "MAIL": "Correo",
@@ -487,7 +510,7 @@
     "HRU": "HRU",
     "COUNTRY": "País"
   },
-  "ADMIN_ATTENDANT_PROFILE":{
+  "ADMIN_ATTENDANT_PROFILE": {
     "USER_PROFILE": "Perfil de usuario",
     "EMAIL_PROFILE_1": "Correo electrónico:",
     "EMAIL_PROFILE_2": "Email",
@@ -530,7 +553,9 @@
     "LABEL_10": "Usuario actualizado",
     "LABEL_11": "Hubo un problema actualizando los datos del usuario, favor de intentar más tarde."
   },
-  "ADMIN_AVAILABLE_APPOINTMEN_ADD":{
+  "ADMIN_AVAILABLE_APPOINTMEN_ADD": {
+    "EDIT_TITLE": "Actualizar datos de la sesión",
+    "UPDATE": "Actualizar",
     "SCHEDULE_NEXT_SESSION": "Agendar próxima sesión",
     "START_DATE_TIME": "Fecha y hora inicial:",
     "FINISH_DATE_TIME": "Fecha y hora final:",
@@ -551,7 +576,7 @@
     "LABEL_4": "Selecciona a un instructor.",
     "LABEL_5": "Selecciona un país y una región."
   },
-  "ADMIN_AVAILABLE_APPOINTMEN":{
+  "ADMIN_AVAILABLE_APPOINTMEN": {
     "ASSISTANT": "Asistente",
     "MAIL": "Correo",
     "COMPANY": "Empresa",
@@ -588,23 +613,34 @@
     "LABEL_15": "¿Desea cancelar la sesión de",
     "LABEL_16": "para el"
   },
-  "ADMIN_COUNTRY_LIST":{
+  "ADMIN_COUNTRY_LIST": {
     "COUNTRIES": "Países",
     "ADD_COUNTRY": "Agregar país",
+    "ADD_STATE": "Agregar ciudad",
     "NAME": "Nombre",
     "ACTION": "Acción",
     "UPDATE": "Actualizar",
     "DELETE": "Borrar",
+    "STATE_NAME": "Nombre",
+    "STATE_TIMEZONE": "Zona horaria",
     "ADD_COUNTRY_1": "Agregar país:",
     "ADDED_COUNTRY": "País agregado",
+    "ADDED_STATE": "Ciudad agregada",
+    "EDIT_STATE_NAME": "Editar nombre",
+    "EDIT_TIMEZONE": "Editar zona horaria",
     "LABEL_1": "Hubo un problema agregando el nombre del país, favor de intentar más tarde.",
     "LABEL_2": "Actualizar nombre:",
     "LABEL_3": "Nombre actualizado.",
     "LABEL_4": "Hubo un problema actualizando nombre del país, favor de intentar más tarde.",
     "LABEL_5": "¿Desea eliminar el registro del país:",
-    "LABEL_6": "No fue posible eliminar el país."
+    "LABEL_6": "No fue posible eliminar el país.",
+    "LABEL_7": "Hubo un problema agregando el nombre de la ciudad, favor de intentar más tarde.",
+    "LABEL_8": "Nombre actualizado.",
+    "LABEL_9": "Hubo un problema actualizando nombre de la ciudad, favor de intentar más tarde.",
+    "LABEL_10": "Zona horaria actualizada.",
+    "LABEL_11": "Hubo un problema actualizando la zona horaria, favor de intentar más tarde."
   },
-  "ADMIN_COUPON_ADD":{
+  "ADMIN_COUPON_ADD": {
     "GENERATE_COUPONS": "Generar cupones a partir de PO",
     "PO_CODE": "Núm. factura (PO):",
     "SEQUENCE": "Cantidad de cupones:",
@@ -620,7 +656,7 @@
     "LABEL_4": "Indique la empresa que compró el cupón.",
     "LABEL_5": "Indique el nombre del RSM asociado."
   },
-  "ADMIN_COUPON":{
+  "ADMIN_COUPON": {
     "GENERATE_COUPONS": "Generar cupones",
     "GENERATED_COUPONS": "Cupones generados",
     "DOWNLOAD_REPORT": "Descargar reporte",
@@ -639,7 +675,7 @@
     "COPY": "Copiar",
     "CANCEL": "Cancelar"
   },
-  "ADMIN_GRADE_LIST":{
+  "ADMIN_GRADE_LIST": {
     "RATINGS": "Calificaciones",
     "DOWNLOAD_REPORT": "Descargar reporte",
     "SESSION": "Sesión",
@@ -657,7 +693,7 @@
     "LABEL_1": "Aún no ha sido evaluado.",
     "CERTIFICATE": "Certificado",
     "LABEL_2": "Aún no ha sido generado el certificado.",
-    "EDIT_LINK":"Editar enlace de la evaluación",
+    "EDIT_LINK": "Editar enlace de la evaluación",
     "LABEL_3": "No hay evaluación",
     "LABEL_4": "Enlace para evaluación de",
     "OF": "de",
@@ -672,10 +708,10 @@
     "LABEL_11": "Hubo un error con el cupón.",
     "LABEL_12": "Hubo un problema estableciendo la evaluación del usuario, favor de intentar más tarde."
   },
-  "ADMIN_HOME":{
+  "ADMIN_HOME": {
     "SCHEDULE_NEW_SESSIONS": "Agendar nuevas sesiones",
     "UPCOMING_SESSIONS": "Próximas sesiones",
-    "SESSION":"Sesión",
+    "SESSION": "Sesión",
     "DATE_HOUR": "Fecha/Hora",
     "LINK": "Enlace",
     "TRAINER": "Instructor",
@@ -701,7 +737,7 @@
     "LABEL_12": "Enlace actualizado.",
     "LABEL_13": "Hubo un problema actualizando el enlace de la cita, favor de intentar más tarde."
   },
-  "ADMIN_SERVICE_CATEGORY_EDIT":{
+  "ADMIN_SERVICE_CATEGORY_EDIT": {
     "NAME": "Nombre",
     "LEVEL": "Nivel:",
     "UPDATE": "Actualizar",
@@ -716,7 +752,7 @@
     "LABEL_9": "¿Desea cancelar la sesión de",
     "LABEL_10": "para el"
   },
-  "ADMIN_SERVICE_CATEGORY_LIST":{
+  "ADMIN_SERVICE_CATEGORY_LIST": {
     "NAME": "Nombre",
     "LEVEL": "Nivel",
     "LABEL_1": "Enlace para licencia de",
@@ -725,7 +761,7 @@
     "LABEL_4": "¿Desea cancelar la sesión de",
     "LABEL_5": "para el"
   },
-  "ADMIN_SYSTEM_USER_DATA_ADD":{
+  "ADMIN_SYSTEM_USER_DATA_ADD": {
     "CREATE_SYSTEM_USER": "Crear usuario del sistema",
     "FIRST_NAME": "Nombres(s):",
     "LAST_NAME": "Apellido(s):",
@@ -741,7 +777,7 @@
     "LABEL_3": "Indica el correo del usuario.",
     "LABEL_4": "Selecciona a un rol para el usuario."
   },
-  "ADMIN_SYSTEM_USER_DATA_LIST":{
+  "ADMIN_SYSTEM_USER_DATA_LIST": {
     "SYSTEM_USERS": "Usuarios del sistema",
     "SCHEDULE_USER": "Agendar usuario",
     "NAME": "Nombre",
@@ -757,20 +793,19 @@
     "CANCEL": "Cancelar",
     "SAVE": "Guardar"
   },
-  "PAGES_GRADE":{
+  "PAGES_GRADE": {
     "ASSISTANT_NAME": "Nombre del asistente",
     "CERTIFICATE": "Certificado",
     "STATUS": "Estatus:",
     "ISSUED_AT": "Emitido en:",
     "EXPIRATION_TIME": "Fecha de expiración"
   },
-  "PAGES_RECOVERY_EMAIL":{
+  "PAGES_RECOVERY_EMAIL": {
     "RECOVERY_PASSWORD": "Recuperar contraseña",
-    "EMAIL": "Correo electrónico:",
-    "EMAIL_1": "Correo electrónico",
+    "EMAIL": "Correo electrónico",
     "SEND_EMAIL": "Enviar correo"
   },
-  "PAGES_RECOVERY_PASSWORD":{
+  "PAGES_RECOVERY_PASSWORD": {
     "RESTORE_PASSWORD": "Restablecer contraseña",
     "PASSWORD": "Contraseña:",
     "REPEAT_PASSWORD": "Repetir contraseña:",
@@ -780,30 +815,27 @@
     "ALERT_2": "La contraseña no coincide.",
     "ALERT_3": "La contraseña es requerida."
   },
-  "PAGES_SIGNIN":{
+  "PAGES_SIGNIN": {
     "WELCOME": "BIENVENIDO",
     "DESCRIPTION": "ISS Appointments Portal",
-    "EMAIL":"Correo electrónico",
+    "EMAIL": "Correo electrónico",
     "PASSWORD": "Contraseña",
-    "FORGOT_PASSWORD":"Olvidé mi contraseña",
+    "FORGOT_PASSWORD": "Olvidé mi contraseña",
     "SIGNIN": "INGRESAR",
     "CHECKIN": "REGISTRARSE"
   },
-  "PAGES_SIGNUP":{
+  "PAGES_SIGNUP": {
     "RECORD": "Registro",
     "LABEL_1": "* Los datos de Nombre(s) y Apellido(s) aparecerán sin modificación en el certificado",
-    "NAME": "Nombre(s):",
-    "NAME_1": "Nombre(s)",
-    "LAST_NAME": "Apellido(s):",
-    "LAST_NAME_1": "Apellido(s)",
-    "COMPANY": "Empresa:",
-    "COMPANY_1": "Empresa",
+    "NAME": "Nombre(s)",
+    "LAST_NAME": "Apellido(s)",
+    "COMPANY": "Empresa",
     "LABEL_2": "* Este dato aparecerá sin modificación en el certificado",
-    "EMAIL":"Correo electrónico:",
-    "COUNTRY":"País:",
-    "OPTION":"Choose...",
+    "EMAIL": "Correo electrónico",
+    "COUNTRY": "País:",
+    "OPTION": "Choose...",
     "ENTER_CAPTCHA": "Ingresar captcha",
-    "VALIDATE":  "Validad",
+    "VALIDATE": "Validar",
     "CHANGE": "Cambiar",
     "ALERT_1": "El nombre es requerido.",
     "ALERT_2": "El apellido es requerido.",
@@ -812,7 +844,7 @@
     "ALERT_5": "El correo electrónico es requerido.",
     "ALERT_6": "Registro realizado con éxito, favor de revisar el correo proporcionado."
   },
-  "PAGES_FAQ":{
+  "PAGES_FAQ": {
     "LABEL_1": "Preguntas frecuentes",
     "LABEL_2": "¿Por qué el listado de próximas fechas está vacío?",
     "LABEL_3": "El listado de próximas fechas se llena con las próximas fechas disponibles que cumplen con las siguientes características:",
@@ -882,7 +914,7 @@
     "LABEL_75": "¿Tu pregunta no está en el listado de arriba?",
     "LABEL_76": "Si tu pregunta no se puede resolver con esta información, favor de contactar a su RSM local o envía un correo a"
   },
-  "APPOINTMENT_REMINDER_EMAIL":{
+  "APPOINTMENT_REMINDER_EMAIL": {
     "LABEL_1": "Recordatorio de",
     "LABEL_2": "Le recordamos que falta(n)",
     "LABEL_3": "día(s) para",
@@ -892,7 +924,7 @@
     "LABEL_7": "plataforma",
     "LABEL_8": "y seguir las recomendaciones previas."
   },
-  "ASSIGNMENT_NOTICE_EMAIL":{
+  "ASSIGNMENT_NOTICE_EMAIL": {
     "LABEL_1": "Asignación de",
     "LABEL_2": "Se te ha asignado impartir",
     "LABEL_3": "del",
@@ -901,13 +933,13 @@
     "LABEL_6": "entrar a la conferencia o consultar la ubicación",
     "LABEL_7": "O copia y pega el siguiente enlace en la barra de búsqueda del navegador:"
   },
-  "ATTENDANCE_NOTIFICATION_EMAIL":{
+  "ATTENDANCE_NOTIFICATION_EMAIL": {
     "LABEL_1": "Registro de asistencia",
     "LABEL_2": "Se ha confirmado su participación en",
     "LABEL_3": "Ingrese al sitio de capacitaciones y certificaciones para verificar y reservar su examen.",
     "LABEL_4": "Ingresar al sitio de Certificación"
   },
-  "CONFIRMATION_EMAIL":{
+  "CONFIRMATION_EMAIL": {
     "LABEL_1": "Bienvenido al sitio de Certificación ISS",
     "LABEL_2": "Verifica tu correo electrónico.",
     "LABEL_3": "Para poder utilizar el sitio de Certificación ISS, favor de verificar esta cuenta de correo.",
@@ -915,21 +947,21 @@
     "LABEL_5": "Si no hizo el registro en el sitio, favor de ignorar el correo, la cuenta se ELIMINARÁ eventualmente.",
     "LABEL_6": "Para der utilizar el sitio de Certificación ISS, favor de verificar esta cuenta de correo usando el siguiente enlace:"
   },
-  "COUPON_NOTIFICATION_EMAIL":{
+  "COUPON_NOTIFICATION_EMAIL": {
     "LABEL_1": "Cupón de",
     "LABEL_2": "Buenas tardes,",
     "LABEL_3": "El siguiente cupón deberá ser utilizado para iniciar su proceso de inscripción al",
     "LABEL_4": "de la plataforma SecurOS:",
     "LABEL_5": "Una vez registrado el cupón, verifique las fechas disponibles para hacer su registro."
   },
-  "DIRECTION_UPDATE_NOTICE":{
+  "DIRECTION_UPDATE_NOTICE": {
     "LABEL_1": "La ubicación de la sesión ha sido actualizada",
     "LABEL_2": "Se actualizó en el sitio de cursos y certificaciones ISS la ubicación del Curso de Certificación Nivel 1, favor de revisar la información del curso en el sitio.",
     "LABEL_3": "Ubicación actualizada:",
     "LABEL_4": "Saludos cordiales.",
     "LABEL_5": "Ingresar al sitio de Certificación"
   },
-  "EXAM_FAILED_NOTICE_EMAIL":{
+  "EXAM_FAILED_NOTICE_EMAIL": {
     "LABEL_1": "Notificación de evaluación",
     "LABEL_2": "Lamentamos informarle que su evaluación del examen de certificación",
     "LABEL_3": "ha resultado",
@@ -938,19 +970,19 @@
     "LABEL_6": "Favor de ingresar al sitio de capacitaciones y certificaciones para consultar las fechas disponibles.",
     "LABEL_7": "Ingresar al sitio de Certificación"
   },
-  "GRADE_NOTIFICATION_EMAIL":{
+  "GRADE_NOTIFICATION_EMAIL": {
     "LABEL_1": "Notificación de evaluación",
     "LABEL_2": "Se ha evaluado su participación en",
     "LABEL_3": "Ingrese al sitio de capacitaciones y certificaciones para verificar.",
     "LABEL_4": "Ingresar al sitio de Certificación"
   },
-  "RECOVERY_PASSWORD_EMAIL":{
+  "RECOVERY_PASSWORD_EMAIL": {
     "LABEL_1": "Establecer contraseña",
     "LABEL_2": "Para establecer la contraseña ingresa a este link",
     "LABEL_3": "El enlace expira en 15 minutos.",
     "LABEL_4": "Establecer contraseña"
   },
-  "RESERVATION_EMAIL":{
+  "RESERVATION_EMAIL": {
     "LABEL_1": "Reservación de",
     "LABEL_2": "Se ha completado la reservación de",
     "LABEL_3": "que se llevará a cabo del",
@@ -962,7 +994,7 @@
     "LABEL_9": "las reservaciones se pueden cancelar MÁXIMO 24 h ANTES.",
     "LABEL_10": "Copia y pega el siguiente enlace en la barra de búsqueda del navegador para entrar a la conferencia o consultar la ubicación:"
   },
-  "SATISFACTION_SURVEY_EMAIL":{
+  "SATISFACTION_SURVEY_EMAIL": {
     "LABEL_1": "Estimado",
     "LABEL_2": "Queremos agradecerte por haber tomado el",
     "LABEL_3": "y por tu tiempo para aprender acerca de SecurOS.",

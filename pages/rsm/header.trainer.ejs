@@ -1,10 +1,12 @@
-<div class="header d-flex" style="height:auto;padding-top: 20px;padding-bottom: 20px;">
-  <h2 class="mr-auto align-self-center col-sm-6" style="font-family: 'GothamLight';"></h2>
+<div class="header d-flex"
+  style="height:auto;padding-top: 20px;padding-bottom: 20px;">
+  <h2 class="mr-auto align-self-center col-sm-6"
+    style="font-family: 'GothamLight';"></h2>
   <% if (locals.username) { %>
-    <div class="text-right align-self-center col-sm-6">
-      <h4>
-        <%= `${username}` %>
-      </h4>
-    </div>
+  <div class="text-right align-self-center col-sm-6">
+    <h4>
+      <%= `${username}` %>
+    </h4>
+  </div>
   <% } %>
 </div>

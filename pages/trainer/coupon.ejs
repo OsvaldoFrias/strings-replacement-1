@@ -5,11 +5,14 @@
   <%- include('../../partials/head'); %>
 
   <!-- Data table -->
-  <link rel="stylesheet" type="text/css" href="/public/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="/public/js/jquery.dataTables.js">
-  </script>
+  <link rel="stylesheet" type="text/css"
+    href="/public/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/jquery.dataTables.js">
+    </script>
   <!--/ Data table -->
-  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.date.js"></script>
   <link rel="stylesheet" type="text/css" href="/public/css/home.css">
 </head>
 
@@ -21,13 +24,19 @@
       <div>
         <div class="d-flex align-items-center justify-content-center">
           <div class="w-100">
-            <h2><%= translation.TRAINER_COUPON.GENERATED_COUPONS %></h2>
+            <h2>
+              <%= translation.TRAINER_COUPON.GENERATED_COUPONS %>
+            </h2>
             <div id="availableAppointments">
               <table id="availableAppointments-list">
                 <thead>
                   <tr>
-                    <th><%= translation.TRAINER_COUPON.INVOICE_NUMBER %></th>
-                    <th><%= translation.TRAINER_COUPON.CONSECUTIVE %></th>
+                    <th>
+                      <%= translation.TRAINER_COUPON.INVOICE_NUMBER %>
+                    </th>
+                    <th>
+                      <%= translation.TRAINER_COUPON.CONSECUTIVE %>
+                    </th>
                     <th><%= translation.TRAINER_COUPON.PRODUCT %></th>
                     <th><%= translation.TRAINER_COUPON.USER %></th>
                     <th><%= translation.TRAINER_COUPON.COUPON %></th>

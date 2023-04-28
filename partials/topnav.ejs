@@ -1,10 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2a3a6f;">
+<nav class="navbar navbar-expand-lg navbar-dark"
+  style="background-color: #2a3a6f;">
   <a class="navbar-brand" href="/">
-    <img style="height:52px;" src="/public/img/Logo Final ISS_R_logo dark BG - cut.png" />
+    <img style="height:52px;"
+      src="/public/img/Logo Final ISS_R_logo dark BG - cut.png" />
   </a>
   <% if (locals.role) { %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+    data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -16,64 +19,90 @@
       </li>
       <li class="nav-item text-center dropdown">
         <a class="nav-link dropdown-toggle <%= typeof location != 'undefined' ? (location === 'status' ? 'nav-active' : '') : '' %>"
-          href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           <%= translation.MENU.MENU_5 %>
         </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink1">
-          <a class="dropdown-item" href="/grades?type=exam"><%= translation.MENU.MENU_6 %></a>
-          <a class="dropdown-item" href="/grades?type=course"><%= translation.MENU.MENU_7 %></a>
+        <div class="dropdown-menu dropdown-menu-right"
+          aria-labelledby="navbarDropdownMenuLink1">
+          <a class="dropdown-item"
+            href="/grades?type=exam"><%= translation.MENU.MENU_6 %></a>
+          <a class="dropdown-item"
+            href="/grades?type=course"><%= translation.MENU.MENU_7 %></a>
         </div>
       </li>
       <% if (locals.role) { %>
       <% if (role === 'admin' || role === 'trainer' || role === 'rsm') { %>
       <li class="nav-item text-center">
         <a class="nav-link <%= typeof location != 'undefined' ? (location === 'coupons' ? 'nav-active' : '') : '' %>"
-          href="/coupon"><%= translation.MENU.MENU_8 %></a>
+          href="/coupon">
+          <%= translation.MENU.MENU_8 %>
+        </a>
       </li>
       <li class="nav-item text-center">
         <a class="nav-link <%= typeof location != 'undefined' ? (location === 'attendants' ? 'nav-active' : '') : '' %>"
-          href="/attendant"><%= translation.MENU.MENU_9 %></a>
+          href="/attendant">
+          <%= translation.MENU.MENU_9 %>
+        </a>
       </li>
       <% } %>
       <% if (role === 'admin') { %>
       <li class="nav-item text-center">
         <a class="nav-link <%= typeof location != 'undefined' ? (location === 'services' ? 'nav-active' : '') : '' %>"
-          href="/service-categories"><%= translation.MENU.MENU_10 %></a>
+          href="/services">
+          <%= translation.MENU.MENU_10 %>
+        </a>
       </li>
       <li class="nav-item text-center dropdown">
         <a class="nav-link dropdown-toggle <%= typeof location != 'undefined' ? (location === 'catalogs' ? 'nav-active' : '') : '' %>"
-          href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Catálogos
+          href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <%= translation.MENU.MENU_11 %>
         </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink1">
-          <a class="dropdown-item" href="/countries"><%= translation.MENU.MENU_12 %></a>
-          <a class="dropdown-item" href="/system-users"><%= translation.MENU.MENU_13 %></a>
+        <div class="dropdown-menu dropdown-menu-right"
+          aria-labelledby="navbarDropdownMenuLink1">
+          <a class="dropdown-item" href="/countries">
+            <%= translation.MENU.MENU_12 %>
+          </a>
+          <a class="dropdown-item" href="/system-users">
+            <%= translation.MENU.MENU_13 %>
+          </a>
         </div>
       </li>
       <% } %>
       <% if (role==='attendant' ) { %>
       <li class="nav-item text-center">
         <a class="nav-link <%= typeof location != 'undefined' ? (location === 'open-training' ? 'nav-active' : '') : '' %>"
-          href="/open-training"><%= translation.MENU.MENU_1 %></a>
+          href="/open-training">
+          <%= translation.MENU.MENU_14 %>
+        </a>
       </li>
       <% } %>
       <% } %>
       <li class="nav-item text-center">
         <a class="nav-link <%= typeof location != 'undefined' ? (location === 'faq' ? 'nav-active' : '') : '' %>"
-          href="/faq"><%= translation.MENU.MENU_3 %></a>
+          href="/faq">
+          <%= translation.MENU.MENU_3 %>
+        </a>
       </li>
       <li class="nav-item text-center dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+        <a class="nav-link dropdown-toggle" href="#"
+          id="navbarDropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <img style="height:36px;" src="/public/img/profile.png" />
         </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+        <div class="dropdown-menu dropdown-menu-right"
+          aria-labelledby="navbarDropdownMenuLink">
           <% if (locals.role) { %>
           <% if (role==='attendant' ) { %>
-          <a class="dropdown-item" href="/my-profile"><%= translation.HEADER.PROFILE %></a>
+          <a class="dropdown-item" href="/my-profile">
+            <%= translation.HEADER.PROFILE %>
+          </a>
           <% } %>
           <% } %>
-          <a class="dropdown-item" href="/logout"><%= translation.HEADER.LOGOUT %></a>
+          <a class="dropdown-item" href="/logout">
+            <%= translation.HEADER.LOGOUT %>
+          </a>
         </div>
       </li>
     </ul>

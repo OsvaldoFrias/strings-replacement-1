@@ -4,11 +4,14 @@
 <head>
   <%- include('../../partials/head'); %>
   <!-- Data table -->
-  <link rel="stylesheet" type="text/css" href="/public/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="/public/js/jquery.dataTables.js">
-  </script>
+  <link rel="stylesheet" type="text/css"
+    href="/public/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/jquery.dataTables.js">
+    </script>
   <!--/ Data table -->
-  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.date.js"></script>
   <link rel="stylesheet" type="text/css" href="/public/css/home.css">
 </head>
 
@@ -18,13 +21,18 @@
   <div class="container">
     <section>
       <div class="container py-4">
-        <div class="row d-flex align-items-center justify-content-center">
+        <div
+          class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div>
               <table id="appointments-list">
                 <thead>
-                  <th><%= translation.ADMIN_SERVICE_CATEGORY_LIST.NAME %></th>
-                  <th><%= translation.ADMIN_SERVICE_CATEGORY_LIST.LEVEL %></th>
+                  <th>
+                    <%= translation.ADMIN_SERVICE_CATEGORY_LIST.NAME %>
+                  </th>
+                  <th>
+                    <%= translation.ADMIN_SERVICE_CATEGORY_LIST.LEVEL %>
+                  </th>
                 </thead>
               </table>
             </div>
@@ -46,9 +54,9 @@
     myHeaders.append('Content-Type', 'application/json');
 
     fetch('/api/v1/service-categories', {
-        headers: myHeaders,
-        credentials: "same-origin"
-      })
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
       .then(res => res.json())
       .then(res => parseServiceCategories(res))
       .catch(err => {
@@ -115,16 +123,16 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-        `<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_4 %> ${serviceCategoryName} <%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_5 %> ${intervalDate}?`
-      )) {
+      `<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_4 %> ${serviceCategoryName} <%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_5 %> ${intervalDate}?`
+    )) {
       return;
     }
 
     fetch(`/api/v1/available-appointments/${availableAppointmentId}`, {
-        headers: myHeaders,
-        credentials: "same-origin",
-        method: 'delete'
-      })
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'delete'
+    })
       .then(res => res.json())
       .then(res => {
         // console.log(res);
@@ -144,16 +152,16 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-        `<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_4 %> ${serviceCategoryName} <%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_5 %> ${intervalDate}?`
-      )) {
+      `<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_4 %> ${serviceCategoryName} <%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_5 %> ${intervalDate}?`
+    )) {
       return;
     }
 
     fetch(`/api/v1/appointments/${hash}`, {
-        headers: myHeaders,
-        credentials: "same-origin",
-        method: 'delete'
-      })
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'delete'
+    })
       .then(res => res.json())
       .then(res => {
         // console.log(res);

@@ -4,11 +4,14 @@
 <head>
   <%- include('../../partials/head'); %>
   <!-- Data table -->
-  <link rel="stylesheet" type="text/css" href="/public/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="/public/js/jquery.dataTables.js">
-  </script>
+  <link rel="stylesheet" type="text/css"
+    href="/public/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/jquery.dataTables.js">
+    </script>
   <!--/ Data table -->
-  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.date.js"></script>
   <link rel="stylesheet" type="text/css" href="/public/css/home.css">
 </head>
 
@@ -18,18 +21,23 @@
   <div class="container">
     <section>
       <div class="container py-4">
-        <div class="row d-flex align-items-center justify-content-center">
+        <div
+          class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <h2><%= translation.ADMIN_COUNTRY_LIST.COUNTRIES %></h2>
             <div class="col-md-12 text-right">
-              <button class="btn btn-primary" onclick="addNewCountry()"><%= translation.ADMIN_COUNTRY_LIST.ADD_COUNTRY %></button>
+              <button class="btn btn-primary"
+                onclick="addNewCountry()">
+                <%= translation.ADMIN_COUNTRY_LIST.ADD_COUNTRY %>
+              </button>
             </div>
             <br>
             <div>
               <table id="countries-list">
                 <thead>
                   <th><%= translation.ADMIN_COUNTRY_LIST.NAME %></th>
-                  <th><%= translation.ADMIN_COUNTRY_LIST.ACTION %></th>
+                  <th><%= translation.ADMIN_COUNTRY_LIST.ACTION %>
+                  </th>
                 </thead>
               </table>
             </div>
@@ -76,10 +84,14 @@
       countriesTable
         .row
         .add([
-          `${name}`,
+          `<a href="/countries/${id}">${name}</a>`,
           `<div>
-            <button class="btn btn-secondary" onclick="setCountryName(${id}, '${name}')"><%= translation.ADMIN_COUNTRY_LIST.UPDATE %></button>
-            <button class="btn btn-dark" onclick="deleteCountry(${id}, '${name}')"><%= translation.ADMIN_COUNTRY_LIST.DELETE %></button>
+            <button class="btn btn-secondary" onclick="setCountryName(${id}, '${name}')">
+              <%= translation.ADMIN_COUNTRY_LIST.UPDATE %>
+            </button>
+            <!-- <button class="btn btn-dark" onclick="deleteCountry(${id}, '${name}')">
+              <%= translation.ADMIN_COUNTRY_LIST.DELETE %> -->
+            </button>
           </div>`,
         ])
         .draw()
@@ -141,34 +153,6 @@
           alert('<%= translation.ADMIN_COUNTRY_LIST.LABEL_4 %>');
         }
         location.reload(true);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }
-
-  function deleteCountry(countryId, countryName) {
-    const myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-    if (!confirm(
-      `<%= translation.ADMIN_COUNTRY_LIST.LABEL_5 %> ${countryName}?`
-    )) {
-      return;
-    }
-
-    fetch(`/api/v1/countries/${countryId}`, {
-      headers: myHeaders,
-      credentials: "same-origin",
-      method: 'delete'
-    })
-      .then(res => {
-        // console.log(res);
-        if (res.status) {
-          if (res.status !== 200) {
-            alert('<%= translation.ADMIN_COUNTRY_LIST.LABEL_6 %>');
-          }
-        }
-        window.location = '/countries';
       })
       .catch(err => {
         console.error(err);

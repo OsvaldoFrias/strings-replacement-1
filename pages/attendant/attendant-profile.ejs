@@ -21,59 +21,59 @@
       <div class="container py-4">
         <div class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
-            <h2><%= translation.ATTENDANT_ATTENDANT_PROFILE.USER_PROFILE %></h2>
+            <h2>Perfil de usuario</h2>
             <form>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="firstName"><%= translation.ATTENDANT_ATTENDANT_PROFILE.FIRST_NAME_1 %></label>
+                  <label for="firstName">Nombre(s):</label>
                   <br>
-                  <label id="firstName"><%= translation.ATTENDANT_ATTENDANT_PROFILE.FIRST_NAME_2 %></label>
+                  <label id="firstName">Nombre(s)</label>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="lastName"><%= translation.ATTENDANT_ATTENDANT_PROFILE.LAST_NAME_1 %></label>
+                  <label for="lastName">Apellido(s):</label>
                   <br>
-                  <label id="lastName"><%= translation.ATTENDANT_ATTENDANT_PROFILE.LAST_NAME_2 %></label>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="businessName"><%= translation.ATTENDANT_ATTENDANT_PROFILE.BUSINESS_NAME_1 %></label>
-                  <br>
-                  <label id="businessName"><%= translation.ATTENDANT_ATTENDANT_PROFILE.BUSINESS_NAME_2 %></label>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="licenseKey"><%= translation.ATTENDANT_ATTENDANT_PROFILE.LICENSE_1 %></label>
-                  <br>
-                  <label id="licenseKey"><%= translation.ATTENDANT_ATTENDANT_PROFILE.LICENSE_2 %></label>
+                  <label id="lastName">Apellido(s)</label>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="email"><%= translation.ATTENDANT_ATTENDANT_PROFILE.EMAIL %></label>
+                  <label for="businessName">Empresa:</label>
+                  <br>
+                  <label id="businessName">Empresa</label>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="licenseKey">Licencia:</label>
+                  <br>
+                  <label id="licenseKey">Licencia</label>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="email">Correo electrónico:</label>
                   <input type="text" class="form-control" id="email" name="email">
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="countryId"><%= translation.ATTENDANT_ATTENDANT_PROFILE.COUNTRY %></label>
+                  <label for="countryId">País:</label>
                   <select id="countryId" name="countryId" class="form-control">
-                    <option value="" selected><%= translation.ATTENDANT_ATTENDANT_PROFILE.OPTION %></option>
+                    <option value="" selected>Choose...</option>
                   </select>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <label for="hru"><%= translation.ATTENDANT_ATTENDANT_PROFILE.HRU %></label>
+                  <label for="hru">Hardware Report Utility (HRU):</label>
                   <textarea type="text" class="form-control" id="hru" name="hru" rows="10"></textarea>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <h3><%= translation.ATTENDANT_ATTENDANT_PROFILE.COUPONS %></h3>
+                  <h3>Cupones</h3>
                   <table id="coupons-list">
                     <thead>
                       <tr>
-                        <th><%= translation.ATTENDANT_ATTENDANT_PROFILE.PRODUCT %></th>
-                        <th><%= translation.ATTENDANT_ATTENDANT_PROFILE.COUPON %></th>
-                        <th><%= translation.ATTENDANT_ATTENDANT_PROFILE.COMPANY %></th>
+                        <th>Producto</th>
+                        <th>Cupón</th>
+                        <th>Empresa</th>
                       </tr>
                     </thead>
                   </table>
@@ -83,7 +83,7 @@
                 <div id="error-message"></div>
               </div>
               <div class="form-group col-md-12 text-right">
-                <button type="button" class="btn btn-primary" onclick="updateAttendant()"><%= translation.ATTENDANT_ATTENDANT_PROFILE.UPDATE %></button>
+                <button type="button" class="btn btn-primary" onclick="updateAttendant()">Actualizar</button>
               </div>
             </form>
           </div>
@@ -166,7 +166,7 @@
         .row
         .add([
           `${serviceName}`,
-          `<img style="cursor:pointer;" onclick="prompt('<%= translation.ATTENDANT_ATTENDANT_PROFILE.LABEL_1 %>','${couponCode}')" src="/public/img/copy-icon.png" alt="<%= translation.ATTENDANT_ATTENDANT_PROFILE.COPY %>" width="30px"/>${couponCode}`,
+          `<img style="cursor:pointer;" onclick="prompt('Copiar al portapapeles: CTRL + C, Enter','${couponCode}')" src="/public/img/copy-icon.png" alt="Copiar" width="30px"/>${couponCode}`,
           `${businessName}`,
         ])
         .draw()
@@ -224,7 +224,7 @@
     lastName.innerHTML = attendant.lastName;
     businessName.innerHTML = attendant.businessName;
     const licenseKeyValue = attendant.licenseKey;
-    licenseKey.innerHTML = `${(licenseKeyValue ? `<a target="_blank" href="${licenseKeyValue}"><%= translation.ATTENDANT_ATTENDANT_PROFILE.LICENSE_2 %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ATTENDANT_ATTENDANT_PROFILE.LABEL_2 %></span>')}`;
+    licenseKey.innerHTML = `${(licenseKeyValue ? `<a target="_blank" href="${licenseKeyValue}">Licencia</a>` : '<span style="font-style: italic;color: #999999;">No ha colocado una licencia.</span>')}`;
     email.value = attendant.user.email;
     hru.value = attendant.hru;
 
@@ -241,10 +241,10 @@
     const errors = [];
 
     if (!email) {
-      errors.push("<%= translation.ATTENDANT_ATTENDANT_PROFILE.LABEL_3 %>");
+      errors.push("Se requiere el correo electrónico del usuario.");
     }
     if (!countryId) {
-      errors.push("<%= translation.ATTENDANT_ATTENDANT_PROFILE.LABEL_4 %>");
+      errors.push("Debe seleccionar un país de origen.");
     }
 
     displayErrors(errors);
@@ -288,9 +288,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.ATTENDANT_ATTENDANT_PROFILE.LABEL_5 %>');
+          alert('Perfil actualizado.');
         } else {
-          alert('<%= translation.ATTENDANT_ATTENDANT_PROFILE.LABEL_6 %>');
+          alert('Hubo un problema actualizando el perfil del usuario, favor de intentar más tarde.');
         }
         window.location.href = "/my-profile";
       })

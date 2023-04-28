@@ -26,28 +26,41 @@
         <div class="d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div class="col-md-12 text-right">
-              <a href="/coupon/add" class="btn btn-primary"><%= translation.ADMIN_COUPON.GENERATE_COUPONS %></a>
+              <a href="/coupon/add" class="btn btn-primary">
+                <%= translation.ADMIN_COUPON.GENERATE_COUPONS %>
+              </a>
             </div>
-            <h2><%= translation.ADMIN_COUPON.GENERATED_COUPONS %></h2>
+            <h2>
+              <%= translation.ADMIN_COUPON.GENERATED_COUPONS %>
+            </h2>
             <div class="col-md-12 text-right">
               <a href="/api/v2/csv/coupons" class="btn btn-primary"><i
                   class="fa fa-download"></i>
-                  <%= translation.ADMIN_COUPON.DOWNLOAD_REPORT %></a>
+                <%= translation.ADMIN_COUPON.DOWNLOAD_REPORT %>
+              </a>
             </div>
             <div id="availableAppointments">
               <table id="availableAppointments-list">
                 <thead>
                   <tr>
-                    <th><%= translation.ADMIN_COUPON.INVOICE_NUMBER %></th>
-                    <th><%= translation.ADMIN_COUPON.CONSECUTIVE %></th>
+                    <th>
+                      <%= translation.ADMIN_COUPON.INVOICE_NUMBER %>
+                    </th>
+                    <th>
+                      <%= translation.ADMIN_COUPON.CONSECUTIVE %>
+                    </th>
                     <th><%= translation.ADMIN_COUPON.PRODUCT %></th>
                     <th><%= translation.ADMIN_COUPON.USER %></th>
                     <th><%= translation.ADMIN_COUPON.COUPON %></th>
                     <th><%= translation.ADMIN_COUPON.COMPANY %></th>
                     <th><%= translation.ADMIN_COUPON.RSM %></th>
                     <th><%= translation.ADMIN_COUPON.TYPE %></th>
-                    <th><%= translation.ADMIN_COUPON.EXPIRATION %></th>
-                    <th><%= translation.ADMIN_COUPON.REMOVE_COUPON %></th>
+                    <th>
+                      <%= translation.ADMIN_COUPON.EXPIRATION %>
+                    </th>
+                    <th>
+                      <%= translation.ADMIN_COUPON.REMOVE_COUPON %>
+                    </th>
                   </tr>
                 </thead>
               </table>

@@ -20,7 +20,7 @@
       <div class="container py-4">
         <div class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
-            <h2><%= translation.ATTENDANT_GRADE_LIST.RATINGS %></h2>
+            <h2>Calificaciones</h2>
             <div id="appointments">
             </div>
             <div id="appointments">
@@ -58,9 +58,9 @@
     const appointmentsList = document.getElementById('appointments-list');
 
     if (type === 'exam') {
-      appointmentsList.innerHTML = `<thead><tr><th><%= translation.ATTENDANT_GRADE_LIST.SESSION %></th><th><%= translation.ATTENDANT_GRADE_LIST.DAY %></th><th><%= translation.ATTENDANT_GRADE_LIST.NAME %></th><th><%= translation.ATTENDANT_GRADE_LIST.EMAIL %></th><th><%= translation.ATTENDANT_GRADE_LIST.COMPANY %></th><th><%= translation.ATTENDANT_GRADE_LIST.RESULT %></th><th><%= translation.ATTENDANT_GRADE_LIST.CERTIFICATE_URL %></th><th><%= translation.ATTENDANT_GRADE_LIST.EVALUATION %></th></tr></thead>`;
+      appointmentsList.innerHTML = `<thead><tr><th>Sesión</th><th>Fecha</th><th>Nombre</th><th>Email</th><th>Empresa</th><th>Resultado</th><th>URL Certificado</th><th>Evaluación</th></tr></thead>`;
     } else if (type === 'course') {
-      appointmentsList.innerHTML = `<thead><tr><th><%= translation.ATTENDANT_GRADE_LIST.SESSION %></th><th><%= translation.ATTENDANT_GRADE_LIST.DAY %></th><th><%= translation.ATTENDANT_GRADE_LIST.NAME %></th><th><%= translation.ATTENDANT_GRADE_LIST.EMAIL %></th><th><%= translation.ATTENDANT_GRADE_LIST.COMPANY %></th><th><%= translation.ATTENDANT_GRADE_LIST.RESULT %></th></tr></thead>`;
+      appointmentsList.innerHTML = `<thead><tr><th>Sesión</th><th>Fecha</th><th>Nombre</th><th>Email</th><th>Empresa</th><th>Resultado</th></tr></thead>`;
     }
 
     let appointmentsTable = $('#appointments-list').DataTable({
@@ -122,12 +122,12 @@
         `${fullName}`,
         `<a href="mailto:${email}">${email}</a>`,
         `${businessName}`,
-        `${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;"><%= translation.ATTENDANT_GRADE_LIST.LABEL_1 %></span>'}<div id="gradeType-${appointmentId}"></div>`,
+        `${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido evaluado.</span>'}<div id="gradeType-${appointmentId}"></div>`,
       ];
 
       if (type === 'exam') {
-        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}"><%= translation.ATTENDANT_GRADE_LIST.CERTIFICATE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ATTENDANT_GRADE_LIST.LABEL_2 %></span>'}<div id="meetingUrl-${appointmentId}"></div>`);
-        rowData.push(`${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}">Evaluación</a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ATTENDANT_GRADE_LIST.LABEL_3 %></span>')}`);
+        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}">Certificado</a>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido generado el certificado.</span>'}<div id="meetingUrl-${appointmentId}"></div>`);
+        rowData.push(`${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}">Evaluación</a>` : '<span style="font-style: italic;color: #999999;">No hay evaluación.</span>')}`);
       }
 
       rowData.push(`${trainerMail}`);

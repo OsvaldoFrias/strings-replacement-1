@@ -3,76 +3,76 @@
 
 <head>
   <%- include('../partials/head'); %>
-    <style>
-      @font-face {
-        font-family: 'Gotham';
-        src: url(/public/fonts/GOTHAM-MEDIUM.TTF);
-      }
+  <style>
+    @font-face {
+      font-family: 'Gotham';
+      src: url(/public/fonts/GOTHAM-MEDIUM.TTF);
+    }
 
-      body {
-        background: #e4e9f9;
-        color: #2a3a6f;
-        font-family: 'Gotham';
-      }
+    body {
+      background: #e4e9f9;
+      color: #2a3a6f;
+      font-family: 'Gotham';
+    }
 
-      .login-page {
-        padding: 5% 0 0;
-      }
+    .login-page {
+      padding: 5% 0 0;
+    }
 
-      .left-col {
-        display: inline-block;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-      }
+    .left-col {
+      display: inline-block;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
 
-      .left-col>img {
-        height: 550px;
-      }
+    .left-col>img {
+      height: 550px;
+    }
 
-      .right-col {
-        display: inline-block;
-        height: 550px;
-        width: 458px;
-        padding: 10px 40px 10px 40px;
-        vertical-align: top;
-        background-color: #fff;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-      }
+    .right-col {
+      display: inline-block;
+      height: 550px;
+      width: 458px;
+      padding: 10px 40px 10px 40px;
+      vertical-align: top;
+      background-color: #fff;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
 
-      .right-col h1,
-      .right-col h4 {
-        text-align: center;
-      }
+    .right-col h1,
+    .right-col h4 {
+      text-align: center;
+    }
 
-      .right-col h4 {
-        font-size: 20px;
-      }
+    .right-col h4 {
+      font-size: 20px;
+    }
 
-      form input {
-        margin-top: 10%;
-        border-left-color: #2a3a6f !important;
-        border-left-width: 5px !important;
-        border-radius: 0px !important;
-      }
+    form input {
+      margin-top: 10%;
+      border-left-color: #2a3a6f !important;
+      border-left-width: 5px !important;
+      border-radius: 0px !important;
+    }
 
-      form button {
-        background: #2a3a6f !important;
-        cursor: pointer;
-      }
+    form button {
+      background: #2a3a6f !important;
+      cursor: pointer;
+    }
 
-      form button:hover,
-      form button:active,
-      form button:focus {
-        background: #2a354f !important;
-      }
+    form button:hover,
+    form button:active,
+    form button:focus {
+      background: #2a354f !important;
+    }
 
-      form a {
-        font-size: 1.2rem !important;
-      }
+    form a {
+      font-size: 1.2rem !important;
+    }
 
-      .btn {
-        border-radius: 25px;
-      }
-    </style>
+    .btn {
+      border-radius: 25px;
+    }
+  </style>
 </head>
 
 <body>
@@ -87,21 +87,37 @@
         <h4><%= translation.PAGES_SIGNIN.DESCRIPTION %></h4>
         <form>
           <div class="form-outline">
-            <input onkeydown="clickPress(event)" type="email" name="email" id="email"
-              class="form-control form-control-lg" placeholder="<%= translation.PAGES_SIGNIN.EMAIL %>" required />
+            <input onkeydown="clickPress(event)" type="email"
+              name="email" id="email"
+              class="form-control form-control-lg"
+              placeholder="<%= translation.PAGES_SIGNIN.EMAIL %>"
+              required />
           </div>
           <div class="form-outline">
-            <input onkeydown="clickPress(event)" type="password" name="password" id="password"
-              class="form-control form-control-lg" placeholder="<%= translation.PAGES_SIGNIN.PASSWORD %>" required />
-            <div class="col-md-12 text-right mb-4" style="padding: 0;">
-              <a href="/recovery" class="btn btn-link"><%= translation.PAGES_SIGNIN.FORGOT_PASSWORD %></a>
+            <input onkeydown="clickPress(event)" type="password"
+              name="password" id="password"
+              class="form-control form-control-lg"
+              placeholder="<%= translation.PAGES_SIGNIN.PASSWORD %>"
+              required />
+            <div class="col-md-12 text-right mb-4"
+              style="padding: 0;">
+              <a href="/recovery" class="btn btn-link">
+                <%= translation.PAGES_SIGNIN.FORGOT_PASSWORD %>
+              </a>
             </div>
           </div>
-          <div id="error" class="alert alert-danger alert-dismissible d-none">
+          <div id="error"
+            class="alert alert-danger alert-dismissible d-none">
             <div id="error-message"></div>
           </div>
-          <button type="button" onclick="signIn()" class="btn btn-primary btn-lg btn-block"><%= translation.PAGES_SIGNIN.SIGNIN %></button>
-          <a href="/signup" class="btn btn-secondary btn-lg btn-block"><%= translation.PAGES_SIGNIN.CHECKIN %></a>
+          <button type="button" onclick="signIn()"
+            class="btn btn-primary btn-lg btn-block">
+            <%= translation.PAGES_SIGNIN.SIGNIN %>
+          </button>
+          <a href="/signup"
+            class="btn btn-secondary btn-lg btn-block">
+            <%= translation.PAGES_SIGNIN.CHECKIN %>
+          </a>
         </form>
       </div>
     </div>

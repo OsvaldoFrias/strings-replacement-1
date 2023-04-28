@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+  <!-- Data table -->
+  <link rel="stylesheet" type="text/css"
+    href="/public/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/jquery.dataTables.js">
+    </script>
+  <!--/ Data table -->
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs", { "location": "catalogs" }) %>
+  <%- include("./header.admin.ejs") %>
+  <div class="container">
+    <section>
+      <div class="container py-4">
+        <div
+          class="row d-flex align-items-center justify-content-center">
+          <div class="w-100">
+            <h2 id="countryName">País</h2>
+            <div class="col-md-12 text-right">
+              <button class="btn btn-primary"
+                onclick="addNewState()">
+                <%= translation.ADMIN_COUNTRY_LIST.ADD_STATE %>
+              </button>
+            </div>
+            <br>
+            <div>
+              <table id="states-list">
+                <thead>
+                  <th><%= translation.ADMIN_COUNTRY_LIST.STATE_NAME %></th>
+                  <th><%= translation.ADMIN_COUNTRY_LIST.STATE_TIMEZONE %></th>
+                  <!-- <th><%= translation.ADMIN_COUNTRY_LIST.DELETE %></th> -->
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div>
+          <%- include("../../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script>
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/countries/<%= countryId %>', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(res => parseCountry(res))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseCountry(country) {
+    let statesTable = $('#states-list').DataTable({
+      "ordering": false,
+      "sDom": 'lrtip',
+      "dom": '<"top"if>rt<"bottom"p><"clear">'
+    });
+    const countryName = document.getElementById('countryName');
+    countryName.innerHTML = country.name;
+
+    country.states.forEach(state => {
+      const {
+        id, name, timeZone
+      } = state;
+
+      statesTable
+        .row
+        .add([
+          `<img style="cursor:pointer;" onclick="setStateName(${id}, '${name}')" src="/public/img/edit.png" alt="<%= translation.ADMIN_COUNTRY_LIST.EDIT_STATE_NAME %>" width="15px"/>${name}`,
+          `<img style="cursor:pointer;" onclick="setTimeZone(${id}, '${name}')" src="/public/img/edit.png" alt="<%= translation.ADMIN_COUNTRY_LIST.EDIT_TIMEZONE %>" width="15px"/>${timeZone}`,
+          // `<button class="btn btn-dark" onclick="deleteState(${id}, '${name}')"><%= translation.ADMIN_COUNTRY_LIST.DELETE %></button>`
+        ])
+        .draw()
+        .node();
+    });
+  }
+
+  function addNewState() {
+    let name = prompt('<%= translation.ADMIN_COUNTRY_LIST.ADD_STATE %>:');
+    if (!name) {
+      return;
+    }
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`/api/v1/states`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'POST',
+      body: JSON.stringify({
+        name,
+        countryId: parseInt('<%= countryId %>')
+      })
+    })
+      .then(res => {
+        if (res.status === 201) {
+          alert('<%= translation.ADMIN_COUNTRY_LIST.ADDED_STATE %>');
+        } else {
+          alert('<%= translation.ADMIN_COUNTRY_LIST.LABEL_7 %>');
+        }
+        location.reload(true);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function setStateName(stateId, stateName) {
+    let name = prompt(`<%= translation.ADMIN_COUNTRY_LIST.EDIT_STATE_NAME %>: ${stateName}`);
+    if (!name) {
+      return;
+    }
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`/api/v1/states/${stateId}`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'PATCH',
+      body: JSON.stringify({
+        name
+      })
+    })
+      .then(res => {
+        if (res.status === 200) {
+          alert('<%= translation.ADMIN_COUNTRY_LIST.LABEL_8 %>');
+        } else {
+          alert('<%= translation.ADMIN_COUNTRY_LIST.LABEL_9 %>');
+        }
+        location.reload(true);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function setTimeZone(stateId, stateName) {
+    let timeZone = prompt(`<%= translation.ADMIN_COUNTRY_LIST.EDIT_TIMEZONE %>: ${stateName}`);
+    if (!timeZone) {
+      return;
+    }
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`/api/v1/states/${stateId}`, {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'PATCH',
+      body: JSON.stringify({
+        timeZone
+      })
+    })
+      .then(res => {
+        if (res.status === 200) {
+          alert('<%= translation.ADMIN_COUNTRY_LIST.LABEL_10 %>');
+        } else {
+          alert('<%= translation.ADMIN_COUNTRY_LIST.LABEL_11 %>');
+        }
+        location.reload(true);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+</script>
+
+</html>

@@ -5,16 +5,19 @@
   <%- include('../../partials/head'); %>
 
   <!-- Data table -->
-  <link rel="stylesheet" type="text/css" href="/public/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css"
+    href="/public/css/jquery.dataTables.css">
   <link rel="stylesheet" type="text/css"
     href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
-  <script type="text/javascript" charset="utf8" src="/public/js/jquery.dataTables.js">
-  </script>
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/jquery.dataTables.js">
+    </script>
   <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js">
     </script>
   <!--/ Data table -->
-  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.date.js"></script>
   <link rel="stylesheet" type="text/css" href="/public/css/home.css">
 </head>
 
@@ -24,23 +27,29 @@
   <div class="container">
     <section>
       <div class="container py-4">
-        <div class="row d-flex align-items-center justify-content-center">
+        <div
+          class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div class="col-md-12 text-right">
-              <a href="/available-appointment/add" class="btn btn-primary"><%= translation.ADMIN_HOME.SCHEDULE_NEW_SESSIONS %></a>
+              <a href="/available-appointment/add"
+                class="btn btn-primary">
+                <%= translation.ADMIN_HOME.SCHEDULE_NEW_SESSIONS %>
+              </a>
             </div>
             <div id="loading"></div>
             <h2><%= translation.ADMIN_HOME.UPCOMING_SESSIONS %></h2>
             <div id="appointments"></div>
             <div id="availableAppointments">
-              <table id="availableAppointments-list" class="compact" style="width:100%">
+              <table id="availableAppointments-list" class="compact"
+                style="width:100%">
                 <thead>
                   <tr>
                     <th><%= translation.ADMIN_HOME.SESSION %></th>
                     <th><%= translation.ADMIN_HOME.DATE_HOUR %></th>
                     <th><%= translation.ADMIN_HOME.LINK %></th>
                     <th><%= translation.ADMIN_HOME.TRAINER %></th>
-                    <th><%= translation.ADMIN_HOME.RESERVATIONS %></th>
+                    <th><%= translation.ADMIN_HOME.RESERVATIONS %>
+                    </th>
                     <th><%= translation.ADMIN_HOME.CANCEL %></th>
                   </tr>
                 </thead>
@@ -55,7 +64,8 @@
     </section>
   </div>
 </body>
-<script type="text/javascript" charset="utf8" src="/public/js/custom.home.js"></script>
+<script type="text/javascript" charset="utf8"
+  src="/public/js/custom.home.js"></script>
 <script>
   function getBasicInfo() {
     const myHeaders = new Headers();

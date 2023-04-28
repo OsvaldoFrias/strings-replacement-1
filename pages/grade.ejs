@@ -3,8 +3,10 @@
 
 <head>
   <%- include('../partials/head'); %>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script type="text/javascript" charset="utf8" src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.date.js"></script>
   <script src="/public/js/html2pdf.bundle.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/public/css/home.css">
   <style>
@@ -29,20 +31,30 @@
   <div class="container">
     <section>
       <div class="container py-4">
-        <div id="certificado" class="row d-flex align-items-center justify-content-center">
+        <div id="certificado"
+          class="row d-flex align-items-center justify-content-center">
           <div class="col-lg-12">
-            <img id="certificado-img" class="col-lg-12" src="data:image/png;base64,<%= certData %>" />
-            <button class="btn btn-info" onclick="printPdf()"><i class="fa fa-download"></i> PDF</button>
+            <img id="certificado-img" class="col-lg-12"
+              src="data:image/png;base64,<%= certData %>" />
+            <button class="btn btn-info" onclick="printPdf()"><i
+                class="fa fa-download"></i> PDF</button>
           </div>
           <div class="col-lg-4 d-flex justify-content-center">
             <div>
               <p><%= translation.PAGES_GRADE.ASSISTANT_NAME %>
                 <strong><%= `${grade.appointment.attendant.firstName} ${grade.appointment.attendant.lastName}` %></strong>
               </p>
-              <p><%= translation.PAGES_GRADE.CERTIFICATE %> <strong><%= grade.appointment.available.service.serviceCategory.name %></strong></p>
-              <p><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.STATUS %> <strong><%= grade.gradeType.name %></strong></p>
-              <p><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ISSUED_AT %> <strong><%= issuedAt %></strong> </p>
-              <p><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.EXPIRATION_TIME %> <strong><%= expirationTime %></strong></p>
+              <p><%= translation.PAGES_GRADE.CERTIFICATE %>
+                <strong><%= grade.appointment.available.service.serviceCategory.name %></strong>
+              </p>
+              <p><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.STATUS %>
+                <strong><%= grade.gradeType.name %></strong></p>
+              <p>
+                <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ISSUED_AT %>
+                <strong><%= issuedAt %></strong> </p>
+              <p>
+                <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.EXPIRATION_TIME %>
+                <strong><%= expirationTime %></strong></p>
             </div>
           </div>
         </div>
@@ -54,22 +66,6 @@
 </body>
 <script>
   function getBasicInfo() {
-    // html2pdf().set({
-    //   margin: 1,
-    //   filename: 'myfile.pdf',
-    //   image: {
-    //     type: 'png',
-    //     quality: 0.98
-    //   },
-    //   // html2canvas: {
-    //   //   scale: 2
-    //   // },
-    //   jsPDF: {
-    //     unit: 'in',
-    //     format: 'letter',
-    //     orientation: 'landscape'
-    //   }
-    // }).from(document.getElementById('certificado')).save();
   }
   function printPdf() {
     const certificado = document.getElementById('certificado-img');

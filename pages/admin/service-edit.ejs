@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head'); %>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link
+    href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+    rel="stylesheet">
+  <script
+    src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+  <script type="text/javascript" charset="utf8"
+    src="/public/js/custom.date.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+
+<body onload="getBasicInfo()">
+  <%- include("../../partials/topnav.ejs", { "location": "services" }) %>
+  <%- include("./header.admin.ejs") %>
+  <div class="container">
+    <section>
+      <div class="container py-4">
+        <div
+          class="row d-flex align-items-center justify-content-center">
+          <div class="w-100">
+            <div>
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="name">
+                      <%= translation.SERVICE.LABEL_1 %>:
+                    </label>
+                    <input type="text" class="form-control" id="name"
+                      name="name">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="level">
+                      <%= translation.SERVICE.LABEL_2 %>:
+                    </label>
+                    <input type="text" class="form-control" id="level"
+                      name="level">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="attendantsNumber">
+                      <%= translation.SERVICE.LABEL_3 %>:
+                    </label>
+                    <input type="number" class="form-control"
+                      id="attendantsNumber" name="attendantsNumber"
+                      min="1">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="type">
+                      <%= translation.SERVICE.LABEL_4 %>:
+                    </label>
+                    <select id="type" name="type"
+                      class="form-control">
+                      <option value="course">
+                        <%= translation.SERVICE.OPTION_1 %>
+                      </option>
+                      <option value="exam">
+                        <%= translation.SERVICE.OPTION_2 %>
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="serviceCategoryId">
+                      <%= translation.SERVICE.LABEL_5 %>:
+                    </label>
+                    <select id="serviceCategoryId"
+                      name="serviceCategoryId" class="form-control">
+                      <option value="">
+                        <%= translation.SERVICE.OPTION_3 %>
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="genetaresCouponForServiceId">
+                      <%= translation.SERVICE.LABEL_6 %>:
+                    </label>
+                    <select id="genetaresCouponForServiceId"
+                      name="genetaresCouponForServiceId"
+                      class="form-control">
+                      <option value="">
+                        <%= translation.SERVICE.OPTION_3 %>
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6 text-center"
+                    style="margin: auto;">
+                    <input class="form-check-input" type="checkbox"
+                      id="isOpen">
+                    <label class="form-check-label" for="isOpen">
+                      <%= translation.SERVICE.LABEL_7 %>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="certText">
+                      <%= translation.SERVICE.LABEL_8 %>:
+                    </label>
+                    <textarea class="form-control"
+                      id="certText"></textarea>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="infoTemplate">
+                      <%= translation.SERVICE.LABEL_9 %>:
+                    </label>
+                    <div id="infoTemplate">
+                    </div>
+                  </div>
+                </div>
+                <div id="error"
+                  class="alert alert-danger alert-dismissible d-none">
+                  <div id="error-message"></div>
+                </div>
+                <div class="form-group col-md-12 text-right">
+                  <button type="button" class="btn btn-primary"
+                    onclick="updateServiceCategory()">
+                    <%= translation.SERVICE.BUTTON_2 %>
+                  </button>
+                  <div id="error"
+                    class="alert alert-danger alert-dismissible d-none">
+                    <div id="error-message"></div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div>
+          <%- include("../../partials/footer.ejs") %>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script>
+  function getBasicInfo() {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v1/services/<%= serviceId %>', {
+      headers: myHeaders,
+      credentials: "same-origin"
+    })
+      .then(res => res.json())
+      .then(service => {
+        parseService(service);
+        fetch('/api/v1/services', {
+          headers: myHeaders,
+          credentials: "same-origin"
+        })
+          .then(res => res.json())
+          .then(services => {
+            parseServicesData(
+              'genetaresCouponForServiceId',
+              services, null,
+              service.genetaresCouponForServiceId);
+          });
+
+        fetch('/api/v1/service-categories', {
+          headers: myHeaders,
+          credentials: "same-origin"
+        })
+          .then(res => res.json())
+          .then(services => {
+            parseServiceCategoriesData(
+              'serviceCategoryId',
+              services, null,
+              service.serviceCategory.serviceCategoryId);
+          });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseServiceCategoriesData(selectId, array, onchange = null, selectedId = 0) {
+    // console.log(array);
+    const select = document.getElementById(selectId);
+    array.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.id;
+      option.innerText = item.name;
+
+      if (item.id === selectedId) {
+        option.selected = true;
+      }
+      select.appendChild(option);
+    });
+
+    if (array) {
+      if (array.length > 0) {
+        if (onchange) {
+          select.onchange = (e) => {
+            onchange(select);
+          };
+        }
+      }
+    }
+  }
+
+  function parseServicesData(selectId, array, onchange = null, selectedId = 0) {
+    // console.log(array);
+    const select = document.getElementById(selectId);
+    array.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.id;
+      option.innerText = item.name;
+
+      if (item.id === selectedId) {
+        option.selected = true;
+      }
+      select.appendChild(option);
+    });
+
+    if (array) {
+      if (array.length > 0) {
+        if (onchange) {
+          select.onchange = (e) => {
+            onchange(select);
+          };
+        }
+      }
+    }
+  }
+
+  function displayErrors(errors) {
+    const error = document.getElementById('error');
+    const errorMessage = document.getElementById('error-message');
+
+    if (errors.length === 0) {
+      error.classList.add('d-none');
+      errorMessage.innerText = '';
+      return;
+    }
+
+    error.classList.remove('d-none');
+    errorMessage.innerText = errors.join('\n');
+  }
+
+  function validateFormFields() {
+    const name = document.getElementById('name').value;
+    const level = document.getElementById('level').value;
+    const attendantsNumber = document.getElementById('attendantsNumber').value;
+    const type = document.getElementById('type').value;
+    const serviceCategoryId = document.getElementById('serviceCategoryId').value;
+    const genetaresCouponForServiceId = document.getElementById('genetaresCouponForServiceId').value;
+    const isOpen = document.getElementById('isOpen').checked;
+    const certText = document.getElementById('certText').value;
+    const infoTemplate = $('#infoTemplate').summernote('code');
+
+    const errors = [];
+
+    if (!name) {
+      errors.push("<%= translation.SERVICE.LABEL_11 %>");
+    }
+    if (!level) {
+      errors.push("<%= translation.SERVICE.LABEL_12 %>");
+    }
+    if (!attendantsNumber) {
+      errors.push("<%= translation.SERVICE.LABEL_13 %>")
+    }
+    if (!infoTemplate) {
+      errors.push("<%= translation.SERVICE.LABEL_14 %>");
+    }
+
+    displayErrors(errors);
+    return errors.length == 0; // There are no errors
+  }
+
+  function getServiceData() {
+    const name = document.getElementById('name').value;
+    const level = document.getElementById('level').value;
+    const attendantsNumber =
+      document.getElementById('attendantsNumber').value;
+    const type = document.getElementById('type').value;
+    const serviceCategoryId =
+      document.getElementById('serviceCategoryId').value;
+    const genetaresCouponForServiceId =
+      document.getElementById('genetaresCouponForServiceId').value;
+    const isOpen = document.getElementById('isOpen').checked;
+    const certText = document.getElementById('certText').value;
+    const infoTemplate = $('#infoTemplate').summernote('code');
+
+    const data = { isOpen, type, serviceCategoryData: {} };
+
+    if (attendantsNumber) {
+      data['attendantsNumber'] = attendantsNumber;
+    }
+    if (genetaresCouponForServiceId) {
+      data['genetaresCouponForServiceId'] = parseInt(genetaresCouponForServiceId);
+    } else {
+      data['genetaresCouponForServiceId'] = null;
+    }
+    if (name) {
+      data['name'] = name;
+      data['serviceCategoryData']['name'] = name;
+    }
+    if (certText) {
+      data['serviceCategoryData']['certText'] = certText;
+    }
+    if (infoTemplate) {
+      data['serviceCategoryData']['infoTemplate'] = infoTemplate;
+    }
+    if (level) {
+      data['serviceCategoryData']['level'] = level;
+    }
+    if (serviceCategoryId) {
+      data['serviceCategoryData']['serviceCategoryId'] = parseInt(serviceCategoryId);
+    } else {
+      data['serviceCategoryData']['serviceCategoryId'] = null;
+    }
+
+    return data;
+  }
+
+  function updateServiceCategory(e) {
+    if (e) {
+      e.preventDefault();
+    }
+
+    if (!validateFormFields()) {
+      return;
+    }
+
+    const data = getServiceData();
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('/api/v2/services/<%= serviceId %>', {
+      headers: myHeaders,
+      credentials: "same-origin",
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    })
+      .then(res => {
+        if (res.status === 200) {
+          alert('<%= translation.SERVICE.LABEL_17 %>');
+        } else {
+          alert('<%= translation.SERVICE.LABEL_18 %>');
+        }
+        window.location.href = "/services";
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function parseService(service) {
+    // console.log(service);
+    const {
+      serviceCategory,
+      attendantsNumber,
+      type,
+      isOpen
+    } = service;
+    const serviceSelect = document.getElementById('infoTemplate');
+
+    serviceSelect.innerHTML = serviceCategory.infoTemplate;
+    $(document).ready(function () {
+      $('#infoTemplate').summernote(); //.summernote('code')
+    });
+
+    const name = document.getElementById('name');
+    name.value = serviceCategory.name;
+
+    const level = document.getElementById('level');
+    level.value = serviceCategory.level;
+
+    const attendantsNumberInput = document.getElementById('attendantsNumber');
+    attendantsNumberInput.value = attendantsNumber;
+
+    const typeInput = document.getElementById('type');
+    typeInput.value = type;
+
+    const certText = document.getElementById('certText');
+    certText.value = serviceCategory.certText;
+
+    const isOpenCheck = document.getElementById('isOpen');
+    isOpenCheck.checked = isOpen;
+  }
+
+</script>
+
+</html>

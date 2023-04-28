@@ -31,7 +31,7 @@
           <div class="w-100">
             <div>
               <h2>
-                <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.SCHEDULE_NEXT_SESSION %>
+                <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.EDIT_TITLE %>
               </h2>
               <form>
                 <div class="form-row">
@@ -127,37 +127,14 @@
                     </select>
                   </div>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="trainerId">
-                      <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.TRAINER %>
-                    </label>
-                    <select id="trainerId" name="trainerId"
-                      class="form-control">
-                      <option value="" selected>
-                        <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.OPTION %>
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="direction">
-                      <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.DIRECTION %>
-                    </label>
-                    <textarea type="text" class="form-control"
-                      id="direction" name="direction" rows="10"
-                      placeholder="<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.DIRECTION_INDICATION %>"></textarea>
-                  </div>
-                </div>
                 <div id="error"
                   class="alert alert-danger alert-dismissible d-none">
                   <div id="error-message"></div>
                 </div>
                 <div class="col-md-12 text-right">
                   <button type="button" class="btn btn-primary"
-                    onclick="saveAppointment()">
-                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.SCHEDULE %>
+                    onclick="updateAppointment()">
+                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.UPDATE %>
                   </button>
                 </div>
                 <div id="loading"></div>
@@ -182,48 +159,85 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
 
-    fetch('/api/v1/services', {
+    fetch('/api/v1/available-appointments/<%= availableAppointmentId %>', {
       headers: myHeaders,
       credentials: "same-origin"
     })
       .then(res => res.json())
-      .then(res => parseServices(res))
-      .catch(err => {
-        console.error(err);
-      });
+      .then(available => {
+        parseAvailableAppointment(available);
 
-    fetch('/api/v1/users/trainers', {
-      headers: myHeaders,
-      credentials: "same-origin"
-    })
-      .then(res => res.json())
-      .then(res => parseTrainers(res))
-      .catch(err => {
-        console.error(err);
-      });
-
-    fetch('/api/v1/countries', {
-      headers: myHeaders,
-      credentials: "same-origin"
-    })
-      .then(res => res.json())
-      .then(res => parseSelect('countryId', res, 'id', 'name', (select) => {
-        const countryId = select.options[select.selectedIndex].value;
-        // console.log(countryId);
-        clearSelect('stateId');
-        fetch(`/api/v1/countries/${countryId}`, {
+        fetch('/api/v1/services', {
           headers: myHeaders,
           credentials: "same-origin"
         })
           .then(res => res.json())
-          .then(res => parseSelect('stateId', res.states, 'id', 'name'))
+          .then(res => parseServices(res, available.service.id))
           .catch(err => {
             console.error(err);
           });
-      }))
+
+        fetch('/api/v1/countries', {
+          headers: myHeaders,
+          credentials: "same-origin"
+        })
+          .then(res => res.json())
+          .then(res => parseSelect('countryId', res, 'id', 'name', (select) => {
+            const countryId = select.options[select.selectedIndex].value;
+            clearSelect('stateId');
+            fetch(`/api/v1/countries/${countryId}`, {
+              headers: myHeaders,
+              credentials: "same-origin"
+            })
+              .then(res => res.json())
+              .then(res =>
+                parseSelect(
+                  'stateId',
+                  res.states,
+                  'id',
+                  'name',
+                  null,
+                  available.state.id
+                ))
+              .catch(err => {
+                console.error(err);
+              });
+          }, available.state.countryId))
+          .catch(err => {
+            console.error(err);
+          });
+      })
       .catch(err => {
         console.error(err);
       });
+  }
+
+  function parseAvailableAppointment(available) {
+    // console.log(available);
+    const appointmentStartDatetime = new Date(available.appointmentStartDatetime);
+    appointmentStartDatetime.setHours(appointmentStartDatetime.getHours() + getTimeZoneHours());
+
+    const appointmentFinishDatetime = new Date(available.appointmentFinishDatetime);
+    appointmentFinishDatetime.setHours(appointmentFinishDatetime.getHours() + getTimeZoneHours());
+
+    document.getElementById('appointmentStartDatetime').value =
+      new Date(appointmentStartDatetime)
+        .toISOString().slice(0, -10) + '00';
+
+    document.getElementById('appointmentFinishDatetime').value =
+      new Date(appointmentFinishDatetime)
+        .toISOString().slice(0, -10) + '00';
+
+    document.getElementById('sessionType').checked =
+      available.sessionType === 'remote';
+
+    document.getElementById('meetingUrl').value =
+      available.meetingUrl;
+  }
+
+  function getTimeZoneHours() {
+    var offset = new Date().getTimezoneOffset(), o = Math.abs(offset);
+    return (offset < 0 ? 1 : -1) * (Math.floor(o / 60) + (o % 60));
   }
 
   function getTimeZone() {
@@ -249,17 +263,15 @@
     errorMessage.innerText = errors.join('\n');
   }
 
-  function saveAppointment() {
+  function updateAppointment() {
     displayLoading();
     const appointmentStartDatetime = document.getElementById("appointmentStartDatetime").value;
     const appointmentFinishDatetime = document.getElementById("appointmentFinishDatetime").value;
     const meetingUrl = document.getElementById("meetingUrl").value;
     const overrideAttendantsNumber = document.getElementById("overrideAttendantsNumber").value;
-    const trainerId = getSelectValue(document.getElementById("trainerId"));
     const serviceId = getSelectValue(document.getElementById("serviceId"));
     const stateId = getSelectValue(document.getElementById("stateId"));
     const sessionType = document.getElementById('sessionType').checked ? 'remote' : 'close';
-    const direction = document.getElementById('direction').value;
 
     const errors = [];
 
@@ -271,9 +283,6 @@
     }
     if (!appointmentFinishDatetime) {
       errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_3 %>');
-    }
-    if (!trainerId) {
-      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_4 %>');
     }
     if (!stateId) {
       errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_5 %>');
@@ -303,21 +312,12 @@
       ...data,
       overrideAttendantsNumber: Number.parseInt(overrideAttendantsNumber)
     } : data;
-    data = trainerId ? {
-      ...data,
-      trainerId: Number.parseInt(trainerId)
-    } : data;
     data = stateId ? {
       ...data,
       stateId: Number.parseInt(stateId)
     } : data;
-    data = direction ? {
-      ...data,
-      direction: direction
-    } : data;
-    // console.log(data);
 
-    fetch("/api/v1/profile/available-appointment", {
+    fetch("/api/v1/profile/available-appointments/<%= availableAppointmentId %>", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8"
@@ -326,7 +326,6 @@
     })
       .then((res) => res.json())
       .then((res) => {
-        // console.log(res);
         if (res.statusCode === 400) {
           displayErrors([res.message]);
         } else {
@@ -341,19 +340,6 @@
       });
   }
 
-  function parseTrainers(trainers) {
-    const select = document.getElementById('trainerId');
-    trainers.forEach(trainer => {
-      const option = document.createElement('option');
-      // console.log(trainer);
-      option.value = trainer.id;
-      option.innerText = trainer.email;
-
-      select.appendChild(option);
-    });
-
-  }
-
   function clearSelect(selectId) {
     const select = document.getElementById(selectId);
     select.innerHTML = '';
@@ -366,12 +352,16 @@
     select.appendChild(option);
   }
 
-  function parseSelect(selectId, array, value = 'id', text = 'name', onchange = null) {
+  function parseSelect(selectId, array, value = 'id', text = 'name', onchange = null, selectedId = 0) {
     const select = document.getElementById(selectId);
     array.forEach(item => {
       const option = document.createElement('option');
       option.value = item[value];
       option.innerText = item[text];
+
+      if (item[value] === selectedId) {
+        option.selected = true;
+      }
 
       select.appendChild(option);
     });
@@ -382,19 +372,27 @@
           select.onchange = (e) => {
             onchange(select);
           };
+
+          if (selectedId !== 0) {
+            onchange(select);
+          }
         }
       }
     }
 
   }
 
-  function parseServices(services) {
+  function parseServices(services, selectedId = 0) {
     const select = document.getElementById('serviceId');
     services.forEach(service => {
       // console.log(service);
       const option = document.createElement('option');
       option.value = service.id;
       option.innerText = service.name;
+
+      if (service.id === selectedId) {
+        option.selected = true;
+      }
 
       select.appendChild(option);
     });
@@ -422,6 +420,24 @@
             attendantsNumber.setAttribute('disabled', true);
           }
         };
+
+        if (selectedId !== 0) {
+          const serviceId = select.options[select.selectedIndex].value;
+          const service = services[select.selectedIndex - 1];
+
+          if (service) {
+            attendantsNumber.removeAttribute('disabled');
+            attendantsNumber.value = service.attendantsNumber;
+            const serviceId = service.id;
+            const serviceCategoryId = service.serviceCategory.id;
+
+            const myHeaders = new Headers();
+            myHeaders.append('Content-Type', 'application/json');
+          } else {
+            attendantsNumber.value = '';
+            attendantsNumber.setAttribute('disabled', true);
+          }
+        }
       }
     }
   }

@@ -6,7 +6,7 @@
   </script>
 <!--/ Data table -->
 
-<h2>Perfil de usuario</h2>
+<h2><%= translation.PROFILE.TITLE %></h2>
 <form>
   <div class="form-row">
     <div class="form-group col-md-6">
@@ -306,9 +306,13 @@
       .then(res => {
         if (res.status === 200) {
           alert('<%= translation.PROFILE.UPDATED_PROFILE %>');
+          window.location.href = "/my-profile";
         } else {
-          alert('<%= translation.PROFILE.PROFILE_UPDATE_ERROR %>');
+          return res.json();
         }
+      })
+      .then(res => {
+        alert(res.message);
         window.location.href = "/my-profile";
       })
       .catch(err => {

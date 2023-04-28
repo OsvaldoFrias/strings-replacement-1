@@ -1,0 +1,77 @@
+@font-face {
+  font-family: "Montserrat-ExtraBold";
+  src: url(/public/fonts/montserrat/Montserrat-ExtraBold.ttf);
+}
+
+@font-face {
+  font-family: "Montserrat-Bold";
+  src: url(/public/fonts/montserrat/Montserrat-Bold.ttf);
+}
+
+@font-face {
+  font-family: "Montserrat-SemiBold";
+  src: url(/public/fonts/montserrat/Montserrat-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: "Montserrat-Medium";
+  src: url(/public/fonts/montserrat/Montserrat-Medium.ttf);
+}
+
+body {
+  font-family: "Montserrat-Medium";
+}
+
+header {
+  background-color: #003F76;
+  color: #eee;
+}
+
+header>section {
+  padding: 1em;
+}
+
+dialog::backdrop {
+  background-color: rgb(74, 74, 74, 0.8);
+}
+
+aside {
+  border-left: 2px solid black;
+}
+
+input[type="email"],
+input[type="password"] {
+  border-left: 5px #133469 solid;
+  border-radius: 0;
+  margin: 2em 0;
+  font-family: "Montserrat-SemiBold" !important;
+}
+
+.M-ebold {
+  font-family: "Montserrat-ExtraBold";
+}
+
+.M-bold {
+  font-family: "Montserrat-Bold";
+}
+
+.M-sbold {
+  font-family: "Montserrat-SemiBold";
+}
+
+.M-medium {
+  font-family: "Montserrat-Medium";
+}
+
+.training-menu a {
+  text-decoration: none !important;
+  /* color: #eee; */
+}
+
+.training-menu a:link {
+  text-decoration: none;
+}
+
+.training-menu a:hover {
+  text-decoration: none;
+}

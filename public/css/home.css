@@ -1,0 +1,229 @@
+@font-face {
+  font-family: "Gotham";
+  src: url(/public/fonts/GOTHAM-MEDIUM.TTF);
+}
+
+@font-face {
+  font-family: "GothamLight";
+  src: url(/public/fonts/GothamLight.ttf);
+}
+
+* {
+  font-family: 'Gotham';
+}
+
+dialog::backdrop {
+  background-color: rgb(74, 74, 74, 0.8);
+}
+
+.header {
+  background-color: #e3e8f8;
+  padding: 0 5%;
+}
+
+/* Card 1 */
+
+.card-1 {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 15px;
+  transition: 0.3s;
+}
+
+/* .card-1:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+} */
+
+.card-1 .calendar-ico {
+  margin-top: 5px;
+}
+
+.card-1 .calendar-ico div {
+  font-weight: bold;
+  font-weight: bold;
+  text-align: center;
+  width: 72px;
+}
+
+.card-1 .calendar-ico div:nth-child(1) {
+  background-color: #004277;
+  border-radius: 10px 10px 0 0;
+  color: #e5e5e5;
+}
+
+.card-1 .calendar-ico div:nth-child(2) {
+  background-color: #e5e5e5;
+  font-size: larger;
+}
+
+.card-1 .calendar-ico div:nth-child(3) {
+  background-color: #e5e5e5;
+  border-radius: 0 0 10px 10px;
+}
+
+.card-1 .cell-1 div:nth-child(1) {
+  font-size: x-large;
+}
+
+.card-1 .cell-1 div:nth-child(2) {
+  font-size: large;
+}
+
+.card-1 .cell-2 {
+  margin: 5px;
+}
+
+/* creating css loader */
+
+#loading {
+  width: 2rem;
+  height: 2rem;
+  border: 5px solid #f3f3f3;
+  border-top: 6px solid #00467a;
+  border-radius: 100%;
+  margin: auto;
+  visibility: hidden;
+  animation: spin 1s infinite linear;
+}
+
+#loading.display {
+  visibility: visible;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body.waiting * {
+  cursor: progress;
+}
+
+/* Navbar */
+
+.navbar,
+.navbar-inverse {
+  border-radius: 0;
+  border: none;
+  margin-bottom: 0;
+  /* min-height: 80px; */
+  padding: 0 5%;
+}
+
+
+.nav li {
+  display: inline;
+  color: white;
+}
+
+.nav-link {
+  font-family: 'GothamLight';
+  font-weight: bold;
+  font-size: 1.5rem;
+  /* padding: 0 20px !important; */
+}
+
+.nav-link:hover {
+  background-color: #e3e8f8;
+  color: #2a3a6f !important;
+}
+
+.nav-active {
+  /* background-color: #e3e8f8; */
+  /* border-bottom: 1px solid #738dd7; */
+  text-decoration: underline;
+  /* color: #2a3a6f !important; */
+}
+
+/* .nav-active::before {
+  display: inline-block;
+  content: "";
+  border-top: 0.3em solid transparent;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0.3em solid transparent;
+  border-left: 0.3em solid;
+} */
+
+.navbar-inverse .navbar-nav>li>a {
+  color: #ffffff;
+  font-family: Lato;
+  font-size: 1.7em;
+  font-weight: 300;
+  padding: 30px 25px 33px 25px;
+}
+
+.navbar-inverse .navbar-nav li a:hover {
+  background-color: #444444;
+  transition: 0.7s all linear;
+  height: 100%;
+}
+
+.btn-primary {
+  background-color: #2a3a6f;
+  border-color: #2a3a6f;
+}
+
+.btn-primary:hover {
+  background-color: #738dd7;
+  border-color: #738dd7;
+}
+
+.btn-info {
+  background-color: #738dd7;
+  border-color: #738dd7;
+  text-transform: uppercase;
+}
+
+.btn-info:hover {
+  background-color: #d6e1ff;
+  border-color: #d6e1ff;
+  color: #738dd7;
+}
+
+.btn-danger {
+  background-color: #d6e1ff;
+  border-color: #d6e1ff;
+  color: #738dd7;
+  text-transform: uppercase;
+}
+
+.btn-danger:hover {
+  background-color: #2a3a6f;
+  border-color: #2a3a6f;
+  color: #fff;
+}
+
+.dataTable tr:nth-child(even) {
+  background-color: #e3e8f8 !important;
+}
+
+.video-js .vjs-title-bar {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+
+  /*
+    By default, do not show the title bar.
+  */
+  display: none;
+  font-size: 2em;
+  padding: .5em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* 
+  Only show the title bar after playback has begun (so as not to hide
+  the big play button) and only when paused or when the user is 
+  interacting with the player.
+*/
+.video-js.vjs-paused.vjs-has-started .vjs-title-bar,
+.video-js.vjs-user-active.vjs-has-started .vjs-title-bar {
+  display: block;
+}

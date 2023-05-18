@@ -86,7 +86,10 @@
     "LABEL_21": "Enlace para la sesión remota de",
     "OF": "de",
     "LABEL_22": "Enlace actualizado.",
-    "LABEL_23": "Hubo un problema actualizando el enlace de la cita, favor de intentar más tarde."
+    "LABEL_23": "Hubo un problema actualizando el enlace de la cita, favor de intentar más tarde.",
+    "ASSISTANT": "Asistente",
+    "MAIL": "Correo",
+    "EMAIL": "Correo electrónico"
   },
   "APPOINTMENT": {
     "CANCEL_PROMPT": "¿Desea cancelar la sesión de $0 para el $1?",
@@ -124,7 +127,6 @@
     "NAME_TITLE": "Nombre(s)",
     "LAST_NAME_TITLE": "Apellido(s)",
     "LICENSE_TITLE": "Licencia",
-    "EMAIL_TITLE": "Correo electrónico",
     "COUNTRY_TITLE": "País",
     "HRU_TITLE": "Hardware Report Utility (HRU)",
     "COUPONS_TABLE_TITLE": "Cupones",
@@ -192,14 +194,9 @@
   "ATTENDANT_LIST": {
     "USER_LIST": "Lista de usuarios",
     "ASSISTANTS": "Asistentes",
-    "ASSISTANT": "Asistente",
-    "MAIL": "Correo",
-    "HRU": "HRU",
-    "COUNTRY": "País"
+    "HRU": "HRU"
   },
   "AVAILABLE_APPOINTMENT": {
-    "ASSISTANT": "Asistente",
-    "MAIL": "Correo",
     "HRU": "HRU",
     "LICENSE": "Licencia",
     "INDICATIONS": "Indicaciones",
@@ -217,7 +214,6 @@
     "CAPACITY": "Cupo:",
     "REMOTE_SESSION": "Sesión remota",
     "SESSION_LINK": "Enlace de sesión",
-    "COUNTRY": "País:",
     "STATE": "Ciudad:",
     "TRAINER": "Instructor",
     "LABEL_12": "Instrucciones de la dirección de este curso:",
@@ -369,7 +365,6 @@
     "CREATE_SYSTEM_USER": "Crear usuario del sistema",
     "FIRST_NAME": "Nombres(s):",
     "LAST_NAME": "Apellido(s):",
-    "EMAIL": "Correo electrónico:",
     "ROLE": "Rol:",
     "OPTION": "Choose...",
     "RSM": "RSM",
@@ -402,14 +397,12 @@
   },
   "PAGES_RECOVERY_EMAIL": {
     "RECOVERY_PASSWORD": "Recuperar contraseña",
-    "EMAIL": "Correo electrónico",
     "SEND_EMAIL": "Enviar correo"
   },
   "PAGES_RECOVERY_PASSWORD": {
     "RESTORE_PASSWORD": "Restablecer contraseña",
     "PASSWORD": "Contraseña:",
-    "REPEAT_PASSWORD": "Repetir contraseña:",
-    "REPEAT_PASSWORD_1": "Repetir contraseña",
+    "REPEAT_PASSWORD": "Repetir contraseña",
     "RESTORE": "Restablecer",
     "ALERT_1": "La contraseña debe tener: al menos letras y números, al menos un caracter especial (@.-_+!#$%&) y ser de al menos 8 caracteres.",
     "ALERT_2": "La contraseña no coincide.",
@@ -418,7 +411,6 @@
   "PAGES_SIGNIN": {
     "WELCOME": "BIENVENIDO",
     "DESCRIPTION": "ISS Appointments Portal",
-    "EMAIL": "Correo electrónico",
     "PASSWORD": "Contraseña",
     "FORGOT_PASSWORD": "Olvidé mi contraseña",
     "SIGNIN": "INGRESAR",
@@ -430,8 +422,6 @@
     "NAME": "Nombre(s)",
     "LAST_NAME": "Apellido(s)",
     "LABEL_2": "* Este dato aparecerá sin modificación en el certificado",
-    "EMAIL": "Correo electrónico",
-    "COUNTRY": "País:",
     "OPTION": "Choose...",
     "ENTER_CAPTCHA": "Ingresar captcha",
     "VALIDATE": "Validar",

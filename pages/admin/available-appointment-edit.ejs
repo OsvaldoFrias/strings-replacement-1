@@ -31,14 +31,14 @@
           <div class="w-100">
             <div>
               <h2>
-                <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.EDIT_TITLE %>
+                <%= translation.AVAILABLE_APPOINTMENT.EDIT_TITLE %>
               </h2>
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label class="form-label"
                       for="appointmentStartDatetime">
-                      <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.START_DATE_TIME %>
+                      <%= translation.AVAILABLE_APPOINTMENT.START_DATE_TIME %>
                     </label>
                     <div class="input-group date"
                       id="fechaInicialGroup">
@@ -52,7 +52,7 @@
                   <div class="form-group col-md-6">
                     <label class="form-label"
                       for="appointmentFinishDatetime">
-                      <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.FINISH_DATE_TIME %>
+                      <%= translation.AVAILABLE_APPOINTMENT.FINISH_DATE_TIME %>
                     </label>
                     <div class="input-group date"
                       id="fechaFinalGroup">
@@ -67,18 +67,18 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="serviceId">
-                      <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.SESSION_TYPE %>
+                      <%= translation.AVAILABLE_APPOINTMENT.SESSION_TYPE %>
                     </label>
                     <select id="serviceId" name="serviceId"
                       class="form-control">
                       <option value="" selected>
-                        <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.OPTION %>
+                        <%= translation.AVAILABLE_APPOINTMENT.OPTION %>
                       </option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="overrideAttendantsNumber">
-                      <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.CAPACITY %>
+                      <%= translation.AVAILABLE_APPOINTMENT.CAPACITY %>
                     </label>
                     <input type="number" class="form-control"
                       id="overrideAttendantsNumber"
@@ -91,12 +91,12 @@
                     <input class="form-check-input" type="checkbox"
                       id="sessionType" checked>
                     <label class="form-check-label" for="sessionType">
-                      <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.REMOTE_SESSION %>
+                      <%= translation.AVAILABLE_APPOINTMENT.REMOTE_SESSION %>
                     </label>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="meetingUrl">
-                      <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.SESSION_LINK %>
+                      <%= translation.AVAILABLE_APPOINTMENT.SESSION_LINK %>
                     </label>
                     <input type="text" class="form-control"
                       id="meetingUrl" name="meetingUrl"
@@ -106,23 +106,23 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="countryId">
-                      <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.COUNTRY %>
+                      <%= translation.PROFILE.COUNTRY_TITLE %>:
                     </label>
                     <select id="countryId" name="countryId"
                       class="form-control">
                       <option value="" selected>
-                        <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.OPTION %>
+                        <%= translation.AVAILABLE_APPOINTMENT.OPTION %>
                       </option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="stateId">
-                      <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.STATE %>
+                      <%= translation.AVAILABLE_APPOINTMENT.STATE %>
                     </label>
                     <select id="stateId" name="stateId"
                       class="form-control">
                       <option value="" selected>
-                        <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.OPTION %>
+                        <%= translation.AVAILABLE_APPOINTMENT.OPTION %>
                       </option>
                     </select>
                   </div>
@@ -134,7 +134,7 @@
                 <div class="col-md-12 text-right">
                   <button type="button" class="btn btn-primary"
                     onclick="updateAppointment()">
-                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.UPDATE %>
+                    <%= translation.AVAILABLE_APPOINTMENT.UPDATE %>
                   </button>
                 </div>
                 <div id="loading"></div>
@@ -276,16 +276,16 @@
     const errors = [];
 
     if (!serviceId) {
-      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_1 %>');
+      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_7 %>');
     }
     if (!appointmentStartDatetime) {
-      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_2 %>');
+      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_8 %>');
     }
     if (!appointmentFinishDatetime) {
-      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_3 %>');
+      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_9 %>');
     }
     if (!stateId) {
-      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_5 %>');
+      errors.push('<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.LABEL_11 %>');
     }
 
     if (errors.length > 0) {
@@ -346,7 +346,7 @@
 
     const option = document.createElement('option');
     option.value = '';
-    option.innerText = '<%= translation.ADMIN_AVAILABLE_APPOINTMEN_ADD.OPTION %>';
+    option.innerText = '<%= translation.AVAILABLE_APPOINTMENT.OPTION %>';
     option.selected = true;
 
     select.appendChild(option);

@@ -28,22 +28,22 @@
               <table id="appointments-list">
                 <thead>
                   <th>
-                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN.ASSISTANT %>
+                    <%= translation.HOME.ASSISTANT %>
                   </th>
                   <th>
-                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN.MAIL %>
+                    <%= translation.HOME.MAIL %>
                   </th>
                   <th>
-                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN.COMPANY %>
+                    <%= translation.CERTIFICATES.THEAD_5 %>
                   </th>
                   <th>
-                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN.HRU %>
+                    <%= translation.AVAILABLE_APPOINTMENT.HRU %>
                   </th>
                   <th>
-                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN.LICENSE %>
+                    <%= translation.AVAILABLE_APPOINTMENT.LICENSE %>
                   </th>
                   <th>
-                    <%= translation.ADMIN_AVAILABLE_APPOINTMEN.CANCEL %>
+                    <%= translation.HOME.CANCEL %>
                   </th>
                 </thead>
               </table>
@@ -59,7 +59,7 @@
   </div>
   <dialog id="directionDialog" style="width: 50%;">
     <section class="text-center">
-      <%= translation.ADMIN_AVAILABLE_APPOINTMEN.UPDATE_DIRECTION %>
+      <%= translation.AVAILABLE_APPOINTMENT.UPDATE_DIRECTION %>
     </section>
     <!-- <input type="text" class="text-center" style="width: 100%;"> -->
     <section class="text-center">
@@ -68,10 +68,10 @@
     </section>
     <section class="text-center">
       <button id="cancelDirectionButton">
-        <%= translation.ADMIN_AVAILABLE_APPOINTMEN.CANCEL %>
+        <%= translation.HOME.CANCEL %>
       </button>
       <button id="submitDirectionButton">
-        <%= translation.ADMIN_AVAILABLE_APPOINTMEN.SUBMIT_DIRECTION %>
+        <%= translation.AVAILABLE_APPOINTMENT.SUBMIT_DIRECTION %>
       </button>
     </section>
   </dialog>
@@ -143,8 +143,8 @@
     const serviceInfoTemplate = available.service.serviceCategory.infoTemplate;
     const serviceAttendantsNumber = available.overrideAttendantsNumber || available.service.attendantsNumber;
     const sessionType = available.sessionType === "remote" ?
-      "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.REMOTE %>"
-      : "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.PRESENTIAL %>";
+      "<%= translation.HOME.REMOTE %>"
+      : "<%= translation.HOME.PRESENTIAL %>";
     const state = available.state;
     const country = available.state.country;
     const location = serviceType === 'exam' ?
@@ -153,11 +153,11 @@
         country.name
         : `${country.name} ${state.name}`;
     const linkTitle = available.sessionType === "remote" ?
-      "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.ENTER_CONFERENCE %>"
-      : "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.DIRECTION %>";
+      "<%= translation.HOME.ENTER_CONFERENCE %>"
+      : "<%= translation.HOME.DIRECTION %>";
     const directionType = available.sessionType === "remote" ?
-      "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.INDICATIONS %>"
-      : "<%= translation.ADMIN_AVAILABLE_APPOINTMEN.DIRECTION %>";
+      "<%= translation.AVAILABLE_APPOINTMENT.INDICATIONS %>"
+      : "<%= translation.HOME.DIRECTION %>";
     const direction = available.direction;
 
     const cardTemplate = `<div class="card-1">
@@ -175,19 +175,19 @@
               <div>${sessionType}${location ? " - " + location : ''}</div>
               <table>
                 <tr>
-                  <td><%= translation.ADMIN_AVAILABLE_APPOINTMEN.DATE %> </td>
+                  <td><%= translation.HOME.DATE %> </td>
                   <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
                 </tr>
               </table>
-              <img style="cursor:pointer;" onclick="updateMeetingUrl(${availableAppointmentId})" src="/public/img/edit.png" alt="<%= translation.ADMIN_AVAILABLE_APPOINTMEN.EDIT_LINK %>" width="15px"/>
-              ${meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle} ${sessionType}${location ? " - " + location : ''}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_1 %></p>'}
-              <p><img style="cursor:pointer;" onclick="showModalDirection(${availableAppointmentId})" src="/public/img/edit.png" alt="<%= translation.ADMIN_AVAILABLE_APPOINTMEN.EDIT_DIRECTION %>" width="15px"/> ${directionType}:</p>
+              <img style="cursor:pointer;" onclick="updateMeetingUrl(${availableAppointmentId})" src="/public/img/edit.png" alt="<%= translation.AVAILABLE_APPOINTMENT.EDIT_LINK %>" width="15px"/>
+              ${meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle} ${sessionType}${location ? " - " + location : ''}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.HOME.LINK_NOT_AVAILABLE %></p>'}
+              <p><img style="cursor:pointer;" onclick="showModalDirection(${availableAppointmentId})" src="/public/img/edit.png" alt="<%= translation.AVAILABLE_APPOINTMENT.EDIT_DIRECTION %>" width="15px"/> ${directionType}:</p>
               <p>${direction ? direction.replace(/\n/gi, '<br>') : '-'}</p>
             </div>
           </div>
           <div class="ml-auto p-2">
             <div class="cell-2">
-              <div><img style="cursor:pointer;" onclick="updateOverrideAttendantsNumber(${availableAppointmentId})" src="/public/img/edit.png" alt="<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_2 %>" width="15px"/> ${totalAppointments} <%= translation.ADMIN_AVAILABLE_APPOINTMEN.OF %> ${serviceAttendantsNumber} <%= translation.ADMIN_AVAILABLE_APPOINTMEN.ASSISTANTS %></div>
+              <div><img style="cursor:pointer;" onclick="updateOverrideAttendantsNumber(${availableAppointmentId})" src="/public/img/edit.png" alt="<%= translation.AVAILABLE_APPOINTMENT.LABEL_13 %>" width="15px"/> ${totalAppointments} <%= translation.AVAILABLE_APPOINTMENT.OF %> ${serviceAttendantsNumber} <%= translation.AVAILABLE_APPOINTMENT.ASSISTANTS %></div>
               ${trainersMail}
               <div><button class="btn btn-danger" onclick="cancelAvailableAppointment(${availableAppointmentId}, '${serviceCategoryName}', '${intervalDate}')"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.CANCEL_COURSE %></button></div>
             </div>
@@ -225,8 +225,8 @@
           `<a href="mailto:${email}">${email}</a>`,
           `${businessName}`,
           hru,
-          `<img style="cursor:pointer;" onclick="setLicenseKeyUrl(${id}, '${fullName}')" src="/public/img/edit.png" alt="<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_3 %>" width="15px"/> ${(licenseKey ? `<a target="_blank" href="${licenseKey}"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.LICENSE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_4 %></span>')}`,
-          `<img style="cursor:pointer;" onclick="cancelAppointment('${hash}', '${serviceCategoryName}', '${intervalDate}')" src="/public/img/cancel-book.png" alt="<%= translation.ADMIN_AVAILABLE_APPOINTMEN.CANCEL %>" width="30px"/>`,
+          `<img style="cursor:pointer;" onclick="setLicenseKeyUrl(${id}, '${fullName}')" src="/public/img/edit.png" alt="<%= translation.AVAILABLE_APPOINTMENT.LABEL_2 %>" width="15px"/> ${(licenseKey ? `<a target="_blank" href="${licenseKey}"><%= translation.AVAILABLE_APPOINTMENT.LICENSE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_3 %></span>')}`,
+          `<img style="cursor:pointer;" onclick="cancelAppointment('${hash}', '${serviceCategoryName}', '${intervalDate}')" src="/public/img/cancel-book.png" alt="<%= translation.HOME.CANCEL %>" width="30px"/>`,
         ])
         .draw()
         .node();
@@ -234,7 +234,7 @@
   }
 
   function updateOverrideAttendantsNumber(availableAppointmentId) {
-    let overrideAttendantsNumber = prompt(`<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_5 %>`);
+    let overrideAttendantsNumber = prompt(`<%= translation.AVAILABLE_APPOINTMENT.LABEL_14 %>`);
     if (!overrideAttendantsNumber) {
       return;
     }
@@ -252,9 +252,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_6 %>');
+          alert('<%= translation.AVAILABLE_APPOINTMENT.LABEL_15 %>');
         } else {
-          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_7 %>');
+          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_16 %>');
         }
         location.reload(true);
       })
@@ -284,7 +284,7 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_8 %>');
+          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_17 %>');
           return fetch(`/api/v1/notification/update/available-appointment/${availableAppointmentId}`, {
             headers: myHeaders,
             credentials: "same-origin",
@@ -294,7 +294,7 @@
             })
           })
         } else {
-          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_9 %>');
+          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_18 %>');
           location.reload(true);
         }
         // location.reload(true);
@@ -325,7 +325,7 @@
   });
 
   function updateMeetingUrl(availableAppointmentId) {
-    let meetingUrl = prompt(`<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_10 %>`);
+    let meetingUrl = prompt(`<%= translation.AVAILABLE_APPOINTMENT.LABEL_19 %>`);
     if (!meetingUrl) {
       return;
     }
@@ -343,9 +343,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_11 %>');
+          alert('<%= translation.HOME.LABEL_22 %>');
         } else {
-          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_12 %>');
+          alert('<%= translation.AVAILABLE_APPOINTMENT.LABEL_21 %>');
         }
         location.reload(true);
       })
@@ -355,7 +355,7 @@
   }
 
   function setLicenseKeyUrl(attendantId, fullAttendantName) {
-    let licenseKey = prompt(`<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_13 %> ${fullAttendantName}`);
+    let licenseKey = prompt(`<%= translation.AVAILABLE_APPOINTMENT.LABEL_22 %> ${fullAttendantName}`);
     if (!licenseKey) {
       return;
     }
@@ -373,9 +373,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_11 %>');
+          alert('<%= translation.HOME.LABEL_22 %>');
         } else {
-          alert('<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_14 %>');
+          alert('<%= translation.AVAILABLE_APPOINTMENT.LABEL_6 %>');
         }
         location.reload(true);
       })
@@ -388,7 +388,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_15 %> ${serviceCategoryName} <%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_16 %> ${intervalDate}?`
+      `<%= translation.AVAILABLE_APPOINTMENT.LABEL_24 %> ${serviceCategoryName} <%= translation.AVAILABLE_APPOINTMENT.LABEL_25 %> ${intervalDate}?`
     )) {
       return;
     }
@@ -417,7 +417,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `<%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_15 %> ${serviceCategoryName} <%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_16 %> ${intervalDate}?`
+      `<%= translation.AVAILABLE_APPOINTMENT.LABEL_24 %> ${serviceCategoryName} <%= translation.AVAILABLE_APPOINTMENT.LABEL_25 %> ${intervalDate}?`
     )) {
       return;
     }

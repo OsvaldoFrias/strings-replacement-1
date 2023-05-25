@@ -25,40 +25,40 @@
           class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <h2>
-              <%= translation.ADMIN_ATTENDANT_PROFILE.USER_PROFILE %>
+              <%= translation.USER_PROFILE.TITLE %>
             </h2>
             <form>
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="email">
-                    <%= translation.ADMIN_ATTENDANT_PROFILE.EMAIL_PROFILE_1 %>
+                    <%= translation.HOME.EMAIL %>:
                   </label>
                   <br>
                   <label id="email">
-                    <%= translation.ADMIN_ATTENDANT_PROFILE.EMAIL_PROFILE_2 %>
+                    <%= translation.CERTIFICATES.THEAD_4 %>
                   </label>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="country">
-                    <%= translation.ADMIN_ATTENDANT_PROFILE.COUNTRY_PROFILE_1 %>
+                    <%= translation.PROFILE.COUNTRY_TITLE %>:
                   </label>
                   <br>
                   <label id="country">
-                    <%= translation.ADMIN_ATTENDANT_PROFILE.COUNTRY_PROFILE_2 %>
+                    <%= translation.PROFILE.COUNTRY_TITLE %>
                   </label>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="firstName">
-                    <%= translation.ADMIN_ATTENDANT_PROFILE.FIRST_NAME %>
+                    <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.FIRST_NAME %>
                   </label>
                   <input type="text" class="form-control"
                     id="firstName" name="firstName">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="lastName">
-                    <%= translation.ADMIN_ATTENDANT_PROFILE.LAST_NAME %>
+                    <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.LAST_NAME %>
                   </label>
                   <input type="text" class="form-control"
                     id="lastName" name="lastName">
@@ -67,7 +67,7 @@
               <div class="form-row">
                 <div class="form-group col-md-12">
                   <label for="businessName">
-                    <%= translation.ADMIN_ATTENDANT_PROFILE.BUSINESS_NAME %>
+                    <%= translation.CERTIFICATES.THEAD_5 %>
                   </label>
                   <input type="text" class="form-control"
                     id="businessName" name="businessName">
@@ -76,12 +76,12 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="rsmName">
-                    <%= translation.ADMIN_ATTENDANT_PROFILE.RSM_NAME %>
+                    <%= translation.PROFILE.RSM_NAME %>
                   </label>
                   <select id="rsmName" name="rsmName"
                     class="form-control">
                     <option value="" selected>
-                      <%= translation.ADMIN_ATTENDANT_PROFILE.OPTION %>
+                      <%= translation.PROFILE.OPTION %>
                     </option>
                   </select>
                 </div>
@@ -92,24 +92,24 @@
               </div>
               <div class="form-group col-md-12 text-right">
                 <button type="button" class="btn btn-primary"
-                  onclick="updateAttendant()"><%= translation.ADMIN_ATTENDANT_PROFILE.UPDATE %></button>
+                  onclick="updateAttendant()"><%= translation.PROFILE.UPDATE_BUTTON %></button>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
                   <h3>
-                    <%= translation.ADMIN_ATTENDANT_PROFILE.COUPONS %>
+                    <%= translation.PROFILE.COUPONS_TABLE_TITLE %>
                   </h3>
                   <table id="coupons-list">
                     <thead>
                       <tr>
                         <th>
-                          <%= translation.ADMIN_ATTENDANT_PROFILE.PRODUCT %>
+                          <%= translation.PROFILE.THEAD_1 %>
                         </th>
                         <th>
-                          <%= translation.ADMIN_ATTENDANT_PROFILE.COUPON %>
+                          <%= translation.PROFILE.THEAD_2 %>
                         </th>
                         <th>
-                          <%= translation.ADMIN_ATTENDANT_PROFILE.COMPANY %>
+                          <%= translation.CERTIFICATES.THEAD_5 %>
                         </th>
                       </tr>
                     </thead>
@@ -119,7 +119,7 @@
               <div class="form-row">
                 <div class="form-group col-md-12">
                   <h3>
-                    <%= translation.ADMIN_ATTENDANT_PROFILE.NEXT_ASSISTANCES %>
+                    <%= translation.PROFILE.NEXT_ASSISTANCES %>
                   </h3>
                   <div id="appointments"></div>
                 </div>
@@ -127,7 +127,7 @@
               <div class="form-row">
                 <div class="form-group col-md-12">
                   <h3>
-                    <%= translation.ADMIN_ATTENDANT_PROFILE.BROWSING_HISTORY %>
+                    <%= translation.PROFILE.BROWSING_HISTORY %>
                   </h3>
                   <table id="grades-list"></table>
                 </div>
@@ -252,7 +252,7 @@
         .row
         .add([
           `${serviceName}`,
-          `<img style="cursor:pointer;" onclick="prompt('<%= translation.ADMIN_ATTENDANT_PROFILE.LABEL_1 %>','${couponCode}')" src="/public/img/copy-icon.png" alt="<%= translation.ADMIN_ATTENDANT_PROFILE.COPY %>" width="30px"/>${couponCode}`,
+          `<img style="cursor:pointer;" onclick="prompt('<%= translation.PROFILE.COPY_COUPON %>','${couponCode}')" src="/public/img/copy-icon.png" alt="<%= translation.PROFILE.COPY %>" width="30px"/>${couponCode}`,
           `${businessName}`,
         ])
         .draw()
@@ -275,11 +275,11 @@
       const serviceName = appointment.available.service.name;
       const serviceCategoryName = appointment.available.service.serviceCategory.name;
       const serviceCategoryDescription = appointment.available.service.serviceCategory.description;
-      const sessionType = appointment.available.sessionType === "remote" ? "<%= translation.ADMIN_ATTENDANT_PROFILE.REMOTE %>" : "<%= translation.ADMIN_ATTENDANT_PROFILE.PRESENTIAL %>";
+      const sessionType = appointment.available.sessionType === "remote" ? "<%= translation.HOME.REMOTE %>" : "<%= translation.HOME.PRESENTIAL %>";
       const state = appointment.available.state;
       const country = appointment.available.state.country;
       const location = appointment.available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-      const linkTitle = appointment.available.sessionType === "remote" ? "<%= translation.ADMIN_ATTENDANT_PROFILE.ENTER_CONFERENCE %>" : "<%= translation.ADMIN_ATTENDANT_PROFILE.DIRECTION %>";
+      const linkTitle = appointment.available.sessionType === "remote" ? "<%= translation.HOME.ENTER_CONFERENCE %>" : "<%= translation.HOME.DIRECTION %>";
 
       const cardTemplate = `<div class="card-1">
       <div class="d-flex flex-wrap justify-content-center">
@@ -296,7 +296,7 @@
             <div>${sessionType} - ${location}</div>
             <table>
               <tr>
-                <td><%= translation.ADMIN_ATTENDANT_PROFILE.DATE %> </td>
+                <td><%= translation.HOME.DATE %> </td>
                 <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
               </tr>
             </table>
@@ -304,7 +304,7 @@
         </div>
         <div class="ml-auto p-2">
           <div class="cell-2">
-            ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.ADMIN_ATTENDANT_PROFILE.LABEL_2 %></p>'}
+            ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.HOME.LINK_NOT_AVAILABLE %></p>'}
           </div>
         </div>
       </div>
@@ -315,7 +315,7 @@
     if (appointmentsTemplate && appointmentsTemplate.length > 0) {
       appointments.innerHTML = appointmentsTemplate.join('\n');
     } else {
-      appointments.innerHTML = '<p><%= translation.ADMIN_ATTENDANT_PROFILE.LABEL_3 %></p>'
+      appointments.innerHTML = '<p><%= translation.HOME.LIST_1_EMPTY %></p>'
     }
 
   }
@@ -323,7 +323,7 @@
   function parseGrades(grades, type) {
     const gradesList = document.getElementById('grades-list');
 
-    gradesList.innerHTML = `<thead><tr><th><%= translation.ADMIN_ATTENDANT_PROFILE.SESSION %></th><th><%= translation.ADMIN_ATTENDANT_PROFILE.DAY %></th><th><%= translation.ADMIN_ATTENDANT_PROFILE.NAME %></th><th><%= translation.ADMIN_ATTENDANT_PROFILE.EMAIL %></th><th><%= translation.ADMIN_ATTENDANT_PROFILE.COMPANY %></th><th><%= translation.ADMIN_ATTENDANT_PROFILE.RESULT %></th></tr></thead>`;
+    gradesList.innerHTML = `<thead><tr><th><%= translation.HOME.SESSION %></th><th><%= translation.PROFILE.DAY %></th><th><%= translation.PROFILE.NAME %></th><th><%= translation.CERTIFICATES.THEAD_4 %></th><th><%= translation.CERTIFICATES.COMPANY %></th><th><%= translation.CERTIFICATES.THEAD_6 %></th></tr></thead>`;
 
     let gradesTable = $('#grades-list').DataTable({
       "ordering": false,
@@ -383,12 +383,12 @@
         `${fullName}`,
         `<a href="mailto:${email}">${email}</a>`,
         `${businessName}`,
-        `${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_ATTENDANT_PROFILE.LABEL_4 %></span>'}<div id="gradeType-${appointmentId}"></div>`,
+        `${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;"><%= translation.CERTIFICATES.PENDING_REVIEW %></span>'}<div id="gradeType-${appointmentId}"></div>`,
       ];
 
       if (type === 'exam') {
-        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}"><%= translation.ADMIN_ATTENDANT_PROFILE.CERTIFICATE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_ATTENDANT_PROFILE.LABEL_5 %></span>'}<div id="meetingUrl-${appointmentId}"></div>`);
-        rowData.push(`${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}"><%= translation.ADMIN_ATTENDANT_PROFILE.EVALUATION %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_ATTENDANT_PROFILE.LABEL_6 %></span>')}`);
+        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}"><%= translation.CERTIFICATES.CERTIFICATE_TITLE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.PROFILE.LABEL_5 %></span>'}<div id="meetingUrl-${appointmentId}"></div>`);
+        rowData.push(`${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}"><%= translation.CERTIFICATES.THEAD_8 %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.CERTIFICATES.NO_REVIEW %></span>')}`);
       }
 
       rowData.push(`${trainerMail}`);
@@ -443,13 +443,13 @@
     const errors = [];
 
     if (!firstName) {
-      errors.push("<%= translation.ADMIN_ATTENDANT_PROFILE.LABEL_7 %>");
+      errors.push("<%= translation.PROFILE.LABEL_14 %>");
     }
     if (!lastName) {
-      errors.push("<%= translation.ADMIN_ATTENDANT_PROFILE.LABEL_8 %>");
+      errors.push("<%= translation.PROFILE.LABEL_15 %>");
     }
     if (!businessName) {
-      errors.push("<%= translation.ADMIN_ATTENDANT_PROFILE.LABEL_9 %>");
+      errors.push("<%= translation.PROFILE.LABEL_16 %>");
     }
 
     displayErrors(errors);
@@ -486,9 +486,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.ADMIN_ATTENDANT_PROFILE.LABEL_10 %>');
+          alert('<%= translation.PROFILE.LABEL_7 %>');
         } else {
-          alert('<%= translation.ADMIN_ATTENDANT_PROFILE.LABEL_11 %>');
+          alert('<%= translation.PROFILE.LABEL_8 %>');
         }
         window.location.href = "/attendant";
       })

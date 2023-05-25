@@ -33,24 +33,24 @@
             <div class="col-md-12 text-right">
               <a href="/available-appointment/add"
                 class="btn btn-primary">
-                <%= translation.ADMIN_HOME.SCHEDULE_NEW_SESSIONS %>
+                <%= translation.HOME.SCHEDULE_NEW_SESSIONS %>
               </a>
             </div>
             <div id="loading"></div>
-            <h2><%= translation.ADMIN_HOME.UPCOMING_SESSIONS %></h2>
+            <h2><%= translation.HOME.UPCOMING_SESSIONS %></h2>
             <div id="appointments"></div>
             <div id="availableAppointments">
               <table id="availableAppointments-list" class="compact"
                 style="width:100%">
                 <thead>
                   <tr>
-                    <th><%= translation.ADMIN_HOME.SESSION %></th>
-                    <th><%= translation.ADMIN_HOME.DATE_HOUR %></th>
-                    <th><%= translation.ADMIN_HOME.LINK %></th>
-                    <th><%= translation.ADMIN_HOME.TRAINER %></th>
-                    <th><%= translation.ADMIN_HOME.RESERVATIONS %>
+                    <th><%= translation.HOME.SESSION %></th>
+                    <th><%= translation.HOME.DATE_HOUR %></th>
+                    <th><%= translation.HOME.LINK %></th>
+                    <th><%= translation.AVAILABLE_APPOINTMENT.TRAINER %></th>
+                    <th><%= translation.HOME.RESERVATIONS %>
                     </th>
-                    <th><%= translation.ADMIN_HOME.CANCEL %></th>
+                    <th><%= translation.HOME.CANCEL %></th>
                   </tr>
                 </thead>
               </table>
@@ -93,9 +93,9 @@
     })
       .then(res => {
         if (res.status === 201) {
-          alert('<%= translation.ADMIN_HOME.LABEL_1 %>');
+          alert('<%= translation.HOME.LABEL_1 %>');
         } else {
-          alert('<%= translation.ADMIN_HOME.LABEL_2 %>');
+          alert('<%= translation.HOME.LABEL_2 %>');
         }
         location.reload(true);
       })
@@ -131,14 +131,14 @@
       // }
 
       let trainersMail = `
-        <img id="trainerEdit-${availableAppointmentId}" style="cursor:pointer;" onclick="populateTrainerList('${availableAppointmentId}')" src="/public/img/add-btn.png" alt="<%= translation.ADMIN_HOME.LABEL_3 %>" width="25px"/>
-        <span style="font-style: italic;color: #999999;"><%= translation.ADMIN_HOME.LABEL_4 %></span>
+        <img id="trainerEdit-${availableAppointmentId}" style="cursor:pointer;" onclick="populateTrainerList('${availableAppointmentId}')" src="/public/img/add-btn.png" alt="<%= translation.HOME.LABEL_16 %>" width="25px"/>
+        <span style="font-style: italic;color: #999999;"><%= translation.HOME.LABEL_17 %></span>
         <div id="availableAppointmentId-${availableAppointmentId}"></div>`;
       if (availableAppointment.trainers && availableAppointment.trainers.length !== 0) {
         let acc = '';
         trainersMail += availableAppointment.trainers.reduce((previousValue, trainer) => {
           return previousValue + `
-            <img id="trainerRemove-${availableAppointmentId}" style="cursor:pointer;" onclick="removeTrainer('${availableAppointmentId}','${trainer.id}')" src="/public/img/button-cancel.png" alt="Agregar instructor de sesión remota" width="25px"/>
+            <img id="trainerRemove-${availableAppointmentId}" style="cursor:pointer;" onclick="removeTrainer('${availableAppointmentId}','${trainer.id}')" src="/public/img/button-cancel.png" alt="<%= translation.HOME.LABEL_16 %>" width="25px"/>
             <a href="mailto:${trainer.email}">${trainer.email}</a>
             <div id="availableAppointmentId-${availableAppointmentId}-${trainer.id}"></div>`;
         }, acc);
@@ -151,18 +151,18 @@
         .attendantsNumber;
       const serviceCategoryName = availableAppointment.service.serviceCategory.name;
       const serviceCategoryDescription = availableAppointment.service.serviceCategory.description;
-      const sessionType = availableAppointment.sessionType === "remote" ? "<%= translation.ADMIN_HOME.REMOTE %>" : "<%= translation.ADMIN_HOME.PRESENTIAL %>";
+      const sessionType = availableAppointment.sessionType === "remote" ? "<%= translation.HOME.REMOTE %>" : "<%= translation.HOME.PRESENTIAL %>";
       const state = availableAppointment.state;
       const country = availableAppointment.state.country;
       const location = serviceType === 'exam' ? '' : availableAppointment.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-      const linkTitle = availableAppointment.sessionType === "remote" ? "<%= translation.ADMIN_HOME.ENTER_CONFERENCE %>" : "<%= translation.ADMIN_HOME.DIRECTION %>";
+      const linkTitle = availableAppointment.sessionType === "remote" ? "<%= translation.HOME.ENTER_CONFERENCE %>" : "<%= translation.HOME.DIRECTION %>";
 
       availableAppointmentsTable
         .row
         .add([
           `<div><a href="/available-appointment/${availableAppointmentId}">${serviceName} - ${sessionType}${location ? " - " + location : ''}</a></div>`,
           `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}`,
-          `<img style="cursor:pointer;" onclick="setMeetingUrl(${availableAppointmentId},'${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="<%= translation.ADMIN_HOME.LABEL_5 %>" width="15px"/> ${(meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle}</a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_HOME.LABEL_6 %></span>')}`,
+          `<img style="cursor:pointer;" onclick="setMeetingUrl(${availableAppointmentId},'${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="<%= translation.HOME.LABEL_18 %>" width="15px"/> ${(meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle}</a>` : '<span style="font-style: italic;color: #999999;"><%= translation.HOME.LINK_NOT_AVAILABLE %></span>')}`,
           // `<img id="trainerEdit-${availableAppointmentId}" style="cursor:pointer;" onclick="populateTrainerList('${availableAppointmentId}')" src="/public/img/edit.png" alt="Editar instructor de sesión remota" width="15px"/> ${trainerMail ? `<a href="mailto:${trainerMail}">${trainerMail}</a>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido asignado un instructor.</span>'}<div id="availableAppointmentId-${availableAppointmentId}"></div>`,
           trainersMail,
           `${totalAppointments} de ${serviceAttendantsNumber}`,
@@ -211,7 +211,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `<%= translation.ADMIN_HOME.LABEL_7 %> ${serviceCategoryName} <%= translation.ADMIN_HOME.LABEL_8 %> ${intervalDate}?`
+      `<%= translation.HOME.LABEL_19 %> ${serviceCategoryName} <%= translation.HOME.LABEL_20 %> ${intervalDate}?`
     )) {
       return;
     }
@@ -273,7 +273,7 @@
         container.appendChild(select);
 
         const cancelBtn = document.createElement('button');
-        cancelBtn.innerText = "<%= translation.ADMIN_HOME.CANCEL %>";
+        cancelBtn.innerText = "<%= translation.HOME.CANCEL %>";
         cancelBtn.onclick = (e) => {
           const availableAppointmentId = htmlDivId.replace('availableAppointmentId-', '');
           const trainerEdit = document.getElementById(`trainerEdit-${availableAppointmentId}`);
@@ -310,9 +310,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.ADMIN_HOME.LABEL_9 %>');
+          alert('<%= translation.HOME.LABEL_4 %>');
         } else {
-          alert('<%= translation.ADMIN_HOME.LABEL_10 %>');
+          alert('<%= translation.HOME.LABEL_5 %>');
         }
         location.reload(true);
       })
@@ -326,7 +326,7 @@
   }
 
   function setMeetingUrl(availableAppointmentId, serviceName, datetime) {
-    let meetingUrl = prompt(`<%= translation.ADMIN_HOME.LABEL_11 %> ${serviceName} <%= translation.ADMIN_HOME.OF %> ${datetime}`);
+    let meetingUrl = prompt(`<%= translation.HOME.LABEL_21 %> ${serviceName} <%= translation.HOME.OF %> ${datetime}`);
     if (!meetingUrl) {
       return;
     }
@@ -344,9 +344,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.ADMIN_HOME.LABEL_12 %>');
+          alert('<%= translation.HOME.LABEL_22 %>');
         } else {
-          alert('<%= translation.ADMIN_HOME.LABEL_13 %>');
+          alert('<%= translation.HOME.LABEL_23 %>');
         }
         location.reload(true);
       })

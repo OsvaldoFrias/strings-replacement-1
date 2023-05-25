@@ -18,13 +18,13 @@
           class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div>
-              <h2><%= translation.ADMIN_COUPON_ADD.GENERATE_COUPONS %>
+              <h2><%= translation.COUPON.GENERATE_COUPONS_PO %>
               </h2>
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="poCode">
-                      <%= translation.ADMIN_COUPON_ADD.PO_CODE %>
+                      <%= translation.COUPON.PO_CODE %>
                     </label>
                     <input type="text" class="form-control"
                       id="poCode" name="poCode"
@@ -32,7 +32,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="sequence">
-                      <%= translation.ADMIN_COUPON_ADD.SEQUENCE %>
+                      <%= translation.COUPON.SEQUENCE %>
                     </label>
                     <input type="number" class="form-control"
                       id="sequence" name="sequence">
@@ -41,14 +41,14 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="businessName">
-                      <%= translation.ADMIN_COUPON_ADD.BUSINESS_NAME %>
+                      <%= translation.CERTIFICATES.THEAD_5 %>:
                     </label>
                     <input type="text" class="form-control"
                       id="businessName" name="businessName">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="rsmName">
-                      <%= translation.ADMIN_COUPON_ADD.RSM_NAME %>
+                      <%= translation.COUPON.RSM_NAME %>
                     </label>
                     <input type="text" class="form-control"
                       id="rsmName" name="rsmName">
@@ -56,22 +56,22 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="type">Tipo de cupón:</label>
+                    <label for="type"><%= translation.COUPON.COUPON_TYPE %></label>
                     <select id="type" name="type"
                       class="form-control">
-                      <option value="sold">Vendido</option>
-                      <option value="free">Gratuito</option>
-                      <option value="end-user">Usuario final</option>
+                      <option value="sold"><%= translation.COUPON.SOLD %></option>
+                      <option value="free"><%= translation.COUPON.FREE %></option>
+                      <option value="end-user"><%= translation.COUPON.FINAL_USER %></option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="serviceId">
-                      <%= translation.ADMIN_COUPON_ADD.PRODUCT_TYPE %>
+                      <%= translation.COUPON.PRODUCT_TYPE %>
                     </label>
                     <select id="serviceId" name="serviceId"
                       class="form-control">
                       <option value="" selected>
-                        <%= translation.ADMIN_COUPON_ADD.OPTION %>
+                        <%= translation.COUPON.OPTION %>
                       </option>
                     </select>
                   </div>
@@ -83,7 +83,7 @@
                 <div class="col-md-12 text-right">
                   <button type="button" class="btn btn-primary"
                     onclick="saveCoupon()">
-                    <%= translation.ADMIN_COUPON_ADD.GENERATE %>
+                    <%= translation.COUPON.GENERATE %>
                   </button>
                 </div>
               </form>
@@ -145,21 +145,21 @@
     const errors = [];
 
     if (!serviceId) {
-      errors.push('<%= translation.ADMIN_COUPON_ADD.LABEL_1 %>');
+      errors.push('<%= translation.COUPON.LABEL_3 %>');
     }
     if (!sequence) {
-      errors.push('<%= translation.ADMIN_COUPON_ADD.LABEL_2 %>');
+      errors.push('<%= translation.COUPON.LABEL_4 %>');
     }
     if (type === 'sold') {
       if (!poCode) {
-        errors.push('<%= translation.ADMIN_COUPON_ADD.LABEL_3 %>');
+        errors.push('<%= translation.COUPON.LABEL_5 %>');
       }
     }
     if (!businessName) {
-      errors.push('<%= translation.ADMIN_COUPON_ADD.LABEL_4 %>');
+      errors.push('<%= translation.COUPON.LABEL_6 %>');
     }
     if (!rsmName) {
-      errors.push('<%= translation.ADMIN_COUPON_ADD.LABEL_5 %>');
+      errors.push('<%= translation.COUPON.LABEL_7 %>');
     }
 
     if (errors.length > 0) {

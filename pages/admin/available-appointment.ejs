@@ -355,7 +355,7 @@
   }
 
   function setLicenseKeyUrl(attendantId, fullAttendantName) {
-    let licenseKey = prompt(`<%= translation.AVAILABLE_APPOINTMENT.LABEL_22 %> ${fullAttendantName}`);
+    let licenseKey = prompt(`<%= translation.AVAILABLE_APPOINTMENT.LABEL_4 %> ${fullAttendantName}`);
     if (!licenseKey) {
       return;
     }
@@ -388,7 +388,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `<%= translation.AVAILABLE_APPOINTMENT.LABEL_24 %> ${serviceCategoryName} <%= translation.AVAILABLE_APPOINTMENT.LABEL_25 %> ${intervalDate}?`
+      `<%= translation.HOME.LABEL_19 %> ${serviceCategoryName} <%= translation.HOME.LABEL_20 %> ${intervalDate}?`
     )) {
       return;
     }
@@ -417,7 +417,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `<%= translation.AVAILABLE_APPOINTMENT.LABEL_24 %> ${serviceCategoryName} <%= translation.AVAILABLE_APPOINTMENT.LABEL_25 %> ${intervalDate}?`
+      `<%= translation.HOME.LABEL_19 %> ${serviceCategoryName} <%= translation.LABEL_19.LABEL_20 %> ${intervalDate}?`
     )) {
       return;
     }

@@ -30,14 +30,14 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="name">
-                      <%= translation.ADMIN_SERVICE_CATEGORY_EDIT.NAME %>
+                      <%= translation.SERVICE.LABEL_11 %>
                     </label>
                     <input type="text" class="form-control" id="name"
                       name="name">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="level">
-                      <%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LEVEL %>
+                      <%= translation.SERVICE.LABEL_2 %>:
                     </label>
                     <input type="text" class="form-control" id="level"
                       name="level">
@@ -56,7 +56,7 @@
                 <div class="form-group col-md-12 text-right">
                   <button type="button" class="btn btn-primary"
                     onclick="updateServiceCategory()">
-                    <%= translation.ADMIN_SERVICE_CATEGORY_EDIT.UPDATE %>
+                    <%= translation.PROFILE.UPDATE_BUTTON %>
                   </button>
                   <div id="error"
                     class="alert alert-danger alert-dismissible d-none">
@@ -115,13 +115,13 @@
     const errors = [];
 
     if (!name) {
-      errors.push("<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_1 %>");
+      errors.push("<%= translation.SERVICE.LABEL_11 %>");
     }
     if (!level) {
-      errors.push("<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_2 %>");
+      errors.push("<%= translation.SERVICE.LABEL_12 %>");
     }
     if (!infoTemplate) {
-      errors.push("<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_3 %>");
+      errors.push("<%= translation.PROFILE.LABEL_16 %>");
     }
 
     displayErrors(errors);
@@ -156,9 +156,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_4 %>');
+          alert('<%= translation.SERVICE.LABEL_17 %>');
         } else {
-          alert('<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_5 %>');
+          alert('<%= translation.PROFILE.LABEL_8 %>');
         }
         window.location.href = "/service-categories";
       })
@@ -183,7 +183,7 @@
   }
 
   function setLicenseKeyUrl(attendantId, fullAttendantName) {
-    let licenseKey = prompt(`<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_6 %> ${fullAttendantName}`);
+    let licenseKey = prompt(`<%= translation.AVAILABLE_APPOINTMENT.LABEL_4 %> ${fullAttendantName}`);
     if (!licenseKey) {
       return;
     }
@@ -201,9 +201,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_7 %>');
+          alert('<%= translation.HOME.LABEL_22 %>');
         } else {
-          alert('<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_8 %>');
+          alert('<%= translation.AVAILABLE_APPOINTMENT.LABEL_6 %>');
         }
         location.reload(true);
       })
@@ -216,7 +216,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_9 %> ${serviceCategoryName} <%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_10 %> ${intervalDate}?`
+      `<%= translation.HOME.LABEL_19 %> ${serviceCategoryName} <%= translation.HOME.LABEL_20 %> ${intervalDate}?`
     )) {
       return;
     }
@@ -245,7 +245,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `<%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_9 %> ${serviceCategoryName} <%= translation.ADMIN_SERVICE_CATEGORY_EDIT.LABEL_10 %> ${intervalDate}?`
+      `<%= translation.HOME.LABEL_19 %> ${serviceCategoryName} <%= translation.HOME.LABEL_20 %> ${intervalDate}?`
     )) {
       return;
     }

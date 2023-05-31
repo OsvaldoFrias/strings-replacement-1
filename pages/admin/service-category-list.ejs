@@ -28,10 +28,10 @@
               <table id="appointments-list">
                 <thead>
                   <th>
-                    <%= translation.ADMIN_SERVICE_CATEGORY_LIST.NAME %>
+                    <%= translation.CERTIFICATES.THEAD_3 %>
                   </th>
                   <th>
-                    <%= translation.ADMIN_SERVICE_CATEGORY_LIST.LEVEL %>
+                    <%= translation.SERVICE.LABEL_2 %>
                   </th>
                 </thead>
               </table>
@@ -90,7 +90,7 @@
   }
 
   function setLicenseKeyUrl(attendantId, fullAttendantName) {
-    let licenseKey = prompt(`<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_1 %> ${fullAttendantName}`);
+    let licenseKey = prompt(`<%= translation.AVAILABLE_APPOINTMENT.LABEL_4 %> ${fullAttendantName}`);
     if (!licenseKey) {
       return;
     }
@@ -108,9 +108,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_2 %>');
+          alert('<%= translation.HOME.LABEL_22 %>');
         } else {
-          alert('<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_3 %>');
+          alert('<%= translation.AVAILABLE_APPOINTMENT.LABEL_6 %>');
         }
         location.reload(true);
       })
@@ -123,7 +123,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_4 %> ${serviceCategoryName} <%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_5 %> ${intervalDate}?`
+      `<%= translation.HOME.LABEL_19 %> ${serviceCategoryName} <%= translation.HOME.LABEL_20 %> ${intervalDate}?`
     )) {
       return;
     }
@@ -152,7 +152,7 @@
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     if (!confirm(
-      `<%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_4 %> ${serviceCategoryName} <%= translation.ADMIN_SERVICE_CATEGORY_LIST.LABEL_5 %> ${intervalDate}?`
+      `<%= translation.HOME.LABEL_19 %> ${serviceCategoryName} <%= translation.HOME.LABEL_20 %> ${intervalDate}?`
     )) {
       return;
     }

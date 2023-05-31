@@ -138,12 +138,10 @@
     "UPDATED_PROFILE": "Perfil actualizado.",
     "PROFILE_UPDATE_ERROR": "Hubo un problema actualizando el perfil del usuario, favor de intentar más tarde.",
     "RSM_NAME": "RSM asociado:",
-    "OPTION": "Choose...",
     "NEXT_ASSISTANCES": "Próximas asistencias",
     "BROWSING_HISTORY": "Historial",
     "COPY": "Copiar",
     "DAY": "Fecha",
-    "NAME": "Nombre",
     "LABEL_4": "Aún no ha sido evaluado.",
     "CERTIFICATE": "Certificado",
     "LABEL_5": "Aún no ha sido generado el certificado.",
@@ -165,14 +163,12 @@
   },
   "SERVICE": {
     "TITLE_1": "Servicios",
-    "LABEL_1": "Nombre",
     "LABEL_2": "Nivel",
     "LABEL_3": "Estimación de asistentes/Cupo",
     "LABEL_4": "Tipo de servicio",
     "OPTION_1": "Curso",
     "OPTION_2": "Examen",
     "LABEL_5": "Depende del servicio",
-    "OPTION_3": "Choose...",
     "LABEL_6": "Genera cupón para el servicio",
     "LABEL_7": "Servicio gratuito (no requiere cupón)",
     "LABEL_8": "Texto del certificado",
@@ -184,7 +180,6 @@
     "LABEL_14": "Se requiere la información del curso.",
     "LABEL_15": "Servicio creado.",
     "LABEL_16": "Hubo un problema creando el servicio, favor de intentar más tarde.",
-    "BUTTON_2": "Actualizar",
     "LABEL_17": "Servicio actualizado.",
     "LABEL_18": "Hubo un problema actualizando los datos del servicio, favor de intentar más tarde.",
     "BUTTON_3": "Agregar servicio"
@@ -203,12 +198,10 @@
     "LABEL_4": "Enlace para licencia de",
     "LABEL_6": "Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde.",
     "EDIT_TITLE": "Actualizar datos de la sesión",
-    "UPDATE": "Actualizar",
     "SCHEDULE_NEXT_SESSION": "Agendar próxima sesión",
     "START_DATE_TIME": "Fecha y hora inicial:",
     "FINISH_DATE_TIME": "Fecha y hora final:",
     "SESSION_TYPE": "Tipo de sesión:",
-    "OPTION": "Choose...",
     "CAPACITY": "Cupo:",
     "REMOTE_SESSION": "Sesión remota",
     "SESSION_LINK": "Enlace de sesión",
@@ -235,11 +228,7 @@
     "LABEL_17": "Dirección actualizada. Se enviarán notificaciones.",
     "LABEL_18": "Hubo un problema actualizando la dirección, favor de intentar más tarde.",
     "LABEL_19": "Enlace de la dirección",
-    "LABEL_21": "Hubo un problema actualizando el enlace de la dirección, favor de intentar más tarde.",
-    "LABEL_22": "Enlace para licencia de",
-    "LABEL_23": "Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde.",
-    "LABEL_24": "¿Desea cancelar la sesión de",
-    "LABEL_25": "para el"
+    "LABEL_21": "Hubo un problema actualizando el enlace de la dirección, favor de intentar más tarde."
   },
   "COUPON": {
     "GENERATED_COUPONS": "Cupones generados",
@@ -261,7 +250,6 @@
     "FREE": "Gratuito",
     "SOLD_COUPON": "Cupón vendido",
     "PRODUCT_TYPE": "Tipo de producto:",
-    "OPTION": "Choose...",
     "GENERATE": "Generar",
     "LABEL_3": "Seleccione un tipo de producto.",
     "LABEL_4": "Indique un consecutivo.",
@@ -276,7 +264,6 @@
     "RATINGS": "Calificaciones",
     "ATTENDANCE": "Asistencia",
     "CERTIFICATE_URL": "URL Certificado",
-    "TRAINER": "Instructor",
     "EVALUATION": "Evaluación",
     "EDIT_RATING": "Editar calificación",
     "LABEL_1": "Aún no ha sido evaluado.",
@@ -297,9 +284,7 @@
     "LABEL_13": "Hubo un error con el cupón."
   },
   "ATTENDANT_APPOINTMENT": {
-    "INDICATIONS": "Indicaciones",
-    "LABEL_3": "¿Desea cancelar la sesión de",
-    "LABEL_4": "para el"
+    "INDICATIONS": "Indicaciones"
   },
   "ATTENDANT_HEADER": {
     "LABEL_1": "Ingresa el cupón válido para acceder a la información del curso o examen:",
@@ -320,9 +305,7 @@
     "ADD_COUNTRY": "Agregar país",
     "ADD_STATE": "Agregar ciudad",
     "ACTION": "Acción",
-    "UPDATE": "Actualizar",
     "DELETE": "Borrar",
-    "STATE_NAME": "Nombre",
     "STATE_TIMEZONE": "Zona horaria",
     "ADD_COUNTRY_1": "Agregar país:",
     "ADDED_COUNTRY": "País agregado",
@@ -342,33 +325,11 @@
     "LABEL_11": "Hubo un problema actualizando la zona horaria, favor de intentar más tarde."
   },
   "ADMIN_SERVICE_CATEGORY_EDIT": {
-    "LEVEL": "Nivel:",
-    "UPDATE": "Actualizar",
-    "LABEL_1": "Se requiere el nombre del servicio.",
-    "LABEL_2": "Se requiere el nivel del servicio.",
-    "LABEL_3": "Se requiere el nombre de la empresa a la que pertenece el usuario.",
-    "LABEL_4": "Servicio actualizado.",
-    "LABEL_5": "Hubo un problema actualizando los datos del usuario, favor de intentar más tarde.",
-    "LABEL_6": "Enlace para licencia de",
-    "LABEL_8": "Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde.",
-    "LABEL_9": "¿Desea cancelar la sesión de",
-    "LABEL_10": "para el"
-  },
-  "ADMIN_SERVICE_CATEGORY_LIST": {
-    "LEVEL": "Nivel",
-    "LABEL_1": "Enlace para licencia de",
-    "LABEL_3": "Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde.",
-    "LABEL_4": "¿Desea cancelar la sesión de",
-    "LABEL_5": "para el"
+    "LABEL_3": "Se requiere el nombre de la empresa a la que pertenece el usuario."
   },
   "ADMIN_SYSTEM_USER_DATA_ADD": {
     "CREATE_SYSTEM_USER": "Crear usuario del sistema",
-    "FIRST_NAME": "Nombres(s):",
-    "LAST_NAME": "Apellido(s):",
-    "ROLE": "Rol:",
-    "OPTION": "Choose...",
-    "RSM": "RSM",
-    "TRAINER": "Instructor",
+    "ROLE": "Rol",
     "ADMIN": "Administrador",
     "ADD": "Agregar",
     "LABEL_1": "Indica el nombre del usuario.",
@@ -383,9 +344,6 @@
     "LABEL_1": "Editar rol del usuario",
     "LABEL_2": "Rol de usuario actualizado.",
     "LABEL_3": "Hubo un problema actualizando el rol de usuario, favor de intentar más tarde.",
-    "RSM": "RSM",
-    "TRAINER": "Instructor",
-    "ADMIN": "Administrador",
     "DISABLED": "Deshabilitado"
   },
   "PAGES_GRADE": {
@@ -420,9 +378,7 @@
     "RECORD": "Registro",
     "LABEL_1": "* Los datos de Nombre(s) y Apellido(s) aparecerán sin modificación en el certificado",
     "NAME": "Nombre(s)",
-    "LAST_NAME": "Apellido(s)",
     "LABEL_2": "* Este dato aparecerá sin modificación en el certificado",
-    "OPTION": "Choose...",
     "ENTER_CAPTCHA": "Ingresar captcha",
     "VALIDATE": "Validar",
     "CHANGE": "Cambiar",

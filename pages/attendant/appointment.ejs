@@ -63,12 +63,12 @@
     const serviceCategoryName = appointment.available.service.serviceCategory.name;
     const serviceCategoryDescription = appointment.available.service.serviceCategory.description;
     const serviceInfoTemplate = appointment.available.service.serviceCategory.infoTemplate;
-    const sessionType = appointment.available.sessionType === "remote" ? "Remoto" : "Presencial";
+    const sessionType = appointment.available.sessionType === "remote" ? "<%= translation.HOME.REMOTE %>" : "<%= translation.HOME.PRESENTIAL %>";
     const state = appointment.available.state;
     const country = appointment.available.state.country;
     const location = serviceType === 'exam' ? '' : appointment.available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-    const linkTitle = appointment.available.sessionType === "remote" ? "Entrar a conferencia" : "Dirección";
-    const directionType = appointment.available.sessionType === "remote" ? "Indicaciones" : "Dirección";
+    const linkTitle = appointment.available.sessionType === "remote" ? "<%= translation.HOME.ENTER_CONFERENCE %>" : "<%= translation.HOME.DIRECTION %>";
+    const directionType = appointment.available.sessionType === "remote" ? "<%= translation.AVAILABLE_APPOINTMENT.INDICATIONS %>" : "<%= translation.HOME.DIRECTION %>";
     const direction = appointment.available.direction;
 
     const cardTemplate = `<div class="card-1">
@@ -86,7 +86,7 @@
               <div>${location}</div>
               <table>
                 <tr>
-                  <td>Cita: </td>
+                  <td><%= translation.HOME.DATE %>: </td>
                   <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
                 </tr>
               </table>
@@ -96,8 +96,8 @@
           </div>
           <div class="ml-auto p-2">
             <div class="cell-2">
-              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;">Aún no está disponible el enlace para unirse.</p>'}
-              <div><button class="btn btn-danger" onclick="cancelAppointment('<%= hash %>', '${serviceCategoryName}', '${intervalDate}')">Cancelar Curso</button></div>
+              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.HOME.LINK_NOT_AVAILABLE %></p>'}
+              <div><button class="btn btn-danger" onclick="cancelAppointment('<%= hash %>', '${serviceCategoryName}', '${intervalDate}')"><%= translation.AVAILABLE_APPOINTMENT.CANCEL_COURSE %></button></div>
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@
   function cancelAppointment(hash, serviceCategoryName, intervalDate) {
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
-    if (!confirm(`¿Desea cancelar la sesión de ${serviceCategoryName} para el ${intervalDate}?`)) {
+    if (!confirm(`<%= translation.HOME.LABEL_19 %> ${serviceCategoryName} <%= translation.HOME.LABEL_20 %> ${intervalDate}?`)) {
       return;
     }
 

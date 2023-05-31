@@ -155,7 +155,7 @@
         `<a href="/attendant/${id}">${fullName}</a>`,
         `<a href="mailto:${email}">${email}</a>`,
         `${businessName}`,
-        `<img id="gradeEdit-${appointmentId}" style="cursor:pointer;" onclick="populateGradeList('${appointmentId}', '${serviceType}')" src="/public/img/edit.png" alt="<%= translation.GRADE_LIST.EDIT_RATING %>" width="15px"/> ${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;"><%= translation.GRADE_LIST.LABEL_1 %></span>'}<div id="gradeType-${appointmentId}"></div>`,
+        `<img id="gradeEdit-${appointmentId}" style="cursor:pointer;" onclick="populateGradeList('${appointmentId}', '${serviceType}')" src="/public/img/edit.png" alt="<%= translation.GRADE_LIST.EDIT_RATING %>" width="15px"/> ${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;"><%= translation.CERTIFICATES.PENDING_REVIEW %></span>'}<div id="gradeType-${appointmentId}"></div>`,
       ];
 
       if (type === 'course') {
@@ -163,8 +163,8 @@
       }
 
       if (type === 'exam') {
-        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}"><%= translation.GRADE_LIST.CERTIFICATE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.GRADE_LIST.LABEL_2 %></span>'}<div id="meetingUrl-${appointmentId}"></div>`);
-        rowData.push(`<img style="cursor:pointer;" onclick="setFeedbackUrl(${gradeId}, '${fullName}','${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="<%= translation.GRADE_LIST.LABEL_3 %>" width="15px"/> ${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}"><%= translation.GRADE_LIST.EVALUATION %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.GRADE_LIST.LABEL_4 %></span>')}`);
+        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}"><%= translation.CERTIFICATES.CERTIFICATE_TITLE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.PROFILE.LABEL_5 %></span>'}<div id="meetingUrl-${appointmentId}"></div>`);
+        rowData.push(`<img style="cursor:pointer;" onclick="setFeedbackUrl(${gradeId}, '${fullName}','${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="<%= translation.GRADE_LIST.LABEL_3 %>" width="15px"/> ${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}"><%= translation.CERTIFICATES.THEAD_8 %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.CERTIFICATES.NO_REVIEW %></span>')}`);
       }
 
       rowData.push(`${trainersMail}`);

@@ -40,7 +40,7 @@
                     <%= translation.AVAILABLE_APPOINTMENT.HRU %>
                   </th>
                   <th>
-                    <%= translation.AVAILABLE_APPOINTMENT.LICENSE %>
+                    <%= translation.PROFILE.LICENSE_TITLE %>
                   </th>
                   <th>
                     <%= translation.HOME.CANCEL %>
@@ -225,7 +225,7 @@
           `<a href="mailto:${email}">${email}</a>`,
           `${businessName}`,
           hru,
-          `<img style="cursor:pointer;" onclick="setLicenseKeyUrl(${id}, '${fullName}')" src="/public/img/edit.png" alt="<%= translation.AVAILABLE_APPOINTMENT.LABEL_2 %>" width="15px"/> ${(licenseKey ? `<a target="_blank" href="${licenseKey}"><%= translation.AVAILABLE_APPOINTMENT.LICENSE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_3 %></span>')}`,
+          `<img style="cursor:pointer;" onclick="setLicenseKeyUrl(${id}, '${fullName}')" src="/public/img/edit.png" alt="<%= translation.AVAILABLE_APPOINTMENT.LABEL_2 %>" width="15px"/> ${(licenseKey ? `<a target="_blank" href="${licenseKey}"><%= translation.PROFILE.LICENSE_TITLE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.ADMIN_AVAILABLE_APPOINTMEN.LABEL_3 %></span>')}`,
           `<img style="cursor:pointer;" onclick="cancelAppointment('${hash}', '${serviceCategoryName}', '${intervalDate}')" src="/public/img/cancel-book.png" alt="<%= translation.HOME.CANCEL %>" width="30px"/>`,
         ])
         .draw()

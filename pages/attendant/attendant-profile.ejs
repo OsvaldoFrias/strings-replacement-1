@@ -25,55 +25,55 @@
             <form>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="firstName">Nombre(s):</label>
+                  <label for="firstName"><%= translation.PROFILE.NAME_TITLE %>:</label>
                   <br>
-                  <label id="firstName">Nombre(s)</label>
+                  <label id="firstName"><%= translation.PROFILE.NAME_TITLE %></label>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="lastName">Apellido(s):</label>
+                  <label for="lastName"><%= translation.PROFILE.LAST_NAME_TITLE %>:</label>
                   <br>
-                  <label id="lastName">Apellido(s)</label>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="businessName">Empresa:</label>
-                  <br>
-                  <label id="businessName">Empresa</label>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="licenseKey">Licencia:</label>
-                  <br>
-                  <label id="licenseKey">Licencia</label>
+                  <label id="lastName"><%= translation.PROFILE.LAST_NAME_TITLE %></label>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="email">Correo electrónico:</label>
+                  <label for="businessName"><%= translation.CERTIFICATES.THEAD_5 %>:</label>
+                  <br>
+                  <label id="businessName"><%= translation.CERTIFICATES.THEAD_5 %></label>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="licenseKey"><%= translation.PROFILE.LICENSE_TITLE %>:</label>
+                  <br>
+                  <label id="licenseKey"><%= translation.PROFILE.LICENSE_TITLE %></label>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="email"><%= translation.HOME.EMAIL %>:</label>
                   <input type="text" class="form-control" id="email" name="email">
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="countryId">País:</label>
+                  <label for="countryId"><%= translation.PROFILE.COUNTRY_TITLE %>:</label>
                   <select id="countryId" name="countryId" class="form-control">
-                    <option value="" selected>Choose...</option>
+                    <option value="" selected><%= translation.HOME.OPTION %></option>
                   </select>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <label for="hru">Hardware Report Utility (HRU):</label>
+                  <label for="hru"><%= translation.PROFILE.HRU_TITLE %>:</label>
                   <textarea type="text" class="form-control" id="hru" name="hru" rows="10"></textarea>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
-                  <h3>Cupones</h3>
+                  <h3><%= translation.MENU.MENU_8 %></h3>
                   <table id="coupons-list">
                     <thead>
                       <tr>
-                        <th>Producto</th>
-                        <th>Cupón</th>
-                        <th>Empresa</th>
+                        <th><%= translation.PROFILE.THEAD_1 %></th>
+                        <th><%= translation.PROFILE.THEAD_2 %></th>
+                        <th><%= translation.CERTIFICATES.THEAD_5 %></th>
                       </tr>
                     </thead>
                   </table>
@@ -83,7 +83,7 @@
                 <div id="error-message"></div>
               </div>
               <div class="form-group col-md-12 text-right">
-                <button type="button" class="btn btn-primary" onclick="updateAttendant()">Actualizar</button>
+                <button type="button" class="btn btn-primary" onclick="updateAttendant()"><%= translation.PROFILE.UPDATE_BUTTON %></button>
               </div>
             </form>
           </div>
@@ -166,7 +166,7 @@
         .row
         .add([
           `${serviceName}`,
-          `<img style="cursor:pointer;" onclick="prompt('Copiar al portapapeles: CTRL + C, Enter','${couponCode}')" src="/public/img/copy-icon.png" alt="Copiar" width="30px"/>${couponCode}`,
+          `<img style="cursor:pointer;" onclick="prompt('<%= translation.PROFILE.COPY_COUPON %>','${couponCode}')" src="/public/img/copy-icon.png" alt="<%= translation.PROFILE.COPY %>" width="30px"/>${couponCode}`,
           `${businessName}`,
         ])
         .draw()
@@ -224,7 +224,7 @@
     lastName.innerHTML = attendant.lastName;
     businessName.innerHTML = attendant.businessName;
     const licenseKeyValue = attendant.licenseKey;
-    licenseKey.innerHTML = `${(licenseKeyValue ? `<a target="_blank" href="${licenseKeyValue}">Licencia</a>` : '<span style="font-style: italic;color: #999999;">No ha colocado una licencia.</span>')}`;
+    licenseKey.innerHTML = `${(licenseKeyValue ? `<a target="_blank" href="${licenseKeyValue}"><%= translation.PROFILE.LICENSE_TITLE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.PROFILE.LABEL_9 %></span>')}`;
     email.value = attendant.user.email;
     hru.value = attendant.hru;
 
@@ -241,10 +241,10 @@
     const errors = [];
 
     if (!email) {
-      errors.push("Se requiere el correo electrónico del usuario.");
+      errors.push("<%= translation.PROFILE.EMAIL_EMPTY_ERROR %>");
     }
     if (!countryId) {
-      errors.push("Debe seleccionar un país de origen.");
+      errors.push("<%= translation.PROFILE.COUNTRY_EMPTY_ERROR %>");
     }
 
     displayErrors(errors);
@@ -288,9 +288,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('Perfil actualizado.');
+          alert('<%= translation.PROFILE.UPDATED_PROFILE %>');
         } else {
-          alert('Hubo un problema actualizando el perfil del usuario, favor de intentar más tarde.');
+          alert('<%= translation.PROFILE.PROFILE_UPDATE_ERROR %>');
         }
         window.location.href = "/my-profile";
       })

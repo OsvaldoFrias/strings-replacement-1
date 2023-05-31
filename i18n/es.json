@@ -73,8 +73,8 @@
     "SCHEDULE": "Agendar",
     "LABEL_12": "¿Desea reservar para",
     "FOR": "para",
-    "LABEL_14": "Error desconocido.",
-    "DATE": "Cita:",
+    "UNKNOWN_ERROR": "Error desconocido.",
+    "DATE": "Cita",
     "SCHEDULE_NEW_SESSIONS": "Agendar nuevas sesiones",
     "LABEL_16": "Agregar instructor de sesión remota",
     "LABEL_17": "Agregar instructor.",
@@ -99,11 +99,7 @@
     "ADDITIONAL_INFO_REMOTE_TITLE": "Instrucciones adicionales",
     "ADDITIONAL_INFO_CLOSE_TITLE": "Indicaciones adicionales",
     "FIX_APPOINTMENT": "Registrarse",
-    "UNKNOWN_ERROR": "Error desconocido.",
-    "ENTER_COUPON": "Ingresa el cupón válido para acceder a la información del curso o examen:",
-    "SAVED_COUPON": "Cupón registrado con éxito.",
-    "TAKEN_COUPON": "El cupón ya fue utilizado o no existe en el registro, favor de contactar a su RSM.",
-    "COUPON_ERROR": "Hubo un error al intentar registrar el cupón, favor de contactar a su RSM."
+    "SAVED_COUPON": "Cupón registrado con éxito."
   },
   "CERTIFICATES": {
     "THEAD_1": "Sesión",
@@ -117,8 +113,7 @@
     "PENDING_REVIEW": "Aún no ha sido evaluado.",
     "NO_CERTIFICATE": "No hay certificado.",
     "CERTIFICATE_TITLE": "Certificado",
-    "NO_REVIEW": "No hay evaluación.",
-    "REVIEW_TITLE": "Evaluación"
+    "NO_REVIEW": "No hay evaluación."
   },
   "PROFILE": {
     "TITLE": "Perfil de usuario",
@@ -127,7 +122,6 @@
     "LICENSE_TITLE": "Licencia",
     "COUNTRY_TITLE": "País",
     "HRU_TITLE": "Hardware Report Utility (HRU)",
-    "COUPONS_TABLE_TITLE": "Cupones",
     "THEAD_1": "Producto",
     "THEAD_2": "Cupón",
     "UPDATE_BUTTON": "Actualizar",
@@ -141,12 +135,7 @@
     "NEXT_ASSISTANCES": "Próximas asistencias",
     "BROWSING_HISTORY": "Historial",
     "COPY": "Copiar",
-    "DAY": "Fecha",
-    "LABEL_4": "Aún no ha sido evaluado.",
-    "CERTIFICATE": "Certificado",
     "LABEL_5": "Aún no ha sido generado el certificado.",
-    "EVALUATION": "Evaluación",
-    "LABEL_6": "No hay evaluación.",
     "LABEL_7": "Usuario actualizado.",
     "LABEL_8": "Hubo un problema actualizando los datos del usuario, favor de intentar más tarde.",
     "LABEL_9": "No ha colocado una licencia.",
@@ -156,7 +145,6 @@
   },
   "GRADE": {
     "LABEL_1": "Nombre del asistente",
-    "LABEL_2": "Certificado",
     "LABEL_3": "Estatus",
     "LABEL_4": "Emitido en",
     "LABEL_5": "Fecha de expiración"
@@ -191,10 +179,8 @@
   },
   "AVAILABLE_APPOINTMENT": {
     "HRU": "HRU",
-    "LICENSE": "Licencia",
     "INDICATIONS": "Indicaciones",
     "LABEL_2": "Editar enlace de la licencia",
-    "LABEL_3": "No ha colocado una licencia.",
     "LABEL_4": "Enlace para licencia de",
     "LABEL_6": "Hubo un problema actualizando el enlace de la licencia, favor de intentar más tarde.",
     "EDIT_TITLE": "Actualizar datos de la sesión",
@@ -234,9 +220,7 @@
     "GENERATED_COUPONS": "Cupones generados",
     "INVOICE_NUMBER": "Núm. Factura",
     "CONSECUTIVE": "Consecutivo",
-    "PRODUCT": "Producto",
     "USER": "Usuario",
-    "COUPON": "Cupón",
     "RSM": "RSM",
     "TYPE": "Tipo",
     "LABEL_1": "El cupón aún no ha sido utilizado.",
@@ -264,13 +248,8 @@
     "RATINGS": "Calificaciones",
     "ATTENDANCE": "Asistencia",
     "CERTIFICATE_URL": "URL Certificado",
-    "EVALUATION": "Evaluación",
     "EDIT_RATING": "Editar calificación",
-    "LABEL_1": "Aún no ha sido evaluado.",
-    "CERTIFICATE": "Certificado",
-    "LABEL_2": "Aún no ha sido generado el certificado.",
     "LABEL_3": "Editar enlace de la evaluación",
-    "LABEL_4": "No hay evaluación.",
     "LABEL_5": "Enlace para evaluación de",
     "OF": "de",
     "LABEL_7": "Hubo un problema actualizando el enlace del feedback de la evaluación, favor de intentar más tarde.",
@@ -279,26 +258,8 @@
     "LABEL_10": "Evaluación actualizada.",
     "LABEL_11": "Hubo un problema estableciendo la evaluación del usuario, favor de intentar más tarde.",
     "DOWNLOAD_REPORT": "Descargar reporte",
-    "COUPON": "Cupón",
     "LABEL_12": "Cupón creado y asignado con éxito.",
     "LABEL_13": "Hubo un error con el cupón."
-  },
-  "ATTENDANT_APPOINTMENT": {
-    "INDICATIONS": "Indicaciones"
-  },
-  "ATTENDANT_HEADER": {
-    "LABEL_1": "Ingresa el cupón válido para acceder a la información del curso o examen:",
-    "LABEL_3": "Cupón registrado con éxito. Favor de seleccionar una fecha para terminar su registro.",
-    "LABEL_4": "El cupón ya fue utilizado o no existe en el registro, favor de contactar a su RSM.",
-    "LABEL_5": "Hubo un error al intentar registrar el cupón, favor de contactar a su RSM."
-  },
-  "ATTENDANT_OPEN_TRAINING": {
-    "NEXT_DATES": "Próximas fechas",
-    "START_DATE": "Fecha/Inicio",
-    "TOPIC": "Tema",
-    "RESERVE": "Reservar",
-    "LABEL_1": "¿Desea reservar para",
-    "FOR": "para"
   },
   "ADMIN_COUNTRY_LIST": {
     "COUNTRIES": "Países",
@@ -324,9 +285,6 @@
     "LABEL_10": "Zona horaria actualizada.",
     "LABEL_11": "Hubo un problema actualizando la zona horaria, favor de intentar más tarde."
   },
-  "ADMIN_SERVICE_CATEGORY_EDIT": {
-    "LABEL_3": "Se requiere el nombre de la empresa a la que pertenece el usuario."
-  },
   "ADMIN_SYSTEM_USER_DATA_ADD": {
     "CREATE_SYSTEM_USER": "Crear usuario del sistema",
     "ROLE": "Rol",
@@ -348,7 +306,6 @@
   },
   "PAGES_GRADE": {
     "ASSISTANT_NAME": "Nombre del asistente",
-    "CERTIFICATE": "Certificado",
     "STATUS": "Estatus:",
     "ISSUED_AT": "Emitido en:",
     "EXPIRATION_TIME": "Fecha de expiración"
@@ -377,7 +334,6 @@
   "PAGES_SIGNUP": {
     "RECORD": "Registro",
     "LABEL_1": "* Los datos de Nombre(s) y Apellido(s) aparecerán sin modificación en el certificado",
-    "NAME": "Nombre(s)",
     "LABEL_2": "* Este dato aparecerá sin modificación en el certificado",
     "ENTER_CAPTCHA": "Ingresar captcha",
     "VALIDATE": "Validar",

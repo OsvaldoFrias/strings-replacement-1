@@ -262,7 +262,7 @@
         location.href = '/home';
         hideLoading();
       } else {
-        alert('<%= translation.AVAILABLE.UNKNOWN_ERROR %>')
+        alert('<%= translation.HOME.UNKNOWN_ERROR %>')
       }
     } catch (e) {
       console.error(e);
@@ -271,7 +271,7 @@
 
   async function saveCoupon() {
     const coupon =
-      prompt('<%= translation.AVAILABLE.ENTER_COUPON %>');
+      prompt('<%= translation.HOME.LABEL_6 %>');
 
     if (coupon) {
       if (confirm('<%= translation.AVAILABLE.IRREVERSIBLE_COUPON %>')) {
@@ -291,23 +291,23 @@
           alert('<%= translation.AVAILABLE.SAVED_COUPON %>');
           return res1;
         } else if (res1.status === 404) {
-          alert('<%= translation.AVAILABLE.TAKEN_COUPON %>');
+          alert('<%= translation.HOME.LABEL_9 %>');
         } else if (res1.status === 400) {
           const body = await res1.json();
           if (body) {
             alert(body.message);
           } else {
-            alert('<%= translation.AVAILABLE.COUPON_ERROR %>');
+            alert('<%= translation.AVAILABLE.LABEL_10 %>');
           }
         } else if (res1.status === 408) {
           const body = await res1.json();
           if (body && body.message === 'token expired') {
             alert('<%= translation.AVAILABLE.EXPIRED_COUPON %>');
           } else {
-            alert('<%= translation.AVAILABLE.COUPON_ERROR %>');
+            alert('<%= translation.AVAILABLE.LABEL_10 %>');
           }
         } else {
-          alert('<%= translation.AVAILABLE.COUPON_ERROR %>');
+          alert('<%= translation.AVAILABLE.LABEL_10 %>');
         }
 
       }

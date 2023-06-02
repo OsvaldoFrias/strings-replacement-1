@@ -41,19 +41,19 @@
           </div>
           <div class="col-lg-4 d-flex justify-content-center">
             <div>
-              <p><%= translation.PAGES_GRADE.ASSISTANT_NAME %>
+              <p><%= translation.GRADE.LABEL_1 %>
                 <strong><%= `${grade.appointment.attendant.firstName} ${grade.appointment.attendant.lastName}` %></strong>
               </p>
               <p><%= translation.CERTIFICATES.CERTIFICATE_TITLE %>
                 <strong><%= grade.appointment.available.service.serviceCategory.name %></strong>
               </p>
-              <p><%= translation.ADMIN_SYSTEM_USER_DATA_ADD.STATUS %>
+              <p><%= translation.MENU.MENU_5 %>:
                 <strong><%= grade.gradeType.name %></strong></p>
               <p>
-                <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.ISSUED_AT %>
+                <%= translation.GRADE.LABEL_4 %>:
                 <strong><%= issuedAt %></strong> </p>
               <p>
-                <%= translation.ADMIN_SYSTEM_USER_DATA_ADD.EXPIRATION_TIME %>
+                <%= translation.GRADE.LABEL_5 %>
                 <strong><%= expirationTime %></strong></p>
             </div>
           </div>

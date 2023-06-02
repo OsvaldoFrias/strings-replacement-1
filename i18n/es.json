@@ -302,10 +302,7 @@
     "DISABLED": "Deshabilitado"
   },
   "PAGES_GRADE": {
-    "ASSISTANT_NAME": "Nombre del asistente",
-    "STATUS": "Estatus:",
-    "ISSUED_AT": "Emitido en:",
-    "EXPIRATION_TIME": "Fecha de expiración"
+    "STATUS": "Estatus:"
   },
   "PAGES_RECOVERY_EMAIL": {
     "RECOVERY_PASSWORD": "Recuperar contraseña",

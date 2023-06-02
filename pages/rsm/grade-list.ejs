@@ -26,11 +26,11 @@
         <div
           class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
-            <h2><%= translation.RSM_GRADE_LIST.RATINGS %></h2>
+            <h2><%= translation.GRADE_LIST.RATINGS %></h2>
             <div class="col-md-12 text-right">
               <a href="/api/v1/profile/appointments/grades/csv?type=<%= type %>"
                 class="btn btn-primary"><i class="fa fa-download"></i>
-                <%= translation.RSM_GRADE_LIST.DOWNLOAD_REPORT %></a>
+                <%= translation.COUPON.DOWNLOAD_REPORT %></a>
             </div>
             <div id="appointments">
               <table id="appointments-list"></table>
@@ -67,9 +67,9 @@
     const appointmentsList = document.getElementById('appointments-list');
 
     if (type === 'exam') {
-      appointmentsList.innerHTML = `<thead><tr><th><%= translation.RSM_GRADE_LIST.SESSION %></th><th><%= translation.RSM_GRADE_LIST.DAY %></th><th><%= translation.RSM_GRADE_LIST.NAME %></th><th><%= translation.RSM_GRADE_LIST.EMAIL %></th><th><%= translation.RSM_GRADE_LIST.COMPANY %></th><th><%= translation.RSM_GRADE_LIST.RESULT %></th><th><%= translation.RSM_GRADE_LIST.CERTIFICATE_URL %></th><th><%= translation.RSM_GRADE_LIST.EVALUATION %></th></tr></thead>`;
+      appointmentsList.innerHTML = `<thead><tr><th><%= translation.HOME.SESSION %></th><th><%= translation.CERTIFICATES.THEAD_2 %></th><th><%= translation.CERTIFICATES.THEAD_3 %></th><th><%= translation.CERTIFICATES.THEAD_4 %></th><th><%= translation.CERTIFICATES.THEAD_5 %></th><th><%= translation.CERTIFICATES.THEAD_6 %></th><th><%= translation.CERTIFICATES.THEAD_7 %></th><th><%= translation.CERTIFICATES.THEAD_8 %></th></tr></thead>`;
     } else if (type === 'course') {
-      appointmentsList.innerHTML = `<thead><tr><th><%= translation.RSM_GRADE_LIST.SESSION %></th><th><%= translation.RSM_GRADE_LIST.DAY %></th><th><%= translation.RSM_GRADE_LIST.NAME %></th><th><%= translation.RSM_GRADE_LIST.EMAIL %></th><th><%= translation.RSM_GRADE_LIST.COMPANY %></th><th><%= translation.RSM_GRADE_LIST.RESULT %></th></tr></thead>`;
+      appointmentsList.innerHTML = `<thead><tr><th><%= translation.HOME.SESSION %></th><th><%= translation.CERTIFICATES.THEAD_2 %></th><th><%= translation.CERTIFICATES.THEAD_3 %></th><th><%= translation.CERTIFICATES.THEAD_4 %></th><th><%= translation.CERTIFICATES.THEAD_5 %></th><th><%= translation.CERTIFICATES.THEAD_6 %></th></tr></thead>`;
     }
 
     let appointmentsTable = $('#appointments-list').DataTable({
@@ -131,12 +131,12 @@
         `${fullName}`,
         `<a href="mailto:${email}">${email}</a>`,
         `${businessName}`,
-        `<img id="gradeEdit-${appointmentId}" style="cursor:pointer;" onclick="populateGradeList('${appointmentId}', '${serviceType}')" src="/public/img/edit.png" alt="<%= translation.RSM_GRADE_LIST.EDIT_RATING %>" width="15px"/> ${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_GRADE_LIST.LABEL_1 %></span>'}<div id="gradeType-${appointmentId}"></div>`,
+        `<img id="gradeEdit-${appointmentId}" style="cursor:pointer;" onclick="populateGradeList('${appointmentId}', '${serviceType}')" src="/public/img/edit.png" alt="<%= translation.GRADE_LIST.EDIT_RATING %>" width="15px"/> ${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;"><%= translation.CERTIFICATES.PENDING_REVIEW %></span>'}<div id="gradeType-${appointmentId}"></div>`,
       ];
 
       if (type === 'exam') {
-        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}"><%= translation.RSM_GRADE_LIST.CERTIFICATE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_GRADE_LIST.LABEL_2 %></span>'}<div id="meetingUrl-${appointmentId}"></div>`);
-        rowData.push(`<img style="cursor:pointer;" onclick="setFeedbackUrl(${gradeId}, '${fullName}','${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="<%= translation.RSM_GRADE_LIST.LABEL_3 %>" width="15px"/> ${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}"><%= translation.RSM_GRADE_LIST.EVALUATION %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_GRADE_LIST.LABEL_4 %></span>')}`);
+        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}"><%= translation.CERTIFICATES.CERTIFICATE_TITLE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.PROFILE.LABEL_5 %></span>'}<div id="meetingUrl-${appointmentId}"></div>`);
+        rowData.push(`<img style="cursor:pointer;" onclick="setFeedbackUrl(${gradeId}, '${fullName}','${serviceName}','${startDatetime.stringDate} ${startDatetime.formatTime}')" src="/public/img/edit.png" alt="<%= translation.GRADE_LIST.LABEL_3 %>" width="15px"/> ${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}"><%= translation.CERTIFICATES.THEAD_8 %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.CERTIFICATES.NO_REVIEW %></span>')}`);
       }
 
       appointmentsTable
@@ -148,7 +148,7 @@
   }
 
   function setFeedbackUrl(gradeId, fullAttendantName, serviceName, datetime) {
-    let feedbackUrl = prompt(`<%= translation.RSM_GRADE_LIST.LABEL_5 %> ${fullAttendantName} <%= translation.RSM_GRADE_LIST.OF %> ${serviceName} <%= translation.RSM_GRADE_LIST.OF %> ${datetime}`);
+    let feedbackUrl = prompt(`<%= translation.GRADE_LIST.LABEL_5 %> ${fullAttendantName} <%= translation.GRADE_LIST.OF %> ${serviceName} <%= translation.GRADE_LIST.OF %> ${datetime}`);
     if (!feedbackUrl) {
       return;
     }
@@ -166,9 +166,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.RSM_GRADE_LIST.LABEL_6 %>');
+          alert('<%= translation.HOME.LABEL_22 %>');
         } else {
-          alert('<%= translation.RSM_GRADE_LIST.LABEL_7 %>');
+          alert('<%= translation.GRADE_LIST.LABEL_7 %>');
         }
         location.reload(true);
       })
@@ -210,7 +210,7 @@
         container.appendChild(select);
 
         const cancelBtn = document.createElement('button');
-        cancelBtn.innerText = "<%= translation.RSM_GRADE_LIST.CANCEL %>";
+        cancelBtn.innerText = "<%= translation.HOME.CANCEL %>";
         cancelBtn.onclick = (e) => {
           const appointmentId = divId.replace('gradeType-', '');
           const gradeEdit = document.getElementById(`gradeEdit-${appointmentId}`);
@@ -221,14 +221,14 @@
         container.appendChild(cancelBtn);
 
         const button = document.createElement('button');
-        button.innerText = "<%= translation.RSM_GRADE_LIST.SAVE %>";
+        button.innerText = "<%= translation.HOME.SAVE %>";
         button.onclick = (e) => {
           displayLoading();
           const gradeTypeId = select.options[select.selectedIndex].value;
           const gradeTypeText = select.options[select.selectedIndex].text;
           const appointmentId = divId.replace('gradeType-', '');
           container.innerHTML = '';
-          if (confirm(`<%= translation.RSM_GRADE_LIST.LABEL_8 %> ${gradeTypeText.toUpperCase()}.\n<%= translation.RSM_GRADE_LIST.LABEL_9 %>`)) {
+          if (confirm(`<%= translation.GRADE_LIST.LABEL_8 %> ${gradeTypeText.toUpperCase()}.\n<%= translation.GRADE_LIST.LABEL_9 %>`)) {
             setAppointmentGrade(gradeTypeId, appointmentId);
           } else {
             const gradeEdit = document.getElementById(`gradeEdit-${appointmentId}`);
@@ -255,10 +255,10 @@
     })
       .then(res => {
         if (res.status === 201) {
-          alert('<%= translation.RSM_GRADE_LIST.LABEL_10 %>');
+          alert('<%= translation.GRADE_LIST.LABEL_10 %>');
           // container.innerHTML = '';
         } else {
-          alert('<%= translation.RSM_GRADE_LIST.LABEL_11 %>');
+          alert('<%= translation.GRADE_LIST.LABEL_11 %>');
         }
         location.reload(true);
       })

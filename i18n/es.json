@@ -174,8 +174,7 @@
   },
   "ATTENDANT_LIST": {
     "USER_LIST": "Lista de usuarios",
-    "ASSISTANTS": "Asistentes",
-    "HRU": "HRU"
+    "ASSISTANTS": "Asistentes"
   },
   "AVAILABLE_APPOINTMENT": {
     "HRU": "HRU",
@@ -257,7 +256,6 @@
     "LABEL_9": "¿Desea continuar?",
     "LABEL_10": "Evaluación actualizada.",
     "LABEL_11": "Hubo un problema estableciendo la evaluación del usuario, favor de intentar más tarde.",
-    "DOWNLOAD_REPORT": "Descargar reporte",
     "LABEL_12": "Cupón creado y asignado con éxito.",
     "LABEL_13": "Hubo un error con el cupón."
   },

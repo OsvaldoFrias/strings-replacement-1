@@ -27,18 +27,18 @@
         <div class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
             <div id="loading"></div>
-            <h2><%= translation.RSM_HOME.UPCOMING_SESSIONS %></h2>
+            <h2><%= translation.HOME.UPCOMING_SESSIONS %></h2>
             <div id="appointments">
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="trainerId"><%= translation.RSM_HOME.TRAINER %></label>
+                    <label for="trainerId"><%= translation.AVAILABLE_APPOINTMENT.TRAINER %>:</label>
                     <select id="trainerId" name="trainerId" class="form-control">
-                      <option value="" selected><%= translation.RSM_HOME.OPTION %></option>
+                      <option value="" selected><%= translation.HOME.OPTION %></option>
                     </select>
                   </div>
                   <div class="col-md-6 align-bottom">
-                    <button type="button" class="btn btn-primary" onclick="filterAppointmentList()"><%= translation.RSM_HOME.FILTER %></button>
+                    <button type="button" class="btn btn-primary" onclick="filterAppointmentList()"><%= translation.HOME.FILTER %></button>
                   </div>
                 </div>
                 <div id="error" class="alert alert-danger alert-dismissible d-none">
@@ -51,11 +51,11 @@
               <table id="availableAppointments-list" class="compact" style="width:100%">
                 <thead>
                   <tr>
-                    <th><%= translation.RSM_HOME.SESSION %></th>
-                    <th><%= translation.RSM_HOME.DATE_HOUR %></th>
-                    <th><%= translation.RSM_HOME.LINK %></th>
-                    <th><%= translation.RSM_HOME.TRAINER_1 %></th>
-                    <th><%= translation.RSM_HOME.RESERVATIONS %></th>
+                    <th><%= translation.HOME.SESSION %></th>
+                    <th><%= translation.HOME.DATE_HOUR %></th>
+                    <th><%= translation.HOME.LINK %></th>
+                    <th><%= translation.AVAILABLE_APPOINTMENT.TRAINER %></th>
+                    <th><%= translation.HOME.RESERVATIONS %></th>
                   </tr>
                 </thead>
               </table>
@@ -123,11 +123,11 @@
     div.innerHTML = `<table id="availableAppointments-list" class="compact" style="width:100%">
       <thead>
         <tr>
-          <th><%= translation.RSM_HOME.SESSION %></th>
-          <th><%= translation.RSM_HOME.DATE_HOUR %></th>
-          <th><%= translation.RSM_HOME.LINK %></th>
-          <th><%= translation.RSM_HOME.TRAINER_1 %></th>
-          <th><%= translation.RSM_HOME.RESERVATIONS %></th>
+          <th><%= translation.HOME.SESSION %></th>
+          <th><%= translation.HOME.DATE_HOUR %></th>
+          <th><%= translation.HOME.LINK %></th>
+          <th><%= translation.AVAILABLE_APPOINTMENT.TRAINER %></th>
+          <th><%= translation.HOME.RESERVATIONS %></th>
         </tr>
       </thead>
     </table>`;
@@ -166,9 +166,9 @@
     })
       .then(res => {
         if (res.status === 201) {
-          alert('<%= translation.RSM_HOME.LABEL_1 %>');
+          alert('<%= translation.HOME.LABEL_1 %>');
         } else {
-          alert('<%= translation.RSM_HOME.LABEL_2 %>');
+          alert('<%= translation.HOME.LABEL_2 %>');
         }
         location.reload(true);
       })
@@ -217,18 +217,18 @@
         .attendantsNumber;
       const serviceCategoryName = availableAppointment.service.serviceCategory.name;
       const serviceCategoryDescription = availableAppointment.service.serviceCategory.description;
-      const sessionType = availableAppointment.sessionType === "remote" ? "<%= translation.RSM_HOME.REMOTE %>" : "<%= translation.RSM_HOME.PRESENTIAL %>";
+      const sessionType = availableAppointment.sessionType === "remote" ? "<%= translation.HOME.REMOTE %>" : "<%= translation.HOME.PRESENTIAL %>";
       const state = availableAppointment.state;
       const country = availableAppointment.state.country;
       const location = serviceType === 'exam' ? '' : availableAppointment.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-      const linkTitle = availableAppointment.sessionType === "remote" ? "<%= translation.RSM_HOME.ENTER_CONFERENCE %>" : "<%= translation.RSM_HOME.DIRECTION %>";
+      const linkTitle = availableAppointment.sessionType === "remote" ? "<%= translation.HOME.ENTER_CONFERENCE %>" : "<%= translation.HOME.DIRECTION %>";
 
       availableAppointmentsTable
         .row
         .add([
           `<div><a href="/available-appointment/${availableAppointmentId}">${serviceName} - ${sessionType}${location ? " - " + location : ''}</a></div>`,
           `${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}`,
-          `${(meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle}</a>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_HOME.LABEL_3 %></span>')}`,
+          `${(meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle}</a>` : '<span style="font-style: italic;color: #999999;"><%= translation.HOME.LINK_NOT_AVAILABLE %></span>')}`,
           // `${trainerMail ? `<a href="mailto:${trainerMail}">${trainerMail}</a>` : '<span style="font-style: italic;color: #999999;">Aún no ha sido asignado un instructor.</span>'}<div id="availableAppointmentId-${availableAppointmentId}"></div>`,
           trainersMail,
           `${totalAppointments} de ${serviceAttendantsNumber}`,
@@ -254,7 +254,7 @@
         container.appendChild(select);
 
         const cancelBtn = document.createElement('button');
-        cancelBtn.innerText = "<%= translation.RSM_HOME.CANCEL %>";
+        cancelBtn.innerText = "<%= translation.HOME.CANCEL %>";
         cancelBtn.onclick = (e) => {
           const availableAppointmentId = htmlDivId.replace('availableAppointmentId-', '');
           const trainerEdit = document.getElementById(`trainerEdit-${availableAppointmentId}`);
@@ -265,7 +265,7 @@
         container.appendChild(cancelBtn);
 
         const button = document.createElement('button');
-        button.innerText = "<%= translation.RSM_HOME.SAVE %>";
+        button.innerText = "<%= translation.HOME.SAVE %>";
         button.onclick = (e) => {
           const trainerId = select.options[select.selectedIndex].value;
           const availableAppointmentId = container.id.replace('availableAppointmentId-', '');
@@ -291,9 +291,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.RSM_HOME.LABEL_4 %>');
+          alert('<%= translation.HOME.LABEL_4 %>');
         } else {
-          alert('<%= translation.RSM_HOME.LABEL_5 %>');
+          alert('<%= translation.HOME.LABEL_5 %>');
         }
         location.reload(true);
       })

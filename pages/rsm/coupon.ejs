@@ -25,26 +25,26 @@
       <div>
         <div class="d-flex align-items-center justify-content-center">
           <div class="w-100">
-            <h2><%= translation.RSM_COUPON.GENERATED_COUPONS %></h2>
+            <h2><%= translation.COUPON.GENERATED_COUPONS %></h2>
             <div class="col-md-12 text-right">
               <a href="/api/v2/csv/coupons" class="btn btn-primary">
                 <i class="fa fa-download"></i>
-                <%= translation.RSM_COUPON.DOWNLOAD_REPORT %>
+                <%= translation.COUPON.DOWNLOAD_REPORT %>
               </a>
             </div>
             <div id="availableAppointments">
               <table id="availableAppointments-list">
                 <thead>
                   <tr>
-                    <th><%= translation.RSM_COUPON.INVOICE_NUMBER %>
+                    <th><%= translation.COUPON.INVOICE_NUMBER %>
                     </th>
-                    <th><%= translation.RSM_COUPON.CONSECUTIVE %></th>
-                    <th><%= translation.RSM_COUPON.PRODUCT %></th>
-                    <th><%= translation.RSM_COUPON.USER %></th>
-                    <th><%= translation.RSM_COUPON.COUPON %></th>
-                    <th><%= translation.RSM_COUPON.COMPANY %></th>
-                    <th><%= translation.RSM_COUPON.RSM %></th>
-                    <th><%= translation.RSM_COUPON.TYPE %></th>
+                    <th><%= translation.COUPON.CONSECUTIVE %></th>
+                    <th><%= translation.PROFILE.THEAD_1 %></th>
+                    <th><%= translation.COUPON.USER %></th>
+                    <th><%= translation.PROFILE.THEAD_2 %></th>
+                    <th><%= translation.CERTIFICATES.THEAD_5 %></th>
+                    <th><%= translation.COUPON.RSM %></th>
+                    <th><%= translation.COUPON.TYPE %></th>
                   </tr>
                 </thead>
               </table>
@@ -106,8 +106,8 @@
           `${poCode}`,
           `${sequence}`,
           `${serviceName}`,
-          `${attendantMail ? attendantMail : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_COUPON.LABEL_1 %></span>'}`,
-          `<img style="cursor:pointer;" onclick="prompt('<%= translation.RSM_COUPON.LABEL_2 %>','${couponCode}')" src="/public/img/copy-icon.png" alt="<%= translation.RSM_COUPON.COPY %>" width="30px"/>${couponCode}`,
+          `${attendantMail ? attendantMail : '<span style="font-style: italic;color: #999999;"><%= translation.COUPON.LABEL_1 %></span>'}`,
+          `<img style="cursor:pointer;" onclick="prompt('<%= translation.PROFILE.COPY_COUPON %>','${couponCode}')" src="/public/img/copy-icon.png" alt="<%= translation.PROFILE.COPY %>" width="30px"/>${couponCode}`,
           `${businessName}`,
           `${rsmName}`,
           `${type}`,

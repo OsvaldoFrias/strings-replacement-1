@@ -28,17 +28,17 @@
               <table id="appointments-list">
                 <thead>
                   <th>
-                    <%= translation.RSM_AVAILABLE_APPOINTMEN.ASSISTANT %>
+                    <%= translation.HOME.ASSISTANT %>
                   </th>
-                  <th><%= translation.RSM_AVAILABLE_APPOINTMEN.MAIL %>
-                  </th>
-                  <th>
-                    <%= translation.RSM_AVAILABLE_APPOINTMEN.COMPANY %>
-                  </th>
-                  <th><%= translation.RSM_AVAILABLE_APPOINTMEN.HRU %>
+                  <th><%= translation.HOME.MAIL %>
                   </th>
                   <th>
-                    <%= translation.RSM_AVAILABLE_APPOINTMEN.LICENSE %>
+                    <%= translation.CERTIFICATES.THEAD_5 %>
+                  </th>
+                  <th><%= translation.AVAILABLE_APPOINTMENT.HRU %>
+                  </th>
+                  <th>
+                    <%= translation.PROFILE.LICENSE_TITLE %>
                   </th>
                 </thead>
               </table>
@@ -114,12 +114,12 @@
     const serviceCategoryDescription = available.service.serviceCategory.description;
     const serviceInfoTemplate = available.service.serviceCategory.infoTemplate;
     const serviceAttendantsNumber = available.overrideAttendantsNumber || available.service.attendantsNumber;
-    const sessionType = available.sessionType === "remote" ? "<%= translation.RSM_AVAILABLE_APPOINTMEN.REMOTE %>" : "<%= translation.RSM_AVAILABLE_APPOINTMEN.PRESENTIAL %>";
+    const sessionType = available.sessionType === "remote" ? "<%= translation.HOME.REMOTE %>" : "<%= translation.HOME.PRESENTIAL %>";
     const state = available.state;
     const country = available.state.country;
     const location = serviceType === 'exam' ? '' : available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-    const linkTitle = available.sessionType === "remote" ? "<%= translation.RSM_AVAILABLE_APPOINTMEN.ENTER_CONFERENCE %>" : "<%= translation.RSM_AVAILABLE_APPOINTMEN.DIRECTION %>";
-    const directionType = available.sessionType === "remote" ? "<%= translation.RSM_AVAILABLE_APPOINTMEN.INDICATIONS %>" : "<%= translation.RSM_AVAILABLE_APPOINTMEN.DIRECTION %>";
+    const linkTitle = available.sessionType === "remote" ? "<%= translation.HOME.ENTER_CONFERENCE %>" : "<%= translation.HOME.DIRECTION %>";
+    const directionType = available.sessionType === "remote" ? "<%= translation.AVAILABLE_APPOINTMENT.INDICATIONS %>" : "<%= translation.HOME.DIRECTION %>";
     const direction = available.direction;
 
     const cardTemplate = `<div class="card-1">
@@ -137,11 +137,11 @@
               <div>${sessionType}${location ? " - " + location : ''}</div>
               <table>
                 <tr>
-                  <td><%= translation.RSM_AVAILABLE_APPOINTMEN.DATE %> </td>
+                  <td><%= translation.HOME.DATE %> </td>
                   <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
                 </tr>
               </table>
-              <!--${meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle} ${sessionType}${location ? " - " + location : ''}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_1 %></p>'} -->
+              <!--${meetingUrl ? `<a target="_blank" href="${meetingUrl}">${linkTitle} ${sessionType}${location ? " - " + location : ''}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.HOME.LINK_NOT_AVAILABLE %></p>'} -->
               <p>${directionType}:</p>
               <p>${direction ? direction.replace(/\n/gi, '<br>') : '-'}</p>
             </div>
@@ -150,7 +150,7 @@
             <div class="cell-2">
               <div>${totalAppointments} de ${serviceAttendantsNumber} asistentes</div>
               ${trainersMail}
-              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_1 %></p>'}
+              ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.HOME.LINK_NOT_AVAILABLE %></p>'}
             </div>
           </div>
         </div>
@@ -187,7 +187,7 @@
           `<a href="mailto:${email}">${email}</a>`,
           `${businessName}`,
           hru,
-          `<img style="cursor:pointer;" onclick="setLicenseKeyUrl(${id}, '${fullName}')" src="/public/img/edit.png" alt="<%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_2 %>" width="15px"/> ${(licenseKey ? `<a target="_blank" href="${licenseKey}"><%= translation.RSM_AVAILABLE_APPOINTMEN.LICENSE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_3 %></span>')}`,
+          `<img style="cursor:pointer;" onclick="setLicenseKeyUrl(${id}, '${fullName}')" src="/public/img/edit.png" alt="<%= translation.AVAILABLE_APPOINTMENT.LABEL_2 %>" width="15px"/> ${(licenseKey ? `<a target="_blank" href="${licenseKey}"><%= translation.PROFILE.LICENSE_TITLE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.PROFILE.LABEL_9 %></span>')}`,
         ])
         .draw()
         .node();
@@ -195,7 +195,7 @@
   }
 
   function setLicenseKeyUrl(attendantId, fullAttendantName) {
-    let licenseKey = prompt(`<%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_4 %> ${fullAttendantName}`);
+    let licenseKey = prompt(`<%= translation.AVAILABLE_APPOINTMENT.LABEL_4 %> ${fullAttendantName}`);
     if (!licenseKey) {
       return;
     }
@@ -213,9 +213,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_5 %>');
+          alert('<%= translation.HOME.LABEL_22 %>');
         } else {
-          alert('<%= translation.RSM_AVAILABLE_APPOINTMEN.LABEL_6 %>');
+          alert('<%= translation.HOME.LABEL_23 %>');
         }
         location.reload(true);
       })

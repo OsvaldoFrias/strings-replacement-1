@@ -24,40 +24,40 @@
         <div
           class="row d-flex align-items-center justify-content-center">
           <div class="w-100">
-            <h2><%= translation.RSM_ATTENDANT_PROFILE.USER_PROFILE %>
+            <h2><%= translation.PROFILE.TITLE %>
             </h2>
             <form>
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="email">
-                    <%= translation.RSM_ATTENDANT_PROFILE.EMAIL_PROFILE_1 %>
+                    <%= translation.HOME.EMAIL %>:
                   </label>
                   <br>
                   <label id="email">
-                    <%= translation.RSM_ATTENDANT_PROFILE.EMAIL_PROFILE_2 %>
+                    <%= translation.CERTIFICATES.THEAD_4 %>
                   </label>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="country">
-                    <%= translation.RSM_ATTENDANT_PROFILE.COUNTRY_PROFILE_1 %>
+                    <%= translation.PROFILE.COUNTRY_TITLE %>:
                   </label>
                   <br>
                   <label id="country">
-                    <%= translation.RSM_ATTENDANT_PROFILE.COUNTRY_PROFILE_2 %>
+                    <%= translation.PROFILE.COUNTRY_TITLE %>
                   </label>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="firstName">
-                    <%= translation.RSM_ATTENDANT_PROFILE.FIRST_NAME %>
+                    <%= translation.PROFILE.NAME_TITLE %>:
                   </label>
                   <br>
                   <label id="firstName"></label>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="lastName">
-                    <%= translation.RSM_ATTENDANT_PROFILE.LAST_NAME %>
+                    <%= translation.PROFILE.LAST_NAME_TITLE %>:
                   </label>
                   <br>
                   <label id="lastName"></label>
@@ -66,7 +66,7 @@
               <div class="form-row">
                 <div class="form-group col-md-12">
                   <label for="businessName">
-                    <%= translation.RSM_ATTENDANT_PROFILE.BUSINESS_NAME %>
+                    <%= translation.CERTIFICATES.THEAD_5 %>:
                   </label>
                   <br>
                   <label id="businessName"></label>
@@ -75,12 +75,12 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="rsmName">
-                    <%= translation.RSM_ATTENDANT_PROFILE.RSM_NAME %>
+                    <%= translation.PROFILE.RSM_NAME %>:
                   </label>
                   <select id="rsmName" name="rsmName"
                     class="form-control">
                     <option value="" selected>
-                      <%= translation.RSM_ATTENDANT_PROFILE.OPTION %>
+                      <%= translation.HOME.OPTION %>
                     </option>
                   </select>
                 </div>
@@ -92,13 +92,13 @@
               <div class="form-group col-md-12 text-right">
                 <button type="button" class="btn btn-primary"
                   onclick="updateAttendant()">
-                  <%= translation.RSM_ATTENDANT_PROFILE.UPDATE %>
+                  <%= translation.PROFILE.UPDATE_BUTTON %>
                 </button>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12">
                   <h3>
-                    <%= translation.RSM_ATTENDANT_PROFILE.NEXT_ASSISTANCES %>
+                    <%= translation.PROFILE.NEXT_ASSISTANCES %>
                   </h3>
                   <div id="appointments"></div>
                 </div>
@@ -106,7 +106,7 @@
               <div class="form-row">
                 <div class="form-group col-md-12">
                   <h3>
-                    <%= translation.RSM_ATTENDANT_PROFILE.BROWSING_HISTORY %>
+                    <%= translation.PROFILE.BROWSING_HISTORY %>
                   </h3>
                   <table id="grades-list"></table>
                 </div>
@@ -205,11 +205,11 @@
       const serviceName = appointment.available.service.name;
       const serviceCategoryName = appointment.available.service.serviceCategory.name;
       const serviceCategoryDescription = appointment.available.service.serviceCategory.description;
-      const sessionType = appointment.available.sessionType === "remote" ? "<%= translation.RSM_ATTENDANT_PROFILE.REMOTE %>" : "<%= translation.RSM_ATTENDANT_PROFILE.PRESENTIAL %>";
+      const sessionType = appointment.available.sessionType === "remote" ? "<%= translation.HOME.REMOTE %>" : "<%= translation.HOME.PRESENTIAL %>";
       const state = appointment.available.state;
       const country = appointment.available.state.country;
       const location = appointment.available.sessionType === "remote" ? country.name : `${country.name} ${state.name}`;
-      const linkTitle = appointment.available.sessionType === "remote" ? "<%= translation.RSM_ATTENDANT_PROFILE.ENTER_CONFERENCE %>" : "<%= translation.RSM_ATTENDANT_PROFILE.DIRECTION %>";
+      const linkTitle = appointment.available.sessionType === "remote" ? "<%= translation.HOME.ENTER_CONFERENCE %>" : "<%= translation.HOME.DIRECTION %>";
 
       const cardTemplate = `<div class="card-1">
       <div class="d-flex flex-wrap justify-content-center">
@@ -226,7 +226,7 @@
             <div>${sessionType} - ${location}</div>
             <table>
               <tr>
-                <td><%= translation.RSM_ATTENDANT_PROFILE.DATE %> </td>
+                <td><%= translation.HOME.DATE %> </td>
                 <td>${startDatetime.stringDate} ${startDatetime.formatTime} - ${finishDatetime.stringDate} ${finishDatetime.formatTime}</td>
               </tr>
             </table>
@@ -234,7 +234,7 @@
         </div>
         <div class="ml-auto p-2">
           <div class="cell-2">
-            ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.RSM_ATTENDANT_PROFILE.LABEL_1 %></p>'}
+            ${meetingUrl ? `<a target="_blank" class="btn btn-info" href="${meetingUrl}">${linkTitle}</a>` : '<p style="font-style: italic;color: #999999;"><%= translation.HOME.LINK_NOT_AVAILABLE %></p>'}
           </div>
         </div>
       </div>
@@ -245,14 +245,14 @@
     if (appointmentsTemplate && appointmentsTemplate.length > 0) {
       appointments.innerHTML = appointmentsTemplate.join('\n');
     } else {
-      appointments.innerHTML = '<p><%= translation.RSM_ATTENDANT_PROFILE.LABEL_2 %></p>'
+      appointments.innerHTML = '<p><%= translation.HOME.LIST_1_EMPTY %></p>'
     }
 
   }
 
   function parseGrades(grades, type) {
     const gradesList = document.getElementById('grades-list');
-    gradesList.innerHTML = `<thead><tr><th><%= translation.RSM_ATTENDANT_PROFILE.SESSION %></th><th><%= translation.RSM_ATTENDANT_PROFILE.DAY %></th><th><%= translation.RSM_ATTENDANT_PROFILE.NAME %></th><th><%= translation.RSM_ATTENDANT_PROFILE.EMAIL %></th><th><%= translation.RSM_ATTENDANT_PROFILE.COMPANY %></th><th><%= translation.RSM_ATTENDANT_PROFILE.RESULT %></th></tr></thead>`;
+    gradesList.innerHTML = `<thead><tr><th><%= translation.HOME.SESSION %></th><th><%= translation.CERTIFICATES.THEAD_2 %></th><th><%= translation.CERTIFICATES.THEAD_3 %></th><th><%= translation.CERTIFICATES.THEAD_4 %></th><th><%= translation.CERTIFICATES.THEAD_5 %></th><th><%= translation.CERTIFICATES.THEAD_6 %></th></tr></thead>`;
 
     let gradesTable = $('#grades-list').DataTable({
       "ordering": false,
@@ -312,12 +312,12 @@
         `${fullName}`,
         `<a href="mailto:${email}">${email}</a>`,
         `${businessName}`,
-        `${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_ATTENDANT_PROFILE.LABEL_3 %></span>'}<div id="gradeType-${appointmentId}"></div>`,
+        `${grade ? `<strong>${grade}</strong>` : '<span style="font-style: italic;color: #999999;"><%= translation.CERTIFICATES.PENDING_REVIEW %></span>'}<div id="gradeType-${appointmentId}"></div>`,
       ];
 
       if (type === 'exam') {
-        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}"><%= translation.RSM_ATTENDANT_PROFILE.CERTIFICATE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_ATTENDANT_PROFILE.LABEL_4 %></span>'}<div id="meetingUrl-${appointmentId}"></div>`);
-        rowData.push(`${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}"><%= translation.RSM_ATTENDANT_PROFILE.EVALUATION %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.RSM_ATTENDANT_PROFILE.LABEL_5 %></span>')}`);
+        rowData.push(`${certificateUrl ? `<a target="_blank" href="/grade/${certificateUrl}"><%= translation.CERTIFICATES.CERTIFICATE_TITLE %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.PROFILE.LABEL_5 %></span>'}<div id="meetingUrl-${appointmentId}"></div>`);
+        rowData.push(`${(feedbackUrl ? `<a target="_blank" href="${feedbackUrl}"><%= translation.CERTIFICATES.THEAD_8 %></a>` : '<span style="font-style: italic;color: #999999;"><%= translation.CERTIFICATES.NO_REVIEW %></span>')}`);
       }
 
       rowData.push(`${trainerMail}`);
@@ -384,9 +384,9 @@
     })
       .then(res => {
         if (res.status === 200) {
-          alert('<%= translation.RSM_ATTENDANT_PROFILE.LABEL_6 %>');
+          alert('<%= translation.PROFILE.LABEL_7 %>');
         } else {
-          alert('<%= translation.RSM_ATTENDANT_PROFILE.LABEL_7 %>');
+          alert('<%= translation.PROFILE.LABEL_8 %>');
         }
         window.location.href = "/attendant";
       })

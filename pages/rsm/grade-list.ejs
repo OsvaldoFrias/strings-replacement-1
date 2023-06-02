@@ -67,9 +67,9 @@
     const appointmentsList = document.getElementById('appointments-list');
 
     if (type === 'exam') {
-      appointmentsList.innerHTML = `<thead><tr><th><%= translation.HOME.SESSION %></th><th><%= translation.CERTIFICATES.THEAD_2 %></th><th><%= translation.CERTIFICATES.THEAD_3 %></th><th><%= translation.CERTIFICATES.THEAD_4 %></th><th><%= translation.CERTIFICATES.THEAD_5 %></th><th><%= translation.CERTIFICATES.THEAD_6 %></th><th><%= translation.CERTIFICATES.THEAD_7 %></th><th><%= translation.CERTIFICATES.THEAD_8 %></th></tr></thead>`;
+      appointmentsList.innerHTML = `<thead><tr><th><%= translation.CERTIFICATES.THEAD_1 %></th><th><%= translation.CERTIFICATES.THEAD_2 %></th><th><%= translation.CERTIFICATES.THEAD_3 %></th><th><%= translation.CERTIFICATES.THEAD_4 %></th><th><%= translation.CERTIFICATES.THEAD_5 %></th><th><%= translation.CERTIFICATES.THEAD_6 %></th><th><%= translation.CERTIFICATES.THEAD_7 %></th><th><%= translation.CERTIFICATES.THEAD_8 %></th></tr></thead>`;
     } else if (type === 'course') {
-      appointmentsList.innerHTML = `<thead><tr><th><%= translation.HOME.SESSION %></th><th><%= translation.CERTIFICATES.THEAD_2 %></th><th><%= translation.CERTIFICATES.THEAD_3 %></th><th><%= translation.CERTIFICATES.THEAD_4 %></th><th><%= translation.CERTIFICATES.THEAD_5 %></th><th><%= translation.CERTIFICATES.THEAD_6 %></th></tr></thead>`;
+      appointmentsList.innerHTML = `<thead><tr><th><%= translation.CERTIFICATES.THEAD_1 %></th><th><%= translation.CERTIFICATES.THEAD_2 %></th><th><%= translation.CERTIFICATES.THEAD_3 %></th><th><%= translation.CERTIFICATES.THEAD_4 %></th><th><%= translation.CERTIFICATES.THEAD_5 %></th><th><%= translation.CERTIFICATES.THEAD_6 %></th></tr></thead>`;
     }
 
     let appointmentsTable = $('#appointments-list').DataTable({
